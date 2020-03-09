@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <title>{% block title %}ELO{% endblock %}</title>
+
+        <!-- JS i CSS niezbędny do działania strony -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/datatables.min.js"></script>
+        <!-- ______________________________________ -->
+
+        <!-- Dodatkowy JS -->
+        {% block js %}
+            <!-- Dodatkowy JS -->
+        {% endblock %}
+
+        <!-- Dodatkowy CSS -->
+        {% block css %}
+            <!-- Dodatkowy CSS -->
+        {% endblock %}
+
+    {% endblock %}
+    </head>
+
+    <body>
+    <div class="container pt-4 pb-4">
+
+            <header class="mb-1">
+                <h2>
+                    {% block header %}
+
+                        Header
+
+                    {% endblock %}
+                <h2>
+            </header>
+
+            <div class="row" >
+                <div class="col-12 mt-1">
+                    {% block main %}
+
+                        Main Content
+
+                    {% endblock %}
+                </div>
+            </div>
+
+    </div>
+    </body>
+
+</html>

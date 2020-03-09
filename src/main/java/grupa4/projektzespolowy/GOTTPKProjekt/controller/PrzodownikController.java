@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class PrzodownikController {
@@ -17,8 +16,12 @@ public class PrzodownikController {
     private PrzodownikService przodownikService;
 
     @GetMapping("/przodownicy")
-    public ResponseEntity < List <Przodownik>> getAllProduct() {
-        return ResponseEntity.ok().body(przodownikService.getAllProduct());
+    public ModelAndView getAllProduct() {
+
+        ModelAndView modelAndView = new ModelAndView("przodownicy");
+        modelAndView.addObject("przodownicy", przodownikService.getAllProduct());
+        //return ResponseEntity.ok().body(przodownikService.getAllProduct());
+        return modelAndView;
     }
 
     @PostMapping("/przodownicy")

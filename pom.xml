@@ -19,7 +19,15 @@
 		<java.version>11</java.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>https://jcenter.bintray.com/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
+		<!--> Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -35,7 +43,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -43,15 +50,18 @@
 			<artifactId>spring-boot-autoconfigure</artifactId>
 			<version>2.2.5.RELEASE</version>
 		</dependency>
+		<!--> MS SQL -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--> Spring Boot Tomcat -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
+		<!--> Spring Boot jUnit -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -63,11 +73,17 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!--> jTwig -->
 		<!-- https://mvnrepository.com/artifact/org.jtwig/jtwig-spring-boot-starter -->
 		<dependency>
 			<groupId>org.jtwig</groupId>
 			<artifactId>jtwig-spring-boot-starter</artifactId>
 			<version>5.87.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.30</version>
 		</dependency>
 	</dependencies>
 

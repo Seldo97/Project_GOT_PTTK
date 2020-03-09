@@ -62,6 +62,6 @@ public class Przodownik {
                 "idPrzodownik=" + idPrzodownik +
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
-                ", telefon='" + telefon + '}';
+                ", telefon='" + telefon + '}' + '\n';
     }
 }
