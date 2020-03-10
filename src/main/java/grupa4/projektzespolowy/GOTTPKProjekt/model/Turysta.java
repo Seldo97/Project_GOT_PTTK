@@ -27,11 +27,7 @@ public class Turysta
 	
 	@Column(name="telefon")
 	private String telefon;
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> Adam_test
 	@Column(name="opis")
 	private String opis;
 	
@@ -50,19 +46,17 @@ public class Turysta
 	
 	
 
-<<<<<<< HEAD
 	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, int idUzytkownik, String opis,int punkty) {
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
-=======
-	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
+	}
+		public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
 		this.idTurysta = idTurysta;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
 		this.Uzytkownik = idUzytkownik;
->>>>>>> Adam_test
 		this.opis = opis;
 		this.punkty = punkty;
 	}
@@ -108,9 +102,6 @@ public class Turysta
 		this.telefon = telefon;
 	}
 
-
-<<<<<<< HEAD
-=======
 	public Uzytkownik getIdUzytkownik() {
 		return Uzytkownik;
 	}
@@ -119,8 +110,6 @@ public class Turysta
 	public void setIdUzytkownik(Uzytkownik idUzytkownik) {
 		this.Uzytkownik = idUzytkownik;
 	}
-
->>>>>>> Adam_test
 
 	public String getOpis() {
 		return opis;
@@ -146,11 +135,8 @@ public class Turysta
 	@Override
 	public String toString() {
 		return "Turysta [idTurysta=" + idTurysta + ", imie=" + imie + ", nazwisko=" + nazwisko + ", telefon=" + telefon
-<<<<<<< HEAD
 				+ ", opis=" + opis + ", punkty=" + punkty + "]";
-=======
-				+ ", idUzytkownik=" + Uzytkownik + ", opis=" + opis + ", punkty=" + punkty + "]";
->>>>>>> Adam_test
+
 	}
 	
 	
