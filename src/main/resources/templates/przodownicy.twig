@@ -1,7 +1,7 @@
 {% extends 'baseTemplate.twig' %}
 
 {% block header %}
-    Przodownicy
+    Przodownicyfdsfs
 {% endblock %}
 {% block main %}
     <table id="myTable" class="table table-striped align-middle table-sm">
@@ -26,5 +26,25 @@
 
         </tbody>
     </table>
+
+    <form id="signupForm" action="/przodownicy/dodaj" method="POST">
+
+      <div class="form-group">
+        <label for="imie">Imie</label>
+        <input type="text" class="form-control" id="imie" name="imie">
+      </div>
+      <div class="form-group">
+        <label for="nazwisko">Nazwisko</label>
+        <input type="text" class="form-control" id="nazwisko" name="nazwisko">
+      </div>
+      <div class="form-group">
+        <label for="telefon">Telefon</label>
+        <input type="text" class="form-control" id="telefon" name="telefon">
+      </div>
+
+      <br/>
+      <button type="submit" class="btn btn-info">Dodaj</button>
+
+    </form>
 
 {% endblock %}

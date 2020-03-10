@@ -19,7 +19,7 @@ public class PrzodownikService {
         return przodownikRepository.save(przodownik);
     }
 
-    public List<Przodownik> getAllProduct() {
+    public List<Przodownik> getAllPrzodownik() {
         return this.przodownikRepository.findAll();
     }
 }

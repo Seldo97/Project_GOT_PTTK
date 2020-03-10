@@ -20,8 +20,13 @@ public class Przodownik {
     @Column(name = "telefon")
     private String telefon;
 
-
     public Przodownik() {}
+
+    public Przodownik(String imie, String nazwisko, String telefon) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.telefon = telefon;
+    }
 
     public int getIdPrzodownik() {
         return idPrzodownik;
