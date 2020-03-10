@@ -7,7 +7,10 @@
 
         <!-- JS i CSS niezbędny do działania strony -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/datatables.min.css"/>
+        <link href="../css/globalCSS.css" rel="stylesheet">
+
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/datatables.min.js"></script>
+        <script type="text/javascript" src="../js/globalJS.js"></script>
         <!-- ______________________________________ -->
 
         <!-- Dodatkowy JS -->
@@ -24,7 +27,9 @@
     </head>
 
     <body>
-    <div class="container pt-4 pb-4">
+    {% include 'navBar.twig' %}
+
+    <div class="container pt-5 pb-5">
 
             <header class="mb-1">
                 <h2>
@@ -47,6 +52,8 @@
             </div>
 
     </div>
+
+    {% include 'footer.twig' %}
     </body>
 
 </html>

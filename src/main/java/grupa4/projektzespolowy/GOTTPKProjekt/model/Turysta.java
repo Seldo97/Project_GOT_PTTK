@@ -25,9 +25,6 @@ public class Turysta
 	@Column(name="telefon")
 	private String telefon;
 	
-	@Column(name="idUzytkownik")
-	private int idUzytkownik;
-	
 	@Column(name="opis")
 	private String opis;
 	
@@ -43,11 +40,9 @@ public class Turysta
 	
 
 	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, int idUzytkownik, String opis,int punkty) {
-		this.idTurysta = idTurysta;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
-		this.idUzytkownik = idUzytkownik;
 		this.opis = opis;
 		this.punkty = punkty;
 	}
@@ -94,15 +89,6 @@ public class Turysta
 	}
 
 
-	public int getIdUzytkownik() {
-		return idUzytkownik;
-	}
-
-
-	public void setIdUzytkownik(int idUzytkownik) {
-		this.idUzytkownik = idUzytkownik;
-	}
-
 
 	public String getOpis() {
 		return opis;
@@ -128,7 +114,7 @@ public class Turysta
 	@Override
 	public String toString() {
 		return "Turysta [idTurysta=" + idTurysta + ", imie=" + imie + ", nazwisko=" + nazwisko + ", telefon=" + telefon
-				+ ", idUzytkownik=" + idUzytkownik + ", opis=" + opis + ", punkty=" + punkty + "]";
+				+ ", opis=" + opis + ", punkty=" + punkty + "]";
 	}
 	
 	

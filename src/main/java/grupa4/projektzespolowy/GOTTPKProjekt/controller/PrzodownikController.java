@@ -18,7 +18,7 @@ public class PrzodownikController {
     @GetMapping("/przodownicy")
     public ModelAndView getAllProduct() {
 
-        ModelAndView modelAndView = new ModelAndView("przodownicy");
+        ModelAndView modelAndView = new ModelAndView("przodownik/przodownicy");
         modelAndView.addObject("przodownicy", przodownikService.getAllPrzodownik());
         return modelAndView;
     }
@@ -26,7 +26,7 @@ public class PrzodownikController {
     @PostMapping("/przodownicy/dodaj")
     public void createProduct(@RequestParam(value="imie", required=false) String imie,
                                 @RequestParam(value="nazwisko", required=false) String nazwisko,
-                                @RequestParam(value="telefon", required=false) String telefon,
+                                @RequestParam(value="telefon", required=true) String telefon,
                                 HttpServletResponse httpResponse) throws IOException {
 
         var przodownik = new Przodownik(imie, nazwisko, telefon);
