@@ -4,24 +4,25 @@ USE GOT_PTTK;
 
 CREATE TABLE Rola(
 	id_rola INT PRIMARY KEY IDENTITY(1,1),
-	nazwa VARCHAR(50) UNIQUE
+	nazwa VARCHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE Uzytkownik
 (
 	id_uzytkownik INT PRIMARY KEY IDENTITY(1,1),
-	login VARCHAR(50) UNIQUE,
-	haslo  VARCHAR(255),
-	email VARCHAR(50) UNIQUE,
+	login VARCHAR(50) UNIQUE NOT NULL,
+	haslo  VARCHAR(255) NOT NULL,
+	email VARCHAR(50) UNIQUE NOT NULL,
+	id_rola INT NOT NULL
 );
 
 
 CREATE TABLE Przodownik
 (
 	id_przodownik INT PRIMARY KEY,
-	imie VARCHAR(50),
-	nazwisko VARCHAR(50),
-	telefon VARCHAR(11),
+	imie VARCHAR(50) NOT NULL,
+	nazwisko VARCHAR(50) NOT NULL,
+	telefon VARCHAR(11) NOT NULL,
 	opis VARCHAR(255),
 	id_uzytkownik INT UNIQUE
 );
@@ -29,9 +30,9 @@ CREATE TABLE Przodownik
 CREATE TABLE Turysta
 (
 	id_turysta INT PRIMARY KEY IDENTITY(1,1),
-	imie VARCHAR(50),
-	nazwisko VARCHAR(50),
-	telefon VARCHAR(11),
+	imie VARCHAR(50) NOT NULL,
+	nazwisko VARCHAR(50) NOT NULL,
+	telefon VARCHAR(11) NOT NULL,
 	id_uzytkownik INT UNIQUE,
 	opis VARCHAR(250),
 	punkty INT
@@ -41,41 +42,41 @@ CREATE TABLE Turysta
 CREATE TABLE Grupa
 (
 	id_grupa INT PRIMARY KEY IDENTITY(1,1),
-	nazwa varchar(50)
+	nazwa varchar(50) NOT NULL
 );
 
-CREATE TABLE Grup_Przodownik
+CREATE TABLE Grupa_Przodownik
 (
 	id_grupa_przodownik INT PRIMARY KEY IDENTITY(1,1), 
-	id_przodownik INT,
-	id_grupa INT
+	id_przodownik INT NOT NULL,
+	id_grupa INT NOT NULL
 );
 
 CREATE TABLE Odznaka
 (
 	id_odznaka INT PRIMARY KEY,
-	nazwa VARCHAR(50)
+	nazwa VARCHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE Pasmo
 (
 	id_pasmo INT PRIMARY KEY IDENTITY(1,1),
-	nazwa VARCHAR(50),
+	nazwa VARCHAR(50) NOT NULL,
 	id_grupa INT
 );
 
 CREATE TABLE Punkt
 (
 	id_punkt INT PRIMARY KEY IDENTITY(1,1),
-	nazwa VARCHAR(50),
+	nazwa VARCHAR(50) NOT NULL,
 	id_pasmo INT
 );
 
 CREATE TABLE Odcinek
 (
 	id_odcinek INT PRIMARY KEY IDENTITY(1,1),
-	id_punkt_poczatkowy INT,
-	id_punkt_koncowy INT,
+	id_punkt_poczatkowy INT NOT NULL,
+	id_punkt_koncowy INT NOT NULL,
 	punkty_wejscie INT,
 	punkty_powrot INT,
 	otwarty BIT
@@ -85,8 +86,8 @@ CREATE TABLE Odcinek
 CREATE TABLE Turysta_Odznaka
 (
 	id_turysta_odznaka INT PRIMARY KEY IDENTITY(1,1),
-	id_turysta INT,
-	id_odznaka INT
+	id_turysta INT NOT NULL,
+	id_odznaka INT NOT NULL
 );
 
 ---------------------------------------------------------------------------------
