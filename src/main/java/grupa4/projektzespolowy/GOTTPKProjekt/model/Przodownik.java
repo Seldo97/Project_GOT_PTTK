@@ -11,13 +11,13 @@ public class Przodownik {
     @Column(name = "idPrzodownik")
     private int idPrzodownik;
 
-    @Column(name = "imie")
+    @Column(name = "imie", nullable=false, length=50)
     private String imie;
 
-    @Column(name = "nazwisko")
+    @Column(name = "nazwisko", nullable=false, length=50)
     private String nazwisko;
 
-    @Column(name = "telefon")
+    @Column(name = "telefon", nullable=false, length=50)
     private String telefon;
 
     public Przodownik() {}
