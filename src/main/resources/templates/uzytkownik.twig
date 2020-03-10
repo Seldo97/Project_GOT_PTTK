@@ -1,0 +1,30 @@
+{% extends 'baseTemplate.twig' %}
+
+{% block header %}
+    Przodownicy
+{% endblock %}
+{% block main %}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">login</th>
+                <th scope="col">haslo</th>
+                <th scope="col">email</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for uzytkownik in uzytkownicy %}
+        <tr>
+          <td>{{ uzytkownik.getLogin }}</td>
+          <td>{{ uzytkownik.getHaslo }}</td>
+          <td>{{ uzytkownik.getEmail }}</td>
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}

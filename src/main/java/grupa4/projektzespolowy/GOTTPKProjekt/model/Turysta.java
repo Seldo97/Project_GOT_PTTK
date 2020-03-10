@@ -1,10 +1,13 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,15 +27,16 @@ public class Turysta
 	
 	@Column(name="telefon")
 	private String telefon;
-	
-	@Column(name="idUzytkownik")
-	private int idUzytkownik;
-	
+
 	@Column(name="opis")
 	private String opis;
 	
 	@Column(name="punkty")
 	private int punkty;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idUzytkownik")
+	private Uzytkownik Uzytkownik;
 	
 	
 	public Turysta()
@@ -42,12 +46,12 @@ public class Turysta
 	
 	
 
-	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, int idUzytkownik, String opis,int punkty) {
+	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
 		this.idTurysta = idTurysta;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
-		this.idUzytkownik = idUzytkownik;
+		this.Uzytkownik = idUzytkownik;
 		this.opis = opis;
 		this.punkty = punkty;
 	}
@@ -94,13 +98,13 @@ public class Turysta
 	}
 
 
-	public int getIdUzytkownik() {
-		return idUzytkownik;
+	public Uzytkownik getIdUzytkownik() {
+		return Uzytkownik;
 	}
 
 
-	public void setIdUzytkownik(int idUzytkownik) {
-		this.idUzytkownik = idUzytkownik;
+	public void setIdUzytkownik(Uzytkownik idUzytkownik) {
+		this.Uzytkownik = idUzytkownik;
 	}
 
 
@@ -128,7 +132,7 @@ public class Turysta
 	@Override
 	public String toString() {
 		return "Turysta [idTurysta=" + idTurysta + ", imie=" + imie + ", nazwisko=" + nazwisko + ", telefon=" + telefon
-				+ ", idUzytkownik=" + idUzytkownik + ", opis=" + opis + ", punkty=" + punkty + "]";
+				+ ", idUzytkownik=" + Uzytkownik + ", opis=" + opis + ", punkty=" + punkty + "]";
 	}
 	
 	
