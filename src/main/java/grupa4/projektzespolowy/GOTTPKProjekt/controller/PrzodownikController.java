@@ -24,9 +24,9 @@ public class PrzodownikController {
     }
 
     @PostMapping("/przodownicy/dodaj")
-    public void createProduct(@RequestParam(value="imie", required=false) String imie,
-                                @RequestParam(value="nazwisko", required=false) String nazwisko,
-                                @RequestParam(value="telefon", required=true) String telefon,
+    public void createProduct(@RequestParam(value="imie") String imie,
+                                @RequestParam(value="nazwisko") String nazwisko,
+                                @RequestParam(value="telefon") String telefon,
                                 HttpServletResponse httpResponse) throws IOException {
 
         var przodownik = new Przodownik(imie, nazwisko, telefon);
