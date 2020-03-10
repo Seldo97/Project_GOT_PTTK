@@ -1,0 +1,36 @@
+{% extends 'baseTemplate.twig' %}
+
+{% block header %}
+    Przodownicy
+{% endblock %}
+{% block main %}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Telefon</th>
+                <th scope="col">Uzytkownik</th>
+                <th scope="col">opis</th>
+                <th scope="col">Punkty</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for turysta in turysci %}
+        <tr>
+          <td>{{ turysta.getIdTurysta }}</td>
+          <td>{{ turysta.getImie }}</td>
+          <td>{{ turysta.getNazwisko }}</td>
+          <td>{{ turysta.getTelefon }}</td>
+          <td>{{ turysta.getIdUzytkownik }}</td>
+          <td>{{ turysta.getOpis }}</td>
+          <td>{{ turysta.getPunkty }}</td>
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}
