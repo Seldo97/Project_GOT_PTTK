@@ -1,10 +1,13 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,12 +27,20 @@ public class Turysta
 	
 	@Column(name="telefon")
 	private String telefon;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> Adam_test
 	@Column(name="opis")
 	private String opis;
 	
 	@Column(name="punkty")
 	private int punkty;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idUzytkownik")
+	private Uzytkownik Uzytkownik;
 	
 	
 	public Turysta()
@@ -39,10 +50,19 @@ public class Turysta
 	
 	
 
+<<<<<<< HEAD
 	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, int idUzytkownik, String opis,int punkty) {
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
+=======
+	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
+		this.idTurysta = idTurysta;
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.telefon = telefon;
+		this.Uzytkownik = idUzytkownik;
+>>>>>>> Adam_test
 		this.opis = opis;
 		this.punkty = punkty;
 	}
@@ -89,6 +109,18 @@ public class Turysta
 	}
 
 
+<<<<<<< HEAD
+=======
+	public Uzytkownik getIdUzytkownik() {
+		return Uzytkownik;
+	}
+
+
+	public void setIdUzytkownik(Uzytkownik idUzytkownik) {
+		this.Uzytkownik = idUzytkownik;
+	}
+
+>>>>>>> Adam_test
 
 	public String getOpis() {
 		return opis;
@@ -114,7 +146,11 @@ public class Turysta
 	@Override
 	public String toString() {
 		return "Turysta [idTurysta=" + idTurysta + ", imie=" + imie + ", nazwisko=" + nazwisko + ", telefon=" + telefon
+<<<<<<< HEAD
 				+ ", opis=" + opis + ", punkty=" + punkty + "]";
+=======
+				+ ", idUzytkownik=" + Uzytkownik + ", opis=" + opis + ", punkty=" + punkty + "]";
+>>>>>>> Adam_test
 	}
 	
 	
