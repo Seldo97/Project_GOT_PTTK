@@ -1,10 +1,12 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +27,10 @@ public class Uzytkownik
 	@Column(name = "email")
 	private String email;
 	
+	@OneToOne(mappedBy="Uzytkownik", cascade =CascadeType.ALL) 
+	Turysta turysta;
+	
+
 	public Uzytkownik()
 	{
 		
@@ -79,6 +85,16 @@ public class Uzytkownik
 	public void setEmail(String email) 
 	{
 		this.email = email;
+	}
+	
+	public Turysta getTurysta() {
+		return turysta;
+	}
+
+
+
+	public void setTurysta(Turysta turysta) {
+		this.turysta = turysta;
 	}
 
 	@Override
