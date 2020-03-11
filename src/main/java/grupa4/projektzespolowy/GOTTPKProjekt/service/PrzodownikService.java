@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PrzodownikService {
+public class PrzodownikService { // service obsługuje nasze metody z repozytorium
 
     @Autowired
     private PrzodownikRepository przodownikRepository;
@@ -23,7 +23,11 @@ public class PrzodownikService {
         return this.przodownikRepository.findAll();
     }
 
+    public Przodownik getOneById(Integer id) { return this.przodownikRepository.getOne(id); }
+
     public void removePrzodownik(Integer id) { this.przodownikRepository.deleteById(id); }
+
+    public void deletePrzodownikQuery(Integer id) { this.przodownikRepository.deletePrzodownik(id); }
 
     //public List<Przodownik> getPrzodownikUser(){ return this.przodownikRepository.findAllPrzodownikUser(); }
 }

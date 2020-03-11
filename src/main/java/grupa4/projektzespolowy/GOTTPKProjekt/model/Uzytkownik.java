@@ -11,7 +11,7 @@ public class Uzytkownik
     @Column(name = "id_uzytkownik")
 	private int idUzytkownik;
 	
-	@Column(name="login", nullable=false, length=50, unique = true)
+	@Column(name="login", nullable=false, length=50, unique = true) // w @Column dane odpowiadające tym w bazie
 	private String login;
 	
 	@Column(name="haslo", nullable=false, length=255)
@@ -20,46 +20,50 @@ public class Uzytkownik
 	@Column(name = "email", nullable=false, length=50, unique = true)
 	private String email;
 
-	@OneToOne(mappedBy = "Uzytkownik")
+	@ManyToOne
+	@JoinColumn(name="id_rola", nullable=false)
+	private Rola rola;
+
+	@OneToOne(mappedBy = "Uzytkownik", cascade = CascadeType.ALL) // kaskadowe operacje ustawiamy zawsze na rodzicu
+																  // (czyli tabela do której odwołuje się inna przez klucz obcy.
+																	// W tym wypadku Przodownik odwołuje się do uzytkownika)
 	private Przodownik przodownik;
 
 	@OneToOne(mappedBy = "Uzytkownik")
 	private Turysta turysta;
 
-	public Uzytkownik() {}
 
-	public Uzytkownik(String login, String haslo, String email)
+	public Uzytkownik() {}  // hibernate wymaga konstruktora bezparametrowego
+
+	public Uzytkownik(String login, String haslo, String email, Rola rola)
 	{
 		this.login = login;
 		this.haslo = haslo;
 		this.email = email;
+		this.rola = rola;
 	}
 
-	public Uzytkownik(int idUzytkownik, String login, String haslo, String email) 
+	public Uzytkownik(int idUzytkownik, String login, String haslo, String email, Przodownik przodownik, Rola rola)
 	{
 		this.idUzytkownik = idUzytkownik;
 		this.login = login;
 		this.haslo = haslo;
 		this.email = email;
-	}
-
-	public Uzytkownik(int idUzytkownik, String login, String haslo, String email, Przodownik przodownik)
-	{
-		this.idUzytkownik = idUzytkownik;
-		this.login = login;
-		this.haslo = haslo;
-		this.email = email;
+		this.rola = rola;
 		this.przodownik = przodownik;
 	}
 
-	public Uzytkownik(int idUzytkownik, String login, String haslo, String email, Turysta turysta)
+	public Uzytkownik(int idUzytkownik, String login, String haslo, String email, Turysta turysta, Rola rola)
 	{
 		this.idUzytkownik = idUzytkownik;
 		this.login = login;
 		this.haslo = haslo;
 		this.email = email;
+		this.rola = rola;
 		this.turysta = turysta;
 	}
+
+	// settery, gettery, kontruktory, toStringi mając zmienne można stworzyć szybko przez alt + ins w intellij
 
 	public int getIdUzytkownik() 
 	{
@@ -100,6 +104,14 @@ public class Uzytkownik
 		this.email = email;
 	}
 
+	public Rola getRola() {
+		return rola;
+	}
+
+	public void setRola(Rola rola) {
+		this.rola = rola;
+	}
+
 	public Przodownik getPrzodownik() {
 		return przodownik;
 	}
@@ -123,6 +135,7 @@ public class Uzytkownik
 				", login='" + login + '\'' +
 				", haslo='" + haslo + '\'' +
 				", email='" + email + '\'' +
+				", rola=" + rola +
 				'}';
 	}
 }

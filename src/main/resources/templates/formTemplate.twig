@@ -1,0 +1,30 @@
+{% extends 'baseTemplate.twig' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block title %}
+    Formularz
+{% endblock %}
+
+{% block header %}
+    <h2>Formularz</h2>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-12 col-md-6 mt-3" id="form">
+            {% block form %}
+
+            Formularz
+
+            {% endblock %}
+        </div>
+    </div>
+
+    {% block js %}
+
+    {% endblock %}
+
+{% endblock %}

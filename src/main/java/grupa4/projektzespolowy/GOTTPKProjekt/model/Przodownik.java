@@ -21,7 +21,7 @@ public class Przodownik {
     @Column(name = "telefon", nullable=false, length=9)
     private String telefon;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
     private Uzytkownik Uzytkownik;
 
