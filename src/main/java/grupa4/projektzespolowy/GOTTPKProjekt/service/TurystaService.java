@@ -21,7 +21,7 @@ public class TurystaService
         return turystaRepository.save(turysta);
     }
 
-    public List<Turysta> getAllProduct() {
+    public List<Turysta> getAllTurysta() {
         return this.turystaRepository.findAll();
     }
 }

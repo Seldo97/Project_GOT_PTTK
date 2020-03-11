@@ -21,7 +21,7 @@ public class TurystaController
     public ModelAndView getAllProduct() {
 
         ModelAndView modelAndView = new ModelAndView("turysta");
-        modelAndView.addObject("turysta", turystaService.getAllProduct());
+        modelAndView.addObject("turysta", turystaService.getAllTurysta());
         return modelAndView;
     }
 	

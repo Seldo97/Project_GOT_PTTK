@@ -17,12 +17,14 @@ public class UzytkownikService
 {
 	@Autowired
     private UzytkownikRepository uzytkownikRepository;
-	
+
 	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) {
         return uzytkownikRepository.save(uzytkownik);
     }
 
-    public List<Uzytkownik> getAllProduct() {
+    public List<Uzytkownik> getAllUzytkownik() {
         return this.uzytkownikRepository.findAll();
     }
+
+    public void removeUzytkownik(Integer id) { this.uzytkownikRepository.deleteById(id); }
 }

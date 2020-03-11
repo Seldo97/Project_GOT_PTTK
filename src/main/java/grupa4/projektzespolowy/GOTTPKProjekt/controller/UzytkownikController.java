@@ -21,7 +21,7 @@ public class UzytkownikController
 	    public ModelAndView getAllProduct() {
 
 	        ModelAndView modelAndView = new ModelAndView("uzytkownik");
-	        modelAndView.addObject("uzytkownik", uzytkownikService.getAllProduct());
+	        modelAndView.addObject("uzytkownik", uzytkownikService.getAllUzytkownik());
 	        //return ResponseEntity.ok().body(przodownikService.getAllProduct());
 	        return modelAndView;
 	    }
