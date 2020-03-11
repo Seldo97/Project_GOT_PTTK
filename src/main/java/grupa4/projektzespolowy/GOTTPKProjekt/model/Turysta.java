@@ -33,15 +33,9 @@ public class Turysta
 	
 	@Column(name="punkty")
 	private int punkty;
-<<<<<<< HEAD
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idUzytkownik")
-=======
-
-	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
->>>>>>> 9bda7a1397da83fdde41e2b3fb7b705c407ba4d5
 	private Uzytkownik Uzytkownik;
 	
 	

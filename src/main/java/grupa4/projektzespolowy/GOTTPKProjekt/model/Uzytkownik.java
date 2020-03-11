@@ -1,6 +1,5 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
-<<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-=======
 import javax.persistence.*;
->>>>>>> 9bda7a1397da83fdde41e2b3fb7b705c407ba4d5
 
 @Entity
 @Table(name="Uzytkownik")
@@ -30,14 +27,11 @@ public class Uzytkownik
 	
 	@Column(name = "email", nullable=false, length=50, unique = true)
 	private String email;
-<<<<<<< HEAD
-	
 	@OneToOne(mappedBy="Uzytkownik", cascade =CascadeType.ALL) 
 	Turysta turysta;
 	
 
 	public Uzytkownik()
-=======
 
 	@ManyToOne
 	@JoinColumn(name="id_rola", nullable=false)
@@ -55,7 +49,6 @@ public class Uzytkownik
 	public Uzytkownik() {}  // hibernate wymaga konstruktora bezparametrowego
 
 	public Uzytkownik(String login, String haslo, String email, Rola rola)
->>>>>>> 9bda7a1397da83fdde41e2b3fb7b705c407ba4d5
 	{
 		this.login = login;
 		this.haslo = haslo;
@@ -150,13 +143,6 @@ public class Uzytkownik
 		this.przodownik = przodownik;
 	}
 
-	public Turysta getTurysta() {
-		return turysta;
-	}
-
-	public void setTurysta(Turysta turysta) {
-		this.turysta = turysta;
-	}
 
 	@Override
 	public String toString() {
