@@ -45,7 +45,7 @@ public class PrzodownikController {
         Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, new Uzytkownik(login, haslo, email));
         przodownikService.createPrzodownik(przodownik);
 
-        redirectAttributes.addFlashAttribute("WIADOMOSC", "wiadomosc");
+        //redirectAttributes.addFlashAttribute("WIADOMOSC", "wiadomosc");
         httpResponse.sendRedirect("/przodownicy");
     }
 }
