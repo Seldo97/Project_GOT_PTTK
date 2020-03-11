@@ -11,13 +11,13 @@ public class Uzytkownik
     @Column(name = "id_uzytkownik")
 	private int idUzytkownik;
 	
-	@Column(name="login", nullable=false, length=50)
+	@Column(name="login", nullable=false, length=50, unique = true)
 	private String login;
 	
 	@Column(name="haslo", nullable=false, length=255)
 	private String haslo;
 	
-	@Column(name = "email", nullable=false, length=50)
+	@Column(name = "email", nullable=false, length=50, unique = true)
 	private String email;
 
 	@OneToOne(mappedBy = "Uzytkownik")

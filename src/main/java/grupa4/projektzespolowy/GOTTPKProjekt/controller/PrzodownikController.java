@@ -6,11 +6,13 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -33,17 +35,28 @@ public class PrzodownikController {
     }
 
     @PostMapping("/przodownicy/dodaj")
-    public void createProduct(@RequestParam(value="imie") String imie,
+    public void createPrzodownik(@RequestParam(value="imie") String imie,
                               @RequestParam(value="nazwisko") String nazwisko,
                               @RequestParam(value="telefon") String telefon,
                               @RequestParam(value="login") String login,
                               @RequestParam(value="haslo") String haslo,
                               @RequestParam(value="email") String email,
+                              MethodArgumentNotValidException result,
                               HttpServletResponse httpResponse,
                               RedirectAttributes redirectAttributes) throws IOException {
 
         Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, new Uzytkownik(login, haslo, email));
         przodownikService.createPrzodownik(przodownik);
+
+        //redirectAttributes.addFlashAttribute("WIADOMOSC", "wiadomosc");
+        httpResponse.sendRedirect("/przodownicy");
+    }
+
+    @GetMapping("/przodownicy/usun/{id_przodownik}")
+    public void removePrzodownik(@PathVariable Integer id_przodownik,
+                                 HttpServletResponse httpResponse) throws IOException {
+
+        przodownikService.removePrzodownik(id_przodownik);
 
         //redirectAttributes.addFlashAttribute("WIADOMOSC", "wiadomosc");
         httpResponse.sendRedirect("/przodownicy");

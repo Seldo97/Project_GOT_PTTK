@@ -1,6 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Przodownik")
@@ -17,7 +18,7 @@ public class Przodownik {
     @Column(name = "nazwisko", nullable=false, length=50)
     private String nazwisko;
 
-    @Column(name = "telefon", nullable=false, length=50)
+    @Column(name = "telefon", nullable=false, length=9)
     private String telefon;
 
     @OneToOne(cascade = CascadeType.ALL)

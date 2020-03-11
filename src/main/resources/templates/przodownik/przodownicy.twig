@@ -13,17 +13,19 @@
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Telefon</th>
                 <th scope="col">E-mail</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
 
         {% for przodownik in przodownicy %}
         <tr>
-          <td>{{ przodownik.getIdPrzodownik }}</td>
-          <td>{{ przodownik.getImie }}</td>
-          <td>{{ przodownik.getNazwisko }}</td>
-          <td>{{ przodownik.getTelefon }}</td>
-          <td>{{ przodownik.uzytkownik.getEmail }}</td>
+              <td>{{ przodownik.getIdPrzodownik }}</td>
+              <td>{{ przodownik.getImie }}</td>
+              <td>{{ przodownik.getNazwisko }}</td>
+              <td>{{ przodownik.getTelefon }}</td>
+              <td>{{ przodownik.uzytkownik.getEmail }}</td>
+                <td><a class="nav-link" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">Usuń</a></td>
         </tr>
         {%  endfor %}
 

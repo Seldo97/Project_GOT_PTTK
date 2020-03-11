@@ -23,5 +23,7 @@ public class PrzodownikService {
         return this.przodownikRepository.findAll();
     }
 
+    public void removePrzodownik(Integer id) { this.przodownikRepository.deleteById(id); }
+
     //public List<Przodownik> getPrzodownikUser(){ return this.przodownikRepository.findAllPrzodownikUser(); }
 }
