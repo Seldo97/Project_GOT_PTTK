@@ -22,4 +22,6 @@ public class PrzodownikService {
     public List<Przodownik> getAllPrzodownik() {
         return this.przodownikRepository.findAll();
     }
+
+    //public List<Przodownik> getPrzodownikUser(){ return this.przodownikRepository.findAllPrzodownikUser(); }
 }

@@ -8,7 +8,7 @@ public class Przodownik {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idPrzodownik")
+    @Column(name = "id_przodownik")
     private int idPrzodownik;
 
     @Column(name = "imie", nullable=false, length=50)
@@ -20,12 +20,23 @@ public class Przodownik {
     @Column(name = "telefon", nullable=false, length=50)
     private String telefon;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
+    private Uzytkownik Uzytkownik;
+
     public Przodownik() {}
 
     public Przodownik(String imie, String nazwisko, String telefon) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.telefon = telefon;
+    }
+
+    public Przodownik(String imie, String nazwisko, String telefon, Uzytkownik uzytkownik) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.telefon = telefon;
+        this.Uzytkownik = uzytkownik;
     }
 
     public int getIdPrzodownik() {
@@ -60,6 +71,13 @@ public class Przodownik {
         this.telefon = telefon;
     }
 
+    public Uzytkownik getUzytkownik() {
+        return Uzytkownik;
+    }
+
+    public void setUzytkownik(Uzytkownik uzytkownik) {
+        Uzytkownik = uzytkownik;
+    }
 
     @Override
     public String toString() {
@@ -67,6 +85,8 @@ public class Przodownik {
                 "idPrzodownik=" + idPrzodownik +
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
-                ", telefon='" + telefon + '}' + '\n';
+                ", telefon='" + telefon + '\'' +
+                ", Uzytkownik=" + Uzytkownik +
+                '}';
     }
 }

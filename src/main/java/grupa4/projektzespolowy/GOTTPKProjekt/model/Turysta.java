@@ -16,7 +16,7 @@ public class Turysta
 {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idTurysta")
+    @Column(name = "id_turysta")
 	private int idTurysta;
 	
 	@Column(name="imie")
@@ -33,25 +33,21 @@ public class Turysta
 	
 	@Column(name="punkty")
 	private int punkty;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="idUzytkownik")
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
 	private Uzytkownik Uzytkownik;
 	
 	
 	public Turysta()
-	{
-		
-	}
-	
-	
+	{}
 
 	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, int idUzytkownik, String opis,int punkty) {
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
 	}
-		public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
+	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
 		this.idTurysta = idTurysta;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
@@ -60,8 +56,6 @@ public class Turysta
 		this.opis = opis;
 		this.punkty = punkty;
 	}
-
-
 
 	public int getIdTurysta() {
 		return idTurysta;
@@ -102,14 +96,6 @@ public class Turysta
 		this.telefon = telefon;
 	}
 
-	public Uzytkownik getIdUzytkownik() {
-		return Uzytkownik;
-	}
-
-
-	public void setIdUzytkownik(Uzytkownik idUzytkownik) {
-		this.Uzytkownik = idUzytkownik;
-	}
 
 	public String getOpis() {
 		return opis;
@@ -131,6 +117,13 @@ public class Turysta
 	}
 
 
+	public Uzytkownik getUzytkownik() {
+		return Uzytkownik;
+	}
+
+	public void setUzytkownik(Uzytkownik uzytkownik) {
+		Uzytkownik = uzytkownik;
+	}
 
 	@Override
 	public String toString() {

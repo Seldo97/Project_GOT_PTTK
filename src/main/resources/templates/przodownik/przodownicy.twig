@@ -12,6 +12,7 @@
                 <th scope="col">Imie</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Telefon</th>
+                <th scope="col">E-mail</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
           <td>{{ przodownik.getImie }}</td>
           <td>{{ przodownik.getNazwisko }}</td>
           <td>{{ przodownik.getTelefon }}</td>
+          <td>{{ przodownik.uzytkownik.getEmail }}</td>
         </tr>
         {%  endfor %}
 
@@ -34,19 +36,36 @@
             {% block form %}
 
                 <form id="signupForm" action="/przodownicy/dodaj" method="POST">
-
-                  <div class="form-group">
-                    <label for="imie">Imie</label>
-                    <input type="text" class="form-control" id="imie" name="imie">
-                  </div>
-                  <div class="form-group">
-                    <label for="nazwisko">Nazwisko</label>
-                    <input type="text" class="form-control" id="nazwisko" name="nazwisko">
-                  </div>
-                  <div class="form-group">
-                    <label for="telefon">Telefon</label>
-                    <input type="text" class="form-control" id="telefon" name="telefon">
-                  </div>
+                    <fieldset>
+                        <legend> Dane Personalne </legend>
+                      <div class="form-group">
+                        <label for="imie">Imie</label>
+                        <input type="text" class="form-control" id="imie" name="imie">
+                      </div>
+                      <div class="form-group">
+                        <label for="nazwisko">Nazwisko</label>
+                        <input type="text" class="form-control" id="nazwisko" name="nazwisko">
+                      </div>
+                      <div class="form-group">
+                        <label for="telefon">Telefon</label>
+                        <input type="text" class="form-control" id="telefon" name="telefon">
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend> Dane Konta </legend>
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            <input type="text" class="form-control" id="login" name="login">
+                        </div>
+                        <div class="form-group">
+                            <label for="haslo">Hasło</label>
+                            <input type="password" class="form-control" id="haslo" name="haslo">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                    </fieldset>
 
                   <br/>
                   <button type="submit" class="btn btn-info">Dodaj</button>
@@ -56,5 +75,10 @@
             {% endblock %}
         </div>
     </div>
+
+    {% if wiadomosc != null %}
+        WIADOMOSC
+    {% endif %}
+    {{ WIADOMOSC }}
 
 {% endblock %}
