@@ -9,28 +9,31 @@
 {% endblock %}
 
 {% block form %}
-
-    <form id="signupForm" action="/przodownicy/dodaj" method="POST">
+    {% if update == 1 %}
+        <form id="signupForm" action="/przodownicy/update/{{ przodownik.getIdPrzodownik }}" method="POST">
+    {% else %}
+        <form id="signupForm" action="/przodownicy/dodaj" method="POST">
+    {% endif %}
         <fieldset>
             <legend> Dane Personalne </legend>
             <div class="form-group">
                 <label for="imie">Imie</label>
-                <input type="text" class="form-control" id="imie" name="imie">
+                <input type="text" class="form-control" id="imie" name="imie" value="{{przodownik.getImie}}">
             </div>
             <div class="form-group">
                 <label for="nazwisko">Nazwisko</label>
-                <input type="text" class="form-control" id="nazwisko" name="nazwisko">
+                <input type="text" class="form-control" id="nazwisko" name="nazwisko" value="{{przodownik.getNazwisko}}">
             </div>
             <div class="form-group">
                 <label for="telefon">Telefon</label>
-                <input type="text" class="form-control" id="telefon" name="telefon">
+                <input type="text" class="form-control" id="telefon" name="telefon" value="{{przodownik.getTelefon}}">
             </div>
         </fieldset>
         <fieldset>
             <legend> Dane Konta </legend>
             <div class="form-group">
                 <label for="login">Login</label>
-                <input type="text" class="form-control" id="login" name="login">
+                <input type="text" class="form-control" id="login" name="login" value="{{przodownik.uzytkownik.getLogin}}">
             </div>
             <div class="form-group">
                 <label for="haslo">Hasło</label>
@@ -38,13 +41,16 @@
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="text" class="form-control" id="email" name="email">
+                <input type="text" class="form-control" id="email" name="email" value="{{przodownik.uzytkownik.getEmail}}">
             </div>
         </fieldset>
 
         <br/>
-        <button type="submit" class="btn btn-info">Dodaj</button>
-
+        {% if update == 1 %}
+            <button type="submit" class="btn btn-info">Zmień</button>
+        {% else %}
+            <button type="submit" class="btn btn-info">Dodaj</button>
+        {% endif %}
     </form>
 
 {% endblock %}

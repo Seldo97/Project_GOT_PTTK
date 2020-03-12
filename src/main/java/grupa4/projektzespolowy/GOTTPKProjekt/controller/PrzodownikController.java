@@ -47,7 +47,7 @@ public class PrzodownikController {
                                   @RequestParam(value="email") String email,
                                   HttpServletResponse httpResponse ) throws IOException {
 
-        Rola rola = rolaService.getOneById(5); // pobranie roli (pod id 5 mam przodownik)
+        Rola rola = rolaService.getOneById(1); // pobranie roli (pod id 5 mam przodownik)
         Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email, rola); // tworze użytkownika z referencją do pobranej roli
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem
@@ -73,15 +73,40 @@ public class PrzodownikController {
         httpResponse.sendRedirect("/przodownicy");
     }
 
-    @GetMapping("/przodownicy/form")
-    public ModelAndView formPrzodownik() {
-
-        /*
-         coś tu będzie do update
-         */
+    @GetMapping({"/przodownicy/form", "/przodownicy/form/{id_przodownik}"})
+    public ModelAndView formPrzodownik(@PathVariable(required = false) Integer id_przodownik) {
 
         modelAndView = new ModelAndView("przodownik/przodownicyForm");
 
+        if(id_przodownik != null){
+            Przodownik przodownik = przodownikService.getOneById(id_przodownik);
+            modelAndView.addObject("przodownik", przodownik);
+            modelAndView.addObject("update", "1");
+        }
+
         return modelAndView;
+    }
+
+    @PostMapping("/przodownicy/update/{id_przodownik}")
+    public void updatePrzodownik(@RequestParam(value="imie") String imie,
+                                 @RequestParam(value="nazwisko") String nazwisko,
+                                 @RequestParam(value="telefon") String telefon,
+                                 @RequestParam(value="login") String login,
+                                 @RequestParam(value="haslo", required = false) String haslo,
+                                 @RequestParam(value="email") String email,
+                                 @PathVariable Integer id_przodownik,
+                                 HttpServletResponse httpResponse ) throws IOException {
+
+        Przodownik przodownik = przodownikService.getOneById(id_przodownik);
+
+        przodownik.setImie(imie);
+        przodownik.setNazwisko(nazwisko);
+        przodownik.setTelefon(telefon);
+        przodownik.getUzytkownik().setLogin(login);
+        przodownik.getUzytkownik().setEmail(email);
+
+        przodownikService.createPrzodownik(przodownik);
+
+        httpResponse.sendRedirect("/przodownicy");
     }
 }
