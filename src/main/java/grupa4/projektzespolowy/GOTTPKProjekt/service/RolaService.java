@@ -10,8 +10,6 @@ public interface RolaService {
 
     Rola getOneById(Integer id);
 
-    Rola getOneByName(String name);
-
-    public Rola getOneByName(String name) { return this.rolaRepository.findRolaByNazwa(name); }
+    public Rola getOneByName(String name);
 
 }
