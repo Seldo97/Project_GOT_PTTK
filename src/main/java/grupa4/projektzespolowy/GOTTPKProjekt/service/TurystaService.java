@@ -1,27 +1,12 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import java.util.List;
 
-import javax.transaction.Transactional;
+public interface TurystaService {
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+    Turysta createTurysta(Turysta turysta);
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
-import grupa4.projektzespolowy.GOTTPKProjekt.repository.TurystaRepository;
+    List<Turysta> getAllTurysta();
 
-@Service
-@Transactional
-public class TurystaService 
-{
-	@Autowired
-    private TurystaRepository turystaRepository;
-	
-	public Turysta createTurysta(Turysta turysta) {
-        return turystaRepository.save(turysta);
-    }
-
-    public List<Turysta> getAllTurysta() {
-        return this.turystaRepository.findAll();
-    }
 }

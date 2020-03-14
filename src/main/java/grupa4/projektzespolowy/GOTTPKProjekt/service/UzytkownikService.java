@@ -1,30 +1,15 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
+
 import java.util.List;
 
-import javax.transaction.Transactional;
+public interface UzytkownikService {
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+    Uzytkownik createUzytkownik(Uzytkownik uzytkownik);
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
-import grupa4.projektzespolowy.GOTTPKProjekt.repository.UzytkownikRepository;
+    List<Uzytkownik> getAllUzytkownik();
 
+    void removeUzytkownik(Integer id);
 
-@Service
-@Transactional
-public class UzytkownikService 
-{
-	@Autowired
-    private UzytkownikRepository uzytkownikRepository;
-
-	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) {
-        return uzytkownikRepository.save(uzytkownik);
-    }
-
-    public List<Uzytkownik> getAllUzytkownik() {
-        return this.uzytkownikRepository.findAll();
-    }
-
-    public void removeUzytkownik(Integer id) { this.uzytkownikRepository.deleteById(id); }
 }
