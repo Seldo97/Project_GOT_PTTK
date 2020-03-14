@@ -14,20 +14,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikService;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
 
 @RestController
 public class TurystaController 
 {
 	@Autowired
-	private TurystaService turystaService;
+	private TurystaServiceImpl turystaServiceImpl;
 	
 	@Autowired
 	private UzytkownikService uzytkownikService;
@@ -39,7 +38,7 @@ public class TurystaController
     public ModelAndView getAllProduct() {
 
         ModelAndView modelAndView = new ModelAndView("turysta/turysta");
-        modelAndView.addObject("turysci", turystaService.getAllTurysta());
+        modelAndView.addObject("turysci", turystaServiceImpl.getAllTurysta());
         return modelAndView;
     }
 	
@@ -76,7 +75,7 @@ public class TurystaController
 	        rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
 	        Turysta turysta = new Turysta(imie, nazwisko,opis,uzytkownik,telefon,punkty); // stwórz turyste z utworzonym użytkownikiem
 
-	        turystaService.createTurysta(turysta); // puść inserta do bazy
+	        turystaServiceImpl.createTurysta(turysta); // puść inserta do bazy
 	        // UWAGA! kolejność operacji jest ważna.
 
 
@@ -85,7 +84,7 @@ public class TurystaController
 	    }
 	  
 	   @PostMapping("/turysta/update/{id_turysta}")
-	    public void updateTurysta(@RequestParam(value="imie") String imie,
+	    public ModelAndView updateTurysta(@RequestParam(value="imie") String imie,
 	                                 @RequestParam(value="nazwisko") String nazwisko,
 	                                 @RequestParam(value="telefon") String telefon,
 	                                 @RequestParam(value="login") String login,
@@ -94,7 +93,7 @@ public class TurystaController
 	                                 @PathVariable Integer id_turysta,
 	                                 HttpServletResponse httpResponse ) throws IOException {
 
-	        Turysta turysta = turystaService.getOneById(id_turysta);
+	        Turysta turysta = turystaServiceImpl.getOneById(id_turysta);
 
 	        turysta.setImie(imie);
 	        turysta.setNazwisko(nazwisko);
@@ -103,9 +102,17 @@ public class TurystaController
 	        turysta.getUzytkownik().setHaslo(haslo);
 	        turysta.getUzytkownik().setEmail(email);
 
-	       turystaService.createTurysta(turysta);
+	       turystaServiceImpl.createTurysta(turysta);
 
 	        httpResponse.sendRedirect("/turysci");
+        ModelAndView modelAndView = new ModelAndView("turysta");
+        modelAndView.addObject("turysta", turystaServiceImpl.getAllTurysta());
+        return modelAndView;
+    }
+	
+	 @PostMapping("/turysta")
+	    public ResponseEntity <Turysta> createProduct(@RequestBody Turysta turysta) {
+	        return ResponseEntity.ok().body(this.turystaServiceImpl.createTurysta(turysta));
 	    }
 	
 }

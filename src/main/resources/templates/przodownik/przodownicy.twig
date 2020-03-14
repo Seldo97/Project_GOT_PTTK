@@ -12,7 +12,9 @@
                 <th scope="col">Imie</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Telefon</th>
+                <th scope="col">Login</th>
                 <th scope="col">E-mail</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -24,8 +26,10 @@
               <td>{{ przodownik.getImie }}</td>
               <td>{{ przodownik.getNazwisko }}</td>
               <td>{{ przodownik.getTelefon }}</td>
+                <td>{{ przodownik.uzytkownik.getLogin }}</td>
               <td>{{ przodownik.uzytkownik.getEmail }}</td>
                 <td><a class="nav-link" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">Usuń</a></td>
+                <td><a class="nav-link" href="/przodownicy/form/{{ przodownik.getIdPrzodownik }}">Edytuj</a></td>
         </tr>
         {%  endfor %}
 

@@ -1,33 +1,21 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
-import grupa4.projektzespolowy.GOTTPKProjekt.repository.PrzodownikRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
-@Transactional
-public class PrzodownikService { // service obsługuje nasze metody z repozytorium
+public interface PrzodownikService {
 
-    @Autowired
-    private PrzodownikRepository przodownikRepository;
+    Przodownik createPrzodownik(Przodownik przodownik);
 
-    public Przodownik createPrzodownik(Przodownik przodownik) {
-        return przodownikRepository.save(przodownik);
-    }
+    List<Przodownik> getAllPrzodownik();
 
-    public List<Przodownik> getAllPrzodownik() {
-        return this.przodownikRepository.findAll();
-    }
+    Przodownik getOneById(Integer id);
 
-    public Przodownik getOneById(Integer id) { return this.przodownikRepository.getOne(id); }
+    void removePrzodownik(Integer id);
 
-    public void removePrzodownik(Integer id) { this.przodownikRepository.deleteById(id); }
+    void deletePrzodownikQuery(Integer id);
 
-    public void deletePrzodownikQuery(Integer id) { this.przodownikRepository.deletePrzodownik(id); }
+    //List<Przodownik> getPrzodownikUser();
 
-    //public List<Przodownik> getPrzodownikUser(){ return this.przodownikRepository.findAllPrzodownikUser(); }
 }
