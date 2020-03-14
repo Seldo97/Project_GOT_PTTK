@@ -27,11 +27,8 @@ public class Uzytkownik
 	
 	@Column(name = "email", nullable=false, length=50, unique = true)
 	private String email;
-	@OneToOne(mappedBy="Uzytkownik", cascade =CascadeType.ALL) 
-	Turysta turysta;
-	
 
-	public Uzytkownik()
+
 
 	@ManyToOne
 	@JoinColumn(name="id_rola", nullable=false)

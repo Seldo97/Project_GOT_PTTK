@@ -47,7 +47,7 @@ public class PrzodownikController {
                                   @RequestParam(value="email") String email,
                                   HttpServletResponse httpResponse ) throws IOException {
 
-        Rola rola = rolaService.getOneById(5); // pobranie roli (pod id 5 mam przodownik)
+        Rola rola = rolaService.getOneByName("Przodownik"); // pobranie roli
         Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email, rola); // tworze użytkownika z referencją do pobranej roli
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem

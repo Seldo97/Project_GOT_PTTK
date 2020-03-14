@@ -56,6 +56,15 @@ public class Turysta
 		this.opis = opis;
 		this.punkty = punkty;
 	}
+	
+	public Turysta( String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.telefon = telefon;
+		this.Uzytkownik = idUzytkownik;
+		this.opis = opis;
+		this.punkty = punkty;
+	}
 
 	public int getIdTurysta() {
 		return idTurysta;

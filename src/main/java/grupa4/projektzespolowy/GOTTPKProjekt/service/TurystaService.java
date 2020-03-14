@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.TurystaRepository;
 
@@ -24,4 +25,7 @@ public class TurystaService
     public List<Turysta> getAllTurysta() {
         return this.turystaRepository.findAll();
     }
+    
+    public Turysta getOneById(Integer id) { return this.turystaRepository.getOne(id); }
+    
 }

@@ -21,10 +21,19 @@ public class UzytkownikService
 	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) {
         return uzytkownikRepository.save(uzytkownik);
     }
+	
+	public void removeUzytkownik(Integer id) { this.uzytkownikRepository.deleteById(id); }
 
     public List<Uzytkownik> getAllUzytkownik() {
         return this.uzytkownikRepository.findAll();
     }
+    
+    public Uzytkownik getOneById(Integer id)
+    {
+		return this.uzytkownikRepository.getOne(id);
+    	
+    }
 
-    public void removeUzytkownik(Integer id) { this.uzytkownikRepository.deleteById(id); }
+    
+    
 }

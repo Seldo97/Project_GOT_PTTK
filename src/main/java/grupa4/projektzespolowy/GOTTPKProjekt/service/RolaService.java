@@ -22,5 +22,6 @@ public class RolaService
         return this.rolaRepository.findAll();
     }
 
-    public Rola getOneById(Integer id) { return this.rolaRepository.getOne(id); }
+    public Rola getOneByName(String name) { return this.rolaRepository.findRolaByNazwa(name); }
+
 }

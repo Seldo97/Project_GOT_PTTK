@@ -1,7 +1,7 @@
-{% extends 'baseTemplate.twig' %}
+{% extends '../baseTemplate.twig' %}
 
 {% block header %}
-    Przodownicy
+    Turysta
 {% endblock %}
 {% block main %}
     <table id="myTable" class="table table-striped align-middle table-sm">
@@ -14,6 +14,8 @@
                 <th scope="col">Uzytkownik</th>
                 <th scope="col">opis</th>
                 <th scope="col">Punkty</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -27,10 +29,13 @@
           <td>{{ turysta.getIdUzytkownik }}</td>
           <td>{{ turysta.getOpis }}</td>
           <td>{{ turysta.getPunkty }}</td>
+          <td><a class="nav-link" href="/turysta/updateForm/{{ turysta.getIdTurysta }}">Edytuj</a></td>
+          <td><a class="nav-link" href="/turysta/delete/{{ turysta.getIdTurysta }}">Usuñ</a></td>
         </tr>
         {%  endfor %}
-
         </tbody>
     </table>
+    
+    <a class="btn btn-info" href="/turysta/addForm" role="button">Dodaj</a>
 
 {% endblock %}
