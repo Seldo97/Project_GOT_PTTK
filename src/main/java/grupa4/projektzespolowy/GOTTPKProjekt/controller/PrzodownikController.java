@@ -7,13 +7,17 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.trace.http.HttpTrace;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@RestController
+@Controller
 public class PrzodownikController {
     @Autowired // podłączamy Servicy z których bedzimy koszystać
     private PrzodownikServiceImpl przodownikServiceImpl;
@@ -25,22 +29,21 @@ public class PrzodownikController {
     private ModelAndView modelAndView;
 
     @GetMapping("/przodownicy") // ścieżka na której zostanie obsłużona metoda
-    public ModelAndView getAllPrzodownik() {
+    public String getAllPrzodownik(Model model) {
 
-        modelAndView = new ModelAndView("przodownik/przodownicy"); // ścieżka do pliku twig który ma zostać wyrenderowany
-        modelAndView.addObject("przodownicy", przodownikServiceImpl.getAllPrzodownik()); // dodanie zmiennych do twiga
+        model.addAttribute("przodownicy", przodownikServiceImpl.getAllPrzodownik());
 
-        return modelAndView;
+        return "przodownik/przodownicy";
     }
 
     @PostMapping("/przodownicy/dodaj")
-    public void createPrzodownik(@RequestParam(value="imie") String imie,
+    public String createPrzodownik(@RequestParam(value="imie") String imie,
                                   @RequestParam(value="nazwisko") String nazwisko,
                                   @RequestParam(value="telefon") String telefon,
                                   @RequestParam(value="login") String login,
                                   @RequestParam(value="haslo") String haslo,
                                   @RequestParam(value="email") String email,
-                                  HttpServletResponse httpResponse ) throws IOException {
+                                   RedirectAttributes redirectAttributes) {
 
         Rola rola = rolaServiceImpl.getOneByName("przodownik"); // pobranie roli (pod id 5 mam przodownik)
         Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email, rola); // tworze użytkownika z referencją do pobranej roli
@@ -50,14 +53,13 @@ public class PrzodownikController {
         przodownikServiceImpl.createPrzodownik(przodownik); // puść inserta do bazy
         // UWAGA! kolejność operacji jest ważna.
 
+        redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 
-        //redirectAttributes.addFlashAttribute("WIADOMOSC", "wiadomosc");
-        httpResponse.sendRedirect("/przodownicy");
+        return "redirect:/przodownicy";
     }
 
     @GetMapping("/przodownicy/usun/{id_przodownik}") // usuń przodownika wraz z jego kontem użytkownika
-    public void removePrzodownik(@PathVariable Integer id_przodownik,
-                                 HttpServletResponse httpResponse) throws IOException {
+    public String removePrzodownik(@PathVariable Integer id_przodownik) {
 
         Przodownik przodownik = przodownikServiceImpl.getOneById(id_przodownik); // pobieram przodownika po odebranym id
         Uzytkownik uzytkownik = przodownik.getUzytkownik(); // pobieram uzytkownika przypisanego do przodownika
@@ -65,32 +67,30 @@ public class PrzodownikController {
 
         uzytkownikServiceImpl.removeUzytkownik(uzytkownik.getIdUzytkownik()); // usuwam użytkownika i od razu kaskadowo usuwa się przodownik.
 
-        httpResponse.sendRedirect("/przodownicy");
+        return "redirect:/przodownicy";
     }
 
     @GetMapping({"/przodownicy/form", "/przodownicy/form/{id_przodownik}"})
-    public ModelAndView formPrzodownik(@PathVariable(required = false) Integer id_przodownik) {
+    public String formPrzodownik(Model model, @PathVariable(required = false) Integer id_przodownik) {
 
-        modelAndView = new ModelAndView("przodownik/przodownicyForm");
 
         if(id_przodownik != null){
             Przodownik przodownik = przodownikServiceImpl.getOneById(id_przodownik);
-            modelAndView.addObject("przodownik", przodownik);
-            modelAndView.addObject("update", "1");
+            model.addAttribute("przodownik", przodownik);
+            model.addAttribute("update", "1");
         }
 
-        return modelAndView;
+        return "przodownik/przodownicyForm";
     }
 
     @PostMapping("/przodownicy/update/{id_przodownik}")
-    public void updatePrzodownik(@RequestParam(value="imie") String imie,
+    public String updatePrzodownik(@RequestParam(value="imie") String imie,
                                  @RequestParam(value="nazwisko") String nazwisko,
                                  @RequestParam(value="telefon") String telefon,
                                  @RequestParam(value="login") String login,
                                  @RequestParam(value="haslo", required = false) String haslo,
                                  @RequestParam(value="email") String email,
-                                 @PathVariable Integer id_przodownik,
-                                 HttpServletResponse httpResponse ) throws IOException {
+                                 @PathVariable Integer id_przodownik) {
 
         Przodownik przodownik = przodownikServiceImpl.getOneById(id_przodownik);
 
@@ -102,6 +102,6 @@ public class PrzodownikController {
 
         przodownikServiceImpl.createPrzodownik(przodownik);
 
-        httpResponse.sendRedirect("/przodownicy");
+        return "redirect:/przodownicy";
     }
 }

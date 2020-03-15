@@ -51,6 +51,11 @@
 			<artifactId>spring-boot-autoconfigure</artifactId>
 			<version>2.2.5.RELEASE</version>
 		</dependency>
+		<!-- Spring Security -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
 		<!--> MS SQL -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>

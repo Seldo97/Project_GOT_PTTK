@@ -5,6 +5,7 @@
     Przodownicy
 {% endblock %}
 {% block main %}
+    {{siema}}
     <table id="myTable" class="table table-striped align-middle table-sm">
         <thead class="thead-dark">
             <tr>
@@ -37,11 +38,5 @@
     </table>
 
     <a class="btn btn-info" href="/przodownicy/form" role="button">Dodaj</a>
-
-
-    {% if wiadomosc != null %}
-        WIADOMOSC
-    {% endif %}
-    {{ WIADOMOSC }}
 
 {% endblock %}
