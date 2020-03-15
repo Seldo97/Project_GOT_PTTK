@@ -5,6 +5,7 @@
     Przodownicy
 {% endblock %}
 {% block main %}
+    {{siema}}
     <table id="myTable" class="table table-striped align-middle table-sm">
         <thead class="thead-dark">
             <tr>
@@ -28,8 +29,8 @@
               <td>{{ przodownik.getTelefon }}</td>
                 <td>{{ przodownik.uzytkownik.getLogin }}</td>
               <td>{{ przodownik.uzytkownik.getEmail }}</td>
-                <td><a class="nav-link" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">Usuń</a></td>
                 <td><a class="nav-link" href="/przodownicy/form/{{ przodownik.getIdPrzodownik }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">Usuń</a></td>
         </tr>
         {%  endfor %}
 
@@ -37,11 +38,5 @@
     </table>
 
     <a class="btn btn-info" href="/przodownicy/form" role="button">Dodaj</a>
-
-
-    {% if wiadomosc != null %}
-        WIADOMOSC
-    {% endif %}
-    {{ WIADOMOSC }}
 
 {% endblock %}

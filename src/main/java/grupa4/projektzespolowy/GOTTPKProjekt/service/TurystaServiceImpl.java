@@ -18,12 +18,14 @@ public class TurystaServiceImpl implements TurystaService
     private TurystaRepository turystaRepository;
 
     @Override
-	public Turysta createTurysta(Turysta turysta) {
-        return turystaRepository.save(turysta);
-    }
+	public Turysta createTurysta(Turysta turysta) { return turystaRepository.save(turysta); }
 
     @Override
-    public List<Turysta> getAllTurysta() {
-        return this.turystaRepository.findAll();
-    }
+    public List<Turysta> getAllTurysta() {return this.turystaRepository.findAll(); }
+
+	@Override
+	public Turysta getOneById(Integer id) {return this.turystaRepository.getOne(id);}
+
+    @Override
+    public void removeTurysta(Integer id) { turystaRepository.deleteById(id); }
 }

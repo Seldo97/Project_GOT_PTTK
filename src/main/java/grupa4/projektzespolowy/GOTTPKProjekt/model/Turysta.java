@@ -33,8 +33,8 @@ public class Turysta
 	
 	@Column(name="punkty")
 	private int punkty;
-
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
 	private Uzytkownik Uzytkownik;
 	
@@ -49,6 +49,15 @@ public class Turysta
 	}
 	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
 		this.idTurysta = idTurysta;
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.telefon = telefon;
+		this.Uzytkownik = idUzytkownik;
+		this.opis = opis;
+		this.punkty = punkty;
+	}
+	
+	public Turysta( String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
@@ -120,6 +129,15 @@ public class Turysta
 	public Uzytkownik getUzytkownik() {
 		return Uzytkownik;
 	}
+	
+	public int getidUzytkownik() {
+		return Uzytkownik.getIdUzytkownik();
+	}
+	
+	public String getNazwaUzytkownik() {
+		return Uzytkownik.getLogin();
+	}
+
 
 	public void setUzytkownik(Uzytkownik uzytkownik) {
 		Uzytkownik = uzytkownik;

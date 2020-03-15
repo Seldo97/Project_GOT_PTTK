@@ -17,6 +17,9 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<file.encoding>UTF-8</file.encoding>
 	</properties>
 
 	<repositories>
@@ -49,8 +52,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
-			<version>2.2.5.RELEASE</version>
 		</dependency>
+		<!-- Spring Security -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
 		<!--> MS SQL -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
@@ -74,6 +81,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<!--> jTwig -->
 		<!-- https://mvnrepository.com/artifact/org.jtwig/jtwig-spring-boot-starter -->
 		<dependency>
@@ -81,13 +89,32 @@
 			<artifactId>jtwig-spring-boot-starter</artifactId>
 			<version>5.87.0.RELEASE</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.30</version>
 		</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		</dependency>
+		
+		 <!-- Spring Security -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-web</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-config</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-taglibs</artifactId>-->
+<!--        </dependency>-->
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>

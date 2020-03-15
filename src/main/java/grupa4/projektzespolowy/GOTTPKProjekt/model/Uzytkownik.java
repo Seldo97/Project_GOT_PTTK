@@ -1,5 +1,14 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,13 +29,15 @@ public class Uzytkownik
 	@Column(name = "email", nullable=false, length=50, unique = true)
 	private String email;
 
+
+
 	@ManyToOne
 	@JoinColumn(name="id_rola", nullable=false)
 	private Rola rola;
 
 	@OneToOne(mappedBy = "Uzytkownik", cascade = CascadeType.ALL) // kaskadowe operacje ustawiamy zawsze na rodzicu
 																  // (czyli tabela do której odwołuje się inna przez klucz obcy.
-																	// W tym wypadku Przodownik odwołuje się do uzytkownika)
+												// W tym wypadku Przodownik odwołuje się do uzytkownika)
 	private Przodownik przodownik;
 
 	@OneToOne(mappedBy = "Uzytkownik")
@@ -103,6 +114,16 @@ public class Uzytkownik
 	{
 		this.email = email;
 	}
+	
+	public Turysta getTurysta() {
+		return turysta;
+	}
+
+
+
+	public void setTurysta(Turysta turysta) {
+		this.turysta = turysta;
+	}
 
 	public Rola getRola() {
 		return rola;
@@ -120,13 +141,6 @@ public class Uzytkownik
 		this.przodownik = przodownik;
 	}
 
-	public Turysta getTurysta() {
-		return turysta;
-	}
-
-	public void setTurysta(Turysta turysta) {
-		this.turysta = turysta;
-	}
 
 	@Override
 	public String toString() {

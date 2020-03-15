@@ -1,0 +1,33 @@
+{% extends '../formTemplate.twig' %}
+
+{% block title %}
+    Formularz Uzytkownik
+{% endblock %}
+
+{% block header %}
+    <h2>Formularz Uzytkownik</h2>
+{% endblock %}
+
+{% block form %}
+
+    <form id="addForm" action="/turysta/dodaj" method="POST">
+        <fieldset>
+            <legend> Dane Konta </legend>
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" id="login" name="login">
+            </div>
+            <div class="form-group">
+                <label for="haslo">Has³o</label>
+                <input type="password" class="form-control" id="haslo" name="haslo">
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" id="email" name="email">
+            </div>
+        </fieldset>
+        <br/>
+        <button type="submit" class="btn btn-info">Dodaj</button>
+    </form>
+
+{% endblock %}
