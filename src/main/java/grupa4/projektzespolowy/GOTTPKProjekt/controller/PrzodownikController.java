@@ -26,8 +26,6 @@ public class PrzodownikController {
     @Autowired
     private RolaServiceImpl rolaServiceImpl;
 
-    private ModelAndView modelAndView;
-
     @GetMapping("/przodownicy") // ścieżka na której zostanie obsłużona metoda
     public String getAllPrzodownik(Model model) {
 
