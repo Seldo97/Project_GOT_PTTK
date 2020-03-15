@@ -19,15 +19,14 @@ public class UzytkownikServiceImpl implements UzytkownikService
     private UzytkownikRepository uzytkownikRepository;
 
     @Override
-	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) {
-        return uzytkownikRepository.save(uzytkownik);
-    }
+	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) { return uzytkownikRepository.save(uzytkownik); }
 
     @Override
-    public List<Uzytkownik> getAllUzytkownik() {
-        return this.uzytkownikRepository.findAll();
-    }
+    public List<Uzytkownik> getAllUzytkownik() { return this.uzytkownikRepository.findAll();  }
 
     @Override
     public void removeUzytkownik(Integer id) { this.uzytkownikRepository.deleteById(id); }
+
+	@Override
+	public Uzytkownik getOneById(Integer id) {return this.uzytkownikRepository.getOne(id);}
 }

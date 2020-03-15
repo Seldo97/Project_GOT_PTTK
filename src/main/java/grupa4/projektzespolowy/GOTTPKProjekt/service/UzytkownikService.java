@@ -6,10 +6,15 @@ import java.util.List;
 
 public interface UzytkownikService {
 
-    Uzytkownik createUzytkownik(Uzytkownik uzytkownik);
+  
+	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) ;
+	
+	public void removeUzytkownik(Integer id); 
 
-    List<Uzytkownik> getAllUzytkownik();
+    public List<Uzytkownik> getAllUzytkownik();
+    
+    public Uzytkownik getOneById(Integer id);
+   
 
-    void removeUzytkownik(Integer id);
 
 }

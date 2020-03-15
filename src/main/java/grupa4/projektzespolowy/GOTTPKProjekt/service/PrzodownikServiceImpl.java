@@ -16,14 +16,10 @@ public class PrzodownikServiceImpl implements PrzodownikService{ // service obs≈
     private PrzodownikRepository przodownikRepository;
 
     @Override
-    public Przodownik createPrzodownik(Przodownik przodownik) {
-        return przodownikRepository.save(przodownik);
-    }
+    public Przodownik createPrzodownik(Przodownik przodownik) { return przodownikRepository.save(przodownik);}
 
     @Override
-    public List<Przodownik> getAllPrzodownik() {
-        return this.przodownikRepository.findAll();
-    }
+    public List<Przodownik> getAllPrzodownik() {return this.przodownikRepository.findAll(); }
 
     @Override
     public Przodownik getOneById(Integer id) { return this.przodownikRepository.getOne(id); }

@@ -7,6 +7,7 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +44,7 @@ public class PrzodownikController {
                                   @RequestParam(value="email") String email,
                                    RedirectAttributes redirectAttributes) {
 
-        Rola rola = rolaServiceImpl.getOneByName("przodownik"); // pobranie roli (pod id 5 mam przodownik)
+        Rola rola = rolaServiceImpl.getOneByName("przodownik"); // pobranie roli (pod id 5 mam przodownik)3
         Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email, rola); // tworze użytkownika z referencją do pobranej roli
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem

@@ -1,0 +1,57 @@
+{% extends '../formTemplate.twig' %}
+
+{% block title %}
+    Formularz Turysty
+{% endblock %}
+
+{% block header %}
+    <h2>Formularz Turysty </h2>
+{% endblock %}
+
+{% block form %}
+
+    <form id="addForm" action="/turysta/update/{{ turysta.getIdTurysta }}" method="POST">
+        <fieldset>
+            <legend> Dane Turysty </legend>
+            <div class="form-group">
+                <label for="imie">Imie</label>
+                <input type="text" class="form-control" id="imie" name="imie" value=" {{ turysta.getImie}}">
+            </div>
+            <div class="form-group">
+                <label for="nazwisko">Nazwisko</label>
+                <input type="text" class="form-control" id="nazwisko" name="nazwisko" value="{{ turysta.getNazwisko }}">
+            </div>
+            <div class="form-group">
+                <label for="telefon">Telefon</label>
+                <input type="text" class="form-control" id="telefon" name="telefon" value="{{ turysta.getTelefon }}">
+            </div>
+             <div class="form-group">
+                <label for="opis">Opis</label>
+                <input type="text" class="form-control" id="opis" name="opis" value="{{ turysta.getOpis }}">
+            </div>
+              <div class="form-group">
+                <label for="punkty">Punkty</label>
+                <input type="number" class="form-control" id="punkty" name="punkty" value="{{ turysta.getPunkty }}">
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend> Dane Konta </legend>
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" id="login" name="login" value="{{ uzytkownik.getLogin }}">
+            </div>
+            <div class="form-group">
+                <label for="haslo">Has³o</label>
+                <input type="password" class="form-control" id="haslo" name="haslo" value="{{ uzytkownik.getHaslo }}">
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" id="email" name="email" value = "{{ uzytkownik.getEmail }}">
+            </div>
+        </fieldset>
+        <br/>
+        <button type="submit" class="btn btn-info">Zmien</button>
+    </form>
+
+{% endblock %}
