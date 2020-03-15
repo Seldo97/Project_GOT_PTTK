@@ -74,7 +74,7 @@ public class TurystaController
 	                                  @RequestParam(value="email") String email,
 	                                  RedirectAttributes redirectAttributes ) throws IOException {
 
-	        Rola rola = rolaService.getOneByName("Turysta");
+	        Rola rola = rolaService.getOneByName("ROLE_turysta");
 	        Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email,rola); // tworze użytkownika z referencją do pobranej roli
 	        rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
 	        Turysta turysta = new Turysta(imie, nazwisko,opis,uzytkownik,telefon,punkty); // stwórz turyste z utworzonym użytkownikiem

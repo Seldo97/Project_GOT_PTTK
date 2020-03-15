@@ -44,7 +44,7 @@ public class PrzodownikController {
                                   @RequestParam(value="email") String email,
                                    RedirectAttributes redirectAttributes) {
 
-        Rola rola = rolaServiceImpl.getOneByName("przodownik"); // pobranie roli (pod id 5 mam przodownik)3
+        Rola rola = rolaServiceImpl.getOneByName("ROLE_przodownik"); // pobranie roli (pod id 5 mam przodownik)3
         Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email, rola); // tworze użytkownika z referencją do pobranej roli
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem
