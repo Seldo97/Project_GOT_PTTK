@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 
 
-@RestController
+@Controller
 public class UzytkownikController 
 {
 	 @Autowired

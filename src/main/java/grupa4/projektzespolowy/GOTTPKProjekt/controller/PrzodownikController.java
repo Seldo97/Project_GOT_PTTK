@@ -7,13 +7,14 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@RestController
+@Controller
 public class PrzodownikController {
     @Autowired // podłączamy Servicy z których bedzimy koszystać
     private PrzodownikServiceImpl przodownikServiceImpl;

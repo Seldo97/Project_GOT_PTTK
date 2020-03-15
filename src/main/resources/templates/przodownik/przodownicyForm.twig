@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label for="haslo">Hasło</label>
-                <input type="password" class="form-control" id="haslo" name="haslo">
+                <input type="password" class="form-control" id="haslo" name="haslo" value=""{{przodownik.uzytkownik.getHaslo}}"">
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
@@ -47,7 +47,7 @@
 
         <br/>
         {% if update == 1 %}
-            <button type="submit" class="btn btn-info">Zmień</button>
+            <button type="submit" class="btn btn-info">Zmie�</button>
         {% else %}
             <button type="submit" class="btn btn-info">Dodaj</button>
         {% endif %}

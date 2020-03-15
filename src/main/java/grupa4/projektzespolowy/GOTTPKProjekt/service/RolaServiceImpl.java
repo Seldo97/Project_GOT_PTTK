@@ -19,9 +19,7 @@ public class RolaServiceImpl implements RolaService
     private RolaRepository rolaRepository;
 
 	@Override
-    public List<Rola> getAllRola() {
-        return this.rolaRepository.findAll();
-    }
+    public List<Rola> getAllRola() { return this.rolaRepository.findAll();}
 
     @Override
     public Rola getOneById(Integer id) { return this.rolaRepository.getOne(id); }

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import javax.persistence.*;
 
 @Entity
@@ -36,7 +37,7 @@ public class Uzytkownik
 
 	@OneToOne(mappedBy = "Uzytkownik", cascade = CascadeType.ALL) // kaskadowe operacje ustawiamy zawsze na rodzicu
 																  // (czyli tabela do której odwołuje się inna przez klucz obcy.
-																	// W tym wypadku Przodownik odwołuje się do uzytkownika)
+												// W tym wypadku Przodownik odwołuje się do uzytkownika)
 	private Przodownik przodownik;
 
 	@OneToOne(mappedBy = "Uzytkownik")
