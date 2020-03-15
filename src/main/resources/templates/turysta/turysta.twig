@@ -1,5 +1,5 @@
 {% extends '../baseTemplate.twig' %}
-
+{% block title %}Turysta tabela{% endblock %}
 {% block header %}
     Turysta
 {% endblock %}
@@ -14,8 +14,10 @@
                 <th scope="col">Uzytkownik</th>
                 <th scope="col">opis</th>
                 <th scope="col">Punkty</th>
+                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
                 <th scope="col"></th>
+                  {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -29,13 +31,17 @@
           <td>{{ turysta.uzytkownik.getLogin }}</td>
           <td>{{ turysta.getOpis }}</td>
           <td>{{ turysta.getPunkty }}</td>
-          <td><a class="nav-link" href="/turysta/updateForm/{{ turysta.getIdTurysta }}">Edytuj</a></td>
-          <td><a class="nav-link" href="/turysta/usun/{{ turysta.getIdTurysta }}">Usuñ</a></td>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+          	<td><a class="nav-link" href="/turysta/updateForm/{{ turysta.getIdTurysta }}">Edytuj</a></td>
+          	<td><a class="nav-link" href="/turysta/usun/{{ turysta.getIdTurysta }}">UsuÅ„</a></td>
+          {% endif %}
+          
         </tr>
         {%  endfor %}
         </tbody>
     </table>
-    
-    <a class="btn btn-info" href="/turysta/addForm" role="button">Dodaj</a>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+    	<a class="btn btn-info" href="/turysta/addForm" role="button">Dodaj</a>
+    {% endif %}
 
 {% endblock %}
