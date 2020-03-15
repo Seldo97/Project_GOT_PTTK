@@ -7,14 +7,12 @@ import java.util.List;
 public interface UzytkownikService {
 
   
-	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) ;
-	
-	public void removeUzytkownik(Integer id); 
+	Uzytkownik createUzytkownik(Uzytkownik uzytkownik) ;
 
-    public List<Uzytkownik> getAllUzytkownik();
+    List<Uzytkownik> getAllUzytkownik();
     
-    public Uzytkownik getOneById(Integer id);
-   
+    Uzytkownik getOneById(Integer id);
 
+    void removeUzytkownik(Integer id);
 
 }

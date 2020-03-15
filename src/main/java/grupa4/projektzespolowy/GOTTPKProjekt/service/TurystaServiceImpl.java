@@ -25,4 +25,7 @@ public class TurystaServiceImpl implements TurystaService
 
 	@Override
 	public Turysta getOneById(Integer id) {return this.turystaRepository.getOne(id);}
+
+    @Override
+    public void removeTurysta(Integer id) { turystaRepository.deleteById(id); }
 }

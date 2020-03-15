@@ -11,7 +11,8 @@ public interface TurystaService {
 
     List<Turysta> getAllTurysta();
 
-    
-    public Turysta getOneById(Integer id); 
+    Turysta getOneById(Integer id);
+
+    void removeTurysta(Integer id);
     
 }

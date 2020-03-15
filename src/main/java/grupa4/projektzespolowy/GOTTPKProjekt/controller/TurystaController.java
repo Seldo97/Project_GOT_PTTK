@@ -120,6 +120,8 @@ public class TurystaController
 	        turysta.setUzytkownik(null); // usuwam referencje do rodzica
 
 	        uzytkownikServiceImpl.removeUzytkownik(uzytkownik.getIdUzytkownik()); // usuwam użytkownika i od razu kaskadowo usuwa się turysta.
+		   	turystaServiceImpl.removeTurysta(id_turysta);
+
 	        redirectAttributes.addFlashAttribute("wiadomosc", "Usunięto turyste pomyślnie");
 	        return "redirect:/turysci";
 	    }

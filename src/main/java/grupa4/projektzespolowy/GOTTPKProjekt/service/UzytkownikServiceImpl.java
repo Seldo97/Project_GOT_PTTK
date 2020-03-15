@@ -29,4 +29,5 @@ public class UzytkownikServiceImpl implements UzytkownikService
 
 	@Override
 	public Uzytkownik getOneById(Integer id) {return this.uzytkownikRepository.getOne(id);}
+
 }
