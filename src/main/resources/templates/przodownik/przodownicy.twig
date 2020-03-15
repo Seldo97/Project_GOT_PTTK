@@ -15,8 +15,12 @@
                 <th scope="col">Telefon</th>
                 <th scope="col">Login</th>
                 <th scope="col">E-mail</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                {% endif %}
+
             </tr>
         </thead>
         <tbody>
@@ -29,14 +33,20 @@
               <td>{{ przodownik.getTelefon }}</td>
                 <td>{{ przodownik.uzytkownik.getLogin }}</td>
               <td>{{ przodownik.uzytkownik.getEmail }}</td>
+
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <td><a class="nav-link" href="/przodownicy/form/{{ przodownik.getIdPrzodownik }}">Edytuj</a></td>
                 <td><a class="nav-link" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">Usuń</a></td>
+            {% endif %}
+
         </tr>
         {%  endfor %}
 
         </tbody>
     </table>
 
-    <a class="btn btn-info" href="/przodownicy/form" role="button">Dodaj</a>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+        <a class="btn btn-info" href="/przodownicy/form" role="button">Dodaj</a>
+    {% endif %}
 
 {% endblock %}

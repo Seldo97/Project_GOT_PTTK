@@ -7,6 +7,7 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.stereotype.Controller;
@@ -28,9 +29,10 @@ public class PrzodownikController {
     private RolaServiceImpl rolaServiceImpl;
 
     @GetMapping("/przodownicy") // ścieżka na której zostanie obsłużona metoda
-    public String getAllPrzodownik(Model model) {
+    public String getAllPrzodownik(Model model, Authentication authentication) {
 
         model.addAttribute("przodownicy", przodownikServiceImpl.getAllPrzodownik());
+        model.addAttribute("LoggedUser", authentication);
 
         return "przodownik/przodownicy";
     }
