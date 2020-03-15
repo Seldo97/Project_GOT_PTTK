@@ -8,5 +8,5 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 @Repository
 public interface UzytkownikRepository  extends JpaRepository<Uzytkownik,Integer>
 {
-	
+	Uzytkownik findByLogin(String userLoginName);
 }
