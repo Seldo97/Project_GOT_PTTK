@@ -1,25 +1,22 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaService;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaService;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikService;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
 
 @RestController
@@ -29,7 +26,7 @@ public class TurystaController
 	private TurystaServiceImpl turystaServiceImpl;
 	
 	@Autowired
-	private UzytkownikService uzytkownikService;
+	private UzytkownikServiceImpl uzytkownikServiceImpl;
 	
 	@Autowired
 	private RolaService rolaService;
@@ -51,11 +48,17 @@ public class TurystaController
 	        return modelAndView;
 	    }
 	  
-	  @GetMapping("/turysta/updateForm/?")
-	    public ModelAndView updateformTurysta() 
+	  @GetMapping("/turysta/updateForm/{id_turysta}")
+	    public ModelAndView updateformTurysta(@PathVariable(required = true) Integer id_turysta) 
 	  	{
-
 	        ModelAndView modelAndView = new ModelAndView("turysta/updateForm");
+	        if(id_turysta != null)
+	        {
+	           Turysta turysta = turystaServiceImpl.getOneById(id_turysta);
+	           Uzytkownik uzytkownik = turysta.getUzytkownik();
+	            modelAndView.addObject("turysta", turysta);
+	            modelAndView.addObject("uzytkownik", uzytkownik);
+	        }
 	        return modelAndView;
 	    }
 	 
@@ -84,7 +87,7 @@ public class TurystaController
 	    }
 	  
 	   @PostMapping("/turysta/update/{id_turysta}")
-	    public ModelAndView updateTurysta(@RequestParam(value="imie") String imie,
+	    public void updateTurysta(@RequestParam(value="imie") String imie,
 	                                 @RequestParam(value="nazwisko") String nazwisko,
 	                                 @RequestParam(value="telefon") String telefon,
 	                                 @RequestParam(value="login") String login,
@@ -94,7 +97,7 @@ public class TurystaController
 	                                 HttpServletResponse httpResponse ) throws IOException {
 
 	        Turysta turysta = turystaServiceImpl.getOneById(id_turysta);
-
+	        
 	        turysta.setImie(imie);
 	        turysta.setNazwisko(nazwisko);
 	        turysta.setTelefon(telefon);
@@ -105,14 +108,19 @@ public class TurystaController
 	       turystaServiceImpl.createTurysta(turysta);
 
 	        httpResponse.sendRedirect("/turysci");
-        ModelAndView modelAndView = new ModelAndView("turysta");
-        modelAndView.addObject("turysta", turystaServiceImpl.getAllTurysta());
-        return modelAndView;
     }
-	
-	 @PostMapping("/turysta")
-	    public ResponseEntity <Turysta> createProduct(@RequestBody Turysta turysta) {
-	        return ResponseEntity.ok().body(this.turystaServiceImpl.createTurysta(turysta));
+	   
+	   @GetMapping("/turysta/usun/{id_turysta}") // usuń turyste wraz z jego kontem użytkownika
+	    public void removeTurysta(@PathVariable Integer id_turysta,
+	                                 HttpServletResponse httpResponse) throws IOException {
+
+	        Turysta turysta = turystaServiceImpl.getOneById(id_turysta); // pobieram turyste po odebranym id
+	        Uzytkownik uzytkownik = turysta.getUzytkownik(); // pobieram uzytkownika przypisanego do turysty
+	        turysta.setUzytkownik(null); // usuwam referencje do rodzica
+
+	        uzytkownikServiceImpl.removeUzytkownik(uzytkownik.getIdUzytkownik()); // usuwam użytkownika i od razu kaskadowo usuwa się turysta.
+
+	        httpResponse.sendRedirect("/turysci");
 	    }
 	
 }

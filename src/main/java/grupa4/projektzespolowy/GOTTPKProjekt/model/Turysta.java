@@ -129,6 +129,15 @@ public class Turysta
 	public Uzytkownik getUzytkownik() {
 		return Uzytkownik;
 	}
+	
+	public int getidUzytkownik() {
+		return Uzytkownik.getIdUzytkownik();
+	}
+	
+	public String getNazwaUzytkownik() {
+		return Uzytkownik.getLogin();
+	}
+
 
 	public void setUzytkownik(Uzytkownik uzytkownik) {
 		Uzytkownik = uzytkownik;

@@ -26,11 +26,11 @@
           <td>{{ turysta.getImie }}</td>
           <td>{{ turysta.getNazwisko }}</td>
           <td>{{ turysta.getTelefon }}</td>
-          <td>{{ turysta.getIdUzytkownik }}</td>
+          <td>{{ turysta.getNazwaUzytkownik }}</td>
           <td>{{ turysta.getOpis }}</td>
           <td>{{ turysta.getPunkty }}</td>
           <td><a class="nav-link" href="/turysta/updateForm/{{ turysta.getIdTurysta }}">Edytuj</a></td>
-          <td><a class="nav-link" href="/turysta/delete/{{ turysta.getIdTurysta }}">Usuñ</a></td>
+          <td><a class="nav-link" href="/turysta/usun/{{ turysta.getIdTurysta }}">Usuñ</a></td>
         </tr>
         {%  endfor %}
         </tbody>

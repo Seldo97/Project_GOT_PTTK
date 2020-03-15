@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaService;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 
@@ -24,20 +27,17 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 public class UzytkownikController 
 {
 	 @Autowired
-	    private UzytkownikService uzytkownikService;
-	    
-	 @Autowired
-	    private RolaService rolaService;
+	    private UzytkownikServiceImpl uzytkownikServiceImpl;
+	    @Autowired
+	    private RolaServiceImpl rolaServiceImpl;
 
 	    private ModelAndView modelAndView;
-	    private UzytkownikServiceImpl uzytkownikServiceImpl;
 
-	    @GetMapping("/uzytkownik")
+	    @GetMapping("/uzytkownicy")
 	    public ModelAndView getAllProduct() {
 
-	        ModelAndView modelAndView = new ModelAndView("uzytkownik");
-	        modelAndView.addObject("uzytkownik", uzytkownikServiceImpl.getAllUzytkownik());
-	        //return ResponseEntity.ok().body(przodownikService.getAllProduct());
+	        ModelAndView modelAndView = new ModelAndView("uzytkownik/uzytkownik");
+	        modelAndView.addObject("uzytkownicy", uzytkownikServiceImpl.getAllUzytkownik());
 	        return modelAndView;
 	    }
 
@@ -46,32 +46,12 @@ public class UzytkownikController
 	        return ResponseEntity.ok().body(this.uzytkownikServiceImpl.createUzytkownik(uzytkownik));
 	    }
 	    
-	    @PostMapping("/uzytkownik/dodaj")
-	    public void createTurysta(@RequestParam(value="login") String login,
-	                              @RequestParam(value="haslo") String haslo,
-	                              @RequestParam(value="email") String email,
-	                              HttpServletResponse httpResponse ) throws IOException {
-	    
-	    	
-	    	
-	    	
-	    }
-	    
-	    @PostMapping("/uzytkownik/update/{id_uzytkownik}")
-	    public void updatePrzodownik(
-	                                 @RequestParam(value="login") String login,
-	                                 @RequestParam(value="haslo", required = false) String haslo,
-	                                 @RequestParam(value="email") String email,
-	                                 @RequestParam(value="id_rola") Integer id_rola,
-	                                 @PathVariable Integer id_uzytkownik,
-	                                 HttpServletResponse httpResponse ) throws IOException {
+	    @GetMapping("/uzytkownik/addForm")
+	    public ModelAndView addformUzytkownik() 
+	  	{
 
-	        Uzytkownik uzytkownik = uzytkownikService.getOneById(id_uzytkownik);
-	        uzytkownik.setLogin(login);
-	        uzytkownik.setHaslo(haslo);
-	        uzytkownik.setEmail(email);
-	        
-	      
-	        httpResponse.sendRedirect("/");
+	        ModelAndView modelAndView = new ModelAndView("turysta/addForm");
+	        return modelAndView;
 	    }
+	    
 }

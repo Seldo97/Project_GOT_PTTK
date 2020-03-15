@@ -30,6 +30,6 @@ public class TurystaServiceImpl implements TurystaService
 	@Override
 	public Turysta getOneById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.turystaRepository.getOne(id);
 	}
 }
