@@ -1,14 +1,8 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Turysta")
@@ -38,7 +32,10 @@ public class Turysta
 	@JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
 	private Uzytkownik Uzytkownik;
 	
-	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_turysta", referencedColumnName = "id_turysta")
+	private List<TurystaOdznaka> turystaOdznaka = new ArrayList<TurystaOdznaka>();
+
 	public Turysta()
 	{}
 
