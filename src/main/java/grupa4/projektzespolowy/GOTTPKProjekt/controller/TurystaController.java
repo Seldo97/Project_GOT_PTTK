@@ -94,6 +94,8 @@ public class TurystaController
 	                                 @RequestParam(value="nazwisko") String nazwisko,
 	                                 @RequestParam(value="telefon") String telefon,
 	                                 @RequestParam(value="login") String login,
+	                                 @RequestParam(value="opis") String opis,
+	                                 @RequestParam(value="punkty") int punkty,
 	                                 @RequestParam(value="haslo", required = false) String haslo,
 	                                 @RequestParam(value="email") String email,
 	                                 @PathVariable Integer id_turysta,
@@ -104,6 +106,8 @@ public class TurystaController
 	        turysta.setImie(imie);
 	        turysta.setNazwisko(nazwisko);
 	        turysta.setTelefon(telefon);
+	        turysta.setOpis(opis);
+	        turysta.setPunkty(punkty);
 	        turysta.getUzytkownik().setLogin(login);
 	        turysta.getUzytkownik().setHaslo(haslo);
 	        turysta.getUzytkownik().setEmail(email);
