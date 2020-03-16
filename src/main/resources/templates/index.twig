@@ -2,10 +2,6 @@
 
 {% block main %}
 
-    Strona Główna, Witaj
-
-    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-        {{ LoggedUser.getAuthorities }} {{ LoggedUser.getName }}
-    {% endif %}
+    Strona Główna, Witaj {{ LoggedUser.getAuthorities }} {{ LoggedUser.getName }}
 
 {% endblock %}
