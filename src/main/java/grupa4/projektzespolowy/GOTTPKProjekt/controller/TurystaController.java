@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,10 +38,11 @@ public class TurystaController
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping("/turysci")
-    public ModelAndView getAllProduct() {
+    public ModelAndView getAllProduct(Authentication authentication) {
 
         ModelAndView modelAndView = new ModelAndView("turysta/turysta");
         modelAndView.addObject("turysci", turystaServiceImpl.getAllTurysta());
+        modelAndView.addObject("LoggedUser", authentication);
         return modelAndView;
     }
 	
@@ -96,6 +98,8 @@ public class TurystaController
 	                                 @RequestParam(value="nazwisko") String nazwisko,
 	                                 @RequestParam(value="telefon") String telefon,
 	                                 @RequestParam(value="login") String login,
+	                                 @RequestParam(value="opis") String opis,
+	                                 @RequestParam(value="punkty") int punkty,
 	                                 @RequestParam(value="haslo", required = false) String haslo,
 	                                 @RequestParam(value="email") String email,
 	                                 @PathVariable Integer id_turysta,
@@ -106,6 +110,8 @@ public class TurystaController
 	        turysta.setImie(imie);
 	        turysta.setNazwisko(nazwisko);
 	        turysta.setTelefon(telefon);
+	        turysta.setOpis(opis);
+	        turysta.setPunkty(punkty);
 	        turysta.getUzytkownik().setLogin(login);
 		   if(haslo != "")
 			   turysta.getUzytkownik().setHaslo(passwordEncoder.encode(haslo));
