@@ -47,7 +47,7 @@ public class TurystaController
     }
 	
 	 
-	  @GetMapping("/turysta/addForm")
+	  @GetMapping({"/turysci/addForm", "/rejestracja/turysta"})
 	    public ModelAndView addformTurysta() 
 	  	{
 
@@ -55,7 +55,7 @@ public class TurystaController
 	        return modelAndView;
 	    }
 	  
-	  @GetMapping("/turysta/updateForm/{id_turysta}")
+	  @GetMapping("/turysci/updateForm/{id_turysta}")
 	    public ModelAndView updateformTurysta(@PathVariable(required = true) Integer id_turysta) 
 	  	{
 	        ModelAndView modelAndView = new ModelAndView("turysta/updateForm");
@@ -69,7 +69,7 @@ public class TurystaController
 	        return modelAndView;
 	    }
 	 
-	  @PostMapping("/turysta/dodaj")
+	  @PostMapping("/turysci/dodaj")
 	    public String createTurysta(@RequestParam(value="imie") String imie,
 	                                  @RequestParam(value="nazwisko") String nazwisko,
 	                                  @RequestParam(value="opis") String opis,
@@ -78,22 +78,26 @@ public class TurystaController
 	                                  @RequestParam(value="login") String login,
 	                                  @RequestParam(value="haslo") String haslo,
 	                                  @RequestParam(value="email") String email,
-	                                  RedirectAttributes redirectAttributes ) throws IOException {
+	                                  RedirectAttributes redirectAttributes,
+									  Authentication authentication) {
 
 	        Rola rola = rolaService.getOneByName("ROLE_turysta");
 	        Uzytkownik uzytkownik = new Uzytkownik(login, passwordEncoder.encode(haslo), email,rola); // tworze użytkownika z referencją do pobranej roli
 	        rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
-	        Turysta turysta = new Turysta(imie, nazwisko,opis,uzytkownik,telefon,punkty); // stwórz turyste z utworzonym użytkownikiem
+	        Turysta turysta = new Turysta(imie, nazwisko,telefon,uzytkownik,opis,punkty); // stwórz turyste z utworzonym użytkownikiem
 
 	        turystaServiceImpl.createTurysta(turysta); // puść inserta do bazy
 	        // UWAGA! kolejność operacji jest ważna.
 
 
 	        redirectAttributes.addFlashAttribute("wiadomosc", "Dodane turyste pomyślnie");
-	        return "redirect:/turysci";
+			  if(authentication != null)
+				  return "redirect:/turysci";
+			  else
+				  return "redirect:/login";
 	    }
 	  
-	   @PostMapping("/turysta/update/{id_turysta}")
+	   @PostMapping("/turysci/update/{id_turysta}")
 	    public String updateTurysta(@RequestParam(value="imie") String imie,
 	                                 @RequestParam(value="nazwisko") String nazwisko,
 	                                 @RequestParam(value="telefon") String telefon,
@@ -122,7 +126,7 @@ public class TurystaController
 	       return "redirect:/turysci";
     }
 	   
-	   @GetMapping("/turysta/usun/{id_turysta}") // usuń turyste wraz z jego kontem użytkownika
+	   @GetMapping("/turysci/usun/{id_turysta}") // usuń turyste wraz z jego kontem użytkownika
 	    public String removeTurysta(@PathVariable Integer id_turysta,
 	    								RedirectAttributes redirectAttributes) throws IOException {
 
