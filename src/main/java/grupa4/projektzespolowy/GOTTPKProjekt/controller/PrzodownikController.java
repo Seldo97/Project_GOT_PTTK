@@ -43,7 +43,8 @@ public class PrzodownikController {
                                   @RequestParam(value="login") String login,
                                   @RequestParam(value="haslo") String haslo,
                                   @RequestParam(value="email") String email,
-                                   RedirectAttributes redirectAttributes) {
+                                   RedirectAttributes redirectAttributes,
+                                   Authentication authentication) {
 
         Rola rola = rolaServiceImpl.getOneByName("ROLE_przodownik"); // pobranie roli (pod id 5 mam przodownik)3
         Uzytkownik uzytkownik = new Uzytkownik(login, passwordEncoder.encode(haslo), email, rola); // tworze użytkownika z referencją do pobranej roli
@@ -55,7 +56,10 @@ public class PrzodownikController {
 
         redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 
-        return "redirect:/przodownicy";
+        if(authentication != null)
+            return "redirect:/przodownicy";
+        else
+            return "redirect:/login";
     }
 
     //@PreAuthorize("administrator")
@@ -71,7 +75,7 @@ public class PrzodownikController {
         return "redirect:/przodownicy";
     }
 
-    @GetMapping({"/przodownicy/form", "/przodownicy/form/{id_przodownik}"})
+    @GetMapping({"/przodownicy/form", "/przodownicy/form/{id_przodownik}", "/rejestracja/przodownik"})
     public String formPrzodownik(Model model, @PathVariable(required = false) Integer id_przodownik) {
 
 
