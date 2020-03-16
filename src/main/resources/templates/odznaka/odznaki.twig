@@ -1,0 +1,34 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Odznaki tabela{% endblock %}
+{% block header %}
+    Odznaki
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for odznaka in odznaki %}
+        <tr>
+              <td>{{ odznaka.getIdOdznaka}}</td>
+              <td>{{ odznaka.getNazwa }}</td>
+                <td><a class="nav-link" href="/odznaki/form/{{ odznaka.getIdOdznaka }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">Usuń</a></td>
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+
+    <a class="btn btn-info" href="/odznaki/form" role="button">Dodaj</a>
+
+{% endblock %}
