@@ -8,16 +8,13 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.boot.actuate.trace.http.HttpTrace;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 public class PrzodownikController {
@@ -27,6 +24,8 @@ public class PrzodownikController {
     private UzytkownikServiceImpl uzytkownikServiceImpl;
     @Autowired
     private RolaServiceImpl rolaServiceImpl;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/przodownicy") // ścieżka na której zostanie obsłużona metoda
     public String getAllPrzodownik(Model model, Authentication authentication) {
@@ -47,7 +46,7 @@ public class PrzodownikController {
                                    RedirectAttributes redirectAttributes) {
 
         Rola rola = rolaServiceImpl.getOneByName("ROLE_przodownik"); // pobranie roli (pod id 5 mam przodownik)3
-        Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email, rola); // tworze użytkownika z referencją do pobranej roli
+        Uzytkownik uzytkownik = new Uzytkownik(login, passwordEncoder.encode(haslo), email, rola); // tworze użytkownika z referencją do pobranej roli
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem
 
@@ -59,6 +58,7 @@ public class PrzodownikController {
         return "redirect:/przodownicy";
     }
 
+    //@PreAuthorize("administrator")
     @GetMapping("/przodownicy/usun/{id_przodownik}") // usuń przodownika wraz z jego kontem użytkownika
     public String removePrzodownik(@PathVariable Integer id_przodownik) {
 
@@ -99,6 +99,8 @@ public class PrzodownikController {
         przodownik.setNazwisko(nazwisko);
         przodownik.setTelefon(telefon);
         przodownik.getUzytkownik().setLogin(login);
+        if(haslo != "")
+            przodownik.getUzytkownik().setHaslo(passwordEncoder.encode(haslo));
         przodownik.getUzytkownik().setEmail(email);
 
         przodownikServiceImpl.createPrzodownik(przodownik);

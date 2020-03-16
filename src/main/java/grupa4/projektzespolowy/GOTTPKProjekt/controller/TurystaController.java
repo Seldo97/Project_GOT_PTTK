@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,12 +33,16 @@ public class TurystaController
 	
 	@Autowired
 	private RolaService rolaService;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping("/turysci")
-    public ModelAndView getAllProduct() {
+    public ModelAndView getAllProduct(Authentication authentication) {
 
         ModelAndView modelAndView = new ModelAndView("turysta/turysta");
         modelAndView.addObject("turysci", turystaServiceImpl.getAllTurysta());
+        modelAndView.addObject("LoggedUser", authentication);
         return modelAndView;
     }
 	
@@ -75,7 +81,7 @@ public class TurystaController
 	                                  RedirectAttributes redirectAttributes ) throws IOException {
 
 	        Rola rola = rolaService.getOneByName("ROLE_turysta");
-	        Uzytkownik uzytkownik = new Uzytkownik(login, haslo, email,rola); // tworze użytkownika z referencją do pobranej roli
+	        Uzytkownik uzytkownik = new Uzytkownik(login, passwordEncoder.encode(haslo), email,rola); // tworze użytkownika z referencją do pobranej roli
 	        rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
 	        Turysta turysta = new Turysta(imie, nazwisko,opis,uzytkownik,telefon,punkty); // stwórz turyste z utworzonym użytkownikiem
 
@@ -92,6 +98,8 @@ public class TurystaController
 	                                 @RequestParam(value="nazwisko") String nazwisko,
 	                                 @RequestParam(value="telefon") String telefon,
 	                                 @RequestParam(value="login") String login,
+	                                 @RequestParam(value="opis") String opis,
+	                                 @RequestParam(value="punkty") int punkty,
 	                                 @RequestParam(value="haslo", required = false) String haslo,
 	                                 @RequestParam(value="email") String email,
 	                                 @PathVariable Integer id_turysta,
@@ -102,8 +110,11 @@ public class TurystaController
 	        turysta.setImie(imie);
 	        turysta.setNazwisko(nazwisko);
 	        turysta.setTelefon(telefon);
+	        turysta.setOpis(opis);
+	        turysta.setPunkty(punkty);
 	        turysta.getUzytkownik().setLogin(login);
-	        turysta.getUzytkownik().setHaslo(haslo);
+		   if(haslo != "")
+			   turysta.getUzytkownik().setHaslo(passwordEncoder.encode(haslo));
 	        turysta.getUzytkownik().setEmail(email);
 
 	       turystaServiceImpl.createTurysta(turysta);
