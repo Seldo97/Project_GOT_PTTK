@@ -1,0 +1,34 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Panel administratora{% endblock %}
+
+{% block header %}
+    Panel administratora
+{% endblock %}
+
+{% block main %}
+
+    <div class="list-group mt-3">
+        <button type="button" class="list-group-item list-group-item-action active bg-dark" disabled>
+            Opcje użytkowników:
+        </button>
+        <a type="button" class="list-group-item list-group-item-action" href="/turysci">Turyści</a>
+        <a type="button" class="list-group-item list-group-item-action" href="/przodownicy">Przodownicy</a>
+
+        <button type="button" class="list-group-item list-group-item-action active bg-dark" disabled>
+            Opcje grup górskich:
+        </button>
+        <a type="button" class="list-group-item list-group-item-action">Grupy górskie</a>
+        <a type="button" class="list-group-item list-group-item-action">Grupy przodowników</a>
+        <a type="button" class="list-group-item list-group-item-action">Pasma górskie</a>
+        <a type="button" class="list-group-item list-group-item-action">Punkty</a>
+        <a type="button" class="list-group-item list-group-item-action">Odcinki</a>
+
+        <button type="button" class="list-group-item list-group-item-action active bg-dark" disabled>
+            Inne:
+        </button>
+        <a type="button" class="list-group-item list-group-item-action" href="/odznaki">Odznaki górskie</a>
+        <a type="button" class="list-group-item list-group-item-action">Zatwierdź książeczke</a>
+    </div>
+
+{% endblock %}
