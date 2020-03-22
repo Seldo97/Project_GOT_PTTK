@@ -18,7 +18,7 @@
 
             <li class="nav-item dropdown dropleft">
                 <a class="nav-link dropdown-toggle dropleft" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <abbr title="Opcje"><img src="images/settings3.png" alt = "opcje" width="25" height="25" /></abbr>
+                    <abbr title="Opcje"><img src="/images/settings3.png" alt = "opcje" width="25" height="25" /></abbr>
                 </a>
                 <div class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
                     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
@@ -43,9 +43,9 @@
 
             <li class="nav-item">
                 {% if LoggedUser is null %}
-                <a class="nav-link" href="/login"><abbr title="Zaloguj"><img src="images/login.png" width="25" height="25" alt="zaloguj" /></abbr></a>
+                <a class="nav-link" href="/login"><abbr title="Zaloguj"><img src="/images/login.png" width="25" height="25" alt="zaloguj" /></abbr></a>
                 {% else %}
-                <a class="nav-link" href="/logout"><abbr title="Wyloguj"><img src="images/logout.png" width="25" height="25" alt="wyloguj" /></abbr></a>
+                <a class="nav-link" href="/logout"><abbr title="Wyloguj"><img src="/images/logout.png" width="25" height="25" alt="wyloguj" /></abbr></a>
                 {% endif %}
             </li>
   		</ul>
