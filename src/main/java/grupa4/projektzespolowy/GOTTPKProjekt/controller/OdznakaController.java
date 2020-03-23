@@ -4,6 +4,7 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,10 @@ public class OdznakaController {
     private OdznakaServiceImpl odznakaServiceImpl;
 
     @GetMapping("/odznaki") // ścieżka na której zostanie obsłużona metoda
-    public String getAllOdznaka(Model model) {
+    public String getAllOdznaka(Model model,
+                                Authentication authentication) {
 
+        model.addAttribute("LoggedUser", authentication);
         model.addAttribute("odznaki", odznakaServiceImpl.getAllOdznaka());
 
         return "odznaka/odznaki";
@@ -27,30 +30,33 @@ public class OdznakaController {
 
     @PostMapping("/odznaki/dodaj")
     public String createOdznaka(@RequestParam(value="nazwa") String nazwa,
-                                   RedirectAttributes redirectAttributes) {
+                                RedirectAttributes redirectAttributes) {
+
         Odznaka odznaka = new Odznaka(nazwa);
         odznakaServiceImpl.createOdznaka(odznaka); // puść inserta do bazy
-
 
         redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 
         return "redirect:/odznaki";
     }
 
-    @GetMapping("/odznaki/usun/{id_odznaka}")
-    public String removeOdznaka(@PathVariable Integer id_odznaka) {
+    @GetMapping("/odznaki/usun/{idOdznaka}")
+    public String removeOdznaka(@PathVariable Integer idOdznaka) {
 
-        odznakaServiceImpl.removeOdznaka(id_odznaka);
+        odznakaServiceImpl.removeOdznaka(idOdznaka);
 
         return "redirect:/odznaki";
     }
 
-    @GetMapping({"/odznaki/form", "/odznaki/form/{id_odznaka}"})
-    public String formOdznaka(Model model, @PathVariable(required = false) Integer id_odznaka) {
+    @GetMapping({"/odznaki/form", "/odznaki/form"})
+    public String formOdznaka(Model model,
+                              @RequestParam(required = false, value="id") Integer idOdznaka,
+                              Authentication authentication) {
 
+        model.addAttribute("LoggedUser", authentication);
 
-        if(id_odznaka != null){
-            Odznaka odznaka = odznakaServiceImpl.getOneById(id_odznaka);
+        if(idOdznaka != null){
+            Odznaka odznaka = odznakaServiceImpl.getOneById(idOdznaka);
             model.addAttribute("odznaka", odznaka);
             model.addAttribute("update", "1");  //???
         }
@@ -58,11 +64,11 @@ public class OdznakaController {
         return "odznaka/odznakiForm";
     }
 
-    @PostMapping("/odznaki/update/{id_odznaka}")
+    @PostMapping("/odznaki/update/{idOdznaka}")
     public String updateOdznaka(@RequestParam(value="nazwa") String nazwa,
-                                   @PathVariable Integer id_odznaka) {
+                                   @PathVariable Integer idOdznaka) {
 
-        Odznaka odznaka = odznakaServiceImpl.getOneById(id_odznaka);
+        Odznaka odznaka = odznakaServiceImpl.getOneById(idOdznaka);
 
         odznaka.setNazwa(nazwa);
 

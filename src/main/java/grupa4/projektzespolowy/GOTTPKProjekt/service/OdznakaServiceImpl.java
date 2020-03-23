@@ -29,6 +29,4 @@ public class OdznakaServiceImpl implements OdznakaService{
     @Override
     public void removeOdznaka(Integer id) { this.odznakaRepository.deleteById(id); }
 
-    @Override
-    public void deleteOdznakaQuery(Integer id) { this.odznakaRepository.deleteOdznaka(id); }
 }

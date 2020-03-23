@@ -23,6 +23,4 @@ public class TurystaOdznakaServiceImpl implements TurystaOdznakaService{
     @Override
     public void removeTurystaOdznaka(Integer id) { this.turystaOdznakaRepository.deleteById(id); }
 
-    @Override
-    public void deleteTurystaOdznakaQuery(Integer id) { this.turystaOdznakaRepository.deleteTurystaOdznaka(id); }
 }

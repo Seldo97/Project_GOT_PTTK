@@ -15,9 +15,9 @@
                 <th scope="col">Opis</th>
                 <th scope="col">Punkty</th>
                  {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                <th scope="col"></th>
-                <th scope="col"></th>
-                  {% endif %}
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                 {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -32,8 +32,8 @@
           <td>{{ turysta.getOpis }}</td>
           <td>{{ turysta.getPunkty }}</td>
             {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-          	<td><a class="nav-link" href="/turysci/updateForm/{{ turysta.getIdTurysta }}">Edytuj</a></td>
-          	<td><a class="nav-link" href="/turysci/usun/{{ turysta.getIdTurysta }}">Usuń</a></td>
+                <td><a class="nav-link" href="/turysci/updateForm?id={{ turysta.getIdTurysta }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/turysci/usun/{{ turysta.getIdTurysta }}">Usuń</a></td>
           {% endif %}
           
         </tr>

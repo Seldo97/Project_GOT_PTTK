@@ -13,5 +13,4 @@ public interface TurystaOdznakaService {
 
     void removeTurystaOdznaka(Integer id);
 
-    void deleteTurystaOdznakaQuery(Integer id);
 }

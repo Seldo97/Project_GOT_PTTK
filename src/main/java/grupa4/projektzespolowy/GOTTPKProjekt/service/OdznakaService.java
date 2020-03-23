@@ -14,6 +14,4 @@ public interface OdznakaService {
 
     void removeOdznaka(Integer id);
 
-    void deleteOdznakaQuery(Integer id);
-
 }

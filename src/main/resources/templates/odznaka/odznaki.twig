@@ -21,7 +21,7 @@
         <tr>
               <td>{{ odznaka.getIdOdznaka}}</td>
               <td>{{ odznaka.getNazwa }}</td>
-                <td><a class="nav-link" href="/odznaki/form/{{ odznaka.getIdOdznaka }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">Edytuj</a></td>
                 <td><a class="nav-link" href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">Usuń</a></td>
         </tr>
         {%  endfor %}

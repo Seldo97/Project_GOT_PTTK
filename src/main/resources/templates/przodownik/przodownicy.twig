@@ -34,7 +34,7 @@
               <td>{{ przodownik.uzytkownik.getEmail }}</td>
 
             {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                <td><a class="nav-link" href="/przodownicy/form/{{ przodownik.getIdPrzodownik }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/przodownicy/form?id={{ przodownik.getIdPrzodownik }}">Edytuj</a></td>
                 <td><a class="nav-link" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">Usuń</a></td>
             {% endif %}
 

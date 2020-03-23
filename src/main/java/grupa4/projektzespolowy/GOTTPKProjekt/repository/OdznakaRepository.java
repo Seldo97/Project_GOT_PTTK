@@ -12,6 +12,6 @@ public interface OdznakaRepository extends JpaRepository<Odznaka, Integer> {
 
     @Modifying
     @Query("delete from Odznaka o where o.idOdznaka = ?1")
-    public void deleteOdznaka(Integer id_odznaka);
+    public void deleteOdznaka(Integer idOdznaka);
 
 }

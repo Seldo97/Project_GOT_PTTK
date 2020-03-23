@@ -25,10 +25,10 @@ public class TurystaOdznakaController {
     }
 
     @PostMapping("/turystaodznaki/dodaj")
-    public String createTurystaOdznaka(@RequestParam(value="id_odznaka") Odznaka id_odznaka,
-                                       @RequestParam(value="id_turysta") Turysta id_turysta,
-                                RedirectAttributes redirectAttributes) {
-        TurystaOdznaka turystaOdznaka = new TurystaOdznaka(id_odznaka, id_turysta);
+    public String createTurystaOdznaka(@RequestParam(value="idOdznaka") Odznaka odznaka, /// ???
+                                       @RequestParam(value="id_turysta") Turysta turysta, /// ???
+                                        RedirectAttributes redirectAttributes) {
+        TurystaOdznaka turystaOdznaka = new TurystaOdznaka(odznaka, turysta);
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka); // puść inserta do bazy
 
 
@@ -37,20 +37,20 @@ public class TurystaOdznakaController {
         return "redirect:/turystaodznaki";
     }
 
-    @GetMapping("/turystaodznaki/usun/{id_turysta_odznaka}")
-    public String removeTurystaOdznaka(@PathVariable Integer id_turysta_odznaka) {
+    @GetMapping("/turystaodznaki/usun/{idTurystaOdznaka}")
+    public String removeTurystaOdznaka(@PathVariable Integer idTurystaOdznaka) {
 
-        turystaOdznakaServiceImpl.removeTurystaOdznaka(id_turysta_odznaka);
+        turystaOdznakaServiceImpl.removeTurystaOdznaka(idTurystaOdznaka);
 
         return "redirect:/turystaodznaki";
     }
 
-    @GetMapping({"/turystaodznaki/form", "/turystaodznaki/form/{id_turysta_odznaka}"})
-    public String formTurystaOdznaka(Model model, @PathVariable(required = false) Integer id_turysta_odznaka) {
+    @GetMapping({"/turystaodznaki/form", "/turystaodznaki/form/{idTurystaOdznaka}"})
+    public String formTurystaOdznaka(Model model, @PathVariable(required = false) Integer idTurystaOdznaka) {
 
 
-        if(id_turysta_odznaka != null){
-            TurystaOdznaka turystaOdznaka = turystaOdznakaServiceImpl.getOneById(id_turysta_odznaka);
+        if(idTurystaOdznaka != null){
+            TurystaOdznaka turystaOdznaka = turystaOdznakaServiceImpl.getOneById(idTurystaOdznaka);
             model.addAttribute("turystaOdznaka", turystaOdznaka);
             model.addAttribute("update", "1");  //???
         }
@@ -58,15 +58,15 @@ public class TurystaOdznakaController {
         return "turystaodznaki/turystaodznakiForm";
     }
 
-    @PostMapping("/turystaodznaki/update/{id_turysta_odznaka}")
-    public String updateTurystaOdznaka(@RequestParam(value="id_odznaka") Odznaka id_odznaka,
-                                       @RequestParam(value="id_turysta") Turysta id_turysta,
-                                @PathVariable Integer id_turysta_odznaka) {
+    @PostMapping("/turystaodznaki/update/{idTurystaOdznaka}")
+    public String updateTurystaOdznaka(@RequestParam(value="idOdznaka") Odznaka odznaka,
+                                       @RequestParam(value="id_turysta") Turysta turysta,
+                                        @PathVariable Integer idTurystaOdznaka) {
 
-        TurystaOdznaka turystaOdznaka = turystaOdznakaServiceImpl.getOneById(id_turysta_odznaka);
+        TurystaOdznaka turystaOdznaka = turystaOdznakaServiceImpl.getOneById(idTurystaOdznaka);
 
-        turystaOdznaka.setOdznaka(id_odznaka);
-        turystaOdznaka.setTurysta(id_turysta);
+        turystaOdznaka.setOdznaka(odznaka);
+        turystaOdznaka.setTurysta(turysta);
 
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka);
 
