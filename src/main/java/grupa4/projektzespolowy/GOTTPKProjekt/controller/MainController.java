@@ -19,4 +19,12 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/panel")
+    public String adminPanel(ModelMap model, Authentication authentication) {
+
+        model.addAttribute("LoggedUser", authentication);
+
+        return "admin/panel";
+    }
+
 }
