@@ -308,13 +308,6 @@ ON UPDATE CASCADE;
 GO
 
 
-ALTER TABLE dbo.Zdjecie_wycieczka
-ADD CONSTRAINT FK_Zdjecie_wycieczka_Wycieczka
-FOREIGN KEY (id_wycieczka)
-REFERENCES dbo.Wycieczka(id_wycieczka)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-GO
 
 
 
