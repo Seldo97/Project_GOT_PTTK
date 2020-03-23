@@ -1,0 +1,31 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Turysta odznaki{% endblock %}
+{% block header %}
+    Turysta odznaki
+{% endblock %}
+{% block main %}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Punkty</th>
+                <th scope="col">Nazwa odznaki</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for turystaOdznaka in turysciOdznaka %}
+        <tr>
+          <td>{{ turystaOdznaka.getIdTurysta }}</td>
+          <td>{{ turystaOdznaka.turysta.getImie }}</td>
+          <td>{{ turystaOdznaka.turysta.getNazwisko }}</td>
+          <td>{{ turystaOdznaka.turysta.getPunkty }}</td>
+          <td>{{ turystaOdznaka.odznaka.getNazwa }}</td>
+        </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
