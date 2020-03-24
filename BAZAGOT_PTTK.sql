@@ -123,6 +123,7 @@ CREATE TABLE Wycieczka_odcinek
 
 
 
+
 CREATE TABLE Ksiazeczka
 (
 	id_ksiazeczka INT PRIMARY KEY IDENTITY(1,1),
@@ -307,7 +308,13 @@ ON DELETE CASCADE
 ON UPDATE CASCADE;
 GO
 
-
+ALTER TABLE dbo.Wycieczka_odcinek
+ADD CONSTRAINT FK_Wycieczka_odcinek_Status_wycieczka
+FOREIGN KEY (id_status_wycieczka)
+REFERENCES dbo.Status_wycieczka(id_status_wycieczka)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
 
 
 
