@@ -79,8 +79,8 @@ public class TurystaOdznakaController {
         return "redirect:/turystaodznaki";
     }
 
-    @GetMapping("/turystaodznaki/znajdzOdznakiTurysty/{idTurysta}")
-    public String findTurystaOdznakaByIdTurysta(@PathVariable Integer idTurysta, Model model, Authentication authentication) {
+    @GetMapping("/turystaodznaki/znajdzOdznakiTurysty")
+    public String findTurystaOdznakaByIdTurysta(@RequestParam Integer idTurysta, Model model, Authentication authentication) {
 
         List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(idTurysta);
 
