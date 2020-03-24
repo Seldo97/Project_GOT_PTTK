@@ -26,4 +26,6 @@ public class RolaServiceImpl implements RolaService
 
     @Override
     public Rola getOneByName(String name) { return this.rolaRepository.findRolaByNazwa(name); }
+
+
 }
