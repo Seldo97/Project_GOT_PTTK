@@ -5,6 +5,8 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaOdznakaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
+@Controller
 public class TurystaOdznakaController {
+
     @Autowired // podłączamy Servicy z których bedzimy koszystać
     private TurystaOdznakaServiceImpl turystaOdznakaServiceImpl;
 
@@ -26,7 +32,7 @@ public class TurystaOdznakaController {
 
     @PostMapping("/turystaodznaki/dodaj")
     public String createTurystaOdznaka(@RequestParam(value="idOdznaka") Odznaka odznaka, /// ???
-                                       @RequestParam(value="id_turysta") Turysta turysta, /// ???
+                                       @RequestParam(value="idTurysta") Turysta turysta, /// ???
                                         RedirectAttributes redirectAttributes) {
         TurystaOdznaka turystaOdznaka = new TurystaOdznaka(odznaka, turysta);
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka); // puść inserta do bazy
@@ -60,7 +66,7 @@ public class TurystaOdznakaController {
 
     @PostMapping("/turystaodznaki/update/{idTurystaOdznaka}")
     public String updateTurystaOdznaka(@RequestParam(value="idOdznaka") Odznaka odznaka,
-                                       @RequestParam(value="id_turysta") Turysta turysta,
+                                       @RequestParam(value="idTurysta") Turysta turysta,
                                         @PathVariable Integer idTurystaOdznaka) {
 
         TurystaOdznaka turystaOdznaka = turystaOdznakaServiceImpl.getOneById(idTurystaOdznaka);
@@ -71,5 +77,17 @@ public class TurystaOdznakaController {
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka);
 
         return "redirect:/turystaodznaki";
+    }
+
+    @GetMapping("/turystaodznaki/znajdzOdznakiTurysty/{idTurysta}")
+    public String findTurystaOdznakaByIdTurysta(@PathVariable Integer idTurysta, Model model, Authentication authentication) {
+
+        List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(idTurysta);
+
+        String imieNazwisko =  odznakiTurysty.get(0).getTurysta().getImie() + " " + odznakiTurysty.get(0).getTurysta().getNazwisko();
+        model.addAttribute("odznakiTurysty", odznakiTurysty);
+        model.addAttribute("LoggedUser", authentication);
+        model.addAttribute("imieNazwisko", imieNazwisko);
+        return  "turysta/odznakiTurysty";
     }
 }

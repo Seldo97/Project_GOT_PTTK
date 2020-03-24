@@ -63,6 +63,8 @@ public class Turysta
 		this.punkty = punkty;
 	}
 
+
+
 	public int getIdTurysta() {
 		return idTurysta;
 	}
