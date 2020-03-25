@@ -11,8 +11,10 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nazwa</th>
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
                 <th scope="col"></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -21,14 +23,17 @@
         <tr>
               <td>{{ odznaka.getIdOdznaka}}</td>
               <td>{{ odznaka.getNazwa }}</td>
+              {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <td><a class="nav-link" href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">Edytuj</a></td>
                 <td><a class="nav-link" href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">Usuń</a></td>
+                {% endif %}
         </tr>
         {%  endfor %}
 
         </tbody>
     </table>
-
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
     <a class="btn btn-info" href="/odznaki/form" role="button">Dodaj</a>
+     {% endif %}
 
 {% endblock %}

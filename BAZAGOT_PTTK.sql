@@ -90,6 +90,70 @@ CREATE TABLE Turysta_Odznaka
 	id_odznaka INT NOT NULL
 );
 
+CREATE TABLE Wycieczka
+(
+	id_wycieczka INT PRIMARY KEY IDENTITY(1,1),
+	id_turysta INT NOT NULL,
+	dataod DATE,
+	datado DATE,
+	punkty INT
+);
+
+
+
+
+CREATE TABLE Status_wycieczka
+(
+	id_status_wycieczka INT PRIMARY KEY IDENTITY(1,1),
+	nazwa VARCHAR(50)
+
+);
+
+
+CREATE TABLE Wycieczka_odcinek
+(
+	id_wycieczka_odcinek INT PRIMARY KEY IDENTITY(1,1),
+	id_wycieczka INT NOT NULL,
+	id_odcinek INT NOT NULL,
+	data DATETIME NOT NULL,
+	id_status_wycieczka INT NOT NULL,
+	liczba_punktow INT
+
+);
+
+
+
+CREATE TABLE Ksiazeczka
+(
+	id_ksiazeczka INT PRIMARY KEY IDENTITY(1,1),
+	id_turysta INT NOT NULL
+);
+
+
+
+
+
+CREATE TABLE Ksiazeczka_wycieczka
+(
+	id_ksiazeczka_wycieczka INT PRIMARY KEY IDENTITY(1,1),
+	id_ksiazeczka INT NOT NULL,
+	id_wycieczka INT NOT NULL,
+	zatwierdzono BIT
+);
+
+
+
+
+CREATE TABLE Zdjecie_wycieczka
+(
+	id_zdjecie_wycieczka INT PRIMARY KEY IDENTITY(1,1),
+	id_wycieczka INT NOT NULL,
+	sciezka VARCHAR(255),
+	opis VARCHAR(255)
+
+);
+
+
 ---------------------------------------------------------------------------------
 -----------DEFINICJE KLUCZY OBCYCH-----------------------------------------------
 
@@ -184,3 +248,70 @@ REFERENCES dbo.Odznaka(id_odznaka)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 GO
+
+ALTER TABLE dbo.Wycieczka
+ADD CONSTRAINT FK_Wycieczka_Turysta
+FOREIGN KEY (id_turysta)
+REFERENCES dbo.Turysta(id_turysta)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
+
+
+ALTER TABLE dbo.Wycieczka_odcinek
+ADD CONSTRAINT FK_Wycieczka_odcinek_Wycieczka
+FOREIGN KEY (id_wycieczka)
+REFERENCES dbo.Wycieczka(id_wycieczka)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
+
+ALTER TABLE dbo.Wycieczka_odcinek
+ADD CONSTRAINT FK_Wycieczka_odcinek_Odcinek
+FOREIGN KEY (id_odcinek)
+REFERENCES dbo.Odcinek(id_odcinek)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
+
+ALTER TABLE dbo.Ksiazeczka
+ADD CONSTRAINT FK_Ksiazeczka_Turysta
+FOREIGN KEY (id_turysta)
+REFERENCES dbo.Turysta(id_turysta)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
+
+ALTER TABLE dbo.Ksiazeczka_wycieczka
+ADD CONSTRAINT FK_Ksiazeczka_wycieczka_Wycieczka
+FOREIGN KEY (id_wycieczka)
+REFERENCES dbo.Wycieczka(id_wycieczka)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
+
+
+ALTER TABLE dbo.Ksiazeczka_wycieczka
+ADD CONSTRAINT FK_Ksiazeczka_wycieczka_Ksiazeczka
+FOREIGN KEY (id_ksiazeczka)
+REFERENCES dbo.Ksiazeczka(id_ksiazeczka);
+GO
+
+
+
+ALTER TABLE dbo.Zdjecie_wycieczka
+ADD CONSTRAINT FK_Zdjecie_wycieczka_Wycieczka
+FOREIGN KEY (id_wycieczka)
+REFERENCES dbo.Wycieczka(id_wycieczka)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
+
+
+
+
+
+----------------------------
+
+
+
