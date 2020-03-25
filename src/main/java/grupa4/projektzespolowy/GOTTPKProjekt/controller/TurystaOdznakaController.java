@@ -4,6 +4,7 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaOdznakaServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class TurystaOdznakaController {
 
     @Autowired // podłączamy Servicy z których bedzimy koszystać
     private TurystaOdznakaServiceImpl turystaOdznakaServiceImpl;
+
+    @Autowired // podłączamy Servicy z których bedzimy koszystać
+    private TurystaServiceImpl turystaServiceImpl;
 
     @GetMapping("/turystaodznaki") // ścieżka na której zostanie obsłużona metoda
     public String getAllTurystaOdznaka(Model model) {
@@ -84,7 +88,8 @@ public class TurystaOdznakaController {
 
         List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(idTurysta);
 
-        String imieNazwisko =  odznakiTurysty.get(0).getTurysta().getImie() + " " + odznakiTurysty.get(0).getTurysta().getNazwisko();
+
+        String imieNazwisko =  turystaServiceImpl.getOneById(idTurysta).getImie() + " " + turystaServiceImpl.getOneById(idTurysta).getNazwisko();
         model.addAttribute("odznakiTurysty", odznakiTurysty);
         model.addAttribute("LoggedUser", authentication);
         model.addAttribute("imieNazwisko", imieNazwisko);
