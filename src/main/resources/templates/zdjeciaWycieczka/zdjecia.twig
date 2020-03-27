@@ -1,0 +1,43 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Wycieczka Zdjecia Tabela{% endblock %}
+{% block header %}
+   Wycieczka Zdjecia
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Wycieczka numer</th>
+                <th scope="col">Opis</th>
+                <th scope="col">Sciezka</th>
+                {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for zdjecie in zdjecia %}
+        <tr>
+              <td>{{ zdjecie.getIdZdjecieWycieczka}}</td>
+              <td>{{ zdjecie.wycieczka.getIdWycieczka }}</td>
+              <td>{{ zdjecie.getOpis }}</td>
+              <td>{{ zdjecie.getSciezka }}</td>
+              {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <td><a class="nav-link" href="/zdjecia/form?id={{zdjecie.getIdZdjecieWycieczka }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/zdjecia/usun/{{ zdjecie.getIdZdjecieWycieczkaa }}">Usuń</a></td>
+                {% endif %}
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+    {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+    <a class="btn btn-info" href="/zdjecia/form" role="button">Dodaj</a>
+     {% endif %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Wycieczki Tabela{% endblock %}
+{% block header %}
+    Wycieczki
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for wycieczka in wycieczki %}
+        <tr>
+              <td>{{ wycieczka.getIdWycieczka}}</td>
+              <td>{{ wycieczka.turysta.getImie }}</td>
+              <td>{{ wycieczka.turysta.getNazwisko }}</td>
+              {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <td><a class="nav-link" href="/wycieczki/form?id={{wycieczka.getIdWycieczka }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/wycieczki/usun/{{ wycieczka.getIdWycieczka }}">Usuń</a></td>
+                {% endif %}
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+    <a class="btn btn-info" href="/wycieczki/form" role="button">Dodaj</a>
+     {% endif %}
+
+{% endblock %}

@@ -123,7 +123,6 @@ CREATE TABLE Wycieczka_odcinek
 
 
 
-
 CREATE TABLE Ksiazeczka
 (
 	id_ksiazeczka INT PRIMARY KEY IDENTITY(1,1),
@@ -215,7 +214,7 @@ ON UPDATE CASCADE;
 GO
 
 
-------------!!!!!!!!!!!!!-------------Trzeba zapewniæ unikalnoœæ odcinków!!!!!!!!!!
+------------!!!!!!!!!!!!!-------------Trzeba zapewniï¿½ unikalnoï¿½ï¿½ odcinkï¿½w!!!!!!!!!!
 
 ALTER TABLE dbo.Odcinek
 ADD CONSTRAINT FK_Odcinek_Punkt_Poczotkowy
@@ -315,6 +314,7 @@ REFERENCES dbo.Status_wycieczka(id_status_wycieczka)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 GO
+
 
 
 
