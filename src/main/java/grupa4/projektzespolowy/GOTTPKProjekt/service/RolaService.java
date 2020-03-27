@@ -12,4 +12,5 @@ public interface RolaService {
 
     public Rola getOneByName(String name);
 
+
 }

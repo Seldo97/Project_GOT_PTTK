@@ -1,0 +1,38 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Odznaki turysty{% endblock %}
+{% block header %}
+    Odznaki: {{ imieNazwisko }}
+{% endblock %}
+{% block main %}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">idTurystaOdznaka</th>
+            <th scope="col">Nazwa odznaki</th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for odznakaTurysty in odznakiTurysty %}
+            <tr>
+                <td>{{ odznakaTurysty.getId_turysta_odznaka }}</td>
+                <td>{{ odznakaTurysty.getOdznaka.getNazwa }}</td>
+
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <td><a class="nav-link" href="#">Edytuj</a></td>
+                    <td><a class="nav-link" href="#">Usuń</a></td>
+                {% endif %}
+
+            </tr>
+
+        {%  endfor %}
+        </tbody>
+    </table>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+        <a class="btn btn-info" href="#" role="button">Dodaj</a>
+    {% endif %}
+
+{% endblock %}

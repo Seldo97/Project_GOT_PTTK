@@ -57,6 +57,8 @@ public class Turysta
 
 	
 
+
+
 	public int getIdTurysta() {
 		return idTurysta;
 	}

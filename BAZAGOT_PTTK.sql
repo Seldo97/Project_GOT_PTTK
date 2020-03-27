@@ -214,7 +214,7 @@ ON UPDATE CASCADE;
 GO
 
 
-------------!!!!!!!!!!!!!-------------Trzeba zapewniæ unikalnoœæ odcinków!!!!!!!!!!
+------------!!!!!!!!!!!!!-------------Trzeba zapewniï¿½ unikalnoï¿½ï¿½ odcinkï¿½w!!!!!!!!!!
 
 ALTER TABLE dbo.Odcinek
 ADD CONSTRAINT FK_Odcinek_Punkt_Poczotkowy
@@ -307,6 +307,13 @@ ON DELETE CASCADE
 ON UPDATE CASCADE;
 GO
 
+ALTER TABLE dbo.Wycieczka_odcinek
+ADD CONSTRAINT FK_Wycieczka_odcinek_Status_wycieczka
+FOREIGN KEY (id_status_wycieczka)
+REFERENCES dbo.Status_wycieczka(id_status_wycieczka)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+GO
 
 
 
