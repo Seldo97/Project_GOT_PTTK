@@ -20,15 +20,15 @@ public class TurystaOdznaka {
 
     public TurystaOdznaka() {}
 
-    public TurystaOdznaka(int id_turysta_odznaka, Odznaka id_odznaka, Turysta id_turysta) {
+    public TurystaOdznaka(int id_turysta_odznaka, Odznaka odznaka, Turysta turysta) {
         this.idTurystaOdznaka = id_turysta_odznaka;
-        this.odznaka = id_odznaka;
-        this.turysta = id_turysta;
+        this.odznaka = odznaka;
+        this.turysta = turysta;
     }
 
-    public TurystaOdznaka(Odznaka id_odznaka, Turysta id_turysta) {
-        this.odznaka = id_odznaka;
-        this.turysta = id_turysta;
+    public TurystaOdznaka(Odznaka odznaka, Turysta turysta) {
+        this.odznaka = odznaka;
+        this.turysta = turysta;
     }
 
     public int getId_turysta_odznaka() {

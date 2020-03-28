@@ -1,6 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,6 +15,9 @@ public class Grupa {
     @Column(name = "nazwa", nullable=false, length=50)
     private String nazwa;
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_grupa", referencedColumnName = "id_grupa")
+    private List<Pasmo> pasmo = new ArrayList<Pasmo>();
 
     public Grupa() {
     }
