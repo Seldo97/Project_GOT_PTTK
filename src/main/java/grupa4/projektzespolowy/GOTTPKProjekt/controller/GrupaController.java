@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -18,7 +19,7 @@ public class GrupaController {
 
 
     @GetMapping("/grupy")
-    public ModelAndView getAllProduct(Authentication authentication) {
+    public ModelAndView getAllProduct( Authentication authentication) {
 
         ModelAndView modelAndView = new ModelAndView("grupy/grupy");
         modelAndView.addObject("grupy", grupaServiceImpl.getAllGrupa());

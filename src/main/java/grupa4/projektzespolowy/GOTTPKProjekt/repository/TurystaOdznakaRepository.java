@@ -15,4 +15,6 @@ import java.util.List;
 public interface TurystaOdznakaRepository extends JpaRepository<TurystaOdznaka, Integer> {
     List<TurystaOdznaka> findByTurysta_IdTurysta(int turystaid);
 
+    TurystaOdznaka findTurystaOdznakaByOdznakaAndTurysta(Odznaka odznaka, Turysta turysta);
+
 }

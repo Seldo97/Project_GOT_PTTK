@@ -1,6 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.TurystaOdznakaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,8 @@ public class TurystaOdznakaServiceImpl implements TurystaOdznakaService{
         return (List<TurystaOdznaka>) this.turystaOdznakaRepository.findByTurysta_IdTurysta(idTurysta);
     }
 
-
+    @Override
+    public TurystaOdznaka checkOfUnique(Odznaka odznaka, Turysta turysta) {
+        return this.turystaOdznakaRepository.findTurystaOdznakaByOdznakaAndTurysta(odznaka, turysta);
+    }
 }

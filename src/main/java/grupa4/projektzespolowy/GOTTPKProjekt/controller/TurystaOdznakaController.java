@@ -3,18 +3,19 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaOdznakaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -25,6 +26,12 @@ public class TurystaOdznakaController {
 
     @Autowired // podłączamy Servicy z których bedzimy koszystać
     private TurystaServiceImpl turystaServiceImpl;
+
+    @Autowired // podłączamy Servicy z których bedzimy koszystać
+    private OdznakaServiceImpl odznakaServiceImpl;
+
+    @Autowired // podłączamy Servicy z których bedzimy koszystać
+    private UzytkownikServiceImpl uzytkownikServiceImpl;
 
     @GetMapping("/turystaodznaki") // ścieżka na której zostanie obsłużona metoda
     public String getAllTurystaOdznaka(Model model) {
@@ -48,11 +55,13 @@ public class TurystaOdznakaController {
     }
 
     @GetMapping("/turystaodznaki/usun/{idTurystaOdznaka}")
-    public String removeTurystaOdznaka(@PathVariable Integer idTurystaOdznaka) {
+    public String removeTurystaOdznaka(@PathVariable Integer idTurystaOdznaka,
+                                       HttpServletRequest request) {
 
         turystaOdznakaServiceImpl.removeTurystaOdznaka(idTurystaOdznaka);
 
-        return "redirect:/turystaodznaki";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @GetMapping({"/turystaodznaki/form", "/turystaodznaki/form/{idTurystaOdznaka}"})
@@ -87,12 +96,55 @@ public class TurystaOdznakaController {
     public String findTurystaOdznakaByIdTurysta(@RequestParam Integer idTurysta, Model model, Authentication authentication) {
 
         List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(idTurysta);
-
+        List<Odznaka> odznaki = odznakaServiceImpl.getAllOdznaka();
 
         String imieNazwisko =  turystaServiceImpl.getOneById(idTurysta).getImie() + " " + turystaServiceImpl.getOneById(idTurysta).getNazwisko();
         model.addAttribute("odznakiTurysty", odznakiTurysty);
+        model.addAttribute("odznaki", odznaki);
         model.addAttribute("LoggedUser", authentication);
         model.addAttribute("imieNazwisko", imieNazwisko);
+        model.addAttribute("idTurysta", idTurysta);
+
         return  "turysta/odznakiTurysty";
     }
+
+    @GetMapping("/turystaodznaki/MojeOdznaki")
+    public String showMojeOdznaki(Model model, Authentication authentication) {
+
+        Uzytkownik uzytkownik = uzytkownikServiceImpl.getLoggedUserDetails(authentication);
+        Turysta turysta = uzytkownik.getTurysta();
+
+        List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(turysta.getIdTurysta());
+        List<Odznaka> odznaki = odznakaServiceImpl.getAllOdznaka();
+
+        String imieNazwisko =  turystaServiceImpl.getOneById(turysta.getIdTurysta()).getImie() + " "
+                + turystaServiceImpl.getOneById(turysta.getIdTurysta()).getNazwisko();
+        model.addAttribute("odznakiTurysty", odznakiTurysty);
+        model.addAttribute("odznaki", odznaki);
+        model.addAttribute("LoggedUser", authentication);
+        model.addAttribute("imieNazwisko", imieNazwisko);
+
+        return  "turysta/odznakiTurysty";
+    }
+
+    @PostMapping("/turystaodznaki/przypiszOdznake")
+    public String addOdznakatoTurysta(@ModelAttribute TurystaOdznaka turystaOdznaka,
+                                      HttpServletRequest request,
+                                      RedirectAttributes redirectAttributes){
+
+        String referer = request.getHeader("Referer");
+
+        if(turystaOdznakaServiceImpl.checkOfUnique(turystaOdznaka.getOdznaka(), turystaOdznaka.getTurysta()) != null){
+            redirectAttributes.addFlashAttribute("wiadomosc", "Ten turysta posiada już tę odznakę!");
+            return "redirect:" + referer;
+        }
+
+        turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka);
+        redirectAttributes.addFlashAttribute("wiadomosc", "Przydzielono odznake turyście!");
+
+        return "redirect:" + referer;
+    }
+
+
+
 }

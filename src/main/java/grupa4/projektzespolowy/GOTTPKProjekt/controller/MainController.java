@@ -17,7 +17,7 @@ public class MainController {
 
         model.addAttribute("exampleInt", exampleInt);
 
-        System.out.println(exampleInt);
+        //System.out.println(exampleInt);
 
         return "index";
     }

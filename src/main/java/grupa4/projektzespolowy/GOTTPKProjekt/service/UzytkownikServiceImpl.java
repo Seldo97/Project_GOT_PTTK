@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
@@ -30,4 +31,8 @@ public class UzytkownikServiceImpl implements UzytkownikService
 	@Override
 	public Uzytkownik getOneById(Integer id) {return this.uzytkownikRepository.getOne(id);}
 
+    @Override
+    public Uzytkownik getLoggedUserDetails(Authentication authentication) {
+        return uzytkownikRepository.findByLogin(authentication.getName());
+    }
 }
