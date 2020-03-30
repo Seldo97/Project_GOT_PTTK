@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -19,6 +20,16 @@ public class PasmoController {
 
         ModelAndView modelAndView = new ModelAndView("pasma/pasma");
         modelAndView.addObject("pasma", pasmoServiceImpl.getAllPasmo());
+        modelAndView.addObject("LoggedUser", authentication);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/pasmaGrupy/{idGrupa}")
+    public ModelAndView getAllPasmoForGrupa(@PathVariable int idGrupa, Authentication authentication) {
+
+        ModelAndView modelAndView = new ModelAndView("pasma/pasmaGrupy");
+        modelAndView.addObject("pasma", pasmoServiceImpl.getAllPasmoByIdGrupa(idGrupa));
         modelAndView.addObject("LoggedUser", authentication);
 
         return modelAndView;

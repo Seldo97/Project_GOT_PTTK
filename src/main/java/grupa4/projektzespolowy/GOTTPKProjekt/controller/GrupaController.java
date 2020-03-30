@@ -28,5 +28,15 @@ public class GrupaController {
         return modelAndView;
     }
 
+    @GetMapping("/grupyFRONT")
+    public ModelAndView getAllGrupyFront( Authentication authentication) {
+
+        ModelAndView modelAndView = new ModelAndView("grupy/grupyFRONT");
+        modelAndView.addObject("grupy", grupaServiceImpl.getAllGrupa());
+        modelAndView.addObject("LoggedUser", authentication);
+
+        return modelAndView;
+    }
+
 
 }

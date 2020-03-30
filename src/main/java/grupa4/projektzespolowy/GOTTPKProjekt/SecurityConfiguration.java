@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/panel").hasRole("administrator")
                 .antMatchers("/rejestracja/*").permitAll()
-                .antMatchers("/grupy", "/pasma", "/punkty").permitAll()
+//                .antMatchers("/grupyFRONT", "/pasmaGrupy", "/punktyPasma").permitAll()
                 .antMatchers("/przodownicy", "/turysci", "/odznaki").hasAnyRole("USER")
                 .antMatchers("/przodownicy/dodaj", "/turysci/dodaj").permitAll()
                 .antMatchers("/turysta/mojeKonto","/turysci/updateForm","/turysci/updateForm","/turysci/update/{idTurysta}").hasAnyRole("administrator", "turysta")
@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasRole("administrator")
                 .and().formLogin().permitAll();
     }
-
+//, "/punkty/**", "/pasma/**", "/grupy/**"
 //    @Override
 //    public void configure(WebSecurity web) throws Exception {
 //        web
