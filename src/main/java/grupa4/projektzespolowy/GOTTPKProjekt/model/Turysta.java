@@ -28,24 +28,24 @@ public class Turysta
 	@Column(name="punkty")
 	private int punkty;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
 	private Uzytkownik Uzytkownik;
-	
-	@OneToMany(cascade = CascadeType.PERSIST)
+
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_turysta", referencedColumnName = "id_turysta")
 	private List<TurystaOdznaka> turystaOdznaka = new ArrayList<TurystaOdznaka>();
+
+	@OneToOne
+	@JoinColumn(name = "id_ksiazeczka")
+	private Ksiazeczka ksiazeczka;
+
 
 	public Turysta()
 	{}
 
-	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, int idUzytkownik, String opis,int punkty) {
-		this.imie = imie;
-		this.nazwisko = nazwisko;
-		this.telefon = telefon;
-	}
-	public Turysta(int idTurysta, String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
-		this.idTurysta = idTurysta;
+	public Turysta(String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) 
+	{
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.telefon = telefon;
@@ -53,15 +53,10 @@ public class Turysta
 		this.opis = opis;
 		this.punkty = punkty;
 	}
+
 	
-	public Turysta( String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis,int punkty) {
-		this.imie = imie;
-		this.nazwisko = nazwisko;
-		this.telefon = telefon;
-		this.Uzytkownik = idUzytkownik;
-		this.opis = opis;
-		this.punkty = punkty;
-	}
+
+
 
 	public int getIdTurysta() {
 		return idTurysta;
@@ -138,6 +133,15 @@ public class Turysta
 
 	public void setUzytkownik(Uzytkownik uzytkownik) {
 		Uzytkownik = uzytkownik;
+	}
+	
+
+	public Ksiazeczka getKsiazeczka() {
+		return ksiazeczka;
+	}
+
+	public void setKsiazeczka(Ksiazeczka ksiazeczka) {
+		this.ksiazeczka = ksiazeczka;
 	}
 
 	@Override

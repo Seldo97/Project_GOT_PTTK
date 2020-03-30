@@ -1,11 +1,18 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
+
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.TurystaOdznakaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Service
+@Transactional
 public class TurystaOdznakaServiceImpl implements TurystaOdznakaService{
 
     @Autowired
@@ -24,5 +31,12 @@ public class TurystaOdznakaServiceImpl implements TurystaOdznakaService{
     public void removeTurystaOdznaka(Integer id) { this.turystaOdznakaRepository.deleteById(id); }
 
     @Override
-    public void deleteTurystaOdznakaQuery(Integer id) { this.turystaOdznakaRepository.deleteTurystaOdznaka(id); }
+    public List<TurystaOdznaka> findByIdTurysta(int idTurysta) {
+        return (List<TurystaOdznaka>) this.turystaOdznakaRepository.findByTurysta_IdTurysta(idTurysta);
+    }
+
+    @Override
+    public TurystaOdznaka checkOfUnique(Odznaka odznaka, Turysta turysta) {
+        return this.turystaOdznakaRepository.findTurystaOdznakaByOdznakaAndTurysta(odznaka, turysta);
+    }
 }

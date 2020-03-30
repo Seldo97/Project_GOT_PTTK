@@ -1,9 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.RolaRepository;
-import grupa4.projektzespolowy.GOTTPKProjekt.repository.UzytkownikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +24,6 @@ public class RolaServiceImpl implements RolaService
 
     @Override
     public Rola getOneByName(String name) { return this.rolaRepository.findRolaByNazwa(name); }
+
+
 }

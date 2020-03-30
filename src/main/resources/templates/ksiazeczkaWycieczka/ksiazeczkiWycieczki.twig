@@ -1,0 +1,43 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Ksiazeczki Tabela{% endblock %}
+{% block header %}
+    Ksiazeczki
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ksiazeczka numer</th>
+                <th scope="col">Wycieczka numer</th>
+                <th scope="col">Zatwierdzono</th>
+                {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for ksiazeczkaWycieczki in ksiazeczkiWycieczki %}
+        <tr>
+              <td>{{ ksiazeczkaWycieczki.getIdKsiazeczkaWycieczka}}</td>
+              <td>{{ ksiazeczkaWycieczki.ksiazeczka.getIdKsiazeczka }}</td>
+              <td>{{ ksiazeczkaWycieczki.wycieczka.getIdWycieczka }}</td>
+               <td>{{ ksiazeczkaWycieczki.isCzyZatwierdzono }}</td>
+              {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <td><a class="nav-link" href="/ksiazeczkiWycieczki/form?id={{ksiazeczkiWycieczki.getIdKsiazeczkaWycieczka}}">Edytuj</a></td>
+                <td><a class="nav-link" href="/ksiazeczkiWycieczki/usun/{{ksiazeczkiWycieczki.getIdKsiazeczkaWycieczka }}">Usuń</a></td>
+                {% endif %}
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+    <a class="btn btn-info" href="/ksiazeczkiWycieczki/form" role="button">Dodaj</a>
+     {% endif %}
+
+{% endblock %}

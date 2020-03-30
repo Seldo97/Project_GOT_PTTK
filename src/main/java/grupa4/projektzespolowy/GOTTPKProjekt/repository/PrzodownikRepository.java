@@ -11,6 +11,6 @@ public interface PrzodownikRepository extends JpaRepository<Przodownik, Integer>
 
     @Modifying
     @Query("delete from Przodownik p where p.idPrzodownik = ?1")
-    public void deletePrzodownik(Integer id_przodownik);
+    public void deletePrzodownik(Integer idPrzodownik);
 
 }

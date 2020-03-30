@@ -1,0 +1,41 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Ksiazeczki Tabela{% endblock %}
+{% block header %}
+    Ksiazeczki
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for ksiazeczka in ksiazeczki %}
+        <tr>
+              <td>{{ ksiazeczka.getIdKsiazeczka}}</td>
+              <td>{{ ksiazeczka.turysta.getImie }}</td>
+              <td>{{ ksiazeczka.turysta.getNazwisko }}</td>
+              {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <td><a class="nav-link" href="/ksiazeczki/form?id={{ksiazeczka.getIdKsiazeczka }}">Edytuj</a></td>
+                <td><a class="nav-link" href="/ksiazeczki/usun/{{ ksiazeczka.getIdKsiazeczka }}">Usuń</a></td>
+                {% endif %}
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+    <a class="btn btn-info" href="/ksiazeczki/form" role="button">Dodaj</a>
+     {% endif %}
+
+{% endblock %}

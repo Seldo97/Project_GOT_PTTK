@@ -14,5 +14,5 @@ public interface TurystaService {
     Turysta getOneById(Integer id);
 
     void removeTurysta(Integer id);
-    
-}
+
+    }

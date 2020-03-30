@@ -9,14 +9,22 @@ import org.springframework.ui.ModelMap;
 @Controller
 public class MainController {
 
-    @GetMapping("/")
+    @GetMapping({"/"})
     public String indexPage(ModelMap model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
-
-        System.out.println(authentication);
+;
+        //System.out.println(exampleInt);
 
         return "index";
+    }
+
+    @GetMapping("/panel")
+    public String adminPanel(ModelMap model, Authentication authentication) {
+
+        model.addAttribute("LoggedUser", authentication);
+
+        return "admin/panel";
     }
 
 }

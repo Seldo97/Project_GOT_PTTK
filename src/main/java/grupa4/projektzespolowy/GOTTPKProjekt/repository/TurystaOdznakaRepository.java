@@ -1,12 +1,17 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.repository;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface TurystaOdznakaRepository extends JpaRepository<TurystaOdznaka, Integer> {
-    @Modifying
-    @Query("delete from TurystaOdznaka to where to.id_turysta_odznaka = ?1")
-    public void deleteTurystaOdznaka(Integer id_turysta_odznaka);
+    List<TurystaOdznaka> findByTurysta_IdTurysta(int turystaid);
+
+    TurystaOdznaka findTurystaOdznakaByOdznakaAndTurysta(Odznaka odznaka, Turysta turysta);
+
 }

@@ -1,0 +1,42 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Punkty Tabela{% endblock %}
+{% block header %}
+    Punkty
+{% endblock %}
+{% block main %}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Pasmo</th>
+            <th scope="col">Grupa</th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for punkt in punkty %}
+            <tr>
+                <td>{{ punkt.getIdPunkt}}</td>
+                <td>{{ punkt.getNazwa }}</td>
+                <td>{{ punkt.pasmo.getNazwa }}</td>
+                <td>{{ punkt.pasmo.grupa.getNazwa }}</td>
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <td><a class="nav-link" href="#">Edytuj</a></td>
+                    <td><a class="nav-link" href="#">Usuń</a></td>
+                {% endif %}
+            </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+        <a class="btn btn-info" href="#" role="button">Dodaj</a>
+    {% endif %}
+
+{% endblock %}

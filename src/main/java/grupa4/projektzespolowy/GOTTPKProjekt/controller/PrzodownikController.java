@@ -14,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Optional;
-
 @Controller
 public class PrzodownikController {
     @Autowired // podłączamy Servicy z których bedzimy koszystać
@@ -63,10 +61,10 @@ public class PrzodownikController {
     }
 
     //@PreAuthorize("administrator")
-    @GetMapping("/przodownicy/usun/{id_przodownik}") // usuń przodownika wraz z jego kontem użytkownika
-    public String removePrzodownik(@PathVariable Integer id_przodownik) {
+    @GetMapping("/przodownicy/usun/{idPrzodownik}") // usuń przodownika wraz z jego kontem użytkownika
+    public String removePrzodownik(@PathVariable Integer idPrzodownik) {
 
-        Przodownik przodownik = przodownikServiceImpl.getOneById(id_przodownik); // pobieram przodownika po odebranym id
+        Przodownik przodownik = przodownikServiceImpl.getOneById(idPrzodownik); // pobieram przodownika po odebranym id
         Uzytkownik uzytkownik = przodownik.getUzytkownik(); // pobieram uzytkownika przypisanego do przodownika
         przodownik.setUzytkownik(null); // usuwam referencje do rodzica
 
@@ -75,12 +73,15 @@ public class PrzodownikController {
         return "redirect:/przodownicy";
     }
 
-    @GetMapping({"/przodownicy/form", "/przodownicy/form/{id_przodownik}", "/rejestracja/przodownik"})
-    public String formPrzodownik(Model model, @PathVariable(required = false) Integer id_przodownik) {
+    @GetMapping({"/przodownicy/form", "/przodownicy/form", "/rejestracja/przodownik"})
+    public String formPrzodownik(Model model,
+                                 @RequestParam(value = "id", required = false) Integer idPrzodownik,
+                                 Authentication authentication) {
 
+        model.addAttribute("LoggedUser", authentication);
 
-        if(id_przodownik != null){
-            Przodownik przodownik = przodownikServiceImpl.getOneById(id_przodownik);
+        if(idPrzodownik != null){
+            Przodownik przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
             model.addAttribute("przodownik", przodownik);
             model.addAttribute("update", "1");
         }
@@ -88,16 +89,16 @@ public class PrzodownikController {
         return "przodownik/przodownicyForm";
     }
 
-    @PostMapping("/przodownicy/update/{id_przodownik}")
+    @PostMapping("/przodownicy/update/{idPrzodownik}")
     public String updatePrzodownik(@RequestParam(value="imie") String imie,
                                  @RequestParam(value="nazwisko") String nazwisko,
                                  @RequestParam(value="telefon") String telefon,
                                  @RequestParam(value="login") String login,
                                  @RequestParam(value="haslo", required = false) String haslo,
                                  @RequestParam(value="email") String email,
-                                 @PathVariable Integer id_przodownik) {
+                                 @PathVariable Integer idPrzodownik) {
 
-        Przodownik przodownik = przodownikServiceImpl.getOneById(id_przodownik);
+        Przodownik przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
 
         przodownik.setImie(imie);
         przodownik.setNazwisko(nazwisko);

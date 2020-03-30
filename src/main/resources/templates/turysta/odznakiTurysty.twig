@@ -1,0 +1,61 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Odznaki turysty{% endblock %}
+{% block header %}
+    Odznaki: {{ imieNazwisko }}
+{% endblock %}
+{% block main %}
+
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nazwa odznaki</th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for odznakaTurysty in odznakiTurysty %}
+            <tr>
+                <td>{{ odznakaTurysty.getOdznaka.getNazwa }}</td>
+
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/turystaodznaki/usun/{{ odznakaTurysty.getIdTurystaOdznaka }}">🗑️</a></abbr>
+                        </div>
+                    </td>
+                {% endif %}
+
+            </tr>
+
+        {%  endfor %}
+        </tbody>
+    </table>
+
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+
+        <div class="row">
+            <div class="col-12 col-md-6 mt-3" id="form">
+
+                <form id="addForm" action="/turystaodznaki/przypiszOdznake" method="POST">
+
+                    <input type="hidden" name="turysta" id="turysta" value="{{ idTurysta }}"/>
+                    <div class="form-group">
+                        <select name="odznaka" class="form-control">
+                            <option value="">--Wybierz odznake--</option>
+                            {% for odznaka in odznaki %}
+                                <option value={{odznaka.getIdOdznaka}}>"{{odznaka.getNazwa}}"</option>
+                            {%  endfor %}
+                        </select>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-info">Przyznaj odznakę</button>
+                </form>
+
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

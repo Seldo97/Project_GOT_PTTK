@@ -1,39 +1,75 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark text-center" style='margin-top: 100px'>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
+            <div class="dropdown">
+                <button class=" nav-link btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent;  ">Góry
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li> <a class="dropdown-item" href="/grupy">Grupy górskie</a></li>
+                    <li><a class="dropdown-item" href="/pasma">Pasma górskie</a></li>
+                    <li><a class="dropdown-item" href="/punkty">Punkty górskie</a></li>
+                </ul>
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="/przodownicy">Przodownicy</a>
             </li>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/turysci">Turysci</a>
+                </li>
+            {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="/turysci">Turysci</a>
+                <a class="nav-link" href="/ksiazeczki">Ksiazeczki</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/odznaki">Odznaki</a>
+             <li class="nav-item">
+                <a class="nav-link" href="/zdjecia">Zdjecia</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="/ksiazeczkiWycieczki">Ksiazeczka Wycieczki</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="/wycieczki">Wycieczki</a>
             </li>
         </ul>
     	<ul class="navbar-nav ml-auto">
-            {% if LoggedUser is null %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rejestracja</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/rejestracja/przodownik">Konto Przodownika</a>
-                    <a class="dropdown-item" href="/rejestracja/turysta">Konto Turysty</a>
+            <li class="nav-item dropdown dropleft">
+                <a class="nav-link dropdown-toggle dropleft" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <abbr title="Opcje"><img src="/images/settings3.png" alt = "opcje" width="25" height="25" /></abbr>
+                </a>
+                <div class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
+                    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                        <h6 class="dropdown-header"><strong>Ustawienia:</strong></h6>
+                        <a class="dropdown-item" href="/panel">Panel Administratora</a>
+                    {% elseif ('ROLE_przodownik' in LoggedUser.getAuthorities) or ('ROLE_turysta' in LoggedUser.getAuthorities) %}
+                        <h6 class="dropdown-header"><strong>Ustawienia:</strong></h6>
+                        {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                            <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
+                            <a class="dropdown-item" href="#">Moje odznaki</a>
+                            <a class="dropdown-item" href="/turystaodznaki/MojeOdznaki">Moje odznaki</a>
+                            <a class="dropdown-item" href="#">Moje wycieczki</a>
+                            <a class="dropdown-item" href="#">Moja książeczka</a>
+                        {% endif %}
+                         {% if 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+                            <a class="dropdown-item" href="#">Moje konto</a>
+                        {% endif %}
+                    {% else %}
+                        <h6 class="dropdown-header"><strong>Zarejestruj:</strong></h6>
+                        <a class="dropdown-item" href="/rejestracja/przodownik">Konto Przodownika</a>
+                        <a class="dropdown-item" href="/rejestracja/turysta">Konto Turysty</a>
+                    {% endif %}
                 </div>
             </li>
-            {% endif %}
+
             <li class="nav-item">
                 {% if LoggedUser is null %}
-                    <a class="nav-link" href="/login">Zaloguj</a>
+                <a class="nav-link" href="/login"><abbr title="Zaloguj"><img src="/images/login.png" width="25" height="25" alt="zaloguj" /></abbr></a>
                 {% else %}
-                    <a class="nav-link" href="/logout">Wyloguj</a>
+                <a class="nav-link" href="/logout"><abbr title="Wyloguj"><img src="/images/logout.png" width="25" height="25" alt="wyloguj" /></abbr></a>
                 {% endif %}
             </li>
-  		</ul>     
+  		</ul>
     </div>
 </nav>

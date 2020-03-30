@@ -4,7 +4,9 @@
     Turysta
 {% endblock %}
 {% block main %}
-    <table id="myTable" class="table table-striped align-middle table-sm">
+    <table id="myTable" class="table table-striped align-middle table-sm"
+           xmlns:word-wrap="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml"
+           xmlns:overflow-x="http://www.w3.org/1999/xhtml">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -14,10 +16,7 @@
                 <th scope="col">Uzytkownik</th>
                 <th scope="col">Opis</th>
                 <th scope="col">Punkty</th>
-                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
-                <th scope="col"></th>
-                  {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -29,12 +28,17 @@
           <td>{{ turysta.getNazwisko }}</td>
           <td>{{ turysta.getTelefon }}</td>
           <td>{{ turysta.uzytkownik.getLogin }}</td>
-          <td>{{ turysta.getOpis }}</td>
+          <td><div style='max-height: 65px; width: 100px; word-wrap: break-word; overflow-x: auto;'>{{ turysta.getOpis }}</div></td>
           <td>{{ turysta.getPunkty }}</td>
-            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-          	<td><a class="nav-link" href="/turysci/updateForm/{{ turysta.getIdTurysta }}">Edytuj</a></td>
-          	<td><a class="nav-link" href="/turysci/usun/{{ turysta.getIdTurysta }}">Usuń</a></td>
-          {% endif %}
+            <td class="text-right">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    <abbr title="Odznaki"><a class="btn btn-sm bg-transparent" href="/turystaodznaki/znajdzOdznakiTurysty?idTurysta={{ turysta.getIdTurysta }}">🏅</a></abbr>
+                    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                        <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/turysci/updateForm?id={{ turysta.getIdTurysta }}">✏️</a></abbr>
+                        <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/turysci/usun/{{ turysta.getIdTurysta }}">🗑️</a></abbr>
+                    {% endif %}
+                </div>
+            </td>
           
         </tr>
         {%  endfor %}

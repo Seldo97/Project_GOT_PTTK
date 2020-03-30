@@ -1,0 +1,39 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Grupy Tabela{% endblock %}
+{% block header %}
+    Grupy
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nazwa</th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for grupa in grupy %}
+            <tr>
+                <td>{{ grupa.getIdGrupa}}</td>
+                <td>{{ grupa.getNazwa }}</td>
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <td><a class="nav-link" href="#">Edytuj</a></td>
+                    <td><a class="nav-link" href="#">Usuń</a></td>
+                {% endif %}
+            </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+        <a class="btn btn-info" href="#" role="button">Dodaj</a>
+    {% endif %}
+
+{% endblock %}

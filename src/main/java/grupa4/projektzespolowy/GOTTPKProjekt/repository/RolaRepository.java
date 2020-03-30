@@ -11,4 +11,6 @@ public interface RolaRepository extends JpaRepository<Rola, Integer>
 {
 	Rola findRolaByNazwa(String rolename);
 
+	List<Rola> findRolaByNazwaIsLike(String nazwa);
+
 }

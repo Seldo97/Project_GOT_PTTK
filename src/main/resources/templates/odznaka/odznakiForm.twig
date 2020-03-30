@@ -10,7 +10,8 @@
 
 {% block form %}
     {% if update == 1 %}
-        <form id="signupForm" action="/odznaki/update/{{ odznaka.getIdOdznaka}}" method="POST">
+        <form id="signupForm" action="/odznaki/update" method="POST">
+            <input type="hidden" name="idOdznaka" id="idOdznaka" value="{{ odznaka.getIdOdznaka }}" />
     {% else %}
         <form id="signupForm" action="/odznaki/dodaj" method="POST">
     {% endif %}
