@@ -2,7 +2,6 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
