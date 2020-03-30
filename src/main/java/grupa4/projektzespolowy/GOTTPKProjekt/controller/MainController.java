@@ -4,21 +4,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Controller
 public class MainController {
 
-    @GetMapping({"/", "/{exampleInt}"})
-    public String indexPage(ModelMap model, Authentication authentication, @PathVariable(required = false) Integer exampleInt) {
+    @GetMapping({"/"})
+    public String indexPage(ModelMap model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
 
-        model.addAttribute("exampleInt", exampleInt);
 
-        //System.out.println(exampleInt);
-
+        //System.out.println(exampleInt)
         return "index";
     }
 

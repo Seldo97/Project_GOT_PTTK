@@ -1,9 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Punkt;
-import grupa4.projektzespolowy.GOTTPKProjekt.repository.PasmoRepository;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.PunktRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

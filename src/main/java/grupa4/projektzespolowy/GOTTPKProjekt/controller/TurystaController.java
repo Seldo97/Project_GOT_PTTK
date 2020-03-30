@@ -2,10 +2,10 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.MyUserDetails;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
@@ -23,6 +24,10 @@ import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
 
+/**
+ * @author Laptop
+ *
+ */
 @Controller
 public class TurystaController
 {
@@ -57,6 +62,7 @@ public class TurystaController
 		return modelAndView;
 	}
 
+	/*
 	@GetMapping("/turysci/updateForm")
 	public String updateformTurysta(@RequestParam(value="id") Integer idTurysta,
 									Model model,
@@ -72,6 +78,54 @@ public class TurystaController
 
 		return "turysta/updateForm";
 	}
+	*/
+	
+	@GetMapping("/turysci/updateForm")
+	public String updateformTurysta(Model model,Authentication authentication)
+	{
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof MyUserDetails) 
+		{
+			  int numer = ((MyUserDetails)principal).getId();
+			  Turysta turysta = turystaServiceImpl.getOneById(numer);
+			  Uzytkownik uzytkownik = turysta.getUzytkownik();
+			  model.addAttribute("turysta", turysta);
+			  model.addAttribute("uzytkownik", uzytkownik);
+			  model.addAttribute("LoggedUser", authentication);
+			  //System.out.print(numer);
+		} 
+		else 
+		{
+			System.out.print("Nie znaleziono takiego uzytkownika");
+		}
+
+		return "turysta/updateForm";
+	}
+	
+	@GetMapping("/turysta/mojeKonto")
+	public String accountSettings(Model model,Authentication authentication){
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof MyUserDetails) 
+		{
+			  int numer = ((MyUserDetails)principal).getId();
+			  Turysta turysta = turystaServiceImpl.getOneById(numer);
+			  Uzytkownik uzytkownik = turysta.getUzytkownik();
+			  model.addAttribute("turysta", turysta);
+			  model.addAttribute("uzytkownik", uzytkownik);
+			  model.addAttribute("LoggedUser", authentication);
+			  //System.out.print(numer);
+		} 
+		else 
+		{
+			System.out.print("Nie znaleziono takiego uzytkownika");
+		}
+		
+		return "turysta/kontoTurysty";
+	}
+	
+	
 
 	@PostMapping("/turysci/dodaj")
 	public String createTurysta(  @RequestParam(value="imie") String imie,
@@ -127,7 +181,7 @@ public class TurystaController
 
 		turystaServiceImpl.createTurysta(turysta);
 		redirectAttributes.addFlashAttribute("wiadomosc", "Zmiany zostały przyjęte pomyślnie");
-		return "redirect:/turysci";
+		return "redirect:/turysta/mojeKonto";
 	}
 
 	@GetMapping("/turysci/usun/{idTurysta}") // usuń turyste wraz z jego kontem użytkownika
@@ -143,7 +197,7 @@ public class TurystaController
 		turystaServiceImpl.removeTurysta(idTurysta);
 
 		redirectAttributes.addFlashAttribute("wiadomosc", "Usunięto turyste pomyślnie");
-		return "redirect:/turysci";
+		return "redirect:/";
 	}
 
 

@@ -1,7 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Przodownik")

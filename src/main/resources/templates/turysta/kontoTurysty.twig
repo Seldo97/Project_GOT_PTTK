@@ -1,0 +1,32 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Konto Turysty{% endblock %}
+{% block header %}
+    Moje Konto
+{% endblock %}
+{% block main %}
+    	 <div class="container">
+    <div class="row profile">
+		<div class="col-md-12">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+					<center><img src="/images/avatar.png" class="img-responsive" alt="awatar" witdh= 150 height = 150></center>
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						<span>{{ turysta.getImie }} {{ turysta.getNazwisko }}</span>
+					</div>
+					<div class="profile-usertitle-job">
+						{{ uzytkownik.rola.getNazwa }}
+					</div>
+				</div>
+				<div class="profile-userbuttons">
+					<a href="/turysci/updateForm"><button type="button" class="btn btn-success btn-sm">Dane Konta</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
