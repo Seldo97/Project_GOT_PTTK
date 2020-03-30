@@ -1,6 +1,5 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
-
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
