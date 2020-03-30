@@ -35,8 +35,7 @@ public class Turysta
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_turysta", referencedColumnName = "id_turysta")
 	private List<TurystaOdznaka> turystaOdznaka = new ArrayList<TurystaOdznaka>();
-	
-	
+
 	@OneToOne
 	@JoinColumn(name = "id_ksiazeczka")
 	private Ksiazeczka ksiazeczka;
@@ -136,6 +135,7 @@ public class Turysta
 		Uzytkownik = uzytkownik;
 	}
 	
+
 	public Ksiazeczka getKsiazeczka() {
 		return ksiazeczka;
 	}

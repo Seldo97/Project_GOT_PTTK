@@ -6,6 +6,7 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
 import java.util.List;
 
 public interface OdznakaService {
+
     Odznaka createOdznaka(Odznaka odznaka);
 
     List<Odznaka> getAllOdznaka();
