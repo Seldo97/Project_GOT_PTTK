@@ -73,15 +73,15 @@ public class PasmoController {
        @PostMapping("/pasma/update/{idPasmo}")
       	public String updatePasmo(@RequestParam(value = "nazwaPasmo") String nazwaPasmo,
   				 						@RequestParam(value = "selectGrupa") Integer idGrupa,
-      										@RequestParam(value = "id") Integer idPasmo)
+  				 						@PathVariable Integer idPasmo)
       	{
       		if(idPasmo != null)
       		{
                Pasmo pasmo = pasmoServiceImpl.getOneById(idPasmo);
-               Grupa grupa = pasmo.getGrupa();   
-               
                pasmo.setNazwa(nazwaPasmo);
                pasmo.setGrupa(grupaServiceImpl.getOneById(idGrupa));
+               
+               pasmoServiceImpl.createPasmo(pasmo);
       		}
       		 return "redirect:/pasma";
       	}
