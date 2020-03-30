@@ -13,9 +13,6 @@ public class MainController {
     public String indexPage(ModelMap model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
-
-
-        //System.out.println(exampleInt)
         return "index";
     }
 

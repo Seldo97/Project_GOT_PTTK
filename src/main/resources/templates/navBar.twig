@@ -46,6 +46,8 @@
                     {% elseif ('ROLE_przodownik' in LoggedUser.getAuthorities) or ('ROLE_turysta' in LoggedUser.getAuthorities) %}
                         <h6 class="dropdown-header"><strong>Ustawienia:</strong></h6>
                         {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                            <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
+                            <a class="dropdown-item" href="#">Moje odznaki</a>
                             <a class="dropdown-item" href="/turystaodznaki/MojeOdznaki">Moje odznaki</a>
                             <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
                             <a class="dropdown-item" href="#">Moje odznaki</a>
