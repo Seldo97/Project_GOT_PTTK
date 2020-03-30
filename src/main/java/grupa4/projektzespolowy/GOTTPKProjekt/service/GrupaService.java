@@ -11,5 +11,9 @@ public interface GrupaService {
     Grupa getOneById(Integer id);
 
     Grupa getOneByName(String name);
+    
+    Grupa createGrupa(Grupa grupa);
+    
+    void deleteGrupa(Integer id);
 
 }
