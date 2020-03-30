@@ -1,9 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.OdznakaRepository;
-import grupa4.projektzespolowy.GOTTPKProjekt.repository.PrzodownikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -6,15 +6,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Primary
 public class MyUserDetails implements UserDetails {
 
-    private int id;
+    
+	private static final long serialVersionUID = 7102554437379859119L;
+	private int id;
     private String userName;
     private String password;
     private String email;

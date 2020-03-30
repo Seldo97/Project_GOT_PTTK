@@ -36,7 +36,6 @@
             </li>
         </ul>
     	<ul class="navbar-nav ml-auto">
-
             <li class="nav-item dropdown dropleft">
                 <a class="nav-link dropdown-toggle dropleft" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <abbr title="Opcje"><img src="/images/settings3.png" alt = "opcje" width="25" height="25" /></abbr>
@@ -47,12 +46,14 @@
                         <a class="dropdown-item" href="/panel">Panel Administratora</a>
                     {% elseif ('ROLE_przodownik' in LoggedUser.getAuthorities) or ('ROLE_turysta' in LoggedUser.getAuthorities) %}
                         <h6 class="dropdown-header"><strong>Ustawienia:</strong></h6>
-                        <a class="dropdown-item" href="#">Moje konto</a>
                         {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
-                            <a class="dropdown-item" href="#">Moje konto</a>
+                            <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
                             <a class="dropdown-item" href="#">Moje odznaki</a>
                             <a class="dropdown-item" href="#">Moje wycieczki</a>
                             <a class="dropdown-item" href="#">Moja książeczka</a>
+                        {% endif %}
+                         {% if 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+                            <a class="dropdown-item" href="#">Moje konto</a>
                         {% endif %}
                     {% else %}
                         <h6 class="dropdown-header"><strong>Zarejestruj:</strong></h6>

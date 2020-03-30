@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository // interfejs który zawiera wszystkie podstawowe funkcje typu findAll, delete itp... zapraszam do dokumentacji
 public interface PrzodownikRepository extends JpaRepository<Przodownik, Integer> {
 
