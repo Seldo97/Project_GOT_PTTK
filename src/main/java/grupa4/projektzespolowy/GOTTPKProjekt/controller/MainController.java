@@ -27,4 +27,15 @@ public class MainController {
         return "admin/panel";
     }
 
+    @GetMapping({"/regulamin"})
+    public String regiulamin(ModelMap model, Authentication authentication) {
+
+        model.addAttribute("LoggedUser", authentication);
+        ;
+        //System.out.println(exampleInt);
+
+        return "regulamin/regulamin";
+    }
+
+
 }

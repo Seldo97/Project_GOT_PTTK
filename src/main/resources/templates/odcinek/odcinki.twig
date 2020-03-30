@@ -1,0 +1,42 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Odznaki tabela{% endblock %}
+{% block header %}
+    Odcinki
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" width="20px">#</th>
+                <th scope="col">Nazwa</th>
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for odcinek in odcinki %}
+        <tr>
+              <td>{{ odcinek.getIdOcinek}}</td>
+              <td>{{ odcinek.getIdOcinek}}</td>
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">✏️</a></abbr>
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">🗑️</a></abbr>
+                        </div>
+                    </td>
+                {% endif %}
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+    <a class="btn btn-info" href="/odznaki/form" role="button">Dodaj</a>
+     {% endif %}
+
+{% endblock %}
