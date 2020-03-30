@@ -1,9 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaOdznakaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
@@ -17,6 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.function.Predicate.not;
 
 @Controller
 public class TurystaOdznakaController {
@@ -96,7 +96,16 @@ public class TurystaOdznakaController {
     public String findTurystaOdznakaByIdTurysta(@RequestParam Integer idTurysta, Model model, Authentication authentication) {
 
         List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(idTurysta);
-        List<Odznaka> odznaki = odznakaServiceImpl.getAllOdznaka();
+        //List<Odznaka> odznaki = odznakaServiceImpl.getAllOdznaka();
+
+        List<Odznaka> odznakiTurystyFilter = odznakiTurysty
+                .stream()
+                .map(TurystaOdznaka::getOdznaka)
+                .collect(Collectors.toList());
+        List<Odznaka> odznaki = odznakaServiceImpl.getAllOdznaka()
+                .stream()
+                .filter(not(odznakiTurystyFilter::contains))
+                .collect(Collectors.toList());
 
         String imieNazwisko =  turystaServiceImpl.getOneById(idTurysta).getImie() + " " + turystaServiceImpl.getOneById(idTurysta).getNazwisko();
         model.addAttribute("odznakiTurysty", odznakiTurysty);
@@ -113,14 +122,11 @@ public class TurystaOdznakaController {
 
         Uzytkownik uzytkownik = uzytkownikServiceImpl.getLoggedUserDetails(authentication);
         Turysta turysta = uzytkownik.getTurysta();
-
         List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(turysta.getIdTurysta());
-        List<Odznaka> odznaki = odznakaServiceImpl.getAllOdznaka();
 
         String imieNazwisko =  turystaServiceImpl.getOneById(turysta.getIdTurysta()).getImie() + " "
                 + turystaServiceImpl.getOneById(turysta.getIdTurysta()).getNazwisko();
-        model.addAttribute("odznakiTurysty", odznakiTurysty);
-        model.addAttribute("odznaki", odznaki);
+        model.addAttribute("odznakiTurysty", odznakiTurysty);;
         model.addAttribute("LoggedUser", authentication);
         model.addAttribute("imieNazwisko", imieNazwisko);
 

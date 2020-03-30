@@ -30,6 +30,7 @@ public class PasmoController {
 
         ModelAndView modelAndView = new ModelAndView("pasma/pasmaGrupy");
         modelAndView.addObject("pasma", pasmoServiceImpl.getAllPasmoByIdGrupa(idGrupa));
+        modelAndView.addObject("idGrupa", idGrupa);
         modelAndView.addObject("LoggedUser", authentication);
 
         return modelAndView;

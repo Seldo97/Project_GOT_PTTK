@@ -1,6 +1,8 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Przodownik")
@@ -26,6 +28,10 @@ public class Przodownik {
     @OneToOne(cascade = CascadeType.PERSIST) // na dziecku robimy PRESIST żeby zaś problemu z updejtami nie było
     @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
     private Uzytkownik Uzytkownik;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_przodownik", referencedColumnName = "id_przodownik")
+    private List<GrupaPrzodownik> grupy = new ArrayList<GrupaPrzodownik>();
 
     public Przodownik() {}
 
@@ -82,6 +88,22 @@ public class Przodownik {
         Uzytkownik = uzytkownik;
     }
 
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public List<GrupaPrzodownik> getGrupy() {
+        return grupy;
+    }
+
+    public void setGrupy(List<GrupaPrzodownik> grupy) {
+        this.grupy = grupy;
+    }
+
     @Override
     public String toString() {
         return "Przodownik{" +
@@ -89,7 +111,7 @@ public class Przodownik {
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
                 ", telefon='" + telefon + '\'' +
-                ", Uzytkownik=" + Uzytkownik +
+                ", opis='" + opis + '\'' +
                 '}';
     }
 }

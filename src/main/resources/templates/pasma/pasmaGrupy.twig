@@ -6,15 +6,18 @@
 {% endblock %}
 {% block main %}
     <div class="row justify-content-center">
-    <h1 style="font-size: 70px">{{ pasma[0].grupa.getNazwa }}</h1>
+        <h1 style="font-size: 70px">{{ pasma[0].grupa.getNazwa }}</h1>
     </div>
 
     {% for pasmo in pasma %}
-    <div class="row justify-content-center">
-        <a href="/punktyPasma/{{ pasmo.getIdPasmo }}"><p style="font-size: 25px">{{ pasmo.getNazwa }}</p></a>
-    </div>
+        <div class="row justify-content-center">
+            <a href="/punktyPasma/{{ pasmo.getIdPasmo }}"><p style="font-size: 25px">{{ pasmo.getNazwa }}</p></a>
+        </div>
     {%  endfor %}
 
+    <div class="row justify-content-center mt-5">
+        <a href="/grupy/{{ idGrupa }}/przodownicy"><p style="font-size: 25px">Przodownicy grupy {{ pasma[0].grupa.getNazwa }}</p></a>
+    </div>
 
 
 {% endblock %}

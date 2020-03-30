@@ -149,7 +149,6 @@ public class Uzytkownik
 				", login='" + login + '\'' +
 				", haslo='" + haslo + '\'' +
 				", email='" + email + '\'' +
-				", rola=" + rola +
 				'}';
 	}
 }

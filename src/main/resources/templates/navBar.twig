@@ -13,14 +13,14 @@
                     <li><a class="dropdown-item" href="/punkty">Punkty górskie</a></li>
                 </ul>
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="/przodownicy">Przodownicy</a>
-            </li>
-            {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/turysci">Turysci</a>
-                </li>
-            {% endif %}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="/przodownicy">Przodownicy</a>#}
+{#            </li>#}
+{#            {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="/turysci">Turysci</a>#}
+{#                </li>#}
+{#            {% endif %}#}
             <li class="nav-item">
                 <a class="nav-link" href="/ksiazeczki">Ksiazeczki</a>
             </li>
@@ -47,13 +47,14 @@
                         <h6 class="dropdown-header"><strong>Ustawienia:</strong></h6>
                         {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
                             <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
-                            <a class="dropdown-item" href="#">Moje odznaki</a>
                             <a class="dropdown-item" href="/turystaodznaki/MojeOdznaki">Moje odznaki</a>
                             <a class="dropdown-item" href="#">Moje wycieczki</a>
                             <a class="dropdown-item" href="#">Moja książeczka</a>
                         {% endif %}
                          {% if 'ROLE_przodownik' in LoggedUser.getAuthorities %}
                             <a class="dropdown-item" href="#">Moje konto</a>
+                            <a class="dropdown-item" href="/mojeGrupy">Moje grupy</a>
+                            <a class="dropdown-item" href="/turysci">Przegląd turystów</a>
                         {% endif %}
                     {% else %}
                         <h6 class="dropdown-header"><strong>Zarejestruj:</strong></h6>
