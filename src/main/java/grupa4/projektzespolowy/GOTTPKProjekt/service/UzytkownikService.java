@@ -1,6 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface UzytkownikService {
     Uzytkownik getOneById(Integer id);
 
     void removeUzytkownik(Integer id);
+
+    Uzytkownik getLoggedUserDetails(Authentication authentication);
 
 }

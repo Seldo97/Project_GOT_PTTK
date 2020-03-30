@@ -191,6 +191,7 @@ public class TurystaController
 		Turysta turysta = turystaServiceImpl.getOneById(idTurysta); // pobieram turyste po odebranym id
 		Uzytkownik uzytkownik = turysta.getUzytkownik(); // pobieram uzytkownika przypisanego do turysty
 		turysta.setUzytkownik(null); // usuwam referencje do rodzica
+		uzytkownik.setTurysta(null); // usuwam referencje do dziecka
 
 		uzytkownikServiceImpl.removeUzytkownik(uzytkownik.getIdUzytkownik()); // usuwam użytkownika i od razu kaskadowo usuwa się turysta.
 		turystaServiceImpl.removeTurysta(idTurysta);

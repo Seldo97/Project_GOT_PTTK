@@ -9,10 +9,9 @@
     <table id="myTable" class="table table-striped align-middle table-sm">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col" width="20px">#</th>
                 <th scope="col">Nazwa</th>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                <th scope="col"></th>
                 <th scope="col"></th>
                 {% endif %}
             </tr>
@@ -23,9 +22,13 @@
         <tr>
               <td>{{ odznaka.getIdOdznaka}}</td>
               <td>{{ odznaka.getNazwa }}</td>
-              {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                <td><a class="nav-link" href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">Edytuj</a></td>
-                <td><a class="nav-link" href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">Usuń</a></td>
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">✏️</a></abbr>
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">🗑️</a></abbr>
+                        </div>
+                    </td>
                 {% endif %}
         </tr>
         {%  endfor %}

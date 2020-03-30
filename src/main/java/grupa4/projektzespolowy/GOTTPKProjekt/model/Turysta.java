@@ -28,11 +28,11 @@ public class Turysta
 	@Column(name="punkty")
 	private int punkty;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
 	private Uzytkownik Uzytkownik;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_turysta", referencedColumnName = "id_turysta")
 	private List<TurystaOdznaka> turystaOdznaka = new ArrayList<TurystaOdznaka>();
 

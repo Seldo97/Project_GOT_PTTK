@@ -21,3 +21,12 @@ footer{
   margin-top:auto;
     bottom: 0;
 }
+
+td:not(:nth-child(0)) {
+    vertical-align: middle;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

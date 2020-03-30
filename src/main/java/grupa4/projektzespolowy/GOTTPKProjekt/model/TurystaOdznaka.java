@@ -31,12 +31,12 @@ public class TurystaOdznaka {
         this.turysta = turysta;
     }
 
-    public int getId_turysta_odznaka() {
+    public int getIdTurystaOdznaka() {
         return idTurystaOdznaka;
     }
 
-    public void setId_turysta_odznaka(int id_turysta_odznaka) {
-        this.idTurystaOdznaka = id_turysta_odznaka;
+    public void setIdTurystaOdznaka(int idTurystaOdznaka) {
+        this.idTurystaOdznaka = idTurystaOdznaka;
     }
 
     public Odznaka getOdznaka() {
