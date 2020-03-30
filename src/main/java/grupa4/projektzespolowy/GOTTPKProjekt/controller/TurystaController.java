@@ -84,17 +84,14 @@ public class TurystaController
 	public String updateformTurysta(Model model,Authentication authentication)
 	{
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof MyUserDetails) 
+		if (authentication != null)
 		{
-			  int numer = ((MyUserDetails)principal).getId();
-			  Turysta turysta = turystaServiceImpl.getOneById(numer);
-			  Uzytkownik uzytkownik = turysta.getUzytkownik();
-			  model.addAttribute("turysta", turysta);
-			  model.addAttribute("uzytkownik", uzytkownik);
-			  model.addAttribute("LoggedUser", authentication);
-			  //System.out.print(numer);
-		} 
+			Uzytkownik uzytkownik = uzytkownikServiceImpl.getLoggedUserDetails(authentication);
+			Turysta turysta = uzytkownik.getTurysta();
+			model.addAttribute("turysta", turysta);
+			model.addAttribute("uzytkownik", uzytkownik);
+			model.addAttribute("LoggedUser", authentication);
+		}
 		else 
 		{
 			System.out.print("Nie znaleziono takiego uzytkownika");
@@ -106,12 +103,10 @@ public class TurystaController
 	@GetMapping("/turysta/mojeKonto")
 	public String accountSettings(Model model,Authentication authentication){
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof MyUserDetails) 
+		if (authentication != null)
 		{
-			  int numer = ((MyUserDetails)principal).getId();
-			  Turysta turysta = turystaServiceImpl.getOneById(numer);
-			  Uzytkownik uzytkownik = turysta.getUzytkownik();
+			  Uzytkownik uzytkownik = uzytkownikServiceImpl.getLoggedUserDetails(authentication);
+			  Turysta turysta = uzytkownik.getTurysta();
 			  model.addAttribute("turysta", turysta);
 			  model.addAttribute("uzytkownik", uzytkownik);
 			  model.addAttribute("LoggedUser", authentication);
@@ -197,7 +192,7 @@ public class TurystaController
 		turystaServiceImpl.removeTurysta(idTurysta);
 
 		redirectAttributes.addFlashAttribute("wiadomosc", "Usunięto turyste pomyślnie");
-		return "redirect:/";
+		return "redirect:/turysci";
 	}
 
 
