@@ -62,7 +62,7 @@ public class TurystaController
 		return modelAndView;
 	}
 
-	/*
+	
 	@GetMapping("/turysci/updateForm")
 	public String updateformTurysta(@RequestParam(value="id") Integer idTurysta,
 									Model model,
@@ -75,27 +75,6 @@ public class TurystaController
 		Uzytkownik uzytkownik = turysta.getUzytkownik();
 		model.addAttribute("turysta", turysta);
 		model.addAttribute("uzytkownik", uzytkownik);
-
-		return "turysta/updateForm";
-	}
-	*/
-	
-	@GetMapping("/turysci/updateForm")
-	public String updateformTurysta(Model model,Authentication authentication)
-	{
-
-		if (authentication != null)
-		{
-			Uzytkownik uzytkownik = uzytkownikServiceImpl.getLoggedUserDetails(authentication);
-			Turysta turysta = uzytkownik.getTurysta();
-			model.addAttribute("turysta", turysta);
-			model.addAttribute("uzytkownik", uzytkownik);
-			model.addAttribute("LoggedUser", authentication);
-		}
-		else 
-		{
-			System.out.print("Nie znaleziono takiego uzytkownika");
-		}
 
 		return "turysta/updateForm";
 	}
@@ -117,7 +96,7 @@ public class TurystaController
 			System.out.print("Nie znaleziono takiego uzytkownika");
 		}
 		
-		return "turysta/kontoTurysty";
+		return "turysta/updateForm";
 	}
 	
 	
@@ -176,7 +155,7 @@ public class TurystaController
 
 		turystaServiceImpl.createTurysta(turysta);
 		redirectAttributes.addFlashAttribute("wiadomosc", "Zmiany zostały przyjęte pomyślnie");
-		return "redirect:/turysta/mojeKonto";
+		return "redirect:/turysci";
 	}
 
 	@GetMapping("/turysci/usun/{idTurysta}") // usuń turyste wraz z jego kontem użytkownika
