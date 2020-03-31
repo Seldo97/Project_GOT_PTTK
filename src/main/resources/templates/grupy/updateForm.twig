@@ -1,0 +1,24 @@
+{% extends '../formTemplate.twig' %}
+
+{% block title %}
+     Formularz Grup Górskich
+{% endblock %}
+
+{% block header %}
+    <h2>Formularz Grupy Górskiej</h2>
+{% endblock %}
+
+{% block form %}
+        <form id="signupForm" action="/grupy/update/{{ grupa.getIdGrupa}}" method="POST">
+        <fieldset>
+            <legend> </legend>
+            <div class="form-group">
+                <label for="nazwa">Nazwa</label>
+                <input type="text" class="form-control" id="nazwa" name="nazwa" value = {{ grupa.getNazwa }}>
+            </div>
+        </fieldset>
+        <br/>
+            <button type="submit" class="btn btn-info">Dodaj</button>
+    </form>
+
+{% endblock %}

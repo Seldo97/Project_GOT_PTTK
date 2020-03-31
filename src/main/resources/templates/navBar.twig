@@ -33,6 +33,12 @@
              <li class="nav-item">
                 <a class="nav-link" href="/wycieczki">Wycieczki</a>
             </li>
+            <li class="nav-item">
+                        <a class="nav-link" href="/regulamin">Regulamin</a>
+            </li>
+            <li class="nav-item">
+                        <a class="nav-link" href="/odcinki">Odcinki</a>
+            </li>
         </ul>
     	<ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown dropleft">
@@ -48,6 +54,8 @@
                         {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
                             <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
                             <a class="dropdown-item" href="/turystaodznaki/MojeOdznaki">Moje odznaki</a>
+                            <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
+                            <a class="dropdown-item" href="#">Moje odznaki</a>
                             <a class="dropdown-item" href="#">Moje wycieczki</a>
                             <a class="dropdown-item" href="#">Moja książeczka</a>
                         {% endif %}

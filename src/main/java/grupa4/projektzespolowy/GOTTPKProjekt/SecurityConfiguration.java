@@ -38,6 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/regulamin").permitAll()
+                .antMatchers("/odcinki").permitAll()
                 .antMatchers("/prevPage").permitAll()
                 .antMatchers("/panel").hasRole("administrator")
                 .antMatchers("/rejestracja/*").permitAll()
@@ -45,16 +47,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/mojeGrupy").hasAnyRole("administrator", "przodownik")
                 .antMatchers("/przodownicy", "/turysci", "/odznaki").hasAnyRole("USER")
                 .antMatchers("/przodownicy/dodaj", "/turysci/dodaj").permitAll()
+                .antMatchers("/turysta/mojeKonto","/turysci/updateForm","/turysci/updateForm","/turysci/update/{idTurysta}","/podpunkty").hasAnyRole("administrator", "turysta")
                 .antMatchers("/przodownicy/{idPrzodownik}/grupy", "/grupy/{idGrupa}/przodownicy").permitAll()
                 .antMatchers("/turysta/mojeKonto","/turysci/updateForm","/turysci/updateForm","/turysci/update/{idTurysta}").hasAnyRole("administrator", "turysta")
                 .antMatchers("/turystaodznaki/znajdzOdznakiTurysty").hasAnyRole("administrator", "przodownik")
                 .antMatchers("/turystaodznaki/MojeOdznaki").hasAnyRole("administrator", "turysta")
                 .antMatchers("/turystaodznaki/**").hasAnyRole("administrator", "przodownik")
-                .antMatchers("/przodownicy/**", "/turysci/**", "/odznaki/**").hasRole("administrator")
+                .antMatchers("/przodownicy/**", "/turysci/**", "/odznaki/**","/grupy/**", "/pasma/**", "/punkty/**", "/podpunkty/**").hasRole("administrator")
                 //.anyRequest().authenticated()
                 //.antMatchers("/przodownicy/**", "/turysci/**").hasRole("administrator")
                 .anyRequest().hasRole("administrator")
-                .and().formLogin().permitAll();
+                .and().formLogin().permitAll()
+                ;
+
+
     }
 //, "/punkty/**", "/pasma/**", "/grupy/**"
 //    @Override

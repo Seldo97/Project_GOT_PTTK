@@ -15,9 +15,6 @@ public class MainController {
     public String indexPage(ModelMap model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
-;
-        //System.out.println(exampleInt);
-
         return "index";
     }
 
@@ -27,6 +24,16 @@ public class MainController {
         model.addAttribute("LoggedUser", authentication);
 
         return "admin/panel";
+    }
+
+    @GetMapping({"/regulamin"})
+    public String regiulamin(ModelMap model, Authentication authentication) {
+
+        model.addAttribute("LoggedUser", authentication);
+        ;
+        //System.out.println(exampleInt);
+
+        return "regulamin/regulamin";
     }
 
 //    @GetMapping("/prevPage")

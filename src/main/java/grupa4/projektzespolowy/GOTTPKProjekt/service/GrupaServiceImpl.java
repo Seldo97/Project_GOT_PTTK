@@ -22,4 +22,10 @@ public class GrupaServiceImpl implements GrupaService{
 
     @Override
     public Grupa getOneByName(String name) { return this.grupaRepository.findGrupaByNazwa(name); }
+
+	@Override
+	public Grupa createGrupa(Grupa grupa) {return this.grupaRepository.save(grupa);}
+
+	@Override
+	public void deleteGrupa(Integer id) { this.grupaRepository.deleteById(id);	}
 }

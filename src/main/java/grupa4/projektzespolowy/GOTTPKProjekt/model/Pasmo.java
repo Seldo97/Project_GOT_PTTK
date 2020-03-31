@@ -25,6 +25,10 @@ public class Pasmo {
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
     private List<Punkt> punkt = new ArrayList<Punkt>();
+    
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
+    private List<PodPunkt> podpunkt = new ArrayList<PodPunkt>();
 
     public Pasmo() {
     }
