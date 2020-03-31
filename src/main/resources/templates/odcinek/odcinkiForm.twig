@@ -1,0 +1,35 @@
+{% extends '../formTemplate.twig' %}
+
+{% block title %}
+     Formularz Odznaki
+{% endblock %}
+
+{% block header %}
+    <h2>Formularz Odznaki</h2>
+{% endblock %}
+
+{% block form %}
+    {% if update == 1 %}
+        <form id="signupForm" action="/odznaki/update" method="POST">
+            <input type="hidden" name="idOdznaka" id="idOdznaka" value="{{ odznaka.getIdOdznaka }}" />
+    {% else %}
+        <form id="signupForm" action="/odznaki/dodaj" method="POST">
+    {% endif %}
+        <fieldset>
+            <legend> Zmień nazwę odznaki </legend>
+            <div class="form-group">
+                <label for="nazwa">Nazwa</label>
+                <input type="text" class="form-control" id="nazwa" name="nazwa" value="{{odznaka.getNazwa}}">
+            </div>
+
+        </fieldset>
+
+        <br/>
+        {% if update == 1 %}
+            <button type="submit" class="btn btn-info">Zmień</button>
+        {% else %}
+            <button type="submit" class="btn btn-info">Dodaj</button>
+        {% endif %}
+    </form>
+
+{% endblock %}

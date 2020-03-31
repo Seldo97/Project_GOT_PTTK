@@ -38,6 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/regulamin").permitAll()
+                .antMatchers("/odcinki").permitAll()
                 .antMatchers("/panel").hasRole("administrator")
                 .antMatchers("/rejestracja/*").permitAll()
                 .antMatchers("/grupy", "/pasma", "/punkty").permitAll()
@@ -51,7 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.anyRequest().authenticated()
                 //.antMatchers("/przodownicy/**", "/turysci/**").hasRole("administrator")
                 .anyRequest().hasRole("administrator")
-                .and().formLogin().permitAll();
+                .and().formLogin().permitAll()
+                ;
+
+
     }
 
 //    @Override

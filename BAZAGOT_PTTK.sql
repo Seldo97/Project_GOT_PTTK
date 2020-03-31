@@ -2,6 +2,8 @@ CREATE DATABASE GOT_PTTK;
 
 USE GOT_PTTK;
 
+
+
 CREATE TABLE Rola(
 	id_rola INT PRIMARY KEY IDENTITY(1,1),
 	nazwa VARCHAR(50) UNIQUE NOT NULL
@@ -69,7 +71,7 @@ CREATE TABLE Punkt
 (
 	id_punkt INT PRIMARY KEY IDENTITY(1,1),
 	nazwa VARCHAR(50) NOT NULL,
-	id_pasmo INT
+
 );
 
 CREATE TABLE Odcinek
@@ -79,6 +81,7 @@ CREATE TABLE Odcinek
 	id_punkt_koncowy INT NOT NULL,
 	punkty_wejscie INT,
 	punkty_powrot INT,
+	id_pasmo INT,
 	otwarty BIT
 );
 
@@ -181,8 +184,8 @@ ON DELETE CASCADE
 ON UPDATE CASCADE;
 GO
 
-ALTER TABLE dbo.Punkt 
-ADD CONSTRAINT FK_Punkt_Pasmo
+ALTER TABLE dbo.Odcinek 
+ADD CONSTRAINT FK_Odcinek_Pasmo
 FOREIGN KEY (id_pasmo)
 REFERENCES dbo.Pasmo(id_pasmo)
 ON DELETE CASCADE
@@ -314,11 +317,4 @@ REFERENCES dbo.Status_wycieczka(id_status_wycieczka)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 GO
-
-
-
-
-----------------------------
-
-
 
