@@ -13,7 +13,6 @@
             <th scope="col">Grupa</th>
             {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
-                <th scope="col"></th>
             {% endif %}
         </tr>
         </thead>
@@ -25,8 +24,12 @@
                 <td>{{ pasmo.getNazwa }}</td>
                 <td>{{ pasmo.grupa.getNazwa }}</td>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                    <td><a class="nav-link" href="/pasma/updateForm?id={{ pasmo.getIdPasmo}}">Edytuj</a></td>
-                    <td><a class="nav-link" href="/pasma/usun/{{ pasmo.getIdPasmo}}">Usuń</a></td>
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/pasma/updateForm?id={{ pasmo.getIdPasmo}}">✏️</a></abbr>
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/pasma/usun/{{ pasmo.getIdPasmo}}">🗑️</a></abbr>
+                        </div>
+                    </td>
                 {% endif %}
             </tr>
         {%  endfor %}

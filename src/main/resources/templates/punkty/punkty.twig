@@ -15,7 +15,6 @@
             <th scope="col">Po≥πczenia</th>
             {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
-                <th scope="col"></th>
             {% endif %}
         </tr>
         </thead>
@@ -29,8 +28,12 @@
                 <td>{{ punkt.pasmo.grupa.getNazwa }}</td>
                 <td><a class="nav-link" href="/podpunkty">szlaki</a></td>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                    <td><a class="nav-link" href="#">Edytuj</a></td>
-                    <td><a class="nav-link" href="#">Usu≈Ñ</a></td>
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="#">?</a></abbr>
+                            <abbr title="UsuÒ"><a class="btn btn-sm bg-transparent" href="#">??</a></abbr>
+                        </div>
+                    </td>
                 {% endif %}
             </tr>
         {%  endfor %}
