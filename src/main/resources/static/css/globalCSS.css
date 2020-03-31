@@ -30,3 +30,14 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+/*PASMA GÓRSKIE*/
+
+.carousel-inner a:hover{
+color: whitesmoke;
+
+}
+
+a:hover{
+    color:inherit;
+}

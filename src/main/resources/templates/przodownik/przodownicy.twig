@@ -14,10 +14,7 @@
                 <th scope="col">Telefon</th>
                 <th scope="col">Login</th>
                 <th scope="col">E-mail</th>
-
-                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                    <th scope="col"></th>
-                {% endif %}
+                <th scope="col"></th>
 
             </tr>
         </thead>
@@ -25,21 +22,24 @@
 
         {% for przodownik in przodownicy %}
         <tr>
-              <td>{{ przodownik.getIdPrzodownik }}</td>
-              <td>{{ przodownik.getImie }}</td>
-              <td>{{ przodownik.getNazwisko }}</td>
-              <td>{{ przodownik.getTelefon }}</td>
-                <td>{{ przodownik.uzytkownik.getLogin }}</td>
-              <td>{{ przodownik.uzytkownik.getEmail }}</td>
+            <td>{{ przodownik.getIdPrzodownik }}</td>
+            <td>{{ przodownik.getImie }}</td>
+            <td>{{ przodownik.getNazwisko }}</td>
+            <td>{{ przodownik.getTelefon }}</td>
+            <td>{{ przodownik.uzytkownik.getLogin }}</td>
+            <td>{{ przodownik.uzytkownik.getEmail }}</td>
 
-            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                <td class="text-right">
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <td class="text-right">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    <abbr title="Edytuj grupy górskie"><a class="btn btn-sm bg-transparent" href="/przodownicy/{{ przodownik.getIdPrzodownik }}/grupy">🏔️</a></abbr>
+                    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                         <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/przodownicy/form?id={{ przodownik.getIdPrzodownik }}">✏️</a></abbr>
                         <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">🗑️</a></abbr>
-                    </div>
-                </td>
-            {% endif %}
+                    {% endif %}
+                </div>
+            </td>
+
+
 
         </tr>
         {%  endfor %}

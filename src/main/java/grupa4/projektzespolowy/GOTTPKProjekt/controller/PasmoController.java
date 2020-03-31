@@ -110,4 +110,15 @@ public class PasmoController {
    		redirectAttributes.addFlashAttribute("wiadomosc", "Usunięto pasmo pomyślnie");
    		return "redirect:/pasma";
    	}
+
+    @GetMapping("/pasmaGrupy/{idGrupa}")
+    public ModelAndView getAllPasmoForGrupa(@PathVariable int idGrupa, Authentication authentication) {
+
+        ModelAndView modelAndView = new ModelAndView("pasma/pasmaGrupy");
+        modelAndView.addObject("pasma", pasmoServiceImpl.getAllPasmoByIdGrupa(idGrupa));
+        modelAndView.addObject("idGrupa", idGrupa);
+        modelAndView.addObject("LoggedUser", authentication);
+
+        return modelAndView;
+    }
 }

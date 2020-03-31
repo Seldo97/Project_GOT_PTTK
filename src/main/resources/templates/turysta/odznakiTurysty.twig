@@ -42,7 +42,7 @@
 
                     <input type="hidden" name="turysta" id="turysta" value="{{ idTurysta }}"/>
                     <div class="form-group">
-                        <select name="odznaka" class="form-control">
+                        <select name="odznaka" class="form-control" required>
                             <option value="">--Wybierz odznake--</option>
                             {% for odznaka in odznaki %}
                                 <option value={{odznaka.getIdOdznaka}}>"{{odznaka.getNazwa}}"</option>
