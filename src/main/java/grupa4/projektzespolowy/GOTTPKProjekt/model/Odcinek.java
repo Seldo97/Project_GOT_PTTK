@@ -11,14 +11,24 @@ public class Odcinek
     @Column(name = "id_odcinek")
     private int idOdcinek;
 
+    @Column(name="punkty_wejscie")
+    private Integer punktyWejscie;
+
+    @Column(name="punkty_powrot")
+    private Integer punktyPowrot;
+
     @ManyToOne
     @JoinColumn(name = "id_punkt_poczatkowy", referencedColumnName = "id_punkt")
 
-    private Punkt punktPoczatkowy;
+    private Punkt PunktPoczatkowy;
 
     @ManyToOne
     @JoinColumn(name = "id_punkt_koncowy", referencedColumnName = "id_punkt")
-    private Punkt punktKoncowy;
+    private Punkt PunktKoncowy;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
+    private Pasmo Pasmo;
 
     public Odcinek()
     {
@@ -26,42 +36,66 @@ public class Odcinek
     }
 
 
-    public Odcinek(Punkt punktPoczatkowy, Punkt punktKoncowy)
+
+
+    public grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo getPasmo() {
+        return Pasmo;
+    }
+
+    public Odcinek(Punkt punktPoczatkowy, Punkt punktKoncowy, Integer punktyWejscie, Integer punktyPowrot, Pasmo idPasmo)
     {
-        this.punktPoczatkowy = punktPoczatkowy ;
-        this.punktKoncowy = punktKoncowy ;
+        this.PunktPoczatkowy = punktPoczatkowy ;
+        this.PunktKoncowy = punktKoncowy ;
+        this.punktyWejscie = punktyWejscie;
+        this.punktyPowrot = punktyPowrot;
+        this.Pasmo = idPasmo;
     }
 
 
-    public int getIdOdcinek()
+
+
+    public Punkt getPunktPoczatkowy() {
+        return PunktPoczatkowy;
+    }
+    public Punkt getPunktKoncowy() {
+        return PunktKoncowy;
+    }
+    public Integer getPunktyWejscie()
+    {
+        return punktyWejscie;
+    }
+    public Integer getPunktyPowrot() { return punktyPowrot; }
+    public Integer getIdOdcinek()
     {
         return idOdcinek;
     }
+
     public void setIdOdcinek(int idOdcinek)
     {
         this.idOdcinek = idOdcinek;
     }
-    public Punkt getPunktPoczatkowy() {
-        return punktPoczatkowy;
-    }
-    public Punkt getPunktKoncowy() {
-        return punktKoncowy;
+    public void setPunktyWejscie(Integer punktyWejscie) { this.punktyWejscie = punktyWejscie; }
+
+    public void setPunktyPowrot(Integer punktyPowrot) { this.punktyPowrot = punktyPowrot; }
+
+    public void setPasmo(grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo pasmo) {
+        Pasmo = pasmo;
     }
 
     public void setPunktPoczatkowy(Punkt punkt)
     {
-        this.punktPoczatkowy = getPunktPoczatkowy();
+        this.PunktPoczatkowy = getPunktPoczatkowy();
     }
     public void setPunktKoncowy(Punkt punkt)
     {
-        this.punktKoncowy = getPunktKoncowy();
+        this.PunktKoncowy = getPunktKoncowy();
     }
 
 
     @Override
     public String toString()
     {
-        return "Odcinek [idOdcinek=" + idOdcinek + ", idPunktPoczatkowy=" + punktPoczatkowy + "idPunktKoncowy " + punktKoncowy +  "]";
+        return "Odcinek [idOdcinek=" + idOdcinek + ", idPunktPoczatkowy=" + PunktPoczatkowy + "idPunktKoncowy " + PunktKoncowy +  "]";
     }
 
 }
