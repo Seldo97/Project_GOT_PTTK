@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.ModelMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class MainController {
@@ -13,9 +15,6 @@ public class MainController {
     public String indexPage(ModelMap model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
-;
-        //System.out.println(exampleInt);
-
         return "index";
     }
 
@@ -37,5 +36,10 @@ public class MainController {
         return "regulamin/regulamin";
     }
 
+//    @GetMapping("/prevPage")
+//    public String goToPrevPage(HttpServletRequest request){
+//
+//        return "redirect:" + request.getHeader("Referer");
+//    }
 
 }

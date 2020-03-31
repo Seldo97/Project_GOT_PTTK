@@ -26,4 +26,10 @@ public class PasmoServiceImpl  implements PasmoService{
 
     @Override
     public void removePasmo(Integer id) { this.pasmoRepository.deleteById(id); }
+
+    @Override
+    public List<Pasmo> getAllPasmoByIdGrupa(int idGrupa){
+        List<Pasmo> pasmo = this.pasmoRepository.findAllByGrupa_IdGrupa(idGrupa);
+        return pasmo;
+    }
 }

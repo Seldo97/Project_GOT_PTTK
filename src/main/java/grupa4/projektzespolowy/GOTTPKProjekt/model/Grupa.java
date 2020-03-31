@@ -19,6 +19,10 @@ public class Grupa {
     @JoinColumn(name = "id_grupa", referencedColumnName = "id_grupa")
     private List<Pasmo> pasmo = new ArrayList<Pasmo>();
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_grupa", referencedColumnName = "id_grupa")
+    private List<GrupaPrzodownik> grupy = new ArrayList<GrupaPrzodownik>();
+
     public Grupa() {
     }
 
@@ -40,6 +44,22 @@ public class Grupa {
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
+    }
+
+    public List<Pasmo> getPasmo() {
+        return pasmo;
+    }
+
+    public void setPasmo(List<Pasmo> pasmo) {
+        this.pasmo = pasmo;
+    }
+
+    public List<GrupaPrzodownik> getGrupy() {
+        return grupy;
+    }
+
+    public void setGrupy(List<GrupaPrzodownik> grupy) {
+        this.grupy = grupy;
     }
 
     @Override

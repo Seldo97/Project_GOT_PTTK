@@ -24,8 +24,8 @@
                 <td>{{ grupa.getIdGrupa}}</td>
                 <td>{{ grupa.getNazwa }}</td>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                    <td><a class="nav-link" href="#">Edytuj</a></td>
-                    <td><a class="nav-link" href="#">Usuń</a></td>
+                    <td><a class="nav-link" href="/grupy/updateForm?id={{grupa.getIdGrupa}}">Edytuj</a></td>
+                    <td><a class="nav-link" href="/grupy/usun/{{ grupa.getIdGrupa}}">Usuń</a></td>
                 {% endif %}
             </tr>
         {%  endfor %}
@@ -33,7 +33,7 @@
         </tbody>
     </table>
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-        <a class="btn btn-info" href="#" role="button">Dodaj</a>
+        <a class="btn btn-info" href="/grupy/addForm" role="button">Dodaj</a>
     {% endif %}
 
 {% endblock %}

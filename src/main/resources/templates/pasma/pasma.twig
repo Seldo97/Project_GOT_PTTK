@@ -25,8 +25,8 @@
                 <td>{{ pasmo.getNazwa }}</td>
                 <td>{{ pasmo.grupa.getNazwa }}</td>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                    <td><a class="nav-link" href="#">Edytuj</a></td>
-                    <td><a class="nav-link" href="#">Usuń</a></td>
+                    <td><a class="nav-link" href="/pasma/updateForm?id={{ pasmo.getIdPasmo}}">Edytuj</a></td>
+                    <td><a class="nav-link" href="/pasma/usun/{{ pasmo.getIdPasmo}}">Usuń</a></td>
                 {% endif %}
             </tr>
         {%  endfor %}
@@ -34,7 +34,7 @@
         </tbody>
     </table>
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-        <a class="btn btn-info" href="#" role="button">Dodaj</a>
+        <a class="btn btn-info" href="/pasma/addForm" role="button">Dodaj</a>
     {% endif %}
 
 {% endblock %}

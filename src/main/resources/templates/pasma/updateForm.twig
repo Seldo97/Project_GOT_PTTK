@@ -1,0 +1,34 @@
+{% extends '../formTemplate.twig' %}
+
+{% block title %}
+     Formularz Pasma
+{% endblock %}
+
+{% block header %}
+    <h2>Formularz Pasma</h2>
+{% endblock %}
+
+{% block form %}
+   <form id="signupForm" action="/pasma/update/{{pasmo.getIdPasmo }}" method="POST">
+        <fieldset>
+            <legend></legend>
+            <div class="form-group">
+                <label for="nazwaPasmo">Pasmo</label>
+                <input type="text" class="form-control" id="nazwaPasmo" name="nazwaPasmo" value="{{pasmo.getNazwa}}">
+            </div>
+            <div class="form-group">
+            <select class="form-control" id="selectGrupa" name="selectGrupa">
+                      {% for gr in grupy %}
+                      {% if grupa in gr %}
+                      		<option value="" selected disabled hidden>{{gr.getNazwa}}</option>
+                        {% endif %}
+                  			<option value="{{gr.getIdGrupa}}" >{{gr.getNazwa}}</option>
+                      {% endfor %}
+				</select>
+			</div>
+        </fieldset>
+        <br/>
+            <button type="submit" class="btn btn-info">Dodaj</button>
+    </form>
+
+{% endblock %}

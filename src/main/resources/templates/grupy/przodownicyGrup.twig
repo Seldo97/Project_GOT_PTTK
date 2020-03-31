@@ -1,0 +1,41 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Przodownicy {{ grupa }}{% endblock %}
+{% block header %}
+    Przodownicy grupy {{ grupa.getNazwa }}
+{% endblock %}
+{% block main %}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" width="20px">#</th>
+                <th scope="col">Imie i nazwisko</th>
+                <th scope="col">Telefon</th>
+                <th scope="col">E-mail</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for przodownikGrupy in przodownicyGrupy %}
+        <tr>
+            <td>{{ przodownikGrupy.przodownik.getIdPrzodownik }}</td>
+            <td>{{ przodownikGrupy.przodownik.getImie }} {{ przodownikGrupy.przodownik.getNazwisko }}</td>
+            <td>{{ przodownikGrupy.przodownik.getTelefon }}</td>
+            <td>{{ przodownikGrupy.przodownik.uzytkownik.getEmail }}</td>
+
+            <td class="text-right">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    <abbr title="Grupy górskie {{ przodownikGrupy.przodownik.getImie }} {{ przodownikGrupy.przodownik.getNazwisko }}">
+                        <a class="btn btn-sm bg-transparent" href="/przodownicy/{{ przodownikGrupy.przodownik.getIdPrzodownik }}/grupy">🏔️</a>
+                    </abbr>
+                </div>
+            </td>
+
+        </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}

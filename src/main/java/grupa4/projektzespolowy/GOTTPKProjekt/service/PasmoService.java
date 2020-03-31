@@ -13,4 +13,6 @@ public interface PasmoService {
     Pasmo getOneById(Integer id);
 
     void removePasmo(Integer id);
+
+    List<Pasmo> getAllPasmoByIdGrupa(int idGrupa);
 }

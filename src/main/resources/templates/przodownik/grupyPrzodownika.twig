@@ -1,0 +1,63 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Grupy przodownika{% endblock %}
+{% block header %}
+    Grupy przodownika: {{ przodownik.getImie }} {{ przodownik.getNazwisko }}
+{% endblock %}
+{% block main %}
+
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" width="20px">#</th>
+            <th scope="col">Grupa górska</th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for grupaPrzodownika in grupyPrzodownika %}
+            <tr>
+                <td>{{ grupaPrzodownika.getGrupa.getIdGrupa }}</td>
+                <td>{{ grupaPrzodownika.getGrupa.getNazwa }}</td>
+
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/grupaPrzodownik/usun/{{ grupaPrzodownika.getIdGrupaPrzodownik }}">🗑️</a></abbr>
+                        </div>
+                    </td>
+                {% endif %}
+
+            </tr>
+
+        {%  endfor %}
+        </tbody>
+    </table>
+
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities  %}
+
+        <div class="row">
+            <div class="col-12 col-md-6 mt-3" id="form">
+
+                <form id="addForm" action="/grupaPrzodownik/przypiszGrupe" method="POST">
+
+                    <input type="hidden" name="przodownik" id="przodownik" value="{{ idPrzodownik }}"/>
+                    <div class="form-group">
+                        <select name="grupa" class="form-control" required>
+                            <option value="">--Wybierz grupę--</option>
+                            {% for grupa in grupy %}
+                                <option value={{grupa.getIdGrupa}}>"{{grupa.getNazwa}}"</option>
+                            {%  endfor %}
+                        </select>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-info">Przyznaj odznakę</button>
+                </form>
+
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
