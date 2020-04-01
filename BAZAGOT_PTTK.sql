@@ -74,6 +74,8 @@ CREATE TABLE Punkt
 
 );
 
+
+
 CREATE TABLE Odcinek
 (
 	id_odcinek INT PRIMARY KEY IDENTITY(1,1),
