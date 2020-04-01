@@ -26,24 +26,24 @@ public class OdcinekController
 
         return "odcinek/odcinki";
     }
-    @PostMapping("/odcinki/dodaj")
-    public String createOdcinek(
-            @RequestParam(value="punkty_wejscie") Integer punktyWejscie,
-            @RequestParam(value="punkty_powrot") Integer punktyPowrot,
-            @RequestParam(value="otwarty") Boolean otwarty,
-            @PathVariable Integer idPasmo,
-            @PathVariable Integer idPunktPoczatkowy,
-            @PathVariable Integer idPunktKoncowy,
-            RedirectAttributes redirectAttributes,
-            Authentication authentication
-    {
-
-        Odcinek odcinek = new Odcinek( punktPoczatkowy, punktKoncowy);
-        odcinekServiceImpl.createOdcinek(odcinek); // puść inserta do bazy
-
-        redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
-
-        return "redirect:/odcinki";
-    }
+//    @PostMapping("/odcinki/dodaj")
+//    public String createOdcinek(
+//            @RequestParam(value="punkty_wejscie") Integer punktyWejscie,
+//            @RequestParam(value="punkty_powrot") Integer punktyPowrot,
+//            @RequestParam(value="otwarty") Boolean otwarty,
+//            @PathVariable Integer idPasmo,
+//            @PathVariable Integer idPunktPoczatkowy,
+//            @PathVariable Integer idPunktKoncowy,
+//            RedirectAttributes redirectAttributes,
+//            Authentication authentication
+//    {
+//
+//        Odcinek odcinek = new Odcinek( punktPoczatkowy, punktKoncowy);
+//        odcinekServiceImpl.createOdcinek(odcinek); // puść inserta do bazy
+//
+//        redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
+//
+//        return "redirect:/odcinki";
+//    }
 }
 

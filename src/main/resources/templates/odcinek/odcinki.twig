@@ -10,18 +10,22 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col" width="20px">#</th>
-                <th scope="col">Nazwa</th>
-                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                <th scope="col"></th>
-                {% endif %}
+                <th scope="col">Punkt początkowy</th>
+                <th scope="col">Punkt końcowy</th>
+
+                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                                <th scope="col"></th>
+                                {% endif %}
             </tr>
         </thead>
         <tbody>
 
         {% for odcinek in odcinki %}
         <tr>
-              <td>{{ odcinek.getIdOcinek}}</td>
-              <td>{{ odcinek.getIdOcinek}}</td>
+
+              <td>{{ odcinek.PunktPoczatkowy.nazwa}}</td>
+              <td>{{ odcinek.PunktKoncowy.nazwa}}</td>
+               <td>{{ odcinek.PunktPoczatkowy.Pasmo.nazwa}}</td>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
