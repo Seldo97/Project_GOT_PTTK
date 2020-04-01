@@ -17,7 +17,9 @@
                 <input type="text" class="form-control" id="nazwaPasmo" name="nazwaPasmo">
             </div>
             <div class="form-group">
-            <select class="form-control" id="selectGrupa" name="selectGrupa">
+                <label for="selectGrupa">Grupa</label>
+            <select class="form-control" id="selectGrupa" name="selectGrupa" required>
+                <option value="">--Wybierz Grupę--</option>
                       {% for gr in grupy %}
                   			<option value="{{gr.getIdGrupa}}" >{{gr.getNazwa}}</option>
                       {% endfor %}

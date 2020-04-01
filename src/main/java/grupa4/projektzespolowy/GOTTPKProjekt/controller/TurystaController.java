@@ -96,7 +96,7 @@ public class TurystaController
 			System.out.print("Nie znaleziono takiego uzytkownika");
 		}
 		
-		return "turysta/updateForm";
+		return "turysta/kontoTurysty";
 	}
 	
 	
