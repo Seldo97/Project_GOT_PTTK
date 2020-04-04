@@ -70,17 +70,19 @@ CREATE TABLE Pasmo
 CREATE TABLE Punkt
 (
 	id_punkt INT PRIMARY KEY IDENTITY(1,1),
-	nazwa VARCHAR(50) NOT NULL,
+	nazwa VARCHAR(100) NOT NULL,
 
 );
+
+
 
 CREATE TABLE Odcinek
 (
 	id_odcinek INT PRIMARY KEY IDENTITY(1,1),
 	id_punkt_poczatkowy INT NOT NULL,
 	id_punkt_koncowy INT NOT NULL,
-	punkty_wejscie INT,
-	punkty_powrot INT,
+	punkty_od INT,
+	punkty_do INT,
 	id_pasmo INT,
 	otwarty BIT
 );
