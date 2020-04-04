@@ -30,15 +30,17 @@ public class OdznakaController {
 
         odznakaServiceImpl.createOdznaka(odznaka); // puść inserta do bazy
 
-        redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
+        redirectAttributes.addFlashAttribute("success_msg", "Dodano wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 
         return "redirect:/odznaki";
     }
 
     @GetMapping("/odznaki/usun/{idOdznaka}")
-    public String removeOdznaka(@PathVariable Integer idOdznaka) {
+    public String removeOdznaka(@PathVariable Integer idOdznaka,
+                                RedirectAttributes redirectAttributes) {
 
         odznakaServiceImpl.removeOdznaka(idOdznaka);
+        redirectAttributes.addFlashAttribute("success_msg", "Usunięto wiersz pomyślnie!");
 
         return "redirect:/odznaki";
     }

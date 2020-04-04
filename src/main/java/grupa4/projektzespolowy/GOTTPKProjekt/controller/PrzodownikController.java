@@ -52,7 +52,7 @@ public class PrzodownikController {
         przodownikServiceImpl.createPrzodownik(przodownik); // puść inserta do bazy
         // UWAGA! kolejność operacji jest ważna.
 
-        redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
+        redirectAttributes.addFlashAttribute("success_msg", "Dodano wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 
         if(authentication != null)
             return "redirect:/przodownicy";

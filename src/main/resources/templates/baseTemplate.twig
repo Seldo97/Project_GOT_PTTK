@@ -35,6 +35,23 @@
     {% include 'navBar.twig' %}
 
     <div class="container pt-5 pb-5" style="display: none">
+
+        {% if success_msg is defined %}
+            <div class="alert alert-success" role="alert" style='display:none;'>
+                {{ success_msg }}
+            </div>
+        {% endif %}
+        {% if error_msg is defined %}
+            <div class="alert alert-danger" role="alert" style='display:none;'>
+                {{ error_msg }}
+            </div>
+        {% endif %}
+        {% if info_msg is defined %}
+            <div class="alert alert-info" role="alert" style='display:none;'>
+                {{ info_msg }}
+            </div>
+        {% endif %}
+
         {{ wiadomosc }}
 
             <header class="mb-1">

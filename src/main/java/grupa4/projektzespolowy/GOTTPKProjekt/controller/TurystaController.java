@@ -122,7 +122,7 @@ public class TurystaController
 		// UWAGA! kolejność operacji jest ważna.
 
 
-		redirectAttributes.addFlashAttribute("wiadomosc", "Dodane turyste pomyślnie");
+		redirectAttributes.addFlashAttribute("success_msg", "Dodane turyste pomyślnie");
 		if(authentication != null)
 			return "redirect:/turysci";
 		else
@@ -154,7 +154,7 @@ public class TurystaController
 		turysta.getUzytkownik().setEmail(email);
 
 		turystaServiceImpl.createTurysta(turysta);
-		redirectAttributes.addFlashAttribute("wiadomosc", "Zmiany zostały przyjęte pomyślnie");
+		redirectAttributes.addFlashAttribute("success_msg", "Zmiany zostały przyjęte pomyślnie");
 		return "redirect:/turysci";
 	}
 
@@ -170,7 +170,7 @@ public class TurystaController
 		uzytkownikServiceImpl.removeUzytkownik(uzytkownik.getIdUzytkownik()); // usuwam użytkownika i od razu kaskadowo usuwa się turysta.
 		turystaServiceImpl.removeTurysta(idTurysta);
 
-		redirectAttributes.addFlashAttribute("wiadomosc", "Usunięto turyste pomyślnie");
+		redirectAttributes.addFlashAttribute("success_msg", "Usunięto turyste pomyślnie");
 		return "redirect:/";
 	}
 
