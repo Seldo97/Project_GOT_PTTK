@@ -21,18 +21,18 @@
 {#                    <a class="nav-link" href="/turysci">Turysci</a>#}
 {#                </li>#}
 {#            {% endif %}#}
-            <li class="nav-item">
-                <a class="nav-link" href="/ksiazeczki">Ksiazeczki</a>
-            </li>
-             <li class="nav-item">
-                <a class="nav-link" href="/zdjecia">Zdjecia</a>
-            </li>
-             <li class="nav-item">
-                <a class="nav-link" href="/ksiazeczkiWycieczki">Ksiazeczka Wycieczki</a>
-            </li>
-             <li class="nav-item">
-                <a class="nav-link" href="/wycieczki">Wycieczki</a>
-            </li>
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="/ksiazeczki">Ksiazeczki</a>#}
+{#            </li>#}
+{#             <li class="nav-item">#}
+{#                <a class="nav-link" href="/zdjecia">Zdjecia</a>#}
+{#            </li>#}
+{#             <li class="nav-item">#}
+{#                <a class="nav-link" href="/ksiazeczkiWycieczki">Ksiazeczka Wycieczki</a>#}
+{#            </li>#}
+{#             <li class="nav-item">#}
+{#                <a class="nav-link" href="/wycieczki">Wycieczki</a>#}
+{#            </li>#}
             <li class="nav-item">
                         <a class="nav-link" href="/regulamin">Regulamin</a>
             </li>
@@ -54,10 +54,7 @@
                         {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
                             <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
                             <a class="dropdown-item" href="/turystaodznaki/MojeOdznaki">Moje odznaki</a>
-                            <a class="dropdown-item" href="/turysta/mojeKonto">Moje konto</a>
-                            <a class="dropdown-item" href="#">Moje odznaki</a>
-                            <a class="dropdown-item" href="#">Moje wycieczki</a>
-                            <a class="dropdown-item" href="#">Moja książeczka</a>
+                            <a class="dropdown-item" href="/ksiazeczka/MojaKsiazeczka">Moja książeczka</a>
                         {% endif %}
                          {% if 'ROLE_przodownik' in LoggedUser.getAuthorities %}
                             <a class="dropdown-item" href="#">Moje konto</a>

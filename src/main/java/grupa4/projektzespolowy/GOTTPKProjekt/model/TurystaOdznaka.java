@@ -1,6 +1,8 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TurystaOdznaka")
@@ -17,6 +19,10 @@ public class TurystaOdznaka {
     @ManyToOne
     @JoinColumn(name = "id_turysta", referencedColumnName = "id_turysta")
     private Turysta turysta;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_turysta_odznaka", referencedColumnName = "id_turysta_odznaka")
+    private List<Wycieczka> wycieczki = new ArrayList<Wycieczka>();
 
     public TurystaOdznaka() {}
 
@@ -53,6 +59,14 @@ public class TurystaOdznaka {
 
     public void setTurysta(Turysta turysta) {
         this.turysta = turysta;
+    }
+
+    public List<Wycieczka> getWycieczki() {
+        return wycieczki;
+    }
+
+    public void setWycieczki(List<Wycieczka> wycieczki) {
+        this.wycieczki = wycieczki;
     }
 
     @Override

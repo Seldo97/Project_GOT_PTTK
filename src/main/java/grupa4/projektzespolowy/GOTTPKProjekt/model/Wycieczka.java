@@ -17,95 +17,135 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Wycieczka")
-public class Wycieczka 
-{
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "id_wycieczka")
-	    private int idWycieczka;
-	   
-	    @ManyToOne
-	    @JoinColumn(name = "id_turysta", referencedColumnName = "id_turysta")
-	    private Turysta turysta;
-	    
-	    @Temporal(value = TemporalType.DATE)
-	    @Column(name = "dataod")
-	    private Date dataOd;
-	    
-	    @Temporal(value = TemporalType.DATE)
-	    @Column(name = "datado")
-	    private Date dataDo;
-	    
-	    @Column(name = "punkty")
-	    private int punkty;
-	    
-	    @OneToMany(cascade = CascadeType.PERSIST)
-		@JoinColumn(name = "id_zdjecie_wycieczka")
-	    private  List<ZdjecieWycieczka> zdjecieWycieczka;
-	    
-	    public Wycieczka()
-	    {
-	    	
-	    }
+@Table(name = "Wycieczka")
 
-		public Wycieczka(Turysta turysta, Date dataOd, Date dataDo, int punkty) 
-		{
-			this.turysta = turysta;
-			this.dataOd = dataOd;
-			this.dataDo = dataDo;
-			this.punkty = punkty;
-		}
+public class Wycieczka {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_wycieczka")
+    private int idWycieczka;
 
-		public int getIdWycieczka() {
-			return idWycieczka;
-		}
+    @ManyToOne
+    @JoinColumn(name = "id_ksiazeczka", referencedColumnName = "id_ksiazeczka")
+    private Ksiazeczka ksiazeczka;
 
-		public void setIdWycieczka(int idWycieczka) {
-			this.idWycieczka = idWycieczka;
-		}
+    @Column(name = "opis")
+    private String opis;
 
-		public Turysta getTurysta() {
-			return turysta;
-		}
+    @Temporal(value = TemporalType.DATE)
+    @Column(name = "data_od")
+    private Date dataOd;
 
-		public void setTurysta(Turysta turysta) {
-			this.turysta = turysta;
-		}
+    @Temporal(value = TemporalType.DATE)
+    @Column(name = "data_do")
+    private Date dataDo;
 
-		public Date getDataOd() {
-			return dataOd;
-		}
+    @Column(name = "suma_punktow")
+    private int sumaPunktow;
 
-		public void setDataOd(Date dataOd) {
-			this.dataOd = dataOd;
-		}
+    @Column(name = "zatwierdzona")
+    private int zatwierdzona;
 
-		public Date getDataDo() {
-			return dataDo;
-		}
+    @ManyToOne
+    @JoinColumn(name = "id_turysta_odznaka", referencedColumnName = "id_turysta_odznaka")
+    private TurystaOdznaka turystaOdznaka;
 
-		public void setDataDo(Date dataDo) {
-			this.dataDo = dataDo;
-		}
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_wycieczka")
+    private List<ZdjecieWycieczka> zdjecieWycieczka;
 
-		public int getPunkty() {
-			return punkty;
-		}
+    public Wycieczka() {
 
-		public void setPunkty(int punkty) {
-			this.punkty = punkty;
-		}
+    }
 
-		@Override
-		public String toString() {
-			return "Wycieczka [idWycieczka=" + idWycieczka + ", turysta=" + turysta + ", dataOd=" + dataOd + ", dataDo="
-					+ dataDo + ", punkty=" + punkty + "]";
-		}
-		
-		
-		
-		
-		
-	    
+    public Wycieczka(Ksiazeczka ksiazeczka, String opis, Date dataOd, Date dataDo, int zatwierdzona, int sumaPunktow) {
+        this.ksiazeczka = ksiazeczka;
+        this.opis = opis;
+        this.dataOd = dataOd;
+        this.dataDo = dataDo;
+        this.zatwierdzona = zatwierdzona;
+        this.sumaPunktow = sumaPunktow;
+    }
+
+    public int getIdWycieczka() {
+        return idWycieczka;
+    }
+
+    public void setIdWycieczka(int idWycieczka) {
+        this.idWycieczka = idWycieczka;
+    }
+
+    public Ksiazeczka getKsiazeczka() {
+        return ksiazeczka;
+    }
+
+    public void setKsiazeczka(Ksiazeczka ksiazeczka) {
+        this.ksiazeczka = ksiazeczka;
+    }
+
+    public List<ZdjecieWycieczka> getZdjecieWycieczka() {
+        return zdjecieWycieczka;
+    }
+
+    public void setZdjecieWycieczka(List<ZdjecieWycieczka> zdjecieWycieczka) {
+        this.zdjecieWycieczka = zdjecieWycieczka;
+    }
+
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public Date getDataOd() {
+        return dataOd;
+    }
+
+    public void setDataOd(Date dataOd) {
+        this.dataOd = dataOd;
+    }
+
+    public Date getDataDo() {
+        return dataDo;
+    }
+
+    public void setDataDo(Date dataDo) {
+        this.dataDo = dataDo;
+    }
+
+    public int getPunkty() {
+        return sumaPunktow;
+    }
+
+    public void setPunkty(int sumaPunktow) {
+        this.sumaPunktow = sumaPunktow;
+    }
+
+    public int getSumaPunktow() {
+        return sumaPunktow;
+    }
+
+    public void setSumaPunktow(int sumaPunktow) {
+        this.sumaPunktow = sumaPunktow;
+    }
+
+    public int getZatwierdzona() {
+        return zatwierdzona;
+    }
+
+    public void setZatwierdzona(int zatwierdzona) {
+        this.zatwierdzona = zatwierdzona;
+    }
+
+    public TurystaOdznaka getTurystaOdznaka() {
+        return turystaOdznaka;
+    }
+
+    public void setTurystaOdznaka(TurystaOdznaka turystaOdznaka) {
+        this.turystaOdznaka = turystaOdznaka;
+    }
+
+
 }

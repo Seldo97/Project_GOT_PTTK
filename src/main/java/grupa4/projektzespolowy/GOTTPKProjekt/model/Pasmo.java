@@ -14,9 +14,8 @@ public class Pasmo {
     @Column(name = "id_pasmo")
     private int idPasmo;
 
-    @Column(name = "nazwa", nullable=true, length=50)
+    @Column(name = "nazwa", nullable = true, length = 50)
     private String nazwa;
-
 
     @ManyToOne
     @JoinColumn(name = "id_grupa", referencedColumnName = "id_grupa")
@@ -25,7 +24,7 @@ public class Pasmo {
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
     private List<Punkt> punkt = new ArrayList<Punkt>();
-    
+
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
     private List<PodPunkt> podpunkt = new ArrayList<PodPunkt>();

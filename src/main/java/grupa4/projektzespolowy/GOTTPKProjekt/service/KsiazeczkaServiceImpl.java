@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,4 +29,9 @@ public class KsiazeczkaServiceImpl implements KsiazeczkaService
 
 	@Override
 	public void removeKsiazeczka(Integer id) {this.ksiazeczkaRepository.deleteById(id);}
+
+	@Override
+	public Ksiazeczka getOneByTurysta(Turysta turysta) {
+		return this.ksiazeczkaRepository.getByTurysta(turysta);
+	}
 }

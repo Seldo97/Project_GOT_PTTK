@@ -1,0 +1,63 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Moja książeczka{% endblock %}
+{% block header %}
+    {% if ksiazeczka is null %}
+        Nie posiadasz książeczki. Utwórz swoją książeczkę turysty.
+    {% else %}
+        <strong>{{ turysta.getImie }} {{ turysta.getNazwisko }} 📓</strong>
+    {% endif %}
+{% endblock %}
+{% block main %}
+
+    {% if ksiazeczka is null %}
+        <form id="addForm" action="/ksiazeczka/stworz" method="POST">
+            <input type="hidden" id="turysta" name="turysta" value="{{ turysta.getIdTurysta }}"/>
+            <input type="hidden" id="sumaPunktow" name="sumaPunktow" value="0"/>
+            <input type="hidden" id="zgloszona" name="zgloszona" value="0"/>
+
+            <button type="submit" class="btn btn-info">Utwórz 📓</button>
+        </form>
+    {% else %}
+
+        <h3>Zdobyte punkty: {{ ksiazeczka.getSumaPunktow }}</h3>
+        <h3 class="mt-5">Przegląd moich wycieczek:</h3>
+
+        <table id="myTable" class="table table-striped align-middle table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" width="20px">#</th>
+                <th scope="col">Opis</th>
+                <th scope="col">Data od</th>
+                <th scope="col">Data do</th>
+                <th scope="col">Suma pkt</th>
+                <th scope="col">Zatwierdzona</th>
+
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for wycieczka in wycieczki %}
+                <tr>
+                    <td>{{ wycieczka.getOpis}}</td>
+                    <td>{{ wycieczka.getDataOd }}</td>
+                    <td>{{ wycieczka.getDataDo }}</td>
+                    <td>{{ wycieczka.getSumaPunktow }}</td>
+                    <td>{{ wycieczka.getZatwierdzona }}</td>
+                        <td class="text-right">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <abbr title="Dokumentacja"><a class="btn btn-sm bg-transparent" href="#">📷</a></abbr>
+                                <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="#">✏</a></abbr>
+                                <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="#">🗑️</a></abbr>
+                            </div>
+                        </td>
+                </tr>
+            {%  endfor %}
+
+            </tbody>
+        </table>
+            <a class="btn btn-info" href="/wycieczka/form" role="button">Utwórz nową wycieczkę 🏕️</a>
+    {% endif %}
+
+{% endblock %}

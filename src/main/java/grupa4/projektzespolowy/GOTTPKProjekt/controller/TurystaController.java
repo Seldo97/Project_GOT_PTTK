@@ -171,7 +171,7 @@ public class TurystaController
 		turystaServiceImpl.removeTurysta(idTurysta);
 
 		redirectAttributes.addFlashAttribute("success_msg", "Usunięto turyste pomyślnie");
-		return "redirect:/";
+		return "redirect:/turysci";
 	}
 
 
