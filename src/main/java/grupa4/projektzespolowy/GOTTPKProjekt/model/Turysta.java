@@ -35,7 +35,7 @@ public class Turysta {
     @JoinColumn(name = "id_turysta", referencedColumnName = "id_turysta")
     private List<TurystaOdznaka> turystaOdznaka = new ArrayList<TurystaOdznaka>();
 
-    @OneToOne(mappedBy = "turysta")
+    @OneToOne(mappedBy = "turysta", cascade = CascadeType.ALL)
     private Ksiazeczka ksiazeczka;
 
 

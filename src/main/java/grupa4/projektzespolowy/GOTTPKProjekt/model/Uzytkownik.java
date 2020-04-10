@@ -40,7 +40,7 @@ public class Uzytkownik
 												// W tym wypadku Przodownik odwołuje się do uzytkownika)
 	private Przodownik przodownik;
 
-	@OneToOne(mappedBy = "Uzytkownik")
+	@OneToOne(mappedBy = "Uzytkownik", cascade = CascadeType.ALL)
 	private Turysta turysta;
 
 

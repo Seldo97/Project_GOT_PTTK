@@ -23,7 +23,7 @@ public class Ksiazeczka
 	@Column(name = "zgloszona")
 	private int zgloszona;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_ksiazeczka", referencedColumnName = "id_ksiazeczka")
 	private List<Wycieczka> wycieczki = new ArrayList<Wycieczka>();
 

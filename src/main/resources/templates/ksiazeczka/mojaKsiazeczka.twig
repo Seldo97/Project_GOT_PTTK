@@ -40,16 +40,22 @@
 
             {% for wycieczka in wycieczki %}
                 <tr>
-                    <td>{{ wycieczka.getOpis}}</td>
+                    <td>{{ wycieczka.getIdWycieczka }}</td>
+                    <td><div style='max-height: 65px; width: 135px; word-wrap: break-word; overflow-x: auto;'>{{ wycieczka.getOpis}}</div></td>
                     <td>{{ wycieczka.getDataOd }}</td>
                     <td>{{ wycieczka.getDataDo }}</td>
                     <td>{{ wycieczka.getSumaPunktow }}</td>
-                    <td>{{ wycieczka.getZatwierdzona }}</td>
+                    {% if  wycieczka.getZatwierdzona == 0 %}
+                        <td>Nie</td>
+                    {% else %}
+                        <td>Tak</td>
+                    {% endif %}
                         <td class="text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <abbr title="Trasy"><a class="btn btn-sm bg-transparent" href="#">👣</a></abbr>
                                 <abbr title="Dokumentacja"><a class="btn btn-sm bg-transparent" href="#">📷</a></abbr>
-                                <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="#">✏</a></abbr>
-                                <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="#">🗑️</a></abbr>
+                                <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/wycieczka/form/{{ ksiazeczka.getIdKsiazeczka }}/{{ wycieczka.getIdWycieczka }}/1">✏️</a></abbr>
+                                <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/wycieczka/usun/{{ wycieczka.getIdWycieczka }}">🗑️</a></abbr>
                             </div>
                         </td>
                 </tr>
@@ -57,7 +63,7 @@
 
             </tbody>
         </table>
-            <a class="btn btn-info" href="/wycieczka/form" role="button">Utwórz nową wycieczkę 🏕️</a>
+            <a class="btn btn-info" href="/wycieczka/form/{{ ksiazeczka.getIdKsiazeczka }}" role="button">Utwórz nową wycieczkę 🏕️</a>
     {% endif %}
 
 {% endblock %}

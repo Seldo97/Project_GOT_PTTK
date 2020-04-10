@@ -1,5 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -25,20 +27,22 @@ public class Wycieczka {
     @Column(name = "id_wycieczka")
     private int idWycieczka;
 
-    @ManyToOne
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_ksiazeczka", referencedColumnName = "id_ksiazeczka")
     private Ksiazeczka ksiazeczka;
 
     @Column(name = "opis")
     private String opis;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(value = TemporalType.DATE)
     @Column(name = "data_od")
-    private Date dataOd;
+    private java.util.Date dataOd;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(value = TemporalType.DATE)
     @Column(name = "data_do")
-    private Date dataDo;
+    private java.util.Date dataDo;
 
     @Column(name = "suma_punktow")
     private int sumaPunktow;
@@ -50,7 +54,7 @@ public class Wycieczka {
     @JoinColumn(name = "id_turysta_odznaka", referencedColumnName = "id_turysta_odznaka")
     private TurystaOdznaka turystaOdznaka;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_wycieczka")
     private List<ZdjecieWycieczka> zdjecieWycieczka;
 
