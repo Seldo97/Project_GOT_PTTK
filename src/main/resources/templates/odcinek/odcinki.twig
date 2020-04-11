@@ -5,38 +5,62 @@
     Odcinki
 {% endblock %}
 {% block main %}
-    {{siema}}
     <table id="myTable" class="table table-striped align-middle table-sm">
         <thead class="thead-dark">
-            <tr>
-                <th scope="col" width="20px">#</th>
-                <th scope="col">Nazwa</th>
-                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+        <tr>
+            <th scope="col" width="20px">#</th>
+            <th scope="col">Punkt początkowy</th>
+            <th scope="col"></th>
+            <th scope="col">Punkt końcowy</th>
+            <th scope="col" width="50px">Punktacja</th>
+            <th scope="col">Otwarty</th>
+            <th scope="col">Pasmo</th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
-                {% endif %}
-            </tr>
+            {% endif %}
+        </tr>
         </thead>
         <tbody>
 
         {% for odcinek in odcinki %}
-        <tr>
-              <td>{{ odcinek.getIdOcinek}}</td>
-              <td>{{ odcinek.getIdOcinek}}</td>
+            <tr>
+                <td>{{ odcinek.getIdOdcinek }}</td>
+                <td>[{{ odcinek.getPunktPoczatkowy.getIdpunkt }}] <strong>{{ odcinek.getPunktPoczatkowy.getNazwa }}</strong></td>
+                {% if odcinek.getPunkty_do != 0 %}
+                    <td>↔️</td>
+                {% else %}
+                    <td>➡️️</td>
+                {% endif %}
+                <td>[{{ odcinek.getPunktKoncowy.getIdpunkt }}] <strong>{{ odcinek.getPunktKoncowy.getNazwa }}</strong></td>
+                {% if odcinek.getPunkty_do != 0 %}
+                    <td>{{ odcinek.getPunkty_od }}/{{ odcinek.getPunkty_do }}</td>
+                {% else %}
+                    <td>{{ odcinek.getPunkty_od }}️️</td>
+                {% endif %}
+                {% if odcinek.getOtwarty != 0 %}
+                    <td>Tak️️</td>
+                {% else %}
+                    <td>Nie</td>
+                {% endif %}
+                <td>{{  odcinek.getPasmo.getNazwa }}</td>
+
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">✏️</a></abbr>
-                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">🗑️</a></abbr>
+                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
+                                                    href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">✏️</a></abbr>
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
+                                                  href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">🗑️</a></abbr>
                         </div>
                     </td>
                 {% endif %}
-        </tr>
-        {%  endfor %}
+            </tr>
+        {% endfor %}
 
         </tbody>
     </table>
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-    <a class="btn btn-info" href="/odznaki/form" role="button">Dodaj</a>
-     {% endif %}
+        <a class="btn btn-info" href="/odznaki/form" role="button">Dodaj</a>
+    {% endif %}
 
 {% endblock %}

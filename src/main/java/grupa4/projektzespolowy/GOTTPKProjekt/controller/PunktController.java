@@ -24,13 +24,13 @@ public class PunktController {
         return modelAndView;
     }
 
-    @GetMapping("/punktyPasma/{idPasmo}")
-    public ModelAndView getAllPasmoForGrupa(@PathVariable int idPasmo, Authentication authentication) {
-
-        ModelAndView modelAndView = new ModelAndView("punkty/punktyPasma");
-        modelAndView.addObject("punkty", punktServiceImpl.getAllPunktByIdPasmo(idPasmo));
-        modelAndView.addObject("LoggedUser", authentication);
-
-        return modelAndView;
-    }
+//    @GetMapping("/punktyPasma/{idPasmo}")
+//    public ModelAndView getAllPasmoForGrupa(@PathVariable int idPasmo, Authentication authentication) {
+//
+//        ModelAndView modelAndView = new ModelAndView("punkty/punktyPasma");
+//        modelAndView.addObject("punkty", punktServiceImpl.getAllPunktByIdPasmo(idPasmo));
+//        modelAndView.addObject("LoggedUser", authentication);
+//
+//        return modelAndView;
+//    }
 }
