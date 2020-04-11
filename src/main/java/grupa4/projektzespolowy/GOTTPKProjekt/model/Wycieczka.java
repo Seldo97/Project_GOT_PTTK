@@ -2,6 +2,7 @@ package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Wycieczka {
     @Column(name = "id_wycieczka")
     private int idWycieczka;
 
-    @ManyToOne//(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_ksiazeczka", referencedColumnName = "id_ksiazeczka")
     private Ksiazeczka ksiazeczka;
 
@@ -57,6 +58,10 @@ public class Wycieczka {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_wycieczka")
     private List<ZdjecieWycieczka> zdjecieWycieczka;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_wycieczka", referencedColumnName = "id_wycieczka")
+    private List<Trasa> trasy = new ArrayList<Trasa>();
 
     public Wycieczka() {
 
@@ -108,6 +113,7 @@ public class Wycieczka {
     }
 
     public void setDataOd(Date dataOd) {
+        //dataOd.setMonth(dataOd.getMonth()+3);
         this.dataOd = dataOd;
     }
 
@@ -151,5 +157,11 @@ public class Wycieczka {
         this.turystaOdznaka = turystaOdznaka;
     }
 
+    public List<Trasa> getTrasy() {
+        return trasy;
+    }
 
+    public void setTrasy(List<Trasa> trasy) {
+        this.trasy = trasy;
+    }
 }

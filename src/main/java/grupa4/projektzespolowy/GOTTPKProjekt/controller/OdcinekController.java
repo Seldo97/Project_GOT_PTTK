@@ -28,17 +28,6 @@ public class OdcinekController
 
         return "odcinek/odcinki";
     }
-    @PostMapping("/odcinki/dodaj")
-    public String createOdcinek(@RequestBody Punkt punktPoczatkowy, Punkt punktKoncowy,
-                                RedirectAttributes redirectAttributes)
-    {
 
-        Odcinek odcinek = new Odcinek(punktPoczatkowy, punktKoncowy);
-        odcinekServiceImpl.createOdcinek(odcinek); // puść inserta do bazy
-
-        redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
-
-        return "redirect:/odcinki";
-    }
 }
 

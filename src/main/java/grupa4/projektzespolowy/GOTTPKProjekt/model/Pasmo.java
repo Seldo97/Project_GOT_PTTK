@@ -25,9 +25,9 @@ public class Pasmo {
     @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
     private List<Punkt> punkt = new ArrayList<Punkt>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
-    private List<PodPunkt> podpunkt = new ArrayList<PodPunkt>();
+    private List<Odcinek> odcinki = new ArrayList<Odcinek>();
 
     public Pasmo() {
     }
@@ -63,6 +63,14 @@ public class Pasmo {
 
     public void setGrupa(Grupa grupa) {
         this.grupa = grupa;
+    }
+
+    public List<Odcinek> getOdcinki() {
+        return odcinki;
+    }
+
+    public void setOdcinki(List<Odcinek> odcinki) {
+        this.odcinki = odcinki;
     }
 
     @Override
