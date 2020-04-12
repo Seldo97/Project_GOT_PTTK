@@ -61,4 +61,5 @@ public class TrasaOdcinek {
     public void setPunkty(int punkty) {
         this.punkty = punkty;
     }
+public class TrasaOdcinek {
 }

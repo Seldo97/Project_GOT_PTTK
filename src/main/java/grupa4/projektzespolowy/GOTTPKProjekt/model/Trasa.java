@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "Trasa")
@@ -119,4 +120,5 @@ public class Trasa {
     public void setOdcinkiTrasy(List<TrasaOdcinek> odcinkiTrasy) {
         this.odcinkiTrasy = odcinkiTrasy;
     }
+
 }

@@ -37,6 +37,9 @@ public class Odcinek {
     @JoinColumn(name = "id_odcinek", referencedColumnName = "id_odcinek")
     private List<TrasaOdcinek> trasyOdcinka = new ArrayList<TrasaOdcinek>();
 
+    @Column(name = "otwarty")
+    private int otwarty;
+
     public Odcinek() {
     }
 
@@ -113,6 +116,7 @@ public class Odcinek {
     public void setTrasyOdcinka(List<TrasaOdcinek> trasyOdcinka) {
         this.trasyOdcinka = trasyOdcinka;
     }
+
 
     @Override
     public String toString() {
