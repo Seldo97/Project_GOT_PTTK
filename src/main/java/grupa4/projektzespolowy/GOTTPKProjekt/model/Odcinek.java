@@ -1,6 +1,8 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Odcinek")
@@ -30,6 +32,10 @@ public class Odcinek {
 
     @Column(name = "otwarty")
     private int otwarty;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_odcinek", referencedColumnName = "id_odcinek")
+    private List<TrasaOdcinek> trasyOdcinka = new ArrayList<TrasaOdcinek>();
 
     public Odcinek() {
     }
@@ -98,6 +104,14 @@ public class Odcinek {
 
     public void setOtwarty(int otwarty) {
         this.otwarty = otwarty;
+    }
+
+    public List<TrasaOdcinek> getTrasyOdcinka() {
+        return trasyOdcinka;
+    }
+
+    public void setTrasyOdcinka(List<TrasaOdcinek> trasyOdcinka) {
+        this.trasyOdcinka = trasyOdcinka;
     }
 
     @Override
