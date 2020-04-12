@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface PunktRepository extends JpaRepository<Punkt, Integer> {
-    List<Punkt> findAllByPasmo_IdPasmo(int idPasmo);
+
 }

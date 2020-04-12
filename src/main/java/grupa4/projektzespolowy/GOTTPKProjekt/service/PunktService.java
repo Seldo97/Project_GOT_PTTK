@@ -15,5 +15,4 @@ public interface PunktService {
 
     void removePunkt(Integer id);
 
-    List<Punkt> getAllPunktByIdPasmo(int idPasmo);
 }

@@ -14,10 +14,6 @@ public class Punkt {
     private String nazwa;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
-    private Pasmo pasmo;
-
     public Punkt() {
     }
 
@@ -26,7 +22,6 @@ public class Punkt {
     }
     public Punkt(String nazwa, Pasmo pasmo) {
         this.nazwa = nazwa;
-        this.pasmo = pasmo;
     }
 
     public int getIdpunkt() {
@@ -45,20 +40,4 @@ public class Punkt {
         this.nazwa = nazwa;
     }
 
-    public Pasmo getPasmo() {
-        return pasmo;
-    }
-
-    public void setPasmo(Pasmo pasmo) {
-        this.pasmo = pasmo;
-    }
-
-    @Override
-    public String toString() {
-        return "Punkt{" +
-                "idpunkt=" + idpunkt +
-                ", nazwa='" + nazwa + '\'' +
-                ", pasmo=" + pasmo +
-                '}';
-    }
 }

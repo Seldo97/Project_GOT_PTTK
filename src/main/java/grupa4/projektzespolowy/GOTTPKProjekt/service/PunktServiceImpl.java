@@ -36,9 +36,4 @@ public class PunktServiceImpl  implements PunktService {
         this.punktRepository.deleteById(id);
     }
 
-    @Override
-    public List<Punkt> getAllPunktByIdPasmo(int idPasmo) {
-        List<Punkt> punkt = this.punktRepository.findAllByPasmo_IdPasmo(idPasmo);
-        return punkt;
-    }
 }

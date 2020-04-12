@@ -4,7 +4,9 @@ import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Trasa")
@@ -38,6 +40,10 @@ public class Trasa {
 
     @Column(name = "suma_punktow")
     private int suma_punktow;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_trasa", referencedColumnName = "id_trasa")
+    private List<TrasaOdcinek> odcinkiTrasy = new ArrayList<TrasaOdcinek>();
 
     public Trasa() {
     }
@@ -104,5 +110,13 @@ public class Trasa {
 
     public void setSuma_punktow(int suma_punktow) {
         this.suma_punktow = suma_punktow;
+    }
+
+    public List<TrasaOdcinek> getOdcinkiTrasy() {
+        return odcinkiTrasy;
+    }
+
+    public void setOdcinkiTrasy(List<TrasaOdcinek> odcinkiTrasy) {
+        this.odcinkiTrasy = odcinkiTrasy;
     }
 }

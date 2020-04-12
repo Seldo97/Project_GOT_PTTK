@@ -1,0 +1,61 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Moje trasy{% endblock %}
+{% block header %}
+    <strong>Wycieczka {{ wycieczka.getDataOd }} / {{ wycieczka.getDataDo }}</strong>
+{% endblock %}
+{% block main %}
+    <div class="text-justify" style="max-width: 35%; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; word-wrap: break-word;">
+        <p>{{ wycieczka.getOpis }}</p>
+    </div>
+
+        <h3 class="mt-5">Przegląd zaplanowanych tras:</h3>
+
+        <table id="myTable" class="table table-striped align-middle table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" width="20px">#</th>
+                <th scope="col">Opis</th>
+                <th scope="col">Pasmo</th>
+                <th scope="col">Data</th>
+                <th scope="col">Suma pkt</th>
+                <th scope="col">Zrealizowana</th>
+
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% set i = 1 %}
+            {% for trasa in trasy %}
+                <tr>
+                    <td>{{ i }}</td>
+                    <td><div style='max-height: 65px; width: 135px; word-wrap: break-word; overflow-x: auto;'>{{ trasa.getOpis}}</div></td>
+                    <td>{{ trasa.getPasmo.getNazwa }}</td>
+                    <td>{{ trasa.getData }}</td>
+                    {% if trasa.getDubel == 0 %}
+                        <td>{{ trasa.getSuma_punktow }}</td>
+                    {% else %}
+                        <td class="text-center"><abbr title="Twoja trasa zawiera zdublowane odcinki i nie może być brana pod uwagę podczas punktacji">❗</abbr></td>
+                    {% endif %}
+                    {% if  trasa.getZrealizowana == 0 %}
+                        <td class="text-center"><a class="btn" href="#">🔲</a></td>
+                    {% else %}
+                        <td class="text-center"><a class="btn" href="#">✅</a></td>
+                    {% endif %}
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Konfiguruj odcinki trasy"><a class="btn btn-sm btn-dark" href="#">Konfiguruj odcinki</a></abbr>
+                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/trasa/form/{{ trasa.getIdTrasa }}">✏️</a></abbr>
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/trasa/usun/{{ trasa.getIdTrasa }}">🗑️</a></abbr>
+                        </div>
+                    </td>
+                </tr>
+                {% set i = i + 1 %}
+            {%  endfor %}
+            {% set i = 1 %}
+            </tbody>
+        </table>
+        <a class="btn btn-info" href="#" role="button">Utwórz nową trasę 👣</a>
+
+{% endblock %}

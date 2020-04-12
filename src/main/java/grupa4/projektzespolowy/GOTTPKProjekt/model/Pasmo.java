@@ -21,10 +21,6 @@ public class Pasmo {
     @JoinColumn(name = "id_grupa", referencedColumnName = "id_grupa")
     private Grupa grupa;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
-    private List<Punkt> punkt = new ArrayList<Punkt>();
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
     private List<Odcinek> odcinki = new ArrayList<Odcinek>();
