@@ -78,7 +78,7 @@ public class KsiazeczkaController
 
         String referer = request.getHeader("Referer");
 
-        redirectAttributes.addFlashAttribute("success_msg", "Utworzono książeczkę pomyślnie");
+        redirectAttributes.addFlashAttribute("success_msg", "Utworzono książeczkę pomyślnie ✅");
         ksiazeczkaServiceImpl.createKsiazeczka(ksiazeczka);
 
         return "redirect:" + referer;

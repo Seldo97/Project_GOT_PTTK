@@ -4,5 +4,11 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $(".alert").slideToggle(500).delay(3500).slideToggle(500);
+    $(".alert").slideToggle(500).delay(3800).slideToggle(500);
+});
+
+$(document).ready(function(){
+    $("#toggleButton").click(function(){
+        $("#trasaForm").slideToggle();
+    });
 });

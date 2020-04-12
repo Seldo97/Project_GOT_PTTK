@@ -51,6 +51,11 @@
                 {{ info_msg }}
             </div>
         {% endif %}
+        {% if warning_msg is defined %}
+            <div class="alert alert-warning" role="alert" style='display:none;'>
+                {{ warning_msg }}
+            </div>
+        {% endif %}
 
         {{ wiadomosc }}
 
