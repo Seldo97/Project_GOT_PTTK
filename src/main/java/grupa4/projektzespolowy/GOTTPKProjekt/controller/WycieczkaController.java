@@ -57,7 +57,7 @@ public class WycieczkaController {
 
         wycieczkaServiceImpl.createWycieczka(wycieczka);
 
-		redirectAttributes.addFlashAttribute("success_msg", "Utworzono wycieczkę");
+		redirectAttributes.addFlashAttribute("success_msg", "Utworzono wycieczkę ✅");
 
         return "redirect:/ksiazeczka/MojaKsiazeczka";
     }
@@ -76,7 +76,7 @@ public class WycieczkaController {
 
 		wycieczkaServiceImpl.createWycieczka(wycieczkaUpdate);
 
-		redirectAttributes.addFlashAttribute("success_msg", "Zaktualizowano wycieczkę");
+		redirectAttributes.addFlashAttribute("success_msg", "Zaktualizowano wycieczkę ✅");
 
 		return "redirect:/ksiazeczka/MojaKsiazeczka";
 	}
@@ -88,10 +88,9 @@ public class WycieczkaController {
 
     	wycieczkaServiceImpl.removeWycieczka(idWycieczka);
 
-		redirectAttributes.addFlashAttribute("success_msg", "Usunięto wycieczkę");
+		redirectAttributes.addFlashAttribute("success_msg", "Usunięto wycieczkę ✅");
 
 		return "redirect:" + request.getHeader("Referer");
 	}
-
 
 }

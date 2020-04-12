@@ -5,57 +5,112 @@
     <strong>Wycieczka {{ wycieczka.getDataOd }} / {{ wycieczka.getDataDo }}</strong>
 {% endblock %}
 {% block main %}
-    <div class="text-justify" style="max-width: 35%; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; word-wrap: break-word;">
+    <div class="text-justify"
+         style="max-width: 35%; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; word-wrap: break-word;">
         <p>{{ wycieczka.getOpis }}</p>
     </div>
 
-        <h3 class="mt-5">Przegląd zaplanowanych tras:</h3>
+    <h3 class="mt-5">Przegląd zaplanowanych tras:</h3>
 
-        <table id="myTable" class="table table-striped align-middle table-sm">
-            <thead class="thead-dark">
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" width="20px">#</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Pasmo</th>
+            <th scope="col">Data</th>
+            <th scope="col">Suma pkt</th>
+            <th scope="col">Zrealizowana</th>
+
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% set i = 1 %}
+        {% for trasa in trasy %}
             <tr>
-                <th scope="col" width="20px">#</th>
-                <th scope="col">Opis</th>
-                <th scope="col">Pasmo</th>
-                <th scope="col">Data</th>
-                <th scope="col">Suma pkt</th>
-                <th scope="col">Zrealizowana</th>
-
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-
-            {% set i = 1 %}
-            {% for trasa in trasy %}
-                <tr>
-                    <td>{{ i }}</td>
-                    <td><div style='max-height: 65px; width: 135px; word-wrap: break-word; overflow-x: auto;'>{{ trasa.getOpis}}</div></td>
-                    <td>{{ trasa.getPasmo.getNazwa }}</td>
-                    <td>{{ trasa.getData }}</td>
-                    {% if trasa.getDubel == 0 %}
-                        <td>{{ trasa.getSuma_punktow }}</td>
-                    {% else %}
-                        <td class="text-center"><abbr title="Twoja trasa zawiera zdublowane odcinki i nie może być brana pod uwagę podczas punktacji">❗</abbr></td>
-                    {% endif %}
-                    {% if  trasa.getZrealizowana == 0 %}
-                        <td class="text-center"><a class="btn" href="#">🔲</a></td>
-                    {% else %}
-                        <td class="text-center"><a class="btn" href="#">✅</a></td>
-                    {% endif %}
-                    <td class="text-right">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                            <abbr title="Konfiguruj odcinki trasy"><a class="btn btn-sm btn-dark" href="#">Konfiguruj odcinki</a></abbr>
-                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/trasa/form/{{ trasa.getIdTrasa }}">✏️</a></abbr>
-                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/trasa/usun/{{ trasa.getIdTrasa }}">🗑️</a></abbr>
-                        </div>
+                <td>{{ i }}</td>
+                <td>
+                    <div style='max-height: 65px; width: 135px; word-wrap: break-word; overflow-x: auto;'>{{ trasa.getOpis }}</div>
+                </td>
+                <td>{{ trasa.getPasmo.getNazwa }}</td>
+                <td>{{ trasa.getData }}</td>
+                {% if trasa.getDubel == 0 %}
+                    <td>{{ trasa.getSuma_punktow }}</td>
+                {% else %}
+                    <td>{{ trasa.getSuma_punktow }} <abbr
+                                title="Twoja trasa zawiera zdublowane odcinki i nie może być brana pod uwagę podczas punktacji">❗</abbr>
                     </td>
-                </tr>
-                {% set i = i + 1 %}
-            {%  endfor %}
-            {% set i = 1 %}
-            </tbody>
-        </table>
-        <a class="btn btn-info" href="#" role="button">Utwórz nową trasę 👣</a>
+                {% endif %}
+                {% if  trasa.getZrealizowana == 0 %}
+                    <td class="text-center"><a class="btn" href="/trasa/zrealizuj/{{ trasa.getIdTrasa }}">🔲</a></td>
+                {% else %}
+                    <td class="text-center"><a class="btn" href="/trasa/zrealizuj/{{ trasa.getIdTrasa }}">✅</a></td>
+                {% endif %}
+                <td class="text-right">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <abbr title="Konfiguruj odcinki trasy"><a class="btn btn-sm btn-dark" href="#">Konfiguruj
+                                odcinki</a></abbr>
+                        <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
+                                                href="/trasa/form/{{ trasa.getIdTrasa }}">✏️</a></abbr>
+                        <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
+                                              href="/trasa/usun/{{ trasa.getIdTrasa }}">🗑️</a></abbr>
+                    </div>
+                </td>
+            </tr>
+            {% set i = i + 1 %}
+        {% endfor %}
+        {% set i = 1 %}
+        </tbody>
+    </table>
+    <button class="btn btn-info" id="toggleButton" role="button">Nowa trasa 👣</button>
+    <a class="btn btn-dark" href="/ksiazeczka/MojaKsiazeczka" role="button">Powrót</a>
+    <div id="trasaForm" style="display: none">
+
+        <div class="row">
+            <div class="col-12 col-md-6 mt-3" id="form">
+
+                <form id="addForm" action="/trasa/wycieczki/dodaj_odcinek" method="POST">
+
+                    <div class="form-group">
+                        <label for="pasmo">Wybierz pasmo górskie:</label>
+                        <select name="pasmo" class="form-control" required>
+                            <option value="">--Wybierz pasmo--</option>
+                            {% for grupa in grupy %}
+                                <optgroup label="{{ grupa.getNazwa }}">
+
+                                    {% for pasmo in grupa.getPasmo %}
+                                        <option value="{{ pasmo.getIdPasmo }}">{{ pasmo.getNazwa }}</option>
+                                    {% endfor %}
+
+                                </optgroup>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data">Wybierz datę:</label>
+                        <input class="form-control" type="date" id="data" name="data"
+                               min="{{ wycieczka.getDataOd }}" max="{{ wycieczka.getDataDo }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="opis">Opis:</label>
+                        <textarea class="form-control" id="opis" name="opis" required></textarea>
+                    </div>
+
+                    <input type="hidden" id="wycieczka" name="wycieczka" value="{{ wycieczka.getIdWycieczka }}">
+                    <input type="hidden" id="zrealizowana" name="zrealizowana" value="0">
+                    <input type="hidden" id="dubel" name="dubel" value="0">
+                    <input type="hidden" id="suma_punktow" name="suma_punktow" value="0">
+
+                    <button type="submit" class="btn btn-info">Utwórz +</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}

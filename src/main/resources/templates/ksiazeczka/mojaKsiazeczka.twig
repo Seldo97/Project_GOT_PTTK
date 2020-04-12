@@ -21,6 +21,12 @@
     {% else %}
 
         <h3>Zdobyte punkty: {{ ksiazeczka.getSumaPunktow }}</h3>
+        <h5>opis:</h5>
+        <div class="text-justify"
+             style="max-width: 35%; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; word-wrap: break-word;">
+            <p>{{ turysta.getOpis }}</p>
+        </div>
+
         <h3 class="mt-5">Przegląd moich wycieczek:</h3>
 
         <table id="myTable" class="table table-striped align-middle table-sm">
