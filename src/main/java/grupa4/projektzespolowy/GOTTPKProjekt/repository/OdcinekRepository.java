@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface OdcinekRepository extends JpaRepository<Odcinek, Integer> {
-    List<Odcinek> getAllByOtwarty (int otwarty);
+    List<Odcinek> getAllByOtwartyAndPasmo_IdPasmo(int otwarty, int idPasmo);
+    List<Odcinek> findAllByPunktKoncowyAndPunktyDo(Punkt punktKon, int punktyDo);
 
-    List<Odcinek> getAllByPunktPoczatkowyAndPunktKoncowyAndOtwarty(Punkt punktPocz, Punkt punktKon, int otwarty);
-    List<Odcinek> getAllByPunktPoczatkowyIdpunktAndPunktKoncowyIdpunktAndOtwarty(int idPunktPocz, int idPunktKon, int otwarty);
+    List<Odcinek> getAllByPunktPoczatkowyOrPunktKoncowyAndOtwarty(Punkt punktPocz, Punkt punktKon, int otwarty);
+    List<Odcinek> getAllByPunktPoczatkowyIdpunktOrPunktKoncowyIdpunktAndOtwarty(int idPunktPocz, int idPunktKon, int otwarty);
 }

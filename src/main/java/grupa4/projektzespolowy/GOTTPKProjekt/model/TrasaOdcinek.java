@@ -21,13 +21,17 @@ public class TrasaOdcinek {
     @Column(name = "punkty")
     private int punkty;
 
+    @Column(name = "powrot")
+    private int powrot;
+
     public TrasaOdcinek() {
     }
 
-    public TrasaOdcinek(Trasa trasa, Odcinek odcinek, int punkty) {
+    public TrasaOdcinek(Trasa trasa, Odcinek odcinek, int punkty, int powrot) {
         this.trasa = trasa;
         this.odcinek = odcinek;
         this.punkty = punkty;
+        this.powrot = powrot;
     }
 
     public int getIdTrasaOdcinek() {
@@ -60,5 +64,13 @@ public class TrasaOdcinek {
 
     public void setPunkty(int punkty) {
         this.punkty = punkty;
+    }
+
+    public int getPowrot() {
+        return powrot;
+    }
+
+    public void setPowrot(int powrot) {
+        this.powrot = powrot;
     }
 }

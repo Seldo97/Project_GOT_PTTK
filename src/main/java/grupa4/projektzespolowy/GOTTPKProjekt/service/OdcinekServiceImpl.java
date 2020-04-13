@@ -1,6 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odcinek;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Punkt;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdcinekService;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.OdcinekRepository;
@@ -29,5 +30,23 @@ public class OdcinekServiceImpl implements OdcinekService {
     @Override
     public void removeOdcinek(Integer id) {this.odcinekRepository.deleteById(id);}
 
+    @Override
+    public List<Odcinek> getAllByOtwartyAndIdPasmo(int otwarty, int idPasmo) {
+        return odcinekRepository.getAllByOtwartyAndPasmo_IdPasmo(otwarty, idPasmo);
+    }
 
+    @Override
+    public List<Odcinek> getAllByIdPunktPoczatkowyOrIdPunktKoncowyAndOtwarty(int idPunktPocz, int idPunktKon, int otwarty) {
+        return odcinekRepository.getAllByPunktPoczatkowyIdpunktOrPunktKoncowyIdpunktAndOtwarty(idPunktPocz, idPunktKon, otwarty);
+    }
+
+    @Override
+    public List<Odcinek> getAllByPunktPoczatkowyOrPunktKoncowyAndOtwarty(Punkt punktPocz, Punkt punktKon, int otwarty) {
+        return odcinekRepository.getAllByPunktPoczatkowyOrPunktKoncowyAndOtwarty(punktPocz, punktKon, otwarty);
+    }
+
+    @Override
+    public List<Odcinek> getAllByIdPunktKoncowyAndPunktyDo(Punkt punktKon, int punktyDo) {
+        return odcinekRepository.findAllByPunktKoncowyAndPunktyDo(punktKon, punktyDo);
+    }
 }

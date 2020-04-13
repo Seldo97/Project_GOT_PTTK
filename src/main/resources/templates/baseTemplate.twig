@@ -34,7 +34,7 @@
     {% include 'banner.twig' %}
     {% include 'navBar.twig' %}
 
-    <div class="container pt-5 pb-5" style="display: none">
+    <div class="container pt-5 pb-5" {% block containerCss %}style="display: none" {% endblock %}>
 
         {% if success_msg is defined %}
             <div class="alert alert-success" role="alert" style='display:none;'>
