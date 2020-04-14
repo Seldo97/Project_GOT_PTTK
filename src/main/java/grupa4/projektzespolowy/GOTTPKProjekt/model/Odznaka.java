@@ -21,6 +21,9 @@ public class Odznaka {
     @JoinColumn(name = "id_odznaka", referencedColumnName = "id_odznaka")
     private List<TurystaOdznaka> turystaOdznaka = new ArrayList<TurystaOdznaka>();
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_odznaka", referencedColumnName = "id_odznaka")
+    private List<Wycieczka> wycieczki = new ArrayList<Wycieczka>();
 
     public Odznaka() {}
 

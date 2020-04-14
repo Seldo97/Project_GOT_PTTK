@@ -1,7 +1,9 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Ksiazeczka;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,14 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
 public class WycieczkaController {
 
-    @Autowired // podłączamy Servicy z których bedzimy koszystać
+    @Autowired
     private WycieczkaServiceImpl wycieczkaServiceImpl;
+
+    @Autowired
+    private OdznakaServiceImpl odznakaService;
 
     @GetMapping("/wycieczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllZdjeciaWycieczek(Model model, Authentication authentication) {
@@ -43,7 +49,10 @@ public class WycieczkaController {
             Wycieczka wycieczka = wycieczkaServiceImpl.getOneById(idWycieczka);
 			model.addAttribute("wycieczka", wycieczka);
         }
-
+		// tymczasowo aby jakas odznaka byla przypisana
+		List<Odznaka> odznaki = odznakaService.getAllOdznaka();
+		//
+		model.addAttribute("odznaki", odznaki);
         model.addAttribute("LoggedUser", authentication);
         model.addAttribute("idKsiazeczka", idKsiazeczka);
         model.addAttribute("update", update);
