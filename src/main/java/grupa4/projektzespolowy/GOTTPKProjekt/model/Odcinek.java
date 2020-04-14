@@ -21,10 +21,10 @@ public class Odcinek {
     private Punkt punktKoncowy;
 
     @Column(name = "punkty_od")
-    private int punkty_od;
+    private int punktyOd;
 
     @Column(name = "punkty_do")
-    private int punkty_do;
+    private int punktyDo;
 
     @ManyToOne
     @JoinColumn(name = "id_pasmo", referencedColumnName = "id_pasmo")
@@ -43,8 +43,8 @@ public class Odcinek {
     public Odcinek(Punkt punktPoczatkowy, Punkt punktKoncowy, int punkty_od, int punkty_do, Pasmo pasmo, int otwarty) {
         this.punktPoczatkowy = punktPoczatkowy;
         this.punktKoncowy = punktKoncowy;
-        this.punkty_od = punkty_od;
-        this.punkty_do = punkty_do;
+        this.punktyOd = punkty_od;
+        this.punktyDo = punkty_do;
         this.pasmo = pasmo;
         this.otwarty = otwarty;
     }
@@ -74,20 +74,20 @@ public class Odcinek {
         this.punktKoncowy = getPunktKoncowy();
     }
 
-    public int getPunkty_od() {
-        return punkty_od;
+    public int getPunktyOd() {
+        return punktyOd;
     }
 
-    public void setPunkty_od(int punkty_od) {
-        this.punkty_od = punkty_od;
+    public void setPunktyOd(int punktyOd) {
+        this.punktyOd = punktyOd;
     }
 
-    public int getPunkty_do() {
-        return punkty_do;
+    public int getPunktyDo() {
+        return punktyDo;
     }
 
-    public void setPunkty_do(int punkty_do) {
-        this.punkty_do = punkty_do;
+    public void setPunktyDo(int punktyDo) {
+        this.punktyDo = punktyDo;
     }
 
     public Pasmo getPasmo() {
@@ -114,17 +114,5 @@ public class Odcinek {
         this.trasyOdcinka = trasyOdcinka;
     }
 
-    @Override
-    public String toString() {
-        return "Odcinek{" +
-                "idOdcinek=" + idOdcinek +
-                ", punktPoczatkowy=" + punktPoczatkowy +
-                ", punktKoncowy=" + punktKoncowy +
-                ", punkty_od=" + punkty_od +
-                ", punkty_do=" + punkty_do +
-                ", pasmo=" + pasmo +
-                ", otwarty=" + otwarty +
-                '}';
-    }
 
 }

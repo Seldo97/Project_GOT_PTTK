@@ -1,0 +1,105 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Konfiguracja odcinków{% endblock %}
+{% block containerCss %} {% endblock %}
+{% block header %}
+    Konfiguracja odcinków
+{% endblock %}
+{% block main %}
+    {% set i = odcinkiTrasy|last.getIdTrasaOdcinek %}
+    {% if odcinkiTrasy == null %}
+    {% else %}
+        {% if odcinkiTrasy|last.getPowrot == 0 %}
+            {% set lastIdPK = odcinkiTrasy|last.getOdcinek.getPunktKoncowy.getIdpunkt %}
+        {% else %}
+            {% set lastIdPK = odcinkiTrasy|last.getOdcinek.getPunktPoczatkowy.getIdpunkt %}
+        {% endif %}
+    {% endif %}
+
+    <h6>Suma punktów: {{ trasa.getSuma_punktow }}
+        {% if trasa.getDubel == 1  %}
+            <abbr title="Twoja trasa zawiera zdublowane odcinki i nie może być brana pod uwagę podczas punktacji">❗</abbr>
+        {% endif %}
+    </h6>
+
+    <table id="" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Punkt A</th>
+            <th scope="col">Kierunek</th>
+            <th scope="col">Punkt B</th>
+            <th scope="col">Punkty</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for odcinekTrasy in odcinkiTrasy %}
+            <tr>
+                    {% if odcinekTrasy.getPowrot == 0 %}
+                        <td>{{ odcinekTrasy.getOdcinek.getPunktPoczatkowy.getNazwa }}</td>
+                        <td>&#129138;&#129138;</td>
+                        <td><strong>{{ odcinekTrasy.getOdcinek.getPunktKoncowy.getNazwa }}</strong></td>
+                    {% else %}
+                        <td><strong>{{ odcinekTrasy.getOdcinek.getPunktPoczatkowy.getNazwa }}</strong></td>
+                        <td>&#129136;&#129136;</td>
+                        <td>{{ odcinekTrasy.getOdcinek.getPunktKoncowy.getNazwa }}</td>
+                    {% endif %}
+
+                <td>{{ odcinekTrasy.getPunkty }}</td>
+
+
+                <td class="text-right">
+                    {% if odcinekTrasy.getIdTrasaOdcinek == i %}
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
+                                                  href="/trasa_odcinki/usun/{{ odcinekTrasy.getIdTrasaOdcinek }}">❌</a></abbr>
+                        </div>
+                    {% endif %}
+                </td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-12 col-md-8" id="form">
+
+            <form id="addForm" action="/trasa_odcinki/dodaj/{{ lastIdPK }}" method="POST">
+
+                <input type="hidden" name="trasa" id="trasa" value="{{ trasa.getIdTrasa }}"/>
+                <input type="hidden" name="punkty" id="punkty" value="0"/>
+                <input type="hidden" name="powrot" id="powrot" value="0"/>
+
+                <div class="form-group input-group">
+                    <select name="odcinek" class="form-control" required>
+                        <option value="">--Wybierz odcinek--</option>
+                        {% for odcinek in odcinki %}
+                            {% if odcinek.getPunktyDo != 0 %}
+                                <option value="{{ odcinek.getIdOdcinek }}">{{ odcinek.getPunktPoczatkowy.getNazwa }}
+                                    &nbsp;&nbsp;&nbsp;<strong>&#11108;</strong> &nbsp;&nbsp;&nbsp;&nbsp;{{ odcinek.getPunktKoncowy.getNazwa }} [{{ odcinek.getPunktyOd }}/{{ odcinek.getPunktyDo }}]
+                                </option>
+                            {% else %}
+                                <option value="{{ odcinek.getIdOdcinek }}">{{ odcinek.getPunktPoczatkowy.getNazwa }}
+                                    &nbsp;&nbsp;&nbsp;<strong>&#11106;</strong>️ &nbsp;&nbsp;&nbsp;{{ odcinek.getPunktKoncowy.getNazwa }} [{{ odcinek.getPunktyOd }}]
+                                </option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <span class = "input-group-btn ml-2">
+                        <button type="submit" class="btn btn-info">Dodaj</button>
+                    </span>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a class="btn btn-dark" role="button" href="/trasy/{{ trasa.getWycieczka.getIdWycieczka }}"> Zatwierdź ✔️</a>
+        <a class="btn btn-danger" role="button" href="/trasa_odcinki/usun_wszystko/{{ trasa.getIdTrasa }}"> Usuń wszystko 🗑️</a>
+    </div>
+
+
+{% endblock %}

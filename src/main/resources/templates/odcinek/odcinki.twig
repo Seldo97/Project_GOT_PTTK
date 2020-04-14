@@ -1,6 +1,6 @@
 {% extends '../baseTemplate.twig' %}
 
-{% block title %}Odznaki tabela{% endblock %}
+{% block title %}Odcinki{% endblock %}
 {% block header %}
     Odcinki
 {% endblock %}
@@ -26,16 +26,16 @@
             <tr>
                 <td>{{ odcinek.getIdOdcinek }}</td>
                 <td>[{{ odcinek.getPunktPoczatkowy.getIdpunkt }}] <strong>{{ odcinek.getPunktPoczatkowy.getNazwa }}</strong></td>
-                {% if odcinek.getPunkty_do != 0 %}
+                {% if odcinek.getPunktyDo != 0 %}
                     <td>↔️</td>
                 {% else %}
                     <td>➡️️</td>
                 {% endif %}
                 <td>[{{ odcinek.getPunktKoncowy.getIdpunkt }}] <strong>{{ odcinek.getPunktKoncowy.getNazwa }}</strong></td>
-                {% if odcinek.getPunkty_do != 0 %}
-                    <td>{{ odcinek.getPunkty_od }}/{{ odcinek.getPunkty_do }}</td>
+                {% if odcinek.getPunktyDo != 0 %}
+                    <td>{{ odcinek.getPunktyOd}}/{{ odcinek.getPunktyDo }}</td>
                 {% else %}
-                    <td>{{ odcinek.getPunkty_od }}️️</td>
+                    <td>{{ odcinek.getPunktyOd }}️️</td>
                 {% endif %}
                 {% if odcinek.getOtwarty != 0 %}
                     <td>Tak️️</td>

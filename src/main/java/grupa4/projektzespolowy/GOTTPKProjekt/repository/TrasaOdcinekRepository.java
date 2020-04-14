@@ -13,4 +13,8 @@ public interface TrasaOdcinekRepository extends JpaRepository<TrasaOdcinek, Inte
 
     List<TrasaOdcinek> findAllByTrasa(Trasa trasa);
     List<TrasaOdcinek> findAllByTrasa_IdTrasa(int idTrasa);
+
+    List<TrasaOdcinek> getAllByOdcinek_IdOdcinekAndTrasa_IdTrasa(int idOdcinek, int idTrasa);
+
+    void deleteAllByTrasa(Trasa trasa);
 }
