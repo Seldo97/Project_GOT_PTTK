@@ -48,8 +48,18 @@ public class Wycieczka {
     @Column(name = "suma_punktow")
     private int sumaPunktow;
 
+    @Column(name = "suma_punktow_do_got")
+    private int sumaPunktowDoGot;
+
     @Column(name = "zatwierdzona")
     private int zatwierdzona;
+
+    @Column(name = "zgloszona")
+    private int zgloszona;
+
+    @ManyToOne
+    @JoinColumn(name = "id_odznaka", referencedColumnName = "id_odznaka")
+    private Odznaka odznaka;
 
     @ManyToOne
     @JoinColumn(name = "id_turysta_odznaka", referencedColumnName = "id_turysta_odznaka")
@@ -163,5 +173,29 @@ public class Wycieczka {
 
     public void setTrasy(List<Trasa> trasy) {
         this.trasy = trasy;
+    }
+
+    public int getSumaPunktowDoGot() {
+        return sumaPunktowDoGot;
+    }
+
+    public void setSumaPunktowDoGot(int sumaPunktowDoGot) {
+        this.sumaPunktowDoGot = sumaPunktowDoGot;
+    }
+
+    public int getZgloszona() {
+        return zgloszona;
+    }
+
+    public void setZgloszona(int zgloszona) {
+        this.zgloszona = zgloszona;
+    }
+
+    public Odznaka getOdznaka() {
+        return odznaka;
+    }
+
+    public void setOdznaka(Odznaka odznaka) {
+        this.odznaka = odznaka;
     }
 }

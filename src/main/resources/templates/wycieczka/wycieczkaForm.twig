@@ -13,13 +13,14 @@
 <form id="signupForm" action="/wycieczka/update/{{ wycieczka.getIdWycieczka }}" method="POST">
     {% else %}
     <form id="signupForm" action="/wycieczka/dodaj" method="POST">
-    {% endif %}
+        {% endif %}
 
         <input type="hidden" id="ksiazeczka" name="ksiazeczka" value="{{ idKsiazeczka }}">
 
         <div class="form-group">
             <label for="opis">Krótki opis</label>
-            <textarea  class="form-control" id="opis" name="opis" value="{{ wycieczka.getOpis }}">{{ wycieczka.getOpis }}</textarea>
+            <textarea class="form-control" id="opis" name="opis"
+                      value="{{ wycieczka.getOpis }}">{{ wycieczka.getOpis }}</textarea>
         </div>
 
         <div class="form-group">
@@ -32,9 +33,22 @@
             <input type="date" class="form-control" id="dataDo" name="dataDo" value="{{ wycieczka.getDataDo }}">
         </div>
 
+        <div class="form-group">
+            <label for="odznaka">Odznaka:</label>
+            <select name="odznaka" class="form-control">
+                <option value="{{ odznaki|last.getIdOdznaka }}" selected disabled>"{{ odznaki|last.getNazwa }}"</option>
+            </select>
+        </div>
+
+        <input type="hidden" id="odznaka" name="odznaka" value="{{ odznaki|last.getIdOdznaka }}" />
+
+        <input type="hidden" id="sumaPunktowDoGot" name="sumaPunktowDoGot" value="0"/>
+
         <input type="hidden" id="sumaPunktow" name="sumaPunktow" value="0"/>
 
         <input type="hidden" id="zatwierdzona" name="zatwierdzona" value="0"/>
+
+        <input type="hidden" id="zgloszona" name="zgloszona" value="0"/>
 
         <br/>
         {% if update == 1 %}
