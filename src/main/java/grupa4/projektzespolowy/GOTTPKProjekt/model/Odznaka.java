@@ -52,6 +52,22 @@ public class Odznaka {
         this.nazwa = nazwa;
     }
 
+    public List<TurystaOdznaka> getTurystaOdznaka() {
+        return turystaOdznaka;
+    }
+
+    public void setTurystaOdznaka(List<TurystaOdznaka> turystaOdznaka) {
+        this.turystaOdznaka = turystaOdznaka;
+    }
+
+    public List<Wycieczka> getWycieczki() {
+        return wycieczki;
+    }
+
+    public void setWycieczki(List<Wycieczka> wycieczki) {
+        this.wycieczki = wycieczki;
+    }
+
     @Override
     public String toString() {
         return "Odznaka{" +

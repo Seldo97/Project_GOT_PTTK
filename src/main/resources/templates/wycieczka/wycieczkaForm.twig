@@ -40,15 +40,27 @@
             </select>
         </div>
 
-        <input type="hidden" id="odznaka" name="odznaka" value="{{ odznaki|last.getIdOdznaka }}" />
+        {% if update == 1 %}
+            <input type="hidden" id="odznaka" name="odznaka" value="{{ wycieczka.getOdznaka.getIdOdznaka }}" />
 
-        <input type="hidden" id="sumaPunktowDoGot" name="sumaPunktowDoGot" value="0"/>
+            <input type="hidden" id="sumaPunktowDoGot" name="sumaPunktowDoGot" value="{{ wycieczka.getSumaPunktowDoGot }}"/>
 
-        <input type="hidden" id="sumaPunktow" name="sumaPunktow" value="0"/>
+            <input type="hidden" id="sumaPunktow" name="sumaPunktow" value="{{ wycieczka.getSumaPunktow }}"/>
 
-        <input type="hidden" id="zatwierdzona" name="zatwierdzona" value="0"/>
+            <input type="hidden" id="zatwierdzona" name="zatwierdzona" value="{{ wycieczka.getZatwierdzona }}"/>
 
-        <input type="hidden" id="zgloszona" name="zgloszona" value="0"/>
+            <input type="hidden" id="zgloszona" name="zgloszona" value="{{ wycieczka.getZgloszona }}"/>
+        {% else %}
+            <input type="hidden" id="odznaka" name="odznaka" value="{{ odznaki|last.getIdOdznaka }}" />
+
+            <input type="hidden" id="sumaPunktowDoGot" name="sumaPunktowDoGot" value="0"/>
+
+            <input type="hidden" id="sumaPunktow" name="sumaPunktow" value="0"/>
+
+            <input type="hidden" id="zatwierdzona" name="zatwierdzona" value="0"/>
+
+            <input type="hidden" id="zgloszona" name="zgloszona" value="0"/>
+        {% endif %}
 
         <br/>
         {% if update == 1 %}
