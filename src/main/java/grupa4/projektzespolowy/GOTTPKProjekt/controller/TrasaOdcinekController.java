@@ -124,27 +124,52 @@ public class TrasaOdcinekController {
                                      @PathVariable(required = false) Integer idLastPunktKon,
                                      HttpServletRequest request) {
 
+        // Zrobić żeby dubel ustawiał się na odcinkach bierzącej trasy a nie wszystkich.
+        //List<TrasaOdcinek> dubleOdcinkow = trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka());
+        //List<TrasaOdcinek> dubleOdcinkowTejTrasy = trasaOdcinekService.getAllByOdcinekAndTrasa(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa());
+
+        int wystapienTejTrasy = (trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka())).size();
+        if (wystapienTejTrasy + 1 > 2) {
+            System.out.println("Ustawiam dubel na 1");
+            trasaOdcinek.getTrasa().setDubel(1);
+            trasaOdcinek.setDubel(1);
+//            for(TrasaOdcinek ts : dubleOdcinkowTejTrasy) {
+//                ts.setDubel(1);
+//            }
+        }
+
         if ((trasaOdcinekService.getAllOdcinkiByTrasa(trasaOdcinek.getTrasa())).size() == 0) {
             trasaOdcinek.setPunkty(trasaOdcinek.getOdcinek().getPunktyOd());
-            trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyOd());
+            if (wystapienTejTrasy + 1 > 2) {
+                trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyOd());
+            } else {
+                trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyOd());
+                trasaOdcinek.getTrasa().setSumaPunktowDoGot(trasaOdcinek.getTrasa().getSumaPunktowDoGot() + trasaOdcinek.getOdcinek().getPunktyOd());
+            }
             trasaOdcinekService.createTrasaOdcinek(trasaOdcinek);
             return "redirect:" + request.getHeader("Referer");
         }
 
         if (idLastPunktKon == trasaOdcinek.getOdcinek().getPunktPoczatkowy().getIdpunkt()) {
             trasaOdcinek.setPunkty(trasaOdcinek.getOdcinek().getPunktyOd());
-            trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyOd());
+            if (wystapienTejTrasy + 1 > 2) {
+                trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyOd());
+            } else {
+                trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyOd());
+                trasaOdcinek.getTrasa().setSumaPunktowDoGot(trasaOdcinek.getTrasa().getSumaPunktowDoGot() + trasaOdcinek.getOdcinek().getPunktyOd());
+            }
+
         } else {
             trasaOdcinek.setPunkty(trasaOdcinek.getOdcinek().getPunktyDo());
-            trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyDo());
+            if (wystapienTejTrasy + 1 > 2) {
+                trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyDo());
+            } else {
+                trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() + trasaOdcinek.getOdcinek().getPunktyDo());
+                trasaOdcinek.getTrasa().setSumaPunktowDoGot(trasaOdcinek.getTrasa().getSumaPunktowDoGot() + trasaOdcinek.getOdcinek().getPunktyDo());
+            }
             trasaOdcinek.setPowrot(1);
         }
 
-        int wystapienTejTrasy = (trasaOdcinekService.getAllByIdOdcinekAndIdTrasa(trasaOdcinek.getOdcinek().getIdOdcinek(), trasaOdcinek.getTrasa().getIdTrasa())).size();
-        if (wystapienTejTrasy+1 > 2){
-            System.out.println("Ustawiam dubel na 1");
-            trasaOdcinek.getTrasa().setDubel(1);
-        }
 
         trasaOdcinekService.createTrasaOdcinek(trasaOdcinek);
 
@@ -157,14 +182,37 @@ public class TrasaOdcinekController {
 
         TrasaOdcinek trasaOdcinek = trasaOdcinekService.getOneById(idTrasaOdcinek);
 
-        int wystapienTejTrasy = (trasaOdcinekService.getAllByIdOdcinekAndIdTrasa(trasaOdcinek.getOdcinek().getIdOdcinek(), trasaOdcinek.getTrasa().getIdTrasa())).size();
+        trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() - trasaOdcinek.getPunkty());
+        if (trasaOdcinek.getDubel() == 0)
+            trasaOdcinek.getTrasa().setSumaPunktowDoGot(trasaOdcinek.getTrasa().getSumaPunktowDoGot() - trasaOdcinek.getPunkty());
+
+        List<TrasaOdcinek> dubleOdcinkow = trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka());
+        int wystapienTejTrasy = (trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka())).size();
         System.out.println("Po usunieciu: " + (wystapienTejTrasy - 1));
         if (wystapienTejTrasy - 1 <= 2) {
-            trasaOdcinek.getTrasa().setDubel(0);
+            //trasaOdcinek.getTrasa().setDubel(0);
+            trasaOdcinek.setDubel(0);
+            for (TrasaOdcinek ts : dubleOdcinkow) {
+                if (ts.getDubel() == 1) {
+                    ts.getTrasa().setSumaPunktowDoGot(ts.getTrasa().getSumaPunktowDoGot() + ts.getPunkty());
+                }
+                ts.setDubel(0);
+                ts.getTrasa().setDubel(0);
+            }
             System.out.println("Wchodze w petle i dubel = 0: " + trasaOdcinek.getTrasa().getDubel());
         }
 
-        trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() - trasaOdcinek.getPunkty());
+        List<TrasaOdcinek> odcinkiTrasy = trasaOdcinekService.getAllOdcinkiByIdTrasa(trasaOdcinek.getTrasa().getIdTrasa());
+        boolean flagaDubli = false;
+        for (TrasaOdcinek ot : odcinkiTrasy) {
+            if (ot.getDubel() == 1) {
+                flagaDubli = true;
+                break;
+            }
+        }
+        if (!flagaDubli)
+            trasaOdcinek.getTrasa().setDubel(0);
+
 
         trasaOdcinekService.removeTrasaOdcinekById(idTrasaOdcinek);
 
@@ -173,10 +221,54 @@ public class TrasaOdcinekController {
 
     @GetMapping("/trasa_odcinki/usun_wszystko/{idTrasa}")
     public String removeAllTrasaOdcinek(@PathVariable int idTrasa,
-                                        HttpServletRequest request){
+                                        HttpServletRequest request) {
 
-        Trasa trasa = trasaService.getOneById(idTrasa);
-        trasaOdcinekService.removeAllByTrasa(trasa);
+        //Trasa trasa = trasaService.getOneById(idTrasa);
+        //trasa.setSumaPunktowDoGot(0);
+//        trasa.setDubel(0);
+//        trasaOdcinekService.removeAllByTrasa(trasa);
+
+        List<TrasaOdcinek> odcinkiUsuwanejTrasy = trasaOdcinekService.getAllOdcinkiByIdTrasa(idTrasa);
+
+        for (TrasaOdcinek out : odcinkiUsuwanejTrasy) {
+
+            TrasaOdcinek trasaOdcinek = out;
+
+            trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() - trasaOdcinek.getPunkty());
+            if (trasaOdcinek.getDubel() == 0)
+                trasaOdcinek.getTrasa().setSumaPunktowDoGot(trasaOdcinek.getTrasa().getSumaPunktowDoGot() - trasaOdcinek.getPunkty());
+
+            List<TrasaOdcinek> dubleOdcinkow = trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka());
+            int wystapienTejTrasy = (trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka())).size();
+            System.out.println("Po usunieciu: " + (wystapienTejTrasy - 1));
+            if (wystapienTejTrasy - 1 <= 2) {
+                //trasaOdcinek.getTrasa().setDubel(0);
+                trasaOdcinek.setDubel(0);
+                for (TrasaOdcinek ts : dubleOdcinkow) {
+                    if (ts.getDubel() == 1) {
+                        ts.getTrasa().setSumaPunktowDoGot(ts.getTrasa().getSumaPunktowDoGot() + ts.getPunkty());
+                    }
+                    ts.setDubel(0);
+                    ts.getTrasa().setDubel(0);
+                }
+                System.out.println("Wchodze w petle i dubel = 0: " + trasaOdcinek.getTrasa().getDubel());
+            }
+
+            List<TrasaOdcinek> odcinkiTrasy = trasaOdcinekService.getAllOdcinkiByIdTrasa(trasaOdcinek.getTrasa().getIdTrasa());
+            boolean flagaDubli = false;
+            for (TrasaOdcinek ot : odcinkiTrasy) {
+                if (ot.getDubel() == 1) {
+                    flagaDubli = true;
+                    break;
+                }
+            }
+            if (!flagaDubli)
+                trasaOdcinek.getTrasa().setDubel(0);
+
+            //trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() - trasaOdcinek.getPunkty());
+
+            trasaOdcinekService.removeTrasaOdcinekById(out.getIdTrasaOdcinek());
+        }
 
         return "redirect:" + request.getHeader("Referer");
     }
