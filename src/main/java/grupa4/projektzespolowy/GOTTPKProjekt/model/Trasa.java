@@ -41,6 +41,9 @@ public class Trasa {
     @Column(name = "suma_punktow")
     private int suma_punktow;
 
+    @Column(name = "suma_punktow_do_got")
+    private int sumaPunktowDoGot;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_trasa", referencedColumnName = "id_trasa")
     private List<TrasaOdcinek> odcinkiTrasy = new ArrayList<TrasaOdcinek>();
@@ -110,6 +113,14 @@ public class Trasa {
 
     public void setSuma_punktow(int suma_punktow) {
         this.suma_punktow = suma_punktow;
+    }
+
+    public int getSumaPunktowDoGot() {
+        return sumaPunktowDoGot;
+    }
+
+    public void setSumaPunktowDoGot(int sumaPunktowDoGot) {
+        this.sumaPunktowDoGot = sumaPunktowDoGot;
     }
 
     public List<TrasaOdcinek> getOdcinkiTrasy() {

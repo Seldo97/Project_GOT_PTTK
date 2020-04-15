@@ -19,7 +19,7 @@
             <th scope="col">Opis</th>
             <th scope="col">Pasmo</th>
             <th scope="col">Data</th>
-            <th scope="col">Suma pkt</th>
+            <th scope="col">Suma pkt / do GOT</th>
             <th scope="col">Zrealizowana</th>
 
             <th scope="col"></th>
@@ -37,10 +37,10 @@
                 <td>{{ trasa.getPasmo.getNazwa }}</td>
                 <td>{{ trasa.getData }}</td>
                 {% if trasa.getDubel == 0 %}
-                    <td>{{ trasa.getSuma_punktow }}</td>
+                    <td>{{ trasa.getSuma_punktow }} / {{ trasa.getSumaPunktowDoGot }}</td>
                 {% else %}
-                    <td>{{ trasa.getSuma_punktow }} <abbr
-                                title="Twoja trasa zawiera zdublowane odcinki i nie może być brana pod uwagę podczas punktacji">❗</abbr>
+                    <td>{{ trasa.getSuma_punktow }} / {{ trasa.getSumaPunktowDoGot }} <abbr
+                                title="Twoja trasa zawiera zdublowane odcinki, które nie będą brane pod uwagę do punktacji GOT"> ❗</abbr>
                     </td>
                 {% endif %}
                 {% if  trasa.getZrealizowana == 0 %}
@@ -50,8 +50,13 @@
                 {% endif %}
                 <td class="text-right">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        {% if trasa.getZrealizowana == 0 %}
                         <abbr title="Konfiguruj odcinki trasy"><a class="btn btn-sm btn-dark" href="/trasa_odcinki/konfiguruj/{{ trasa.getIdTrasa }}">Konfiguruj
                                 odcinki</a></abbr>
+                        {% else %}
+                            <abbr title="Konfiguruj odcinki trasy"><a class="btn disabled btn-sm btn-dark" href="/trasa_odcinki/konfiguruj/{{ trasa.getIdTrasa }}" >Konfiguruj
+                                    odcinki</a></abbr>
+                        {% endif %}
                         <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
                                                 href="/trasa/form/{{ trasa.getIdTrasa }}">✏️</a></abbr>
                         <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
@@ -104,6 +109,7 @@
                     <input type="hidden" id="zrealizowana" name="zrealizowana" value="0">
                     <input type="hidden" id="dubel" name="dubel" value="0">
                     <input type="hidden" id="suma_punktow" name="suma_punktow" value="0">
+                    <input type="hidden" id="sumaPunktowDoGot" name="sumaPunktowDoGot" value="0">
 
                     <button type="submit" class="btn btn-info">Utwórz +</button>
                 </form>
