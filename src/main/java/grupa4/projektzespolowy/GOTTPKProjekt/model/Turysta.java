@@ -1,5 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,14 @@ public class Turysta {
 
     @Column(name = "punkty")
     private int punkty;
+
+    @Column(name = "niepelnosprawnosc")
+    private boolean niepelnosprawnosc;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(value = TemporalType.DATE)
+    @Column(name = "data_urodzenia")
+    private java.util.Date data_urodzenia;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")

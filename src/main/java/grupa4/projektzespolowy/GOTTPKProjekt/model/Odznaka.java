@@ -16,6 +16,9 @@ public class Odznaka {
     @Column(name = "nazwa", nullable=true, length=50)
     private String nazwa;
 
+    @Column(name = "punkty")
+    private int punkty;
+
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_odznaka", referencedColumnName = "id_odznaka")
