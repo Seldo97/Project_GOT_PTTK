@@ -13,7 +13,7 @@ public class Odznaka {
     @Column(name = "id_odznaka")
     private int idOdznaka;
 
-    @Column(name = "nazwa", nullable=true, length=50)
+    @Column(name = "nazwa", nullable=true, length=100)
     private String nazwa;
 
     @Column(name = "punkty")
