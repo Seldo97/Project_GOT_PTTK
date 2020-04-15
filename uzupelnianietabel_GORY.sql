@@ -852,51 +852,51 @@ GO
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("W góry - br¹zowa", 15);
+VALUES ('W góry - br¹zowa', 15);
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("W góry - srebrna", 30);
+VALUES ('W góry - srebrna', 30);
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("W góry - z³ota", 45);
+VALUES ('W góry - z³ota', 45);
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("Popularna", 60);
-
-
-INSERT INTO dbo.odznaka
-(nazwa, punkty)
-VALUES ("Ma³a - br¹zowa", 120);
-
-INSERT INTO dbo.odznaka
-(nazwa, punkty)
-VALUES ("Ma³a - srebrna", 360);
-
-INSERT INTO dbo.odznaka
-(nazwa, punkty)
-VALUES ("Ma³a - z³ota", 720);
+VALUES ('Popularna', 60);
 
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("Du¿a - br¹zowa", 0);
+VALUES ('Ma³a - br¹zowa', 120);
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("Du¿a - srebrna", 100);
+VALUES ('Ma³a - srebrna', 360);
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("Du¿a - z³ota", 150);
+VALUES ('Ma³a - z³ota', 720);
 
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("Za wytrwa³oœæ - ma³a", 0);
+VALUES ('Du¿a - br¹zowa', 0);
 
 INSERT INTO dbo.odznaka
 (nazwa, punkty)
-VALUES ("Za wytrwa³oœæ - du¿a", 0);
+VALUES ('Du¿a - srebrna', 100);
+
+INSERT INTO dbo.odznaka
+(nazwa, punkty)
+VALUES ('Du¿a - z³ota', 150);
+
+
+INSERT INTO dbo.odznaka
+(nazwa, punkty)
+VALUES ('Za wytrwa³oœæ - ma³a', 0);
+
+INSERT INTO dbo.odznaka
+(nazwa, punkty)
+VALUES ('Za wytrwa³oœæ - du¿a', 0);
