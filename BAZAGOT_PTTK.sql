@@ -36,8 +36,10 @@ CREATE TABLE Turysta
 	nazwisko VARCHAR(50) NOT NULL,
 	telefon VARCHAR(11) NOT NULL,
 	id_uzytkownik INT UNIQUE,
+	data_urodzenia date,
 	opis VARCHAR(250),
-	punkty INT
+	punkty INT,
+	niepelnosprawnosc bit
 );
 
 
@@ -57,7 +59,8 @@ CREATE TABLE Grupa_Przodownik
 CREATE TABLE Odznaka
 (
 	id_odznaka INT PRIMARY KEY,
-	nazwa VARCHAR(50) UNIQUE NOT NULL
+	nazwa VARCHAR(50) UNIQUE NOT NULL,
+	punkty int
 );
 
 CREATE TABLE Pasmo

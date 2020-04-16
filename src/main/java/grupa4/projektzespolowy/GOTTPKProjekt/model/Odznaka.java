@@ -13,8 +13,11 @@ public class Odznaka {
     @Column(name = "id_odznaka")
     private int idOdznaka;
 
-    @Column(name = "nazwa", nullable=true, length=50)
+    @Column(name = "nazwa", nullable=true, length=100)
     private String nazwa;
+
+    @Column(name = "punkty")
+    private int punkty;
 
 
     @OneToMany(cascade = CascadeType.PERSIST)
@@ -58,6 +61,14 @@ public class Odznaka {
 
     public void setTurystaOdznaka(List<TurystaOdznaka> turystaOdznaka) {
         this.turystaOdznaka = turystaOdznaka;
+    }
+
+    public int getPunkty() {
+        return punkty;
+    }
+
+    public void setPunkty(int punkty) {
+        this.punkty = punkty;
     }
 
     public List<Wycieczka> getWycieczki() {

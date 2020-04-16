@@ -67,6 +67,7 @@ public class OdznakaController {
         Odznaka odznakaToEdit = odznakaServiceImpl.getOneById(odznaka.getIdOdznaka());
 
         odznakaToEdit.setNazwa(odznaka.getNazwa());
+        odznakaToEdit.setPunkty(odznaka.getPunkty());
         odznakaServiceImpl.createOdznaka(odznakaToEdit);
 
         return "redirect:/odznaki";

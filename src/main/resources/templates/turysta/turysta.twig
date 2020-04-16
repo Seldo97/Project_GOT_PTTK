@@ -8,44 +8,53 @@
            xmlns:word-wrap="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml"
            xmlns:overflow-x="http://www.w3.org/1999/xhtml">
         <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Imie</th>
-                <th scope="col">Nazwisko</th>
-                <th scope="col">Telefon</th>
-                <th scope="col">Uzytkownik</th>
-                <th scope="col">Opis</th>
-                <th scope="col">Punkty</th>
-                <th scope="col"></th>
-            </tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Imie</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Data Urodzenia</th>
+            <th scope="col">Uzytkownik</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Niepełnosprawność</th>
+            <th scope="col">Punkty</th>
+            <th scope="col"></th>
+        </tr>
         </thead>
         <tbody>
 
         {% for turysta in turysci %}
-        <tr>
-          <td>{{ turysta.getIdTurysta }}</td>
-          <td>{{ turysta.getImie }}</td>
-          <td>{{ turysta.getNazwisko }}</td>
-          <td>{{ turysta.getTelefon }}</td>
-          <td>{{ turysta.uzytkownik.getLogin }}</td>
-          <td><div style='max-height: 65px; width: 100px; word-wrap: break-word; overflow-x: auto;'>{{ turysta.getOpis }}</div></td>
-          <td>{{ turysta.getPunkty }}</td>
-            <td class="text-right">
-                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                    <abbr title="Odznaki"><a class="btn btn-sm bg-transparent" href="/turystaodznaki/znajdzOdznakiTurysty?idTurysta={{ turysta.getIdTurysta }}">🏅</a></abbr>
-                    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-                        <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/turysci/updateForm?id={{ turysta.getIdTurysta }}">✏️</a></abbr>
-                        <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/turysci/usun/{{ turysta.getIdTurysta }}">🗑️</a></abbr>
-                    {% endif %}
-                </div>
-            </td>
-          
-        </tr>
-        {%  endfor %}
+            <tr>
+                <td>{{ turysta.getIdTurysta }}</td>
+                <td>{{ turysta.getImie }}</td>
+                <td>{{ turysta.getNazwisko }}</td>
+                <td>{{ turysta.getTelefon }}</td>
+                <td>{{ turysta.getDataUrodzenia }}</td>
+                <td>{{ turysta.uzytkownik.getLogin }}</td>
+                <td>
+                    <div style='max-height: 65px; width: 100px; word-wrap: break-word; overflow-x: auto;'>{{ turysta.getOpis }}</div>
+                </td>
+                <td>{{ turysta.getNiepelnosprawnosc }}</td>
+                <td>{{ turysta.getPunkty }}</td>
+                <td class="text-right">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <abbr title="Odznaki"><a class="btn btn-sm bg-transparent"
+                                                 href="/turystaodznaki/znajdzOdznakiTurysty?idTurysta={{ turysta.getIdTurysta }}">🏅</a></abbr>
+                        {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                            <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
+                                                    href="/turysci/updateForm?id={{ turysta.getIdTurysta }}">✏️</a></abbr>
+                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
+                                                  href="/turysci/usun/{{ turysta.getIdTurysta }}">🗑️</a></abbr>
+                        {% endif %}
+                    </div>
+                </td>
+
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-    	<a class="btn btn-info" href="/turysci/addForm" role="button">Dodaj</a>
+        <a class="btn btn-info" href="/turysci/addForm" role="button">Dodaj</a>
     {% endif %}
 
 {% endblock %}
