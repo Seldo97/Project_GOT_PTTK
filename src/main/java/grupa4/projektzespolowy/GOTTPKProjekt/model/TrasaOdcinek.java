@@ -24,6 +24,9 @@ public class TrasaOdcinek {
     @Column(name = "powrot")
     private int powrot;
 
+    @Column(name = "dubel")
+    private int dubel;
+
     public TrasaOdcinek() {
     }
 
@@ -72,5 +75,13 @@ public class TrasaOdcinek {
 
     public void setPowrot(int powrot) {
         this.powrot = powrot;
+    }
+
+    public int getDubel() {
+        return dubel;
+    }
+
+    public void setDubel(int dubel) {
+        this.dubel = dubel;
     }
 }

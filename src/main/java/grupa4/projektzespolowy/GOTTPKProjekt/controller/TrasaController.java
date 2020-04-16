@@ -70,14 +70,13 @@ public class TrasaController {
         Trasa trasa = trasaService.getOneById(idTrasa);
         if (trasa.getZrealizowana() == 0) {
             trasa.setZrealizowana(1);
-            if (trasa.getDubel() == 0)
-                trasa.getWycieczka()
-                        .setSumaPunktow(trasa.getWycieczka().getSumaPunktow() + trasa.getSuma_punktow());
+            trasa.getWycieczka().setSumaPunktow(trasa.getWycieczka().getSumaPunktow() + trasa.getSuma_punktow());
+            trasa.getWycieczka().setSumaPunktowDoGot(trasa.getWycieczka().getSumaPunktowDoGot() + trasa.getSumaPunktowDoGot());
+
         } else {
             trasa.setZrealizowana(0);
-            if (trasa.getDubel() == 0)
-                trasa.getWycieczka()
-                        .setSumaPunktow(trasa.getWycieczka().getSumaPunktow() - trasa.getSuma_punktow());
+            trasa.getWycieczka().setSumaPunktow(trasa.getWycieczka().getSumaPunktow() - trasa.getSuma_punktow());
+            trasa.getWycieczka().setSumaPunktowDoGot(trasa.getWycieczka().getSumaPunktowDoGot() - trasa.getSumaPunktowDoGot());
         }
 
         trasaService.createTrasa(trasa);

@@ -1,7 +1,10 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,6 +30,14 @@ public class Turysta {
     @Column(name = "punkty")
     private int punkty;
 
+    @Column(name = "niepelnosprawnosc")
+    private boolean niepelnosprawnosc;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(value = TemporalType.DATE)
+    @Column(name = "data_urodzenia")
+    private java.util.Date dataUrodzenia;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
     private Uzytkownik Uzytkownik;
@@ -42,13 +53,15 @@ public class Turysta {
     public Turysta() {
     }
 
-    public Turysta(String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis, int punkty) {
+    public Turysta(String imie, String nazwisko, String telefon, Uzytkownik idUzytkownik, String opis, int punkty, boolean niepelnosprawnosc, Date dataUrodzenia) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.telefon = telefon;
         this.Uzytkownik = idUzytkownik;
         this.opis = opis;
         this.punkty = punkty;
+        this.dataUrodzenia = dataUrodzenia;
+        this.niepelnosprawnosc = niepelnosprawnosc;
     }
 
 
@@ -111,9 +124,28 @@ public class Turysta {
         this.punkty = punkty;
     }
 
+    public boolean isNiepelnosprawnosc() {
+        return niepelnosprawnosc;
+    }
+
+    public void setNiepelnosprawnosc(boolean niepelnosprawnosc) {
+        this.niepelnosprawnosc = niepelnosprawnosc;
+    }
+
+    public Date getDataUrodzenia() {
+        return dataUrodzenia;
+    }
+
+    public void setDataUrodzenia(Date data_urodzenia) {
+        this.dataUrodzenia = data_urodzenia;
+    }
 
     public Uzytkownik getUzytkownik() {
         return Uzytkownik;
+    }
+
+    public void setUzytkownik(Uzytkownik uzytkownik) {
+        Uzytkownik = uzytkownik;
     }
 
     public int getidUzytkownik() {
@@ -122,10 +154,6 @@ public class Turysta {
 
     public String getNazwaUzytkownik() {
         return Uzytkownik.getLogin();
-    }
-
-    public void setUzytkownik(Uzytkownik uzytkownik) {
-        Uzytkownik = uzytkownik;
     }
 
     public List<TurystaOdznaka> getTurystaOdznaka() {

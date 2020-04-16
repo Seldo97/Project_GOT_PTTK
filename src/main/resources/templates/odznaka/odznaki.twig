@@ -11,6 +11,7 @@
             <tr>
                 <th scope="col" width="20px">#</th>
                 <th scope="col">Nazwa</th>
+                <th scope="col">Punkty</th>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
                 {% endif %}
@@ -22,6 +23,7 @@
         <tr>
               <td>{{ odznaka.getIdOdznaka}}</td>
               <td>{{ odznaka.getNazwa }}</td>
+              <td>{{ odznaka.getPunkty }}</td>
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
