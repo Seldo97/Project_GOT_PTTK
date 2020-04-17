@@ -23,6 +23,11 @@ public interface OdcinekService {
 
     List<Odcinek> getAllByIdPunktKoncowyAndPunktyDo(Punkt punktKon, int punktyDo);
 
+    List<Odcinek> getAllByPasmo_IdPasmo(int idPasmo);
+
+   // List<Odcinek> getAllByGrupa_idGrupa(int idGrupa);
+
+    List<Odcinek> getAllByPasmo_Grupa_IdGrupa(int idGrupa);
 
 
 }

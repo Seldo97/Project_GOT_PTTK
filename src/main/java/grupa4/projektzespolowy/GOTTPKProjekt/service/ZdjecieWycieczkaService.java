@@ -11,6 +11,8 @@ public interface ZdjecieWycieczkaService {
 	    List<ZdjecieWycieczka> getAllZdjecia();
 
 	    ZdjecieWycieczka getOneById(Integer id);
-
+	    
+	    List<ZdjecieWycieczka> getAllZdjeciaByIdWycieczka(Integer id);
+	    
 	    void removeZdjecie(Integer id);
 }
