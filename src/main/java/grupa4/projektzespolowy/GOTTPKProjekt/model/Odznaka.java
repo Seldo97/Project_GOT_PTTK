@@ -63,6 +63,14 @@ public class Odznaka {
         this.turystaOdznaka = turystaOdznaka;
     }
 
+    public int getPunkty() {
+        return punkty;
+    }
+
+    public void setPunkty(int punkty) {
+        this.punkty = punkty;
+    }
+
     public List<Wycieczka> getWycieczki() {
         return wycieczki;
     }
