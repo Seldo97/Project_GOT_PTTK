@@ -1,6 +1,5 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Ksiazeczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;

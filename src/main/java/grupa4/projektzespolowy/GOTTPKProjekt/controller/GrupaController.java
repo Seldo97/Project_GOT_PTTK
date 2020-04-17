@@ -1,10 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Grupa;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.GrupaServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 

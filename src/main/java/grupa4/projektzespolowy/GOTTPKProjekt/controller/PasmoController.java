@@ -2,9 +2,6 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Grupa;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.GrupaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.PasmoServiceImpl;
 
