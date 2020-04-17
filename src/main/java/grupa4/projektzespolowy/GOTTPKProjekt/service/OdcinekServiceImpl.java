@@ -49,4 +49,23 @@ public class OdcinekServiceImpl implements OdcinekService {
     public List<Odcinek> getAllByIdPunktKoncowyAndPunktyDo(Punkt punktKon, int punktyDo) {
         return odcinekRepository.findAllByPunktKoncowyAndPunktyDo(punktKon, punktyDo);
     }
+
+    @Override
+    public  List<Odcinek> getAllByPasmo_IdPasmo(int idPasmo) {
+        return odcinekRepository.findAllByPasmo_IdPasmo(idPasmo);
+    }
+
+    @Override
+    public  List<Odcinek> getAllByPasmo_Grupa_IdGrupa(int idPasmo) {
+        return odcinekRepository.findAllByPasmo_Grupa_IdGrupa(idPasmo);
+    }
+
+//    @Override
+//    public  List<Odcinek> getAllByGrupa_idGrupa(int idGrupa) {
+//        return odcinekRepository.findAllByGrupa_IdGrupa(idGrupa);
+//    }
+
+
+
+
 }

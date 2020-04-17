@@ -34,8 +34,8 @@ public class Turysta {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(value = TemporalType.DATE)
-    @Column(name = "data_urodzenia")
-    private java.util.Date data_urodzenia;
+    @Column(name = "dataUrodzenia")
+    private java.util.Date dataUrodzenia;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")

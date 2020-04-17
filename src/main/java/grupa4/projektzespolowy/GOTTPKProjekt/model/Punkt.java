@@ -10,7 +10,7 @@ public class Punkt {
     @Column(name = "id_punkt")
     private int idpunkt;
 
-    @Column(name = "nazwa", nullable=true, length=50)
+    @Column(name = "nazwa", nullable=true, length=100)
     private String nazwa;
 
 
