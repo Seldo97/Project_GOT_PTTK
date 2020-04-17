@@ -40,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/regulamin").permitAll()
                 .antMatchers("/odcinki").permitAll()
+                .antMatchers("/odcinkiWybor","/odcinki/allPasmo/*", "/odcinki/allGrupa/*" ).permitAll()
                 .antMatchers("/prevPage").permitAll()
                 .antMatchers("/panel").hasRole("administrator")
                 .antMatchers("/error").hasRole("administrator")

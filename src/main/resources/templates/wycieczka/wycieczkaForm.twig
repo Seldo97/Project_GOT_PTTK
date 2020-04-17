@@ -20,17 +20,17 @@
         <div class="form-group">
             <label for="opis">Krótki opis</label>
             <textarea class="form-control" id="opis" name="opis"
-                      value="{{ wycieczka.getOpis }}">{{ wycieczka.getOpis }}</textarea>
+                      value="{{ wycieczka.getOpis }}" required>{{ wycieczka.getOpis }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="dataOd">Data rozpoczęcia wycieczki</label>
-            <input type="date" class="form-control" id="dataOd" name="dataOd" value="{{ wycieczka.getDataOd }}">
+            <input type="date" class="form-control" id="dataOd" name="dataOd" value="{{ wycieczka.getDataOd }}" min = {{ "now"|date("Y-MM-dd") }} max="2050-12-12" required>
         </div>
 
         <div class="form-group">
             <label for="dataDo">Data zakończenia wycieczki</label>
-            <input type="date" class="form-control" id="dataDo" name="dataDo" value="{{ wycieczka.getDataDo }}">
+            <input type="date" class="form-control" id="dataDo" name="dataDo" value="{{ wycieczka.getDataDo }}" min = {{ "now"|date("Y-MM-dd") }}  max="2050-12-12" required>
         </div>
 
         <div class="form-group">
