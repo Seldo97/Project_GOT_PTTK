@@ -2,6 +2,7 @@
 {% block title %}Turysta tabela{% endblock %}
 {% block header %}
     Turysta
+    {{ turysta.getNiepelnosprawnosc }}
 {% endblock %}
 {% block main %}
     <table id="myTable" class="table table-striped align-middle table-sm"
@@ -34,7 +35,11 @@
                 <td>
                     <div style='max-height: 65px; width: 100px; word-wrap: break-word; overflow-x: auto;'>{{ turysta.getOpis }}</div>
                 </td>
-                <td>{{ turysta.getNiepelnosprawnosc }}</td>
+                {% if turysta.isNiepelnosprawnosc %}
+                    <td>Tak</td>
+                {% else %}
+                    <td>Nie</td>
+                {% endif %}
                 <td>{{ turysta.getPunkty }}</td>
                 <td class="text-right">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
