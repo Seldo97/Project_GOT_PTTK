@@ -51,6 +51,8 @@ public class TurystaController {
         modelAndView.addObject("turysci", turystaServiceImpl.getAllTurysta());
         modelAndView.addObject("LoggedUser", authentication);
 
+        //turystaServiceImpl.getAllTurysta().get(0).getN
+
         return modelAndView;
     }
 
