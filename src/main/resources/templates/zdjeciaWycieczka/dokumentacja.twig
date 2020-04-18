@@ -2,9 +2,10 @@
 
 {% block title %}Dokumentacja{% endblock %}
 {% block header %}
-    Galeria
+    Ksiazeczka
 {% endblock %}
 {% block main %}
+<<<<<<< HEAD
     {{ siema }}
     <div class="col-12">
         {% for zdjecie in zdjecia %}
@@ -17,4 +18,61 @@
     <a class="btn btn-info" href="/zdjecia/form/{{ idWycieczka }}" role="button">Dodaj Zdj�cia</a>
 
 
+=======
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Opis Trasa</th>
+            <th scope="col"></th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for trasa in trasy %}
+            <tr>
+                <td>{{ trasa.getIdTrasa}}</td>
+                <td>{{ trasa.getOpis }}</td>
+                 <td class="text-right">
+                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                              <abbr title="Szczegóły trasy"><a class="btn btn-sm bg-transparent" href="/trasa/szczegoly/{{ trasa.getIdTrasa}}">🔖</a></abbr>   
+                        </div>
+                  </td>
+            </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+         	<div class="col-12">
+                 {% for zdjecie in zdjecia %}
+    		  	<a class="demo" href="{{ zdjecie.getSciezka }}" data-lightbox="gallery" data-title="{{ zdjecie.getOpis }}">
+  				<img class="example-image" src="{{ zdjecie.getSciezka }}" alt="zdjecie" witdh="150px" height="150px" />
+				</a>
+                {% endfor %}
+            </div>
+            <br><br>
+   			 <a class="btn btn-info" id="formButton"  role="button">Dodaj Zdjęcia</a>
+   			 <a class="btn btn-info" id="odswiez"  role="button">Odswież</a>
+   			   <br><br>
+                   	<form id="addFormWycieczka" action="/zdjecie/dodaj/{{ idWycieczka }}" method="POST" enctype="multipart/form-data" >
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="files">Zdjęcie</label>
+                                    <input type="file" class="form-control" id="files" name="files" multiple="multiple" accept="image/*">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="opis">Opis</label>
+                                    <br>
+             
+                                    <textarea id="opis" name="opis" rows="4" cols="50"></textarea>
+                                </div>
+                             </fieldset>
+                            <button type="submit" class="btn btn-info">Dodaj</button>
+                    </form>
+>>>>>>> fe92636c210b4ec23f0aa9a936f81818d7b5fa17
 {% endblock %}

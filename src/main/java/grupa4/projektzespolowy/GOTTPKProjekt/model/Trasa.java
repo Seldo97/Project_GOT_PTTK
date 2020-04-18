@@ -1,6 +1,5 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
-import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

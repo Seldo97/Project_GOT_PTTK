@@ -41,3 +41,13 @@ color: whitesmoke;
 a:hover{
     color:inherit;
 }
+
+#addFormWycieczka
+{
+	
+ padding: 15px;
+  border: 1px solid #666;
+  background: #fff;
+  display: none;
+}
+

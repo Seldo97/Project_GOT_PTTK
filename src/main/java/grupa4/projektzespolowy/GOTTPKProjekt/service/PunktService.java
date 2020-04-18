@@ -1,7 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Punkt;
 
 import java.util.List;

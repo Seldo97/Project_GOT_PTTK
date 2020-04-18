@@ -5,23 +5,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.ZdjecieWycieczka;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.TrasaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.WycieczkaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.ZdjecieWycieczkaServiceImpl;
 
@@ -35,6 +34,9 @@ public class ZdjecieWycieczkaController
 	private ZdjecieWycieczkaServiceImpl zdjecieWycieczkaServiceImpl;
 	
 	@Autowired
+    private TrasaServiceImpl trasaService;
+	
+	@Autowired
 	private WycieczkaServiceImpl WycieczkaServiceImpl;
 	
 	 @GetMapping("/zdjecia/{idWycieczka}") // ścieżka na której zostanie obsłużona metoda
@@ -42,25 +44,19 @@ public class ZdjecieWycieczkaController
 	    {
 	        model.addAttribute("LoggedUser", authentication);
 	        model.addAttribute("idWycieczka", idWycieczka);
+	        model.addAttribute("trasy", trasaService.getAllByIdWycieczka(idWycieczka));
 	        model.addAttribute("zdjecia", zdjecieWycieczkaServiceImpl.getAllZdjeciaByIdWycieczka(idWycieczka));
 	        return "zdjeciaWycieczka/dokumentacja";
 	    }
-	 
-		@GetMapping("/zdjecia/form/{idWycieczka}")
-		public ModelAndView addformZdjecie(Authentication authentication, @PathVariable() Integer idWycieczka)
-		{
-			ModelAndView modelAndView = new ModelAndView("zdjeciaWycieczka/addZdjecia");
-			modelAndView.addObject("idWycieczka", idWycieczka);
-			modelAndView.addObject("LoggedUser", authentication);
-			return modelAndView;
-		}
 	 
 	 
 	 @PostMapping("/zdjecie/dodaj/{idWycieczka}") // ścieżka na której zostanie obsłużona metoda
 	    public String addZdjeciaDoWycieczki(Model model,@RequestParam("files") MultipartFile[] files, 
 	    									Authentication authentication,@PathVariable() 
 	    									Integer idWycieczka,
-	    									@RequestParam(value="opis") String opis) throws IOException 
+	    									@RequestParam(value="opis") String opis,
+	    									 HttpServletRequest request,
+	    									 RedirectAttributes redirectAttributes) throws IOException 
 	    {
 		 	
 		 	//Zapisuje pliki do folderu static/images/zdjecieWycieczek
@@ -79,8 +75,8 @@ public class ZdjecieWycieczkaController
 			 	zdjecie.setWycieczka(wycieczka);
 			 	zdjecieWycieczkaServiceImpl.createZdjecie(zdjecie);
 		 	}
-		 	
-		 	
-	        return "zdjeciaWycieczka/zdjecia";
+		 	redirectAttributes.addFlashAttribute("success_msg", "Dodano zdjęcia.");
+		 	return "redirect:" + request.getHeader("Referer");
 	    }
+	 
 }

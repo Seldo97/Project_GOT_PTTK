@@ -3,7 +3,6 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.service.KsiazeczkaServiceImpl;
