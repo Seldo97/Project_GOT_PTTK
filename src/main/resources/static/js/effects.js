@@ -12,3 +12,9 @@ $(document).ready(function(){
         $("#trasaForm").slideToggle();
     });
 });
+
+$(document).ready(function(){
+    $("#toggleButton").click(function(){
+        $("#zdjeciaForm").slideToggle();
+    });
+});
