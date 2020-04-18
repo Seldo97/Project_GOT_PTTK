@@ -35,11 +35,7 @@ public class Turysta {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(value = TemporalType.DATE)
-<<<<<<< HEAD
-    @Column(name = "dataUrodzenia")
-=======
     @Column(name = "data_urodzenia")
->>>>>>> 86aa9bb3f0cb38be16c2bc4c5d5e9ffa209bcf3a
     private java.util.Date dataUrodzenia;
 
     @OneToOne(cascade = CascadeType.ALL)

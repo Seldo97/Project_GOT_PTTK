@@ -5,16 +5,16 @@
     Galeria
 {% endblock %}
 {% block main %}
-    {{siema}}
-            <div class="col-12">
-                 {% for zdjecie in zdjecia %}
-    		  	<a class="demo" href="{{ zdjecie.getSciezka }}" data-lightbox="gallery">
-  				<img class="example-image" src="{{ zdjecie.getSciezka }}" alt="zdjecie" witdh="150px" height="150px" />
-				</a>
-                {% endfor %}
-            </div>
-            <br><br>
-   			 <a class="btn btn-info" href="/zdjecia/form/{{ idWycieczka}}" role="button">Dodaj Zdjêcia</a>
-   		
-		
+    {{ siema }}
+    <div class="col-12">
+        {% for zdjecie in zdjecia %}
+            <a class="demo" href="{{ zdjecie.getSciezka }}" data-lightbox="gallery">
+                <img class="example-image" src="{{ zdjecie.getSciezka }}" alt="zdjecie" witdh="150px" height="150px"/>
+            </a>
+        {% endfor %}
+    </div>
+    <br><br>
+    <a class="btn btn-info" href="/zdjecia/form/{{ idWycieczka }}" role="button">Dodaj Zdjêcia</a>
+
+
 {% endblock %}
