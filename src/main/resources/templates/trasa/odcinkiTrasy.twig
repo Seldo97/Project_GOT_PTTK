@@ -61,8 +61,11 @@
                 <td class="text-right">
                     {% if odcinekTrasy.getIdTrasaOdcinek == i %}
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
-                                                  href="/trasa_odcinki/usun/{{ odcinekTrasy.getIdTrasaOdcinek }}">❌</a></abbr>
+                            {% if trasa.getWycieczka.getZgloszona == 1 or trasa.getWycieczka.getZatwierdzona == 1 or trasa.getZrealizowana == 1 %}
+                            {% else %}
+                                <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
+                                                      href="/trasa_odcinki/usun/{{ odcinekTrasy.getIdTrasaOdcinek }}">❌</a></abbr>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </td>
@@ -73,6 +76,8 @@
         </tbody>
     </table>
 
+    {% if trasa.getWycieczka.getZgloszona == 1 or trasa.getWycieczka.getZatwierdzona == 1 or trasa.getZrealizowana == 1 %}
+    {% else %}
     <div class="row">
         <div class="col-12 col-md-8" id="form">
 
@@ -118,11 +123,16 @@
 
         </div>
     </div>
+    {% endif %}
    
     <div class="mt-5">
-        <a class="btn btn-dark" role="button" href="/trasy/{{ trasa.getWycieczka.getIdWycieczka }}"> Zatwierdź ✔️</a>
-        <a class="btn btn-danger" role="button" href="/trasa_odcinki/usun_wszystko/{{ trasa.getIdTrasa }}"> Usuń
-            wszystko 🗑️</a>
+        {% if trasa.getWycieczka.getZgloszona == 1 or trasa.getWycieczka.getZatwierdzona == 1 or trasa.getZrealizowana == 1 %}
+            <a class="btn btn-dark" role="button" href="/trasy/{{ trasa.getWycieczka.getIdWycieczka }}"> Ok ✔️</a>
+        {% else %}
+            <a class="btn btn-dark" role="button" href="/trasy/{{ trasa.getWycieczka.getIdWycieczka }}"> Zatwierdź ✔️</a>
+            <a class="btn btn-danger" role="button" href="/trasa_odcinki/usun_wszystko/{{ trasa.getIdTrasa }}"> Usuń
+                wszystko 🗑️</a>
+        {% endif %}
     </div>
     <br><br>
     <h3>Zamknięte Odcinki</h3>
