@@ -55,11 +55,12 @@ public class TrasaOdcinekController {
             }
         }
         //odcinkiTrasy.get(0).getOdcinek().getPunktKoncowy().getIdpunkt();
-
+        
         model.addAttribute("odcinkiTrasy", odcinkiTrasy);
         model.addAttribute("trasa", trasa);
         model.addAttribute("dubelTras", dubelTras);
         model.addAttribute("odcinki", odcinki);
+        model.addAttribute("odcinkiZamkniete",odcinekService.getAllByOtwartyAndIdPasmo(0, trasa.getPasmo().getIdPasmo()));
         model.addAttribute("LoggedUser", authentication);
 
         return "trasa/odcinkiTrasy";

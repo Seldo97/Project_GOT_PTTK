@@ -48,19 +48,18 @@
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                             <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
-                                                    href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">✏️</a></abbr>
+                                                    href="/odcinki/form/{{ odcinek.getIdOdcinek }}">✏️</a></abbr>
                             <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
-                                                  href="/odznaki/usun/{{ odznaka.getIdOdznaka }}">🗑️</a></abbr>
+                                                  href="/odcinki/usun/{{ odcinek.getIdOdcinek }}">🗑️</a></abbr>
                         </div>
                     </td>
                 {% endif %}
             </tr>
         {% endfor %}
-
         </tbody>
     </table>
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-        <a class="btn btn-info" href="/odznaki/form" role="button">Dodaj</a>
+        <a class="btn btn-info" href="/odcinki/form" role="button">Dodaj</a>
     {% endif %}
 
 {% endblock %}

@@ -1,0 +1,51 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Wycieczki Tabela{% endblock %}
+{% block header %}
+    Wycieczki
+{% endblock %}
+{% block main %}
+    {{siema}}
+  
+        <table id="myTable" class="table table-striped align-middle table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" width="20px">#</th>
+                <th scope="col">Opis</th>
+                <th scope="col">Data od</th>
+                <th scope="col">Data do</th>
+                <th scope="col">Suma pkt / do GOT</th>
+                <th scope="col">Zatwierdzona</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for wycieczka in wycieczki %}
+            
+            {% if  wycieczka.getZgloszona == 1 %}
+                <tr>
+                    <td>{{ wycieczka.getIdWycieczka }}</td>
+                    <td><div style='text-align: left; max-height: 72px; width: 155px; word-wrap: break-word; overflow-x: auto; hyphens: auto;'>{{ wycieczka.getOpis}}</div></td>
+                    <td>{{ wycieczka.getDataOd }}</td>
+                    <td>{{ wycieczka.getDataDo }}</td>
+                    <td>{{ wycieczka.getSumaPunktow }} / {{ wycieczka.getSumaPunktowDoGot }}</td>
+                    {% if  wycieczka.getZatwierdzona == 0 %}
+                        <td>Nie</td>
+                    {% else %}
+                        <td>Tak</td>
+                    {% endif %}
+                        <td class="text-right">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <abbr title="Dokumentacja"><a class="btn btn-sm bg-transparent" href="/zdjecia/{{ wycieczka.getIdWycieczka }}">📷</a></abbr>
+                            </div>
+                        </td>
+                </tr>
+            {% endif %}
+            {%  endfor %}
+            
+
+            </tbody>
+        </table>
+
+{% endblock %}

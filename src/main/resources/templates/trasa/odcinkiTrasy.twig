@@ -87,18 +87,26 @@
                     <select name="odcinek" class="form-control" required>
                         <option value="">--Wybierz odcinek--</option>
                         {% for odcinek in odcinki %}
-                            {% if odcinek.getPunktyDo != 0 %}
+                        {% if odcinek. getOtwarty == 0 %}
+                        	<option value="{{ odcinek.getIdOdcinek }}" disabled>{{ odcinek.getPunktPoczatkowy.getNazwa }}
+                                    &nbsp;&nbsp;&nbsp;<strong>&#11108;</strong>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ odcinek.getPunktKoncowy.getNazwa }}
+                                    [{{ odcinek.getPunktyOd }}/{{ odcinek.getPunktyDo }}]
+                                </option>
+                                
+                                {% elseif odcinek.getPunktyDo != 0 %}
                                 <option value="{{ odcinek.getIdOdcinek }}">{{ odcinek.getPunktPoczatkowy.getNazwa }}
                                     &nbsp;&nbsp;&nbsp;<strong>&#11108;</strong>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{{ odcinek.getPunktKoncowy.getNazwa }}
                                     [{{ odcinek.getPunktyOd }}/{{ odcinek.getPunktyDo }}]
                                 </option>
-                            {% else %}
+                                
+                                {% else %}
                                 <option value="{{ odcinek.getIdOdcinek }}">{{ odcinek.getPunktPoczatkowy.getNazwa }}
                                     &nbsp;&nbsp;&nbsp;<strong>&#11106;</strong>️
                                     &nbsp;&nbsp;&nbsp;{{ odcinek.getPunktKoncowy.getNazwa }} [{{ odcinek.getPunktyOd }}]
                                 </option>
-                            {% endif %}
+                        {% endif %}
                         {% endfor %}
                     </select>
                     <span class="input-group-btn ml-2">
@@ -110,12 +118,32 @@
 
         </div>
     </div>
-
+   
     <div class="mt-5">
         <a class="btn btn-dark" role="button" href="/trasy/{{ trasa.getWycieczka.getIdWycieczka }}"> Zatwierdź ✔️</a>
         <a class="btn btn-danger" role="button" href="/trasa_odcinki/usun_wszystko/{{ trasa.getIdTrasa }}"> Usuń
             wszystko 🗑️</a>
     </div>
-
-
+    <br><br>
+    <h3>Zamknięte Odcinki</h3>
+    	 <table id="" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Punkt A</th>
+            <th scope="col">Kierunek</th>
+            <th scope="col">Punkt B</th>
+            <th scope="col">Punkty</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for zamkniete in odcinkiZamkniete %}
+            <tr>
+                    <td>{{ zamkniete.getPunktPoczatkowy.getNazwa }}</td>
+                    <td><strong>&#8654;</strong></td>
+                    <td>{{ zamkniete.getPunktKoncowy.getNazwa }}</td>
+                    <td>{{ zamkniete.getPunktyOd }}/{{ zamkniete.getPunktyDo }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
