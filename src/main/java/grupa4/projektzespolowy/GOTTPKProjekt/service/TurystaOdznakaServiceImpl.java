@@ -36,6 +36,12 @@ public class TurystaOdznakaServiceImpl implements TurystaOdznakaService{
     }
 
     @Override
+    public TurystaOdznaka findOdznaka(String nazwa, int id) {
+        return  this.turystaOdznakaRepository.findByOdznakaNazwaAndTurystaIdTurysta(nazwa, id);
+    }
+
+
+    @Override
     public TurystaOdznaka checkOfUnique(Odznaka odznaka, Turysta turysta) {
         return this.turystaOdznakaRepository.findTurystaOdznakaByOdznakaAndTurysta(odznaka, turysta);
     }

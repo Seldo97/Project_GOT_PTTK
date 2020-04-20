@@ -25,6 +25,12 @@ public class OdznakaServiceImpl implements OdznakaService{
     public Odznaka getOneById(Integer id) { return this.odznakaRepository.getOne(id); }
 
     @Override
+    public Odznaka getOneByNazwa(String nazwa){ return this.odznakaRepository.getOdznakaByNazwaEquals(nazwa);}
+
+    @Override
+    public Odznaka getTopByNazwa(String nazwa){ return this.odznakaRepository.getTopByNazwa(nazwa);}
+
+    @Override
     public void removeOdznaka(Integer id) { this.odznakaRepository.deleteById(id); }
 
 }

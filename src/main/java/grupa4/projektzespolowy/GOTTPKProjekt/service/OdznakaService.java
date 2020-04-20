@@ -11,6 +11,10 @@ public interface OdznakaService {
 
     Odznaka getOneById(Integer id);
 
+    Odznaka getOneByNazwa(String nazwa);
+
+    Odznaka getTopByNazwa(String nazwa);
+
     void removeOdznaka(Integer id);
 
 }

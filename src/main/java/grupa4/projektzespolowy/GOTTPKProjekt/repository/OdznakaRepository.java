@@ -14,4 +14,8 @@ public interface OdznakaRepository extends JpaRepository<Odznaka, Integer> {
     @Query("delete from Odznaka o where o.idOdznaka = ?1")
     public void deleteOdznaka(Integer idOdznaka);
 
+    public Odznaka getOdznakaByNazwaEquals(String nazwa);
+
+    public Odznaka getTopByNazwa(String nazwa);
+
 }

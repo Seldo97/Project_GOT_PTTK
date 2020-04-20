@@ -14,4 +14,8 @@ public interface TurystaOdznakaRepository extends JpaRepository<TurystaOdznaka, 
 
     TurystaOdznaka findTurystaOdznakaByOdznakaAndTurysta(Odznaka odznaka, Turysta turysta);
 
+    TurystaOdznaka findByOdznakaNazwa(String nazwa);
+
+    TurystaOdznaka findByOdznakaNazwaAndTurystaIdTurysta(String nazwa, int id);
+
 }

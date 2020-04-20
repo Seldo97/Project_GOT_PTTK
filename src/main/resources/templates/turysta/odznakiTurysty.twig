@@ -33,7 +33,8 @@
         </tbody>
     </table>
 
-    {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+    {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+{#        or 'ROLE_przodownik' in LoggedUser.getAuthorities#}
 
         <div class="row">
             <div class="col-12 col-md-6 mt-3" id="form">
