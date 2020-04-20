@@ -7,8 +7,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.MyUserDetails;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
@@ -50,6 +47,8 @@ public class TurystaController {
         ModelAndView modelAndView = new ModelAndView("turysta/turysta");
         modelAndView.addObject("turysci", turystaServiceImpl.getAllTurysta());
         modelAndView.addObject("LoggedUser", authentication);
+
+        //turystaServiceImpl.getAllTurysta().get(0).getN
 
         return modelAndView;
     }

@@ -51,18 +51,31 @@
                     <td>{{ wycieczka.getDataOd }}</td>
                     <td>{{ wycieczka.getDataDo }}</td>
                     <td>{{ wycieczka.getSumaPunktow }} / {{ wycieczka.getSumaPunktowDoGot }}</td>
-                    {% if  wycieczka.getZatwierdzona == 0 %}
+                    {% if wycieczka.getZgloszona == 1 %}
+                        <td>Zgłoszona</td>
+                    {% elseif  wycieczka.getZatwierdzona == 0 %}
                         <td>Nie</td>
                     {% else %}
                         <td>Tak</td>
                     {% endif %}
                         <td class="text-right">
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <abbr title="Trasy"><a class="btn btn-sm bg-transparent" href="/trasy/{{ wycieczka.getIdWycieczka }}">👣</a></abbr>
-                                <abbr title="Dokumentacja"><a class="btn btn-sm bg-transparent" href="#">📷</a></abbr>
-                                <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/wycieczka/form/{{ ksiazeczka.getIdKsiazeczka }}/{{ wycieczka.getIdWycieczka }}/1">✏️</a></abbr>
-                                <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/wycieczka/usun/{{ wycieczka.getIdWycieczka }}">🗑️</a></abbr>
-                            </div>
+                            {% if wycieczka.getZgloszona == 1 or wycieczka.getZatwierdzona == 1 %}
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <abbr title="Trasy"><a class="btn btn-sm bg-transparent" href="/trasy/{{ wycieczka.getIdWycieczka }}">👣</a></abbr>
+                                    <abbr title="Dokumentacja"><a class="btn btn-sm bg-transparent" href="/zdjecia/{{ wycieczka.getIdWycieczka }}">📷</a></abbr>
+                                    <abbr title="Edytuj"><a class="btn disabled btn-sm bg-transparent" href="/wycieczka/form/{{ ksiazeczka.getIdKsiazeczka }}/{{ wycieczka.getIdWycieczka }}/1">✏️</a></abbr>
+                                    <abbr title="Usuń"><a class="btn disabled btn-sm bg-transparent" href="/wycieczka/usun/{{ wycieczka.getIdWycieczka }}">🗑️</a></abbr>
+                                    <abbr title="Zgłoś do oceny"><a class="btn disabled btn-sm bg-transparent" href="/wycieczka/zglos/{{ wycieczka.getIdWycieczka }}">📤</a></abbr>
+                                </div>
+                            {% else %}
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <abbr title="Trasy"><a class="btn btn-sm bg-transparent" href="/trasy/{{ wycieczka.getIdWycieczka }}">👣</a></abbr>
+                                    <abbr title="Dokumentacja"><a class="btn btn-sm bg-transparent" href="/zdjecia/{{ wycieczka.getIdWycieczka }}">📷</a></abbr>
+                                    <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/wycieczka/form/{{ ksiazeczka.getIdKsiazeczka }}/{{ wycieczka.getIdWycieczka }}/1">✏️</a></abbr>
+                                    <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/wycieczka/usun/{{ wycieczka.getIdWycieczka }}">🗑️</a></abbr>
+                                    <abbr title="Zgłoś do oceny"><a class="btn btn-sm bg-transparent" href="/wycieczka/zglos/{{ wycieczka.getIdWycieczka }}">📤</a></abbr>
+                                </div>
+                            {% endif %}
                         </td>
                 </tr>
             {%  endfor %}

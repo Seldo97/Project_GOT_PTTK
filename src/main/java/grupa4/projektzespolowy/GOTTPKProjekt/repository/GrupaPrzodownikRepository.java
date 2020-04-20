@@ -1,6 +1,5 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.repository;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Grupa;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.GrupaPrzodownik;
 import org.springframework.data.jpa.repository.JpaRepository;
 

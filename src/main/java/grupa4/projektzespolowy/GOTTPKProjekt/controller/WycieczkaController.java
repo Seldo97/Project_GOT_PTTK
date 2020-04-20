@@ -2,8 +2,11 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Ksiazeczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,9 @@ public class WycieczkaController {
 
     @Autowired
     private OdznakaServiceImpl odznakaService;
+    
+    @Autowired
+    private TurystaServiceImpl turystaService;
 
     @GetMapping("/wycieczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllZdjeciaWycieczek(Model model, Authentication authentication) {
@@ -100,6 +106,43 @@ public class WycieczkaController {
 		redirectAttributes.addFlashAttribute("success_msg", "Usunięto wycieczkę ✅");
 
 		return "redirect:" + request.getHeader("Referer");
+	}
+	
+	@GetMapping("/wycieczka/zglos/{idWycieczka}")
+	public String zglosWycieczka(@PathVariable int idWycieczka,
+								HttpServletRequest request,
+								RedirectAttributes redirectAttributes){
+
+   Wycieczka wycieczkaUpdate = wycieczkaServiceImpl.getOneById(idWycieczka);
+	wycieczkaUpdate.setOpis(wycieczkaUpdate.getOpis());
+	wycieczkaUpdate.setDataOd(wycieczkaUpdate.getDataOd());
+	wycieczkaUpdate.setDataDo(wycieczkaUpdate.getDataDo());
+	wycieczkaUpdate.setSumaPunktow(wycieczkaUpdate.getSumaPunktow());
+	wycieczkaUpdate.setZatwierdzona(wycieczkaUpdate.getZatwierdzona());
+	wycieczkaUpdate.setZgloszona(1);
+	
+	wycieczkaServiceImpl.createWycieczka(wycieczkaUpdate);
+    	
+
+		redirectAttributes.addFlashAttribute("success_msg", "Zgłoszono wycieczkę do oceny ✅");
+
+		return "redirect:" + request.getHeader("Referer");
+	}
+	
+	@GetMapping("/wycieczka/zgloszone")
+	public String getWycieczki(
+								HttpServletRequest request,
+								RedirectAttributes redirectAttributes,
+								Model model,
+								Authentication authentication					
+			){
+	
+		model.addAttribute("wycieczki", wycieczkaServiceImpl.getAllWycieczkiByZgloszona(1));
+		
+		
+		//return "redirect:" + request.getHeader("Referer");
+        
+        return "wycieczka/zgloszone";
 	}
 
 }

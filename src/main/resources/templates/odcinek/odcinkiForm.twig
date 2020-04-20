@@ -1,26 +1,108 @@
 {% extends '../formTemplate.twig' %}
 
 {% block title %}
-     Formularz Odznaki
+     Formularz Odcinka
 {% endblock %}
 
 {% block header %}
-    <h2>Formularz Odznaki</h2>
+    <h2>Formularz Odcinka</h2>
 {% endblock %}
 
 {% block form %}
     {% if update == 1 %}
-        <form id="signupForm" action="/odznaki/update" method="POST">
-            <input type="hidden" name="idOdznaka" id="idOdznaka" value="{{ odznaka.getIdOdznaka }}" />
+        <form id="signupForm" action="/odcinki/update/{{ odcinek.getIdOdcinek }}" method="POST">
+            <input type="hidden" name="idOdcinek" id="idOdcinek" value="{{ odcinek.getIdOdcinek }}" />
     {% else %}
-        <form id="signupForm" action="/odznaki/dodaj" method="POST">
+        <form id="signupForm" action="/odcinki/dodaj" method="POST">
     {% endif %}
         <fieldset>
-            <legend> Zmień nazwę odznaki </legend>
-            <div class="form-group">
-                <label for="nazwa">Nazwa</label>
-                <input type="text" class="form-control" id="nazwa" name="nazwa" value="{{odznaka.getNazwa}}">
+            <legend>Odcinek </legend>
+            
+             <div class="form-group input-group">
+                    <select name="otwarty" class="form-control" required>
+                    {% if update == 1 and  odcinek.getOtwarty == 1 %}
+                        <option value="">--Wybierz opcje--</option>
+                        <option value="0">Nie </option>
+                        <option value="1" selected="selected">Tak </option>
+                        {% elseif update == 1 and  odcinek.getOtwarty == 0 %}
+                       	<option value="">--Wybierz opcje--</option>
+                        <option value="0"  selected = "selected">Nie </option>
+                        <option value="1">Tak </option>
+                        {% else %}
+                        <option value="">--Wybierz opcje--</option>
+                        <option value="0">Nie </option>
+                        <option value="1">Tak </option>
+                        {% endif %}
+                    </select>
+                </div>
+                
+             <div class="form-group">
+                <label for="punktyDo">Punkty Do</label>
+                <input type="number" class="form-control" id="punktyDo" name="punktyDo" value="{{odcinek.getPunktyDo}}">
             </div>
+            
+            <div class="form-group">
+                <label for="punktyOd">Punkty Od</label>
+                <input type="number" class="form-control" id="punktyOd" name="punktyOd" value="{{odcinek.getPunktyOd}}">
+            </div>
+            
+            
+            
+            <div class="form-group input-group">
+                    <select name="punktPoczatkowy" class="form-control" required  id="punktPoczatkowy">
+                    	 {% if update == 1 %}
+                        <option value="{{ odcinek.getPunktPoczatkowy.getIdpunkt }}" selected="selected">{{ odcinek.getPunktPoczatkowy.getNazwa }}</option>
+                        {% for punkt in punkty %}
+                                <option value="{{ punkt.getIdpunkt }}">{{ punkt.getNazwa}}
+                                </option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="">--Wybierz odcinek--</option>
+                         {% for punkt in punkty %}
+                                <option value="{{ punkt.getIdpunkt }}">{{ punkt.getNazwa}}
+                                </option>
+                        {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+                
+                 <div class="form-group input-group">
+                    <select name="punktKoncowy" class="form-control" required id="punktKoncowy">
+                       
+                       {% if update == 1 %}
+                        <option value="{{ odcinek.getPunktKoncowy.getIdpunkt }}" selected="selected">{{ odcinek.getPunktKoncowy.getNazwa }}</option>
+                        {% for punkt in punkty %}
+                                <option value="{{ punkt.getIdpunkt }}">{{ punkt.getNazwa}}
+                                </option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="">--Wybierz odcinek--</option>
+                         {% for punkt in punkty %}
+                                <option value="{{ punkt.getIdpunkt }}">{{ punkt.getNazwa}}
+                                </option>
+                        {% endfor %}
+                        {% endif %}
+                       
+                    </select>
+                </div>
+            
+             <div class="form-group input-group">
+                    <select name="pasmo" class="form-control" required>
+                       {% if update == 1 %}
+                        <option value="{{ odcinek.getPasmo.getIdPasmo }}" selected="selected">{{ odcinek.getPasmo.getNazwa}}</option>
+                         {% for pasmo in pasma %}
+                                <option value="{{ pasmo.getIdPasmo  }}">{{ pasmo.getNazwa}}
+                                </option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="">--Wybierz pasmo--</option>
+                        {% for pasmo in pasma %}
+                                <option value="{{ pasmo.getIdPasmo  }}">{{ pasmo.getNazwa}}
+                                </option>
+                        {% endfor %}
+                      {% endif %}
+                    </select>
+                </div>
 
         </fieldset>
 

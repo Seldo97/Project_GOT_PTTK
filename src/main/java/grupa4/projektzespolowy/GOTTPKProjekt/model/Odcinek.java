@@ -63,7 +63,7 @@ public class Odcinek {
     }
 
     public void setPunktPoczatkowy(Punkt punkt) {
-        this.punktPoczatkowy = getPunktPoczatkowy();
+        this.punktPoczatkowy = punkt;
     }
 
     public Punkt getPunktKoncowy() {
@@ -71,7 +71,7 @@ public class Odcinek {
     }
 
     public void setPunktKoncowy(Punkt punkt) {
-        this.punktKoncowy = getPunktKoncowy();
+        this.punktKoncowy = punkt;
     }
 
     public int getPunktyOd() {

@@ -35,6 +35,7 @@ public class Turysta {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(value = TemporalType.DATE)
+
     @Column(name = "data_urodzenia")
     private java.util.Date dataUrodzenia;
 

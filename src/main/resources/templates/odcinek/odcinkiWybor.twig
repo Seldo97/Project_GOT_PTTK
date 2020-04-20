@@ -1,0 +1,106 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Odcinki{% endblock %}
+{% block header %}
+    Wybór grupy i pasma
+{% endblock %}
+{% block main %}
+<div class="row">
+    <div class="col-12 col-md-6 mt-3">
+        <label for="grupa">Wybierz grupę</label>
+
+        <select id="grupa" class="form-control" onchange="ChangeGrupa()">
+            <option value="0">Wszystkie</option>
+            {% for grupa in grupy %}
+
+                <option value="{{ grupa.getIdGrupa }}">{{ grupa.nazwa }}</option>
+
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="pasmo">Wybierz pasmo</label>
+        <select id="pasmo" class="form-control" onchange="ChangePasmo()"> </select>
+
+
+        <br>
+        <a id="btn" class="btn btn-info" value="0" href="/odcinki">Wybierz grupę</a>
+
+
+    </div>
+
+    <script>
+        var pasma = new Array();
+
+        document.getElementById("btn").textContent = "Wybierz grupę";
+
+
+
+        {% for pasmo in pasma %}
+        pasma [{{ pasmo.getIdPasmo }}] = {
+            nazwa: "{{ pasmo.getNazwa }}",
+            idPasmo: {{ pasmo.getIdPasmo }},
+            idGrupa: {{ pasmo.getGrupa.getIdGrupa }}};
+
+
+        {% endfor %}
+
+
+
+
+        function ChangeGrupa() {
+            document.getElementById("btn").textContent = "Wybierz grupę";
+
+
+            var grupaList = document.getElementById("grupa");
+            var pasmoList = document.getElementById("pasmo");
+            var selGrupa = grupaList.options[grupaList.selectedIndex].value;
+            while (pasmoList.options.length) {
+                pasmoList.remove(0);
+            }
+
+
+            if (pasma) {
+                var i;
+
+                var pasmo = new Option("Wszystkie", 0);
+                pasmoList.options.add(pasmo);
+                for (i = 1; i < pasma.length; i++) {
+                    if ((pasma[i].idGrupa) == selGrupa) {
+                        var pasmo = new Option((pasma[i].nazwa), i);
+                        pasmoList.options.add(pasmo);
+                    }
+                }
+
+
+            }
+
+
+            if (document.getElementById("grupa").value == 0) {
+                document.getElementById("btn").textContent = "Wybierz grupę";
+                document.getElementById("btn").href = "/odcinki/allGrupa/=0";
+            } else {
+                document.getElementById("btn").textContent = "Wybierz grupę";
+                document.getElementById("btn").href = `/odcinki/allGrupa/${document.getElementById("grupa").value}`;
+            }
+        }
+
+        function ChangePasmo() {
+
+            if (document.getElementById("pasmo").value == 0) {
+                document.getElementById("btn").textContent = "Wybierz grupę";
+                document.getElementById("btn").href = "/odcinki/allPasmo/0";
+            } else {
+                document.getElementById("btn").href = `/odcinki/allPasmo/${document.getElementById("pasmo").value}`;
+                document.getElementById("btn").textContent = "Wybierz pasmo";
+
+            }
+
+
+        }
+
+
+    </script>
+
+
+    {% endblock %}

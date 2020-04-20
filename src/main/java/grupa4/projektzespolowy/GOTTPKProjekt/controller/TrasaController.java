@@ -1,11 +1,13 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.TrasaOdcinek;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Grupa;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Odcinek;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.GrupaServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.TrasaOdcinekServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TrasaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.WycieczkaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,6 +34,9 @@ public class TrasaController {
 
     @Autowired
     private TrasaServiceImpl trasaService;
+    
+    @Autowired
+    private TrasaOdcinekServiceImpl trasaOdcinekService;
 
     @GetMapping("/trasy/{idWycieczka}")
     public String showTrasyWycieczki(@PathVariable int idWycieczka,
@@ -100,6 +104,26 @@ public class TrasaController {
         redirectAttributes.addFlashAttribute("success_msg", "Usunięto trasę.");
 
         return "redirect:" + request.getHeader("Referer");
+    }
+    
+    @GetMapping("/trasa/szczegoly/{idTrasa}")
+    public String szczegolyTrasy(@PathVariable int idTrasa,
+                            HttpServletRequest request,
+                            RedirectAttributes redirectAttributes,
+                            Model model,
+                            Authentication authentication ) 
+    {
+
+        Trasa trasa = trasaService.getOneById(idTrasa);
+        List<TrasaOdcinek> listaOdcinkow = trasaOdcinekService.getAllOdcinkiByTrasa(trasa);
+        
+        model.addAttribute("trasy", trasa);
+        model.addAttribute("odcinki", listaOdcinkow);
+        model.addAttribute("LoggedUser", authentication);
+        
+       
+        //return "redirect:" + request.getHeader("Referer");
+        return "trasa/szczegoly";
     }
 
 }
