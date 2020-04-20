@@ -1,7 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.repository;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odcinek;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Punkt;
 import org.springframework.data.jpa.repository.JpaRepository;
 

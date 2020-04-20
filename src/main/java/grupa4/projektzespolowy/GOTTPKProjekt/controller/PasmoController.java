@@ -101,7 +101,7 @@ public class PasmoController {
    	public String removePasmo(@PathVariable Integer idPasmo,
    								RedirectAttributes redirectAttributes) throws IOException {
 
-   		Pasmo pasmo =  pasmoServiceImpl.getOneById(idPasmo);  
+   		pasmoServiceImpl.getOneById(idPasmo);  
    		pasmoServiceImpl.removePasmo(idPasmo);
    		
    		redirectAttributes.addFlashAttribute("wiadomosc", "Usunięto pasmo pomyślnie");

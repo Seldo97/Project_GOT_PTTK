@@ -1,7 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,11 +23,7 @@ public class KsiazeczkaController
 	private KsiazeczkaServiceImpl ksiazeczkaServiceImpl;
 	@Autowired
 	private UzytkownikServiceImpl uzytkownikService;
-	@Autowired
-	private TurystaServiceImpl turystaService;
-	
-	
-    @GetMapping("/ksiazeczki") // ścieżka na której zostanie obsłużona metoda
+	@GetMapping("/ksiazeczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllKsiazeczki(Model model, Authentication authentication) 
     {
 

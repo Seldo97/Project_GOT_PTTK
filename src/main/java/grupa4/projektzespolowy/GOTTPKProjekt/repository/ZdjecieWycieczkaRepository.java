@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.ZdjecieWycieczka;
-import java.util.*;
 
 @Repository
 public interface ZdjecieWycieczkaRepository extends JpaRepository<ZdjecieWycieczka, Integer> {

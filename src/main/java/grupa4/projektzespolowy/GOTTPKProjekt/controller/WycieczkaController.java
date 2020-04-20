@@ -1,11 +1,9 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Ksiazeczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,13 +26,11 @@ public class WycieczkaController {
 
     @Autowired
     private WycieczkaServiceImpl wycieczkaServiceImpl;
+    
 
     @Autowired
     private OdznakaServiceImpl odznakaService;
     
-    @Autowired
-    private TurystaServiceImpl turystaService;
-
     @GetMapping("/wycieczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllZdjeciaWycieczek(Model model, Authentication authentication) {
 
@@ -136,13 +132,76 @@ public class WycieczkaController {
 								Model model,
 								Authentication authentication					
 			){
+		 
 	
+		model.addAttribute("LoggedUser", authentication);
 		model.addAttribute("wycieczki", wycieczkaServiceImpl.getAllWycieczkiByZgloszona(1));
-		
-		
 		//return "redirect:" + request.getHeader("Referer");
         
         return "wycieczka/zgloszone";
 	}
-
+	
+	@GetMapping("/wycieczka/akceptuj/{idWycieczka}")
+	public String acceptWycieczka(
+			@PathVariable int idWycieczka,
+			HttpServletRequest request,
+			RedirectAttributes redirectAttributes)
+	{
+		int sumaPunktow = 0;
+		int sumaPunktowKsiazeczki = 0;
+		Wycieczka wycieczkaUpdate = wycieczkaServiceImpl.getOneById(idWycieczka);
+		List<Trasa> trasa = wycieczkaUpdate.getTrasy();
+		
+		//Liczenie punktow z tras w wycieczce (Suma punktow do got)
+		for(Trasa tr: trasa)
+		{
+			sumaPunktow += tr.getSumaPunktowDoGot();
+			
+		}
+		wycieczkaUpdate.setSumaPunktowDoGot(sumaPunktow);
+		
+		
+		// Akceptujac wycieczke zmieniamy jej status  na zrealizowana oraz jej tras a takze usuwamy ja z zgloszone wycieczki u przodownika
+		
+		wycieczkaUpdate.setZatwierdzona(1);
+		wycieczkaUpdate.setZgloszona(0);
+		//Dodanie do wycieczki sumy punktow z tras w wycieczce
+		for(Trasa tr: trasa)
+		{
+			tr.setZrealizowana(1);
+		}
+		
+		//Dodanie do ksiazeczki Punktow akceptowanej wycieczki
+		sumaPunktowKsiazeczki = wycieczkaUpdate.getKsiazeczka().getSumaPunktow() + sumaPunktow;
+		wycieczkaUpdate.getKsiazeczka().setSumaPunktow(sumaPunktowKsiazeczki);
+		//Dodanie do turysty Punktow z ksiazeczki
+		wycieczkaUpdate.getKsiazeczka().getTurysta().setPunkty(sumaPunktowKsiazeczki);
+		wycieczkaServiceImpl.createWycieczka(wycieczkaUpdate);
+		
+		redirectAttributes.addFlashAttribute("success_msg", "Wycieczka została zaakceptowana ✅");
+		
+		return "redirect:" + request.getHeader("Referer");
+	}
+	@GetMapping("/wycieczka/odrzuc/{idWycieczka}")
+	public String odrzucWycieczka(
+			@PathVariable int idWycieczka,
+			HttpServletRequest request,
+			RedirectAttributes redirectAttributes)
+	{
+		Wycieczka wycieczkaUpdate = wycieczkaServiceImpl.getOneById(idWycieczka);
+		List<Trasa> trasa = wycieczkaUpdate.getTrasy();
+		
+		wycieczkaUpdate.setZatwierdzona(0);
+		wycieczkaUpdate.setZgloszona(0);
+		//Dodanie do wycieczki sumy punktow z tras w wycieczce
+		for(Trasa tr: trasa)
+		{
+			tr.setZrealizowana(0);
+		}
+		
+		wycieczkaServiceImpl.createWycieczka(wycieczkaUpdate);
+		
+		redirectAttributes.addFlashAttribute("success_msg", "Wycieczka została odrzucona ✅");
+		return "redirect:" + request.getHeader("Referer");
+	}
 }

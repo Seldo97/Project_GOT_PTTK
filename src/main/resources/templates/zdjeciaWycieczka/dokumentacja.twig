@@ -52,8 +52,10 @@
         {% endfor %}
     </div>
     <br><br>
+     {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
     <button class="btn btn-info" id="toggleButton" role="button">Dodaj zdjęcia</button>
     <button class="btn btn-info" id="odswiez" role="button">Odśwież</button>
+    
     <br><br>
     <form id="zdjeciaForm" action="/zdjecie/dodaj/{{ idWycieczka }}" method="POST" enctype="multipart/form-data">
         <fieldset>
@@ -71,5 +73,9 @@
         </fieldset>
         <button type="submit" class="btn btn-info">Dodaj</button>
     </form>
+    {% else %}
+    <a href="/wycieczka/akceptuj/{{ idWycieczka }}" class="btn btn-primary"  role="button">Akceptuj wycieczke</a>
+    <a href="/wycieczka/odrzuc/{{ idWycieczka }}" class="btn btn-primary"  role="button">Odrzuć wycieczke</a>
+    {% endif %}
 
 {% endblock %}
