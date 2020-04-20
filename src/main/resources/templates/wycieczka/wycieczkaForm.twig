@@ -34,10 +34,11 @@
         </div>
 
         <div class="form-group">
-            <label for="odznaka">Odznaka:</label>
-            <select name="odznaka" class="form-control">
-                <option value="{{ odznaki|last.getIdOdznaka }}" selected disabled>"{{ odznaki|last.getNazwa }}"</option>
-            </select>
+        <select name="odznaka" class="form-control" required>
+            {% for odznaka in odznaki %}
+                <option value={{odznaka.getIdOdznaka}}>"{{odznaka.getNazwa}}"</option>
+            {%  endfor %}
+        </select>
         </div>
 
         {% if update == 1 %}
