@@ -2,8 +2,19 @@
 
 {% block main %}
 
-    Strona Główna, Witaj {{ LoggedUser.getAuthorities }} {{ LoggedUser.getName }} <br/>
-
-    {{ req }}
+    <div class = "row justify-content-around hover-square">
+        <div class = "glowna col-4 align-self-center">
+            <img src="/images/szlak.jpg" alt = "szlak" width="100%" height="100%" id="szlakZdj"/>
+            <div class="overlay">
+                <div class="text" id="tekstSzlaki"> Jesteś miłośnikiem gór, pasjonatem przygód lub po prostu lubisz spacerować?  </div>
+            </div>
+        </div>
+        <div class = "glowna col-4 align-self-center">
+            <img src="/images/odznaka.png" alt = "odznaka" width="100%" height="100%" id="szlakZdj"/>
+            <div class="overlay">
+                <div class="text" id="tekstSzlaki"> Postaw sobie wyzwanie z Górską Odznaką Turystyczną ustanowioną już w 1935 roku! </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

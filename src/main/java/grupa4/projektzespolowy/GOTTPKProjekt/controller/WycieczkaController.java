@@ -1,9 +1,14 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
+
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
+
+import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.*;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,12 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.service.WycieczkaServiceImpl;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,6 +37,15 @@ public class WycieczkaController {
     @Autowired
     private OdznakaServiceImpl odznakaService;
     
+    @Autowired
+    private TurystaServiceImpl turystaService;
+
+	@Autowired
+	private KsiazeczkaServiceImpl ksiazeczkaService;
+
+	@Autowired
+	private TurystaOdznakaServiceImpl turystaOdznakaService;
+
     @GetMapping("/wycieczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllZdjeciaWycieczek(Model model, Authentication authentication) {
 
@@ -47,12 +62,80 @@ public class WycieczkaController {
                                       Model model,
                                       Authentication authentication) {
 
-        if (update != null) {
+    	Ksiazeczka ksiazeczka = ksiazeczkaService.getOneById(idKsiazeczka);
+    	int idTurysta = ksiazeczka.getTurysta().getIdTurysta();
+
+		List<TurystaOdznaka> odznakiTurysty = turystaOdznakaService.findByIdTurysta(idTurysta);
+		Turysta turysta = turystaService.getOneById(idTurysta);
+
+		//** DATA
+		Date dataUrodzenia = (Date) turysta.getDataUrodzenia();
+		LocalDate dataUr = dataUrodzenia.toLocalDate();
+		LocalDate dzisiaj = LocalDate.now();
+		//**
+
+		boolean niepelnosprawnosc = turysta.isNiepelnosprawnosc();
+
+//        List<Odznaka> odznakiTurystyFilter = odznakiTurysty
+//                .stream()
+//                .map(TurystaOdznaka::getOdznaka)
+//                .collect(Collectors.toList());
+
+		List<Odznaka> odznaki = new ArrayList<Odznaka>();
+
+
+		if (dataUr.plusYears(7).compareTo(dzisiaj) > 0) {
+			if (odznakiTurysty.size() == 0) {
+				odznaki.add(odznakaService.getOneByNazwa("W góry - brązowa"));
+
+			} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("W góry - brązowa", idTurysta))) {
+				odznaki.add(odznakaService.getOneByNazwa("W góry - srebrna"));
+
+			} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("W góry - srebrna", idTurysta))) {
+				odznaki.add(odznakaService.getOneByNazwa("W góry - złota"));
+			}
+		} else {
+			if (niepelnosprawnosc == true) {
+				if (odznakiTurysty.size() == 0) {
+					odznaki.add(odznakaService.getOneByNazwa("Popularna"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Popularna", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Mała - brązowa"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Mała - brązowa", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Mała - srebrna"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Mała - srebrna", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Mała - złota"));
+				}
+			} else {
+				if (odznakiTurysty.size() == 0) {
+					odznaki.add(odznakaService.getOneByNazwa("Popularna"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Popularna", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Mała - brązowa"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Mała - brązowa", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Mała - srebrna"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Mała - srebrna", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Mała - złota"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Mała - złota", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Duża - brązowa"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Duża - brązowa", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Duża - srebrna"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Duża - srebrna", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Duża - złota"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Duża - złota", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Za wytrwałość - mała"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Za wytrwałość - mała", idTurysta))) {
+					odznaki.add(odznakaService.getOneByNazwa("Za wytrwałość - duża"));
+				} else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaService.findOdznaka("Za wytrwałość - duża", idTurysta))) {
+				}
+			}
+		}
+
+
+		if (update != null) {
             Wycieczka wycieczka = wycieczkaServiceImpl.getOneById(idWycieczka);
 			model.addAttribute("wycieczka", wycieczka);
         }
 		// tymczasowo aby jakas odznaka byla przypisana
-		List<Odznaka> odznaki = odznakaService.getAllOdznaka();
+		//List<Odznaka> odznaki = odznakaService.getAllOdznaka();
 		//
 		model.addAttribute("odznaki", odznaki);
         model.addAttribute("LoggedUser", authentication);

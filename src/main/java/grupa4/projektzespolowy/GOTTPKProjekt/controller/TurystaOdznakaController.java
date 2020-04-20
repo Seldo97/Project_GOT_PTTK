@@ -41,9 +41,9 @@ public class TurystaOdznakaController {
     }
 
     @PostMapping("/turystaodznaki/dodaj")
-    public String createTurystaOdznaka(@RequestParam(value="idOdznaka") Odznaka odznaka, /// ???
-                                       @RequestParam(value="idTurysta") Turysta turysta, /// ???
-                                        RedirectAttributes redirectAttributes) {
+    public String createTurystaOdznaka(@RequestParam(value = "idOdznaka") Odznaka odznaka, /// ???
+                                       @RequestParam(value = "idTurysta") Turysta turysta, /// ???
+                                       RedirectAttributes redirectAttributes) {
         TurystaOdznaka turystaOdznaka = new TurystaOdznaka(odznaka, turysta);
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka); // puść inserta do bazy
 
@@ -67,7 +67,7 @@ public class TurystaOdznakaController {
     public String formTurystaOdznaka(Model model, @PathVariable(required = false) Integer idTurystaOdznaka) {
 
 
-        if(idTurystaOdznaka != null){
+        if (idTurystaOdznaka != null) {
             TurystaOdznaka turystaOdznaka = turystaOdznakaServiceImpl.getOneById(idTurystaOdznaka);
             model.addAttribute("turystaOdznaka", turystaOdznaka);
             model.addAttribute("update", "1");  //???
@@ -77,9 +77,9 @@ public class TurystaOdznakaController {
     }
 
     @PostMapping("/turystaodznaki/update/{idTurystaOdznaka}")
-    public String updateTurystaOdznaka(@RequestParam(value="idOdznaka") Odznaka odznaka,
-                                       @RequestParam(value="idTurysta") Turysta turysta,
-                                        @PathVariable Integer idTurystaOdznaka) {
+    public String updateTurystaOdznaka(@RequestParam(value = "idOdznaka") Odznaka odznaka,
+                                       @RequestParam(value = "idTurysta") Turysta turysta,
+                                       @PathVariable Integer idTurystaOdznaka) {
 
         TurystaOdznaka turystaOdznaka = turystaOdznakaServiceImpl.getOneById(idTurystaOdznaka);
 
@@ -159,17 +159,16 @@ public class TurystaOdznakaController {
         }
 
 
-
 //        odznaki.stream().filter(not(odznakiTurystyFilter::contains)).collect(Collectors.toList());
 
-        String imieNazwisko =  turysta.getImie() + " " + turysta.getNazwisko();
+        String imieNazwisko = turysta.getImie() + " " + turysta.getNazwisko();
         model.addAttribute("odznakiTurysty", odznakiTurysty);
         model.addAttribute("odznaki", odznaki);
         model.addAttribute("LoggedUser", authentication);
         model.addAttribute("imieNazwisko", imieNazwisko);
         model.addAttribute("idTurysta", idTurysta);
 
-        return  "turysta/odznakiTurysty";
+        return "turysta/odznakiTurysty";
     }
 
     @GetMapping("/turystaodznaki/MojeOdznaki")
@@ -179,23 +178,24 @@ public class TurystaOdznakaController {
         Turysta turysta = uzytkownik.getTurysta();
         List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(turysta.getIdTurysta());
 
-        String imieNazwisko =  turystaServiceImpl.getOneById(turysta.getIdTurysta()).getImie() + " "
+        String imieNazwisko = turystaServiceImpl.getOneById(turysta.getIdTurysta()).getImie() + " "
                 + turystaServiceImpl.getOneById(turysta.getIdTurysta()).getNazwisko();
-        model.addAttribute("odznakiTurysty", odznakiTurysty);;
+        model.addAttribute("odznakiTurysty", odznakiTurysty);
+        ;
         model.addAttribute("LoggedUser", authentication);
         model.addAttribute("imieNazwisko", imieNazwisko);
 
-        return  "turysta/odznakiTurysty";
+        return "turysta/odznakiTurysty";
     }
 
     @PostMapping("/turystaodznaki/przypiszOdznake")
     public String addOdznakatoTurysta(@ModelAttribute TurystaOdznaka turystaOdznaka,
                                       HttpServletRequest request,
-                                      RedirectAttributes redirectAttributes){
+                                      RedirectAttributes redirectAttributes) {
 
         String referer = request.getHeader("Referer");
 
-        if(turystaOdznakaServiceImpl.checkOfUnique(turystaOdznaka.getOdznaka(), turystaOdznaka.getTurysta()) != null){
+        if (turystaOdznakaServiceImpl.checkOfUnique(turystaOdznaka.getOdznaka(), turystaOdznaka.getTurysta()) != null) {
             redirectAttributes.addFlashAttribute("wiadomosc", "Ten turysta posiada już tę odznakę!");
             return "redirect:" + referer;
         }
@@ -205,7 +205,6 @@ public class TurystaOdznakaController {
 
         return "redirect:" + referer;
     }
-
 
 
 }
