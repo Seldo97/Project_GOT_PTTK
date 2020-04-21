@@ -16,4 +16,6 @@ public interface WycieczkaService
 	    void removeWycieczka(Integer id);
 	    
 	    List<Wycieczka> getAllWycieczkiByZgloszona(Integer id);
+	    
+	    
 }

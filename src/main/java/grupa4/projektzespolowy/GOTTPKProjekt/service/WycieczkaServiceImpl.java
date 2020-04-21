@@ -7,9 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Odcinek;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.TrasaOdcinek;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.WycieczkaRepository;
 
@@ -35,5 +32,6 @@ public class WycieczkaServiceImpl implements WycieczkaService {
 	
 	@Override
 	public List<Wycieczka> getAllWycieczkiByZgloszona(Integer id){return this.wycieczkaRepository.getAllWycieczkiByZgloszona(id);}
+
 
 }

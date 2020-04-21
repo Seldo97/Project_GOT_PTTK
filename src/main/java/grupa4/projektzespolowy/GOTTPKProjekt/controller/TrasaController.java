@@ -4,8 +4,6 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.TrasaOdcinek;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Grupa;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Odcinek;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Pasmo;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.GrupaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TrasaOdcinekServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TrasaServiceImpl;
