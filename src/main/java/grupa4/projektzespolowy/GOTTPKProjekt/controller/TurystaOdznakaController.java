@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -43,8 +44,9 @@ public class TurystaOdznakaController {
     @PostMapping("/turystaodznaki/dodaj")
     public String createTurystaOdznaka(@RequestParam(value = "idOdznaka") Odznaka odznaka, /// ???
                                        @RequestParam(value = "idTurysta") Turysta turysta, /// ???
+                                       @RequestParam(value = "data") Date data,
                                        RedirectAttributes redirectAttributes) {
-        TurystaOdznaka turystaOdznaka = new TurystaOdznaka(odznaka, turysta);
+        TurystaOdznaka turystaOdznaka = new TurystaOdznaka(odznaka, turysta, data);
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka); // puść inserta do bazy
 
 
