@@ -1,17 +1,16 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Odznaka;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
-
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
@@ -45,6 +45,15 @@ public class WycieczkaController {
 
 	@Autowired
 	private TurystaOdznakaServiceImpl turystaOdznakaService;
+	
+	@Autowired
+	private GrupaPrzodownikServiceImpl grupaPrzodownikService;
+	
+	@Autowired
+	private PrzodownikServiceImpl PrzodownikService;
+	
+	@Autowired
+	private UzytkownikServiceImpl uzytkownikService;
 
     @GetMapping("/wycieczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllZdjeciaWycieczek(Model model, Authentication authentication) {
@@ -216,9 +225,35 @@ public class WycieczkaController {
 								Authentication authentication					
 			){
 		 
-	
-		model.addAttribute("LoggedUser", authentication);
-		model.addAttribute("wycieczki", wycieczkaServiceImpl.getAllWycieczkiByZgloszona(1));
+		//Pobieramy przodownika po auntetykacji oraz jego grup
+
+		
+		Uzytkownik uzytkownik =  uzytkownikService.getLoggedUserDetails(authentication);
+		Przodownik przodownik = uzytkownik.getPrzodownik();
+		List<GrupaPrzodownik> grupyPrzodownika = grupaPrzodownikService.getGrupyPrzodownika(przodownik.getIdPrzodownik());
+		//Pobieramy wycieczki zgloszone
+		List<Wycieczka> wycieczkiZgloszone = wycieczkaServiceImpl.getAllWycieczkiByZgloszona(1);
+		List<Trasa> trasy = null;
+		List<Wycieczka> WycieczkiTmp = new ArrayList<Wycieczka>();
+		
+		for(Wycieczka wycieczki: wycieczkiZgloszone)
+		{
+			trasy = wycieczki.getTrasy();
+			
+			for(Trasa trasa: trasy)
+			{
+				for(GrupaPrzodownik grupaPrzodownik: grupyPrzodownika)
+				{
+					if(trasa.getPasmo().getGrupa().getNazwa() == grupaPrzodownik.getGrupa().getNazwa())
+					{
+						WycieczkiTmp.add(wycieczki);
+					}
+				}
+			}
+			
+		}
+
+		model.addAttribute("wycieczki", WycieczkiTmp);
 		//return "redirect:" + request.getHeader("Referer");
         
         return "wycieczka/zgloszone";
