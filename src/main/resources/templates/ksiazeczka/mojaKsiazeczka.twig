@@ -36,7 +36,8 @@
                 <th scope="col">Opis</th>
                 <th scope="col">Data od</th>
                 <th scope="col">Data do</th>
-                <th scope="col">Suma pkt / do GOT</th>
+                <th scope="col">Na odznakę</th>
+                <th scope="col">Pkt / do GOT</th>
                 <th scope="col">Zatwierdzona</th>
 
                 <th scope="col"></th>
@@ -50,13 +51,14 @@
                     <td><div style='text-align: left; max-height: 72px; width: 155px; word-wrap: break-word; overflow-x: auto; hyphens: auto;'>{{ wycieczka.getOpis}}</div></td>
                     <td>{{ wycieczka.getDataOd }}</td>
                     <td>{{ wycieczka.getDataDo }}</td>
+                    <td>🏅"{{ wycieczka.getOdznaka.getNazwa }}"</td>
                     <td>{{ wycieczka.getSumaPunktow }} / {{ wycieczka.getSumaPunktowDoGot }}</td>
                     {% if wycieczka.getZgloszona == 1 %}
-                        <td>Zgłoszona</td>
+                        <td>Zgłoszona⚠️</td>
                     {% elseif  wycieczka.getZatwierdzona == 0 %}
                         <td>Nie</td>
                     {% else %}
-                        <td>Tak</td>
+                        <td>Tak✔️</td>
                     {% endif %}
                         <td class="text-right">
                             {% if wycieczka.getZgloszona == 1 or wycieczka.getZatwierdzona == 1 %}

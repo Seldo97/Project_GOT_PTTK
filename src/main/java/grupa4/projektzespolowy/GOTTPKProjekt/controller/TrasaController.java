@@ -93,11 +93,46 @@ public class TrasaController {
                             HttpServletRequest request,
                             RedirectAttributes redirectAttributes) {
 
-        Trasa trasa = trasaService.getOneById(idTrasa);
-        if (trasa.getZrealizowana() != 0) {
-            if (trasa.getDubel() == 0)
-                trasa.getWycieczka()
-                        .setSumaPunktow(trasa.getWycieczka().getSumaPunktow() - trasa.getSuma_punktow());
+        List<TrasaOdcinek> odcinkiUsuwanejTrasy = trasaOdcinekService.getAllOdcinkiByIdTrasa(idTrasa);
+
+        for (TrasaOdcinek out : odcinkiUsuwanejTrasy) {
+
+            TrasaOdcinek trasaOdcinek = out;
+
+            trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() - trasaOdcinek.getPunkty());
+            if (trasaOdcinek.getDubel() == 0)
+                trasaOdcinek.getTrasa().setSumaPunktowDoGot(trasaOdcinek.getTrasa().getSumaPunktowDoGot() - trasaOdcinek.getPunkty());
+
+            List<TrasaOdcinek> dubleOdcinkow = trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka());
+            int wystapienTejTrasy = (trasaOdcinekService.getAllByOdcinekAndOdznaka(trasaOdcinek.getOdcinek(), trasaOdcinek.getTrasa().getWycieczka().getOdznaka())).size();
+            System.out.println("Po usunieciu: " + (wystapienTejTrasy - 1));
+            if (wystapienTejTrasy - 1 <= 2) {
+                //trasaOdcinek.getTrasa().setDubel(0);
+                trasaOdcinek.setDubel(0);
+                for (TrasaOdcinek ts : dubleOdcinkow) {
+                    if (ts.getDubel() == 1) {
+                        ts.getTrasa().setSumaPunktowDoGot(ts.getTrasa().getSumaPunktowDoGot() + ts.getPunkty());
+                    }
+                    ts.setDubel(0);
+                    ts.getTrasa().setDubel(0);
+                }
+                System.out.println("Wchodze w petle i dubel = 0: " + trasaOdcinek.getTrasa().getDubel());
+            }
+
+            List<TrasaOdcinek> odcinkiTrasy = trasaOdcinekService.getAllOdcinkiByIdTrasa(trasaOdcinek.getTrasa().getIdTrasa());
+            boolean flagaDubli = false;
+            for (TrasaOdcinek ot : odcinkiTrasy) {
+                if (ot.getDubel() == 1) {
+                    flagaDubli = true;
+                    break;
+                }
+            }
+            if (!flagaDubli)
+                trasaOdcinek.getTrasa().setDubel(0);
+
+            //trasaOdcinek.getTrasa().setSuma_punktow(trasaOdcinek.getTrasa().getSuma_punktow() - trasaOdcinek.getPunkty());
+
+            trasaOdcinekService.removeTrasaOdcinekById(out.getIdTrasaOdcinek());
         }
 
         trasaService.removeTrasa(idTrasa);
