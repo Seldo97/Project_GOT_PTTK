@@ -235,9 +235,11 @@ public class WycieczkaController {
 		List<Wycieczka> wycieczkiZgloszone = wycieczkaServiceImpl.getAllWycieczkiByZgloszona(1);
 		List<Trasa> trasy = null;
 		List<Wycieczka> WycieczkiTmp = new ArrayList<Wycieczka>();
+		Turysta turysta = null;
 		
 		for(Wycieczka wycieczki: wycieczkiZgloszone)
 		{
+			turysta = wycieczki.getKsiazeczka().getTurysta();
 			trasy = wycieczki.getTrasy();
 			
 			for(Trasa trasa: trasy)
@@ -252,8 +254,9 @@ public class WycieczkaController {
 			}
 			
 		}
-
 		model.addAttribute("wycieczki", WycieczkiTmp);
+		model.addAttribute("turysta", turysta);
+		model.addAttribute("LoggedUser", authentication);
 		//return "redirect:" + request.getHeader("Referer");
         
         return "wycieczka/zgloszone";
@@ -263,7 +266,9 @@ public class WycieczkaController {
 	public String acceptWycieczka(
 			@PathVariable int idWycieczka,
 			HttpServletRequest request,
-			RedirectAttributes redirectAttributes)
+			RedirectAttributes redirectAttributes,
+			Authentication authentication
+			)
 	{
 		int sumaPunktow = 0;
 		int sumaPunktowKsiazeczki = 0;
@@ -298,7 +303,9 @@ public class WycieczkaController {
 		
 		redirectAttributes.addFlashAttribute("success_msg", "Wycieczka została zaakceptowana ✅");
 		
-		return "redirect:" + request.getHeader("Referer");
+		//return "redirect:" + request.getHeader("Referer");
+		
+		return "redirect:/wycieczka/zgloszone";
 	}
 	@GetMapping("/wycieczka/odrzuc/{idWycieczka}")
 	public String odrzucWycieczka(
@@ -320,6 +327,8 @@ public class WycieczkaController {
 		wycieczkaServiceImpl.createWycieczka(wycieczkaUpdate);
 		
 		redirectAttributes.addFlashAttribute("success_msg", "Wycieczka została odrzucona ✅");
-		return "redirect:" + request.getHeader("Referer");
+		//return "redirect:" + request.getHeader("Referer");
+		
+		return "redirect:/wycieczka/zgloszone";
 	}
 }

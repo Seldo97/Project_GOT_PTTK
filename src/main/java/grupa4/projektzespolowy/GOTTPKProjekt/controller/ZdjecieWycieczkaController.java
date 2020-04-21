@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.ZdjecieWycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TrasaServiceImpl;
@@ -42,8 +43,14 @@ public class ZdjecieWycieczkaController
 	 @GetMapping("/zdjecia/{idWycieczka}") // ścieżka na której zostanie obsłużona metoda
 	    public String getAllZdjeciaWycieczek(Model model, Authentication authentication, @PathVariable() Integer idWycieczka) 
 	    {
+		 
+		 Wycieczka wycieczka = WycieczkaServiceImpl.getOneById(idWycieczka);
+		 Turysta turysta = wycieczka.getKsiazeczka().getTurysta();
 	        model.addAttribute("LoggedUser", authentication);
 	        model.addAttribute("idWycieczka", idWycieczka);
+	        model.addAttribute("wycieczka", wycieczka);
+	        model.addAttribute("turysta", turysta);
+	      
 	        model.addAttribute("trasy", trasaService.getAllByIdWycieczka(idWycieczka));
 	        model.addAttribute("zdjecia", zdjecieWycieczkaServiceImpl.getAllZdjeciaByIdWycieczka(idWycieczka));
 	        return "zdjeciaWycieczka/dokumentacja";

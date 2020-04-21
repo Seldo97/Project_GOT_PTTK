@@ -6,6 +6,22 @@
 {% endblock %}
 {% block main %}
     {{ siema }}
+    
+     <div class="col-12">
+     <h1>{{ turysta.getImie}} {{ turysta.getNazwisko}}</h1>
+     <span>Data Rozpoczecia Wycieczki:  {{ wycieczka.getDataOd }} </span>
+     <br>
+     <span>Data Zakończenia Wycieczki:  {{ wycieczka.getDataDo }} </span>
+     <br>
+     <span>Opis:  {{ wycieczka.getOpis }} </span>
+     <br>
+     <span>Punkty:  {{ wycieczka.getSumaPunktow}}  </span>
+     <br>
+     <span>Punkty GOT: {{ wycieczka.getSumaPunktowDoGot }}  </span>
+     
+    </div>
+    <br><br>
+    <div class="col-12">
     <table id="myTable" class="table table-striped align-middle table-sm">
         <thead class="thead-dark">
         <tr>
@@ -44,7 +60,9 @@
 
         </tbody>
     </table>
+     </div>
     <div class="col-12">
+    <h1>Zdjęcia Tras</h1>
         {% for zdjecie in zdjecia %}
             <a class="demo" href="{{ zdjecie.getSciezka }}" data-lightbox="gallery" data-title="{{ zdjecie.getOpis }}">
                 <img class="example-image" src="{{ zdjecie.getSciezka }}" alt="zdjecie" witdh="150px" height="150px"/>

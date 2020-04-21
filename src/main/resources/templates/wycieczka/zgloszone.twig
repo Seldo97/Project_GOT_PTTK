@@ -6,11 +6,13 @@
 {% endblock %}
 {% block main %}
     {{siema}}
+    		
   
         <table id="myTable" class="table table-striped align-middle table-sm">
             <thead class="thead-dark">
             <tr>
-                <th scope="col" width="20px">#</th>
+            	<th scope="col">Turysta</th>
+                <th scope="col" width="`100px">Nr Wycieczki</th>
                 <th scope="col">Opis</th>
                 <th scope="col">Data od</th>
                 <th scope="col">Data do</th>
@@ -25,6 +27,7 @@
             
             {% if  wycieczka.getZgloszona == 1 %}
                 <tr>
+                	<td>{{ turysta.getImie }} {{ turysta.getNazwisko }}</td>
                     <td>{{ wycieczka.getIdWycieczka }}</td>
                     <td><div style='text-align: left; max-height: 72px; width: 155px; word-wrap: break-word; overflow-x: auto; hyphens: auto;'>{{ wycieczka.getOpis}}</div></td>
                     <td>{{ wycieczka.getDataOd }}</td>
