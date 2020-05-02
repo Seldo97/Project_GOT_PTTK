@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -86,4 +87,39 @@ public class ZdjecieWycieczkaController
 		 	return "redirect:" + request.getHeader("Referer");
 	    }
 	 
+	 @GetMapping("/zdjecie/usunWszystkie/{idWycieczka}") // ścieżka na której zostanie obsłużona metoda
+	    public String deleteAllZdjeciaDoWycieczki(Authentication authentication,
+	    									@PathVariable() Integer idWycieczka,
+	    									 HttpServletRequest request,
+	    									 RedirectAttributes redirectAttributes) throws IOException 
+	    
+	    {
+		 	Wycieczka wycieczka = WycieczkaServiceImpl.getOneById(idWycieczka);
+		 	List<ZdjecieWycieczka> zdjecia = zdjecieWycieczkaServiceImpl.getAllZdjeciaByIdWycieczka(idWycieczka);
+		 	
+		 	String[] tmp;
+		 	String nazwaPliku;
+		 	for(ZdjecieWycieczka zdj: zdjecia)
+		 	{
+		 		tmp = zdj.getSciezka().split("/");
+		 		nazwaPliku = tmp[3];
+		 		Path imagesPath = Paths.get(System.getProperty("user.dir") + sciezkaZapisuZdjecNaDysku + "\\" + nazwaPliku);
+		 		try {
+			 	    Files.delete(imagesPath);
+			 	    System.out.println("File "
+			 	            + imagesPath.toAbsolutePath().toString()
+			 	            + " successfully removed");
+			 	} catch (IOException e) {
+			 	    System.err.println("Unable to delete "
+			 	            + imagesPath.toAbsolutePath().toString()
+			 	            + " due to...");
+			 	    e.printStackTrace();
+			 	}
+		 	}
+		 	
+		 	zdjecieWycieczkaServiceImpl.deleteAllByWycieczka(wycieczka);
+		 	
+		 	redirectAttributes.addFlashAttribute("success_msg", "Usunieto zdjecia zdjęcia.");
+		 	return "redirect:" + request.getHeader("Referer");
+	    }
 }

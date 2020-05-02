@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
-	$("#formButton").click(function(){
-        $("#addFormWycieczka").toggle();
+	$("#toggleButton").click(function(){
+        $("#zdjeciaForm").show();
     });
 });
 
