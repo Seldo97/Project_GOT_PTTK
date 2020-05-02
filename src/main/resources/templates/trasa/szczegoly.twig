@@ -6,11 +6,11 @@
 {% endblock %}
 {% block main %}
 		<div class="col-12">
-    		  	<span>Nazwa: {{ trasy.pasmo.getNazwa }} Grupa: {{ trasy.pasmo.grupa.getNazwa }} Punkty GOT: {{ trasy.getSumaPunktowDoGot }} Punkty:  {{ trasy.getSuma_punktow }} 
+    		  	<span>Nazwa: {{ trasy.pasmo.getNazwa }} <br/>Grupa: {{ trasy.pasmo.grupa.getNazwa }} <br/>Punkty GOT: {{ trasy.getSumaPunktowDoGot }} <br/>Punkty:  {{ trasy.getSuma_punktow }}
     		  	
-    		  	Data: {{ trasy.getData }} </span>
+    		  	<br/>Data: {{ trasy.getData }} </span>
           </div>
-          <div class="col-12">
+          <div class="col-12" >
           <h1>Odcinki</h1>
           {% for odc in odcinki %}
           <br>
