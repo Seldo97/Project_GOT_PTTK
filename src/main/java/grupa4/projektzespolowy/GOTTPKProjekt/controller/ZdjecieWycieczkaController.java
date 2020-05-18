@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -120,6 +121,53 @@ public class ZdjecieWycieczkaController
 		 	zdjecieWycieczkaServiceImpl.deleteAllByWycieczka(wycieczka);
 		 	
 		 	redirectAttributes.addFlashAttribute("success_msg", "Usunieto zdjecia zdjęcia.");
+		 	return "redirect:" + request.getHeader("Referer");
+	    }
+	 
+	 @GetMapping("/zdjecie/usunZaznaczone") // ścieżka na której zostanie obsłużona metoda
+	    public String deleteZaznaczoneZdjeciaDoWycieczki(Authentication authentication,
+	    										@RequestParam(value="imageIds", required = false) Integer[] idZdjecia,
+	    									 HttpServletRequest request,
+	    									 RedirectAttributes redirectAttributes) throws IOException 
+	    {
+		 
+		 if(idZdjecia != null)
+		 {
+			 List<ZdjecieWycieczka> zdjecia = new ArrayList<ZdjecieWycieczka>();
+			 ZdjecieWycieczka dajZdjecie;
+			 for(Integer id: idZdjecia)
+			 {
+				 dajZdjecie =  zdjecieWycieczkaServiceImpl.getOneById(id);
+				 zdjecia.add(dajZdjecie);
+				 
+					String[] tmp;
+				 	String nazwaPliku;
+				 	for(ZdjecieWycieczka zdj: zdjecia)
+				 	{
+				 		tmp = zdj.getSciezka().split("/");
+				 		nazwaPliku = tmp[3];
+				 		Path imagesPath = Paths.get(System.getProperty("user.dir") + sciezkaZapisuZdjecNaDysku + "\\" + nazwaPliku);
+				 		try {
+					 	    Files.delete(imagesPath);
+					 	    System.out.println("File "
+					 	            + imagesPath.toAbsolutePath().toString()
+					 	            + " successfully removed");
+					 	} catch (IOException e) {
+					 	    System.err.println("Unable to delete "
+					 	            + imagesPath.toAbsolutePath().toString()
+					 	            + " due to...");
+					 	    e.printStackTrace();
+					 	}
+				 	}
+				zdjecieWycieczkaServiceImpl.removeZdjecie(id);
+			 }
+
+			 	redirectAttributes.addFlashAttribute("success_msg", "Usunięto zdjęcie.");
+		 }
+		 else
+		 {
+			 redirectAttributes.addFlashAttribute("error_msg", "Nie udało sie usunąć zdjęcia/zdjęć czy wybrałeś zdjęcie ?");
+		 }
 		 	return "redirect:" + request.getHeader("Referer");
 	    }
 }
