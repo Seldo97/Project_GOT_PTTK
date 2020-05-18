@@ -13,5 +13,8 @@ public interface ZdjecieWycieczkaRepository extends JpaRepository<ZdjecieWyciecz
     List<ZdjecieWycieczka> getAllByWycieczka(Wycieczka wycieczka);
 
     List<ZdjecieWycieczka> getAllByWycieczka_IdWycieczka(int idWycieczka);
+    
+    void deleteAllByWycieczka(Wycieczka wycieczka);
+    
 
 }
