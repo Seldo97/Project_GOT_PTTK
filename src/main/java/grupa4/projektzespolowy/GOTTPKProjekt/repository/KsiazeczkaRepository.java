@@ -10,4 +10,6 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.Ksiazeczka;
 public interface KsiazeczkaRepository  extends JpaRepository<Ksiazeczka, Integer>
 {
     Ksiazeczka getByTurysta(Turysta turysta);
+
+    //List<Ksiazeczka> getAllByTurysta_IdTurystaAndTAndTurysta
 }
