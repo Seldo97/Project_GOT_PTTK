@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import java.util.*;
 
 @Repository
 public interface OdznakaRepository extends JpaRepository<Odznaka, Integer> {
@@ -17,5 +18,9 @@ public interface OdznakaRepository extends JpaRepository<Odznaka, Integer> {
     public Odznaka getOdznakaByNazwaEquals(String nazwa);
 
     public Odznaka getTopByNazwa(String nazwa);
+
+    //List<Odznaka> deleteAllByNazwaIsNullAndNazwaOrIdOdznakaIn(String nazwa, List<Integer> ids);
+
+    int countAllByNazwa(String nazwa);
 
 }
