@@ -99,3 +99,15 @@ a:hover{
     text-align: center;
 }
 
+.hidden
+{
+	display:none;
+}
+
+#Labelzaznaczone
+{
+	display:block;
+	margin:0;
+}
+
+
