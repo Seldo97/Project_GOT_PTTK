@@ -53,13 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/przodownicy/{idPrzodownik}/grupy", "/grupy/{idGrupa}/przodownicy").permitAll()
                 .antMatchers("/turysta/mojeKonto","/turysci/updateForm","/turysci/updateForm","/turysci/update/{idTurysta}","/zdjecia/{idWycieczka}","/zdjecia/form/{idWycieczka}","/zdjecie/dodaj/{idWycieczka}","/zdjecie/usunWszystkie/{idWycieczka}","/zdjecie/usunZaznaczone").hasAnyRole("administrator", "turysta")
                 .antMatchers("/turystaodznaki/znajdzOdznakiTurysty").hasAnyRole("administrator", "przodownik")
-<<<<<<< HEAD
                 //.antMatchers("/zdjecia/{idWycieczka}").hasAnyRole("przodownik")
                 .antMatchers("/turystaodznaki/MojeOdznaki").hasAnyRole("administrator", "turysta")
-=======
-                .antMatchers("/zdjecia/{idWycieczka}").hasAnyRole("przodownik")
+                //.antMatchers("/zdjecia/{idWycieczka}").hasAnyRole("przodownik")
                 .antMatchers("/turystaodznaki/MojeOdznaki", "/turystaodznaki/ranking").hasAnyRole("administrator", "turysta")
->>>>>>> 4c658e76f6d3779ec2c4851769ae51753e7dcd06
                 .antMatchers("/turystaodznaki/**").hasAnyRole("administrator", "przodownik")
                 //.antMatchers("/zdjecia/{idWycieczka}").hasAnyRole("turysta", "przodownik")
                 .antMatchers("/zdjecia/**").hasAnyRole("administrator", "przodownik", "turysta")
