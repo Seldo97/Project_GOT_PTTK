@@ -20,4 +20,9 @@ public interface TurystaOdznakaService {
     TurystaOdznaka findOdznaka(String nazwa, int id);
 
     TurystaOdznaka checkOfUnique(Odznaka odznaka, Turysta turysta);
+
+    int ileOdznak(int turysta);
+
+
+    List<TurystaOdznaka> findAllByOdznakaIdOdznaka(int odznaka);
 }

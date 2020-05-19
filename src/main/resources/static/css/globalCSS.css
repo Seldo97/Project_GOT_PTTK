@@ -51,6 +51,15 @@ a:hover{
   display: none;
 }
 
+#zdjeciaForm
+{
+	
+  padding: 15px;
+  border: 1px solid #666;
+  background: #fff;
+  display: none;
+}
+
 /*hompage*/
 
 .glowna {
@@ -89,4 +98,16 @@ a:hover{
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.hidden
+{
+	display:none;
+}
+
+#Labelzaznaczone
+{
+	display:block;
+	margin:0;
+}
+
 

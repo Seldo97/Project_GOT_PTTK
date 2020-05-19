@@ -13,5 +13,9 @@ public interface KsiazeczkaRepository  extends JpaRepository<Ksiazeczka, Integer
 
     Ksiazeczka getByTurysta(Turysta turysta);
 
+<<<<<<< HEAD
     List<Ksiazeczka> getAllByZgloszona(int zgloszona);
+=======
+    //List<Ksiazeczka> getAllByTurysta_IdTurystaAndTAndTurysta
+>>>>>>> 4c658e76f6d3779ec2c4851769ae51753e7dcd06
 }

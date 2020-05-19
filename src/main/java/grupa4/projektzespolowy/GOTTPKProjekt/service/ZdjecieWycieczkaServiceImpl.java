@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.ZdjecieWycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.ZdjecieWycieczkaRepository;
 
@@ -37,5 +38,13 @@ public class ZdjecieWycieczkaServiceImpl implements ZdjecieWycieczkaService   {
 	{
 		return zdjecieWycieczkaRepository.getAllByWycieczka_IdWycieczka(id);
 	}
+
+	@Override
+	public void deleteAllByWycieczka(Wycieczka wycieczka) {
+		
+		zdjecieWycieczkaRepository.deleteAllByWycieczka(wycieczka);
+		
+	}
+
 }
 
