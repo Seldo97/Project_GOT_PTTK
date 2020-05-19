@@ -6,7 +6,6 @@
 {% endblock %}
 {% block main %}
     {{ siema }}
-    
      <div class="col-12">
      <h1>{{ turysta.getImie}} {{ turysta.getNazwisko}}</h1>
      <span>Data Rozpoczecia Wycieczki:  {{ wycieczka.getDataOd }} </span>
@@ -63,16 +62,24 @@
      </div>
     <div class="col-12">
     <h1>Zdjęcia Tras</h1>
+    <form id="zdjeciaDoUsuniecia" action="/zdjecie/usunZaznaczone" method="GET">
         {% for zdjecie in zdjecia %}
             <a class="demo" href="{{ zdjecie.getSciezka }}" data-lightbox="gallery" data-title="{{ zdjecie.getOpis }}">
 			<img class="example-image" src="{{ zdjecie.getSciezka }}" alt="zdjecie" witdh="150px" height="150px"/>
             </a>
+            {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+            <input type = "checkbox" name = "imageIds" value = "{{ zdjecie.getIdZdjecieWycieczka}}" />
+            {% endif %}
+            <input type="submit" id="submit-form" class="hidden" />
         {% endfor %}
+         
+   </form>
     </div>
     <br><br>
      {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
     <button class="btn btn-info" id="toggleButton" role="button">Dodaj zdjęcia</button>
      <a href="/zdjecie/usunWszystkie/{{ idWycieczka }}" class="btn btn-info"  role="button">Usuń wszystkie zdjęcia</a>
+    <a href="/zdjecie/usunZaznaczone" class="btn btn-info"  role="button"><label for="submit-form" id="Labelzaznaczone" tabindex="0">Usuń wybrane zdjęcia</label></a>
     <button class="btn btn-info" id="odswiez" role="button">Odśwież</button>
     <br><br>
     <form id="zdjeciaForm" action="/zdjecie/dodaj/{{ idWycieczka }}" method="POST" enctype="multipart/form-data">
