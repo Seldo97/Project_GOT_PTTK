@@ -190,6 +190,54 @@ public class TurystaOdznakaController {
         return "turysta/odznakiTurysty";
     }
 
+    @GetMapping("/turystaodznaki/odznaki")
+    public void showOdznakiTurysty(@RequestParam Integer idTurysta, Model model, Authentication authentication) {
+
+
+        List<TurystaOdznaka> odznakiTurysty = turystaOdznakaServiceImpl.findByIdTurysta(idTurysta);
+
+        model.addAttribute("odznakiTurysty", odznakiTurysty);
+
+        model.addAttribute("LoggedUser", authentication);
+
+    }
+
+    @GetMapping("/turystaodznaki/ranking")
+    public String showRanking(Model model, Authentication authentication) {
+
+       List<Turysta> turysci = turystaServiceImpl.getAllTurysta();
+        List<Integer> odznaki = new ArrayList<Integer>();
+
+       for(Turysta turysta : turysci){
+            odznaki.add(turystaOdznakaServiceImpl.ileOdznak(turysta.getIdTurysta()));
+       }
+        model.addAttribute("odznaki", odznaki);
+        model.addAttribute("turysci", turysci);
+        model.addAttribute("LoggedUser", authentication);
+
+        return "turysta/ranking";
+    }
+//
+//    @GetMapping("/turystaodznaki/rankingWgOdznaki/{idOdznaka}")
+//    public String showRankingWgOdznaki(@PathVariable Integer idOdznaka, Model model, Authentication authentication) {
+//
+//
+//        List<TurystaOdznaka> turysciOdznaki = turystaOdznakaServiceImpl.findAllByOdznakaIdOdznaka(idOdznaka);
+//
+//        List<Turysta> turysci = null;
+//        for (TurystaOdznaka turystaOdznaka : turysciOdznaki) {
+//            turysci.add(turystaOdznaka.getTurysta());
+//        }
+//
+//        model.addAttribute("turysci", turysci);
+//
+//        model.addAttribute("LoggedUser", authentication);
+//
+//
+//        return "turysta/ranking";
+//    }
+
+
     @PostMapping("/turystaodznaki/przypiszOdznake")
     public String addOdznakatoTurysta(@ModelAttribute TurystaOdznaka turystaOdznaka,
                                       HttpServletRequest request,

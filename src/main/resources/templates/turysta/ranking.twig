@@ -1,0 +1,43 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Turysta tabela{% endblock %}
+{% block header %}
+    Ranking turystów
+{% endblock %}
+{% block main %}
+{#<form id="addForm" action="/turystaodznaki/rankingWgOdznaki/{{odznaka.getIdOdznaka}}" method="GET">#}
+{#    <div class="form-group">#}
+{#        <select name="odznaka" class="form-control" required>#}
+{#            <option value="">--Wybierz odznake--</option>#}
+{#            {% for odznaka in odznaki %}#}
+{#                <option value={{odznaka.getIdOdznaka}}>"{{odznaka.getNazwa}}"</option>#}
+{#            {%  endfor %}#}
+{#        </select>#}
+{#    </div>#}
+{#    <button type="submit" class="btn btn-info" >Wyszukaj</button>#}
+{#</form>#}
+    <table id="myTable" class="table table-striped align-middle table-sm"
+           xmlns:word-wrap="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml"
+           xmlns:overflow-x="http://www.w3.org/1999/xhtml">
+        <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Liczba odznak</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for turysta in turysci %}
+{#        {% for odznaka in odznaki %}#}
+            <tr>
+                <td>{{ turysta.getImie }}</td>
+                <td>{{ turysta.getNazwisko }}</td>
+                <td>{{ odznaki.get(turysci.indexOf(turysta)) }}</td>
+            </tr>
+{#        {% endfor %}#}
+       {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -173,6 +173,7 @@ public class Turysta {
         this.ksiazeczka = ksiazeczka;
     }
 
+
     @Override
     public String toString() {
         return "Turysta [idTurysta=" + idTurysta + ", imie=" + imie + ", nazwisko=" + nazwisko + ", telefon=" + telefon
