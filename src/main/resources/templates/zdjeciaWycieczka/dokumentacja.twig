@@ -91,7 +91,7 @@
         </fieldset>
         <button type="submit" class="btn btn-info">Dodaj</button>
     </form>
-    {% else %}
+    {% elseif 'ROLE_przodownik' in LoggedUser.getAuthorities %}
     <a href="/wycieczka/akceptuj/{{ idWycieczka }}" class="btn btn-primary"  role="button">Akceptuj wycieczke</a>
     <a href="/wycieczka/odrzuc/{{ idWycieczka }}" class="btn btn-primary"  role="button">Odrzuć wycieczke</a>
     {% endif %}

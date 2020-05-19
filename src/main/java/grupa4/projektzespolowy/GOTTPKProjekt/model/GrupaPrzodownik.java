@@ -10,11 +10,11 @@ public class GrupaPrzodownik {
     @Column(name = "id_grupa_przodownik")
     private int idGrupaPrzodownik;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_przodownik", referencedColumnName = "id_przodownik")
     private Przodownik przodownik;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_grupa", referencedColumnName = "id_grupa")
     private Grupa grupa;
 

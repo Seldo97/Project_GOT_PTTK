@@ -1,0 +1,40 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Zgłoszone książeczki{% endblock %}
+{% block header %}
+    Zgłoszone książeczki
+{% endblock %}
+{% block main %}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" width="20px">#</th>
+            <th scope="col">Imię i Nazwisko</th>
+            <th scope="col">Punkty</th>
+            {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                <th scope="col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for zgloszona in zgloszoneKsiazeczki %}
+            <tr>
+                <td>{{ zgloszona.getIdKsiazeczka }}</td>
+                <td>{{ zgloszona.getTurysta.getImie }} {{ zgloszona.getTurysta.getNazwisko }}</td>
+                <td>{{ zgloszona.getSumaPunktow }}</td>
+                {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <abbr title="Wyświetl szczegoły"><a class="btn btn-sm bg-dark text-white"
+                                                                href="/ksiazeczka/{{ zgloszona.getIdKsiazeczka }}">Wyświetl</a></abbr>
+                        </div>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}

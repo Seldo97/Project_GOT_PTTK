@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+
 @Table(name = "Turysta")
 public class Turysta {
     @Id
@@ -39,7 +40,7 @@ public class Turysta {
     @Column(name = "data_urodzenia")
     private java.util.Date dataUrodzenia;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
     private Uzytkownik Uzytkownik;
 

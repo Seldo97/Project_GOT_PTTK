@@ -34,4 +34,9 @@ public class KsiazeczkaServiceImpl implements KsiazeczkaService
 	public Ksiazeczka getOneByTurysta(Turysta turysta) {
 		return this.ksiazeczkaRepository.getByTurysta(turysta);
 	}
+
+	@Override
+	public List<Ksiazeczka> getZgloszoneWycieczki() {
+		return this.ksiazeczkaRepository.getAllByZgloszona(1);
+	}
 }

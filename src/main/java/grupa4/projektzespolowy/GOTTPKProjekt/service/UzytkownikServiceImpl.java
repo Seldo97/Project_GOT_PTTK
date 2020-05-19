@@ -2,14 +2,13 @@ package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.UzytkownikRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -17,7 +16,7 @@ import grupa4.projektzespolowy.GOTTPKProjekt.repository.UzytkownikRepository;
 public class UzytkownikServiceImpl implements UzytkownikService
 {
 	@Autowired
-    private UzytkownikRepository uzytkownikRepository;
+    public UzytkownikRepository uzytkownikRepository;
 
     @Override
 	public Uzytkownik createUzytkownik(Uzytkownik uzytkownik) { return uzytkownikRepository.save(uzytkownik); }

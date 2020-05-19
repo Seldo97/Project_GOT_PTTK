@@ -4,7 +4,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $(".alert").slideToggle(500).delay(3800).slideToggle(500);
+    $(".flash-msg").slideToggle(500).delay(3800).slideToggle(500);
 });
 
 $(document).ready(function(){

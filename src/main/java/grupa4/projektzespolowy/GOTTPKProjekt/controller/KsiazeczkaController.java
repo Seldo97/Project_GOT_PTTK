@@ -2,30 +2,35 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.WycieczkaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.service.KsiazeczkaServiceImpl;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 @Controller
-public class KsiazeczkaController 
-{
-	@Autowired
-	private KsiazeczkaServiceImpl ksiazeczkaServiceImpl;
-	@Autowired
-	private UzytkownikServiceImpl uzytkownikService;
-	@GetMapping("/ksiazeczki") // ścieżka na której zostanie obsłużona metoda
-    public String getAllKsiazeczki(Model model, Authentication authentication) 
-    {
+public class KsiazeczkaController {
+    @Autowired
+    private KsiazeczkaServiceImpl ksiazeczkaServiceImpl;
+    @Autowired
+    private WycieczkaServiceImpl wycieczkaService;
+    @Autowired
+    private UzytkownikServiceImpl uzytkownikService;
+
+    @GetMapping("/ksiazeczki") // ścieżka na której zostanie obsłużona metoda
+    public String getAllKsiazeczki(Model model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
         model.addAttribute("ksiazeczki", ksiazeczkaServiceImpl.getAllKsiazeczki());
@@ -45,16 +50,33 @@ public class KsiazeczkaController
 //	        return "redirect:/ksiazeczki";
 //	    }
 
-    @GetMapping("/ksiazeczka/MojaKsiazeczka")
-    public String getMojaKsiazeczka(Model model, Authentication authentication){
+    @GetMapping({"/ksiazeczka/MojaKsiazeczka", "/ksiazeczka/{idKsiazeczka}"})
+    public String getMojaKsiazeczka(Model model,
+                                    Authentication authentication,
+                                    @PathVariable(required = false) Integer idKsiazeczka) {
 
-        Uzytkownik uzytkownik = uzytkownikService.getLoggedUserDetails(authentication);
-        Turysta turysta = uzytkownik.getTurysta();
-        Ksiazeczka ksiazeczka = ksiazeczkaServiceImpl.getOneByTurysta(turysta);
+        Ksiazeczka ksiazeczka = null;
+        Turysta turysta = null;
 
-        if(ksiazeczka != null){
-            List<Wycieczka> wycieczki = ksiazeczka.getWycieczki();
+        if (idKsiazeczka != null) {
+
+            ksiazeczka = ksiazeczkaServiceImpl.getOneById(idKsiazeczka);
+            turysta = ksiazeczka.getTurysta();
+
+            List<Wycieczka> wycieczki = wycieczkaService.getAllZatwierdzoneWycieczki(ksiazeczka);
             model.addAttribute("wycieczki", wycieczki);
+
+        } else {
+
+            Uzytkownik uzytkownik = uzytkownikService.getLoggedUserDetails(authentication);
+            turysta = uzytkownik.getTurysta();
+            ksiazeczka = ksiazeczkaServiceImpl.getOneByTurysta(turysta);
+
+            if (ksiazeczka != null) {
+                List<Wycieczka> wycieczki = ksiazeczka.getWycieczki();
+                model.addAttribute("wycieczki", wycieczki);
+            }
+
         }
 
         model.addAttribute("LoggedUser", authentication);
@@ -67,7 +89,7 @@ public class KsiazeczkaController
     @PostMapping("/ksiazeczka/stworz")
     public String createKsiazeczka(@ModelAttribute Ksiazeczka ksiazeczka,
                                    HttpServletRequest request,
-                                   RedirectAttributes redirectAttributes){
+                                   RedirectAttributes redirectAttributes) {
 
         String referer = request.getHeader("Referer");
 
@@ -77,6 +99,60 @@ public class KsiazeczkaController
         return "redirect:" + referer;
     }
 
+    @GetMapping("/ksiazeczka/zglos/{idKsiazeczka}")
+    public String reportKsiazeczka(@PathVariable("idKsiazeczka") Integer idKsiazeczka,
+                                   HttpServletRequest request,
+                                   RedirectAttributes redirectAttributes) {
+
+
+        Ksiazeczka ksiazeczka = ksiazeczkaServiceImpl.getOneById(idKsiazeczka);
+        ksiazeczka.setZgloszona(1);
+        ksiazeczkaServiceImpl.createKsiazeczka(ksiazeczka);
+
+        redirectAttributes.addFlashAttribute("info_msg", "Książeczka została zgłoszona do referatu ✅");
+
+        return "redirect:" + request.getHeader("Referer");
+    }
+
+    @GetMapping("/ksiazeczka/zgloszone")
+    public String showZgloszoneKsiazeczki(Model model,
+                                          Authentication authentication) {
+
+        List<Ksiazeczka> zgloszoneKsiazeczki = ksiazeczkaServiceImpl.getZgloszoneWycieczki();
+
+        //zgloszoneKsiazeczki.get(1).getTurysta().getImie();
+
+        model.addAttribute("LoggedUser", authentication);
+        model.addAttribute("zgloszoneKsiazeczki", zgloszoneKsiazeczki);
+
+        return "ksiazeczka/zgloszoneKsiazeczki";
+    }
+
+    @GetMapping("/ksiazeczka/odrzuc/{idKsiazeczka}")
+    public String odrzucZgloszonaKsiazeczke(@PathVariable("idKsiazeczka") Integer idKsiazeczka,
+                                            HttpServletRequest request,
+                                            RedirectAttributes redirectAttributes){
+
+        Ksiazeczka ksiazeczka = ksiazeczkaServiceImpl.getOneById(idKsiazeczka);
+        ksiazeczka.setZgloszona(0);
+        ksiazeczka.setPowiadomienie(2);
+        ksiazeczkaServiceImpl.createKsiazeczka(ksiazeczka);
+
+        redirectAttributes.addFlashAttribute("info_msg", "Zgłoszenie zostało odrzucone");
+
+        return "redirect:/ksiazeczka/zgloszone";
+    }
+
+    @GetMapping("/ksiazeczka/zamknij/{idKsiazeczka}")
+    public String zamknijPowiadomienieKsiazeczki(@PathVariable("idKsiazeczka") Integer idKsiazeczka,
+                                            HttpServletRequest request){
+
+        Ksiazeczka ksiazeczka = ksiazeczkaServiceImpl.getOneById(idKsiazeczka);
+        ksiazeczka.setPowiadomienie(0);
+        ksiazeczkaServiceImpl.createKsiazeczka(ksiazeczka);
+
+        return "redirect:" + request.getHeader("Referer");
+    }
 
 }
 	

@@ -25,7 +25,7 @@ public class Przodownik {
     @Column(name="opis", nullable=true, length=100)
     private String opis;
 
-    @OneToOne(cascade = CascadeType.PERSIST) // na dziecku robimy PRESIST żeby zaś problemu z updejtami nie było
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY) // na dziecku robimy PRESIST żeby zaś problemu z updejtami nie było
     @JoinColumn(name = "id_uzytkownik", referencedColumnName = "id_uzytkownik")
     private Uzytkownik Uzytkownik;
 

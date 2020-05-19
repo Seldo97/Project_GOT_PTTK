@@ -16,4 +16,6 @@ public interface KsiazeczkaService
     void removeKsiazeczka(Integer id);
 
     Ksiazeczka getOneByTurysta(Turysta turysta);
+
+    List<Ksiazeczka> getZgloszoneWycieczki();
 }

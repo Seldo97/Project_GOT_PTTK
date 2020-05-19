@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Ksiazeczka;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,8 @@ public class WycieczkaServiceImpl implements WycieczkaService {
 	@Override
 	public List<Wycieczka> getAllWycieczkiByZgloszona(Integer id){return this.wycieczkaRepository.getAllWycieczkiByZgloszona(id);}
 
-
+	@Override
+	public List<Wycieczka> getAllZatwierdzoneWycieczki(Ksiazeczka ksiazeczka) {
+		return this.wycieczkaRepository.getAllWycieczkiByZatwierdzonaAndKsiazeczka(1, ksiazeczka);
+	}
 }

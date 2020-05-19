@@ -1,10 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.OdznakaServiceImpl;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaOdznakaServiceImpl;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.TurystaServiceImpl;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,9 @@ public class TurystaOdznakaController {
 
     @Autowired // podłączamy Servicy z których bedzimy koszystać
     private UzytkownikServiceImpl uzytkownikServiceImpl;
+
+    @Autowired
+    private KsiazeczkaServiceImpl ksiazeczkaService;
 
     @GetMapping("/turystaodznaki") // ścieżka na której zostanie obsłużona metoda
     public String getAllTurystaOdznaka(Model model) {
@@ -201,6 +201,12 @@ public class TurystaOdznakaController {
             redirectAttributes.addFlashAttribute("wiadomosc", "Ten turysta posiada już tę odznakę!");
             return "redirect:" + referer;
         }
+
+        Ksiazeczka ksiazeczka = turystaOdznaka.getTurysta().getKsiazeczka();
+        ksiazeczka.setSumaPunktow((int)((ksiazeczka.getSumaPunktow() - turystaOdznaka.getOdznaka().getPunkty()) * 0.25));
+        ksiazeczka.setPowiadomienie(1);
+        ksiazeczka.setZgloszona(0);
+        ksiazeczkaService.createKsiazeczka(ksiazeczka);
 
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka);
         redirectAttributes.addFlashAttribute("wiadomosc", "Przydzielono odznake turyście!");
