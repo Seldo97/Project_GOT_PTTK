@@ -230,27 +230,45 @@ public class WycieczkaController {
 		List<Wycieczka> wycieczkiZgloszone = wycieczkaServiceImpl.getAllWycieczkiByZgloszona(1);
 		List<Trasa> trasy = null;
 		List<Wycieczka> WycieczkiTmp = new ArrayList<Wycieczka>();
+		List<Grupa> grup =  new ArrayList<Grupa>();
 		Turysta turysta = null;
+		Przodownik przodownikAkceptWycieczka = null;
 		
 		for(Wycieczka wycieczki: wycieczkiZgloszone)
 		{
 			turysta = wycieczki.getKsiazeczka().getTurysta();
 			trasy = wycieczki.getTrasy();
 			
+			if(wycieczki.getPrzodownikWycieczkaAccept() != null)
+			{
+			przodownikAkceptWycieczka = PrzodownikService.getOneById(wycieczki.getPrzodownikWycieczkaAccept());
+			}
+			
 			for(Trasa trasa: trasy)
 			{
 				for(GrupaPrzodownik grupaPrzodownik: grupyPrzodownika)
 				{
-					if(trasa.getPasmo().getGrupa().getNazwa() == grupaPrzodownik.getGrupa().getNazwa())
+					if(trasa.getPasmo().getGrupa().getNazwa().equals(grupaPrzodownik.getGrupa().getNazwa()))
 					{
-						WycieczkiTmp.add(wycieczki);
+						if(WycieczkiTmp.contains(wycieczki) && grup.contains(grupaPrzodownik.getGrupa()))
+						{
+							continue;
+						}
+						else
+						{
+							WycieczkiTmp.add(wycieczki);
+							grup.add(grupaPrzodownik.getGrupa());
+						}
+						
 					}
 				}
 			}
 			
 		}
-		model.addAttribute("wycieczki", WycieczkiTmp);
+		model.addAttribute("wycieczki",WycieczkiTmp);
+		model.addAttribute("zaakceptowaniPrzodownicy",przodownikAkceptWycieczka);
 		model.addAttribute("turysta", turysta);
+		model.addAttribute("grupyPrzodownika", grup);
 		model.addAttribute("LoggedUser", authentication);
 		//return "redirect:" + request.getHeader("Referer");
         
@@ -270,33 +288,41 @@ public class WycieczkaController {
 		Wycieczka wycieczkaUpdate = wycieczkaServiceImpl.getOneById(idWycieczka);
 		List<Trasa> trasa = wycieczkaUpdate.getTrasy();
 		
-		//Liczenie punktow z tras w wycieczce (Suma punktow do got)
+		Uzytkownik uzytkownik =  uzytkownikService.getLoggedUserDetails(authentication);
+		Przodownik przodownik = uzytkownik.getPrzodownik();
+		
 		for(Trasa tr: trasa)
 		{
-			sumaPunktow += tr.getSumaPunktowDoGot();
+			if(tr.getSprawdzona() == 0)
+			{
+				redirectAttributes.addFlashAttribute("error_msg", "Wycieczka nie została zaakceptowana niektóre trasy  są nie sprawdzone! ");
+				wycieczkaUpdate.setZatwierdzona(0);
+				wycieczkaUpdate.setZgloszona(1);
+				sumaPunktow += 0;
+				sumaPunktowKsiazeczki += 0;	
+			}
+			else
+			{
+				sumaPunktow += tr.getSumaPunktowDoGot();
+				//Dodanie do ksiazeczki Punktow akceptowanej wycieczki
+				sumaPunktowKsiazeczki = wycieczkaUpdate.getKsiazeczka().getSumaPunktow() + sumaPunktow;
+				//Dodanie do turysty Punktow z ksiazeczki
+				tr.setZrealizowana(1);
+			}
+		}
+	
+	
+		if(wycieczkaUpdate.getSumaPunktowDoGot() == sumaPunktow)
+		{
+			wycieczkaUpdate.setZatwierdzona(1);
+			wycieczkaUpdate.setZgloszona(0);
 			
+			wycieczkaUpdate.getKsiazeczka().setSumaPunktow(sumaPunktowKsiazeczki);
+			wycieczkaUpdate.getKsiazeczka().getTurysta().setPunkty(sumaPunktowKsiazeczki);
+			wycieczkaUpdate.setPrzodownikWycieczkaAccept(przodownik.getIdPrzodownik());
+			wycieczkaServiceImpl.createWycieczka(wycieczkaUpdate);
+			redirectAttributes.addFlashAttribute("success_msg", "Wycieczka została zaakceptowana z punktacją przez " + przodownik.getImie() + " " + przodownik.getNazwisko() );
 		}
-		wycieczkaUpdate.setSumaPunktowDoGot(sumaPunktow);
-		
-		
-		// Akceptujac wycieczke zmieniamy jej status  na zrealizowana oraz jej tras a takze usuwamy ja z zgloszone wycieczki u przodownika
-		
-		wycieczkaUpdate.setZatwierdzona(1);
-		wycieczkaUpdate.setZgloszona(0);
-		//Dodanie do wycieczki sumy punktow z tras w wycieczce
-		for(Trasa tr: trasa)
-		{
-			tr.setZrealizowana(1);
-		}
-		
-		//Dodanie do ksiazeczki Punktow akceptowanej wycieczki
-		sumaPunktowKsiazeczki = wycieczkaUpdate.getKsiazeczka().getSumaPunktow() + sumaPunktow;
-		wycieczkaUpdate.getKsiazeczka().setSumaPunktow(sumaPunktowKsiazeczki);
-		//Dodanie do turysty Punktow z ksiazeczki
-		wycieczkaUpdate.getKsiazeczka().getTurysta().setPunkty(sumaPunktowKsiazeczki);
-		wycieczkaServiceImpl.createWycieczka(wycieczkaUpdate);
-		
-		redirectAttributes.addFlashAttribute("success_msg", "Wycieczka została zaakceptowana ✅");
 		
 		//return "redirect:" + request.getHeader("Referer");
 		

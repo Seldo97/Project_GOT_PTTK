@@ -47,10 +47,10 @@
 
                 {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
                     {% if  trasa.getZrealizowana == 0 %}
-                        <td class="text-center"><a class="btn" href="/trasa/zrealizuj/{{ trasa.getIdTrasa }}">🔲</a>
+                        <td class="text-center"><a class="btn disabled" href="/trasa/zrealizuj/{{ trasa.getIdTrasa }}">🔲</a>
                         </td>
                     {% else %}
-                        <td class="text-center"><a class="btn" href="/trasa/zrealizuj/{{ trasa.getIdTrasa }}">✅</a></td>
+                        <td class="text-center"><a class="btn disabled" href="/trasa/zrealizuj/{{ trasa.getIdTrasa }}">✅</a></td>
                     {% endif %}
                 {% else %}
                     {% if  trasa.getZrealizowana == 0 %}

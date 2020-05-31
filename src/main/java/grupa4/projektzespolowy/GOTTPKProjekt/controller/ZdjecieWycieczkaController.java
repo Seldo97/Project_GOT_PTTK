@@ -20,10 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.model.GrupaPrzodownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Trasa;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Wycieczka;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.ZdjecieWycieczka;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.GrupaPrzodownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.TrasaServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.WycieczkaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.ZdjecieWycieczkaServiceImpl;
 
@@ -42,16 +48,86 @@ public class ZdjecieWycieczkaController
 	@Autowired
 	private WycieczkaServiceImpl WycieczkaServiceImpl;
 	
+	@Autowired
+	private UzytkownikServiceImpl uzytkownikServiceImpl;
+	
+	@Autowired
+	private GrupaPrzodownikServiceImpl grupaPrzodownikService;
+	
 	 @GetMapping("/zdjecia/{idWycieczka}") // ścieżka na której zostanie obsłużona metoda
 	    public String getAllZdjeciaWycieczek(Model model, Authentication authentication, @PathVariable() Integer idWycieczka) 
 	    {
-		 
+		 List<GrupaPrzodownik> grupyPrzodownika = null;
+		 List<GrupaPrzodownik> grupyPrzodownikaPasujace = new ArrayList<>();
+		 List<GrupaPrzodownik> grupyPrzodownikatmp = new ArrayList<>();
+		 List<GrupaPrzodownik> grupyPrzodownikaNiePasujace = new ArrayList<>();
+		 Uzytkownik uzytkownik =  uzytkownikServiceImpl.getLoggedUserDetails(authentication);
 		 Wycieczka wycieczka = WycieczkaServiceImpl.getOneById(idWycieczka);
+		 List<Trasa> tr = trasaService.getAllByIdWycieczka(idWycieczka);
 		 Turysta turysta = wycieczka.getKsiazeczka().getTurysta();
+		 if((uzytkownik.getPrzodownik() != null))
+		 {
+			 Przodownik przodownik = uzytkownik.getPrzodownik();
+			  grupyPrzodownika = grupaPrzodownikService.getGrupyPrzodownika(przodownik.getIdPrzodownik());
+			  
+			 for(Trasa trasa: tr)
+			 {
+				 for(GrupaPrzodownik gr: grupyPrzodownika)
+				 {
+					 
+					 if(trasa.getPasmo().getGrupa().getNazwa().equals(gr.getGrupa().getNazwa()))
+							 {
+						 		if(grupyPrzodownikatmp.contains(gr))
+						 		{
+						 			continue;
+						 		}
+						 		else
+						 		{
+						 			grupyPrzodownikatmp.add(gr);
+						 		}
+							 }
+					 
+					 /*
+					 if(trasa.getPasmo().getGrupa().getNazwa().contains(gr.getGrupa().getNazwa()))
+					{
+						 if(grupyPrzodownikaPasujace.contains(gr))
+						 {
+							 continue;
+						 }
+						 else
+						 {
+							 grupyPrzodownikaPasujace.add(gr);
+						 }
+					}
+					 else if(trasa.getPasmo().getGrupa().getNazwa() != gr.getGrupa().getNazwa())
+					 {
+						 if(grupyPrzodownikaNiePasujace.contains(gr))
+						 {
+							 continue;
+						 }
+						 else
+						 {
+							 grupyPrzodownikaNiePasujace.add(gr);
+						 }	 
+						
+					 }
+					   */
+				 }
+				  
+				
+			 }
+			
+		 }
+		
+		 
+		
 	        model.addAttribute("LoggedUser", authentication);
 	        model.addAttribute("idWycieczka", idWycieczka);
 	        model.addAttribute("wycieczka", wycieczka);
 	        model.addAttribute("turysta", turysta);
+	        model.addAttribute("grupyPrzodownika", grupyPrzodownikatmp);
+	        model.addAttribute("grupyPrzodownikaPasujace", grupyPrzodownikaPasujace);
+	        model.addAttribute("grupyPrzodownikaNiePasujace", grupyPrzodownikaNiePasujace);
 	      
 	        model.addAttribute("trasy", trasaService.getAllByIdWycieczka(idWycieczka));
 	        model.addAttribute("zdjecia", zdjecieWycieczkaServiceImpl.getAllZdjeciaByIdWycieczka(idWycieczka));
@@ -166,7 +242,7 @@ public class ZdjecieWycieczkaController
 		 }
 		 else
 		 {
-			 redirectAttributes.addFlashAttribute("error_msg", "Nie udało sie usunąć zdjęcia/zdjęć czy wybrałeś zdjęcie ?");
+			 redirectAttributes.addFlashAttribute("error_msg", "Nie udało się usunąć zdjęcia/zdjęć czy wybrałeś zdjęcie ?");
 		 }
 		 	return "redirect:" + request.getHeader("Referer");
 	    }

@@ -56,6 +56,9 @@ public class Wycieczka {
 
     @Column(name = "zgloszona")
     private int zgloszona;
+    
+    @Column(name = "przodownik_accept_wycieczki")
+    private Integer przodownikWycieczkaAccept;
 
     @ManyToOne
     @JoinColumn(name = "id_odznaka", referencedColumnName = "id_odznaka")
@@ -198,4 +201,16 @@ public class Wycieczka {
     public void setOdznaka(Odznaka odznaka) {
         this.odznaka = odznaka;
     }
+
+	public Integer getPrzodownikWycieczkaAccept() {
+		return przodownikWycieczkaAccept;
+	}
+
+	public void setPrzodownikWycieczkaAccept(Integer przodownikWycieczkaAccept) {
+		this.przodownikWycieczkaAccept = przodownikWycieczkaAccept;
+	}
+
+	
+    
+    
 }
