@@ -135,45 +135,30 @@ public class TurystaOdznakaController {
             } else {
                 if (odznakiTurysty.size() == 0) {
                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Popularna"));
-                } else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Popularna", idTurysta))) {
+                } else if (odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Popularna", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Mała - brązowa", idTurysta)))) {
                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Mała - brązowa"));
-                } else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Mała - brązowa", idTurysta))) {
+                } else if (odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Mała - brązowa", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Mała - srebrna", idTurysta)))) {
                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Mała - srebrna"));
-                } else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Mała - srebrna", idTurysta))) {
+                } else if (odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Mała - srebrna", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Mała - złota", idTurysta)))) {
                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Mała - złota"));
-                } else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Mała - złota", idTurysta))) {
+                } else if (odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Mała - złota", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Duża - brązowa", idTurysta)))) {
                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Duża - brązowa"));
                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Za wytrwałość - mała"));
-                } else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - brązowa", idTurysta)) ||
-                          ((odznakiTurysty.get(odznakiTurysty.size() - 2).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - brązowa", idTurysta)) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))))) ||
-                          (((odznakiTurysty.get(odznakiTurysty.size() - 3).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - brązowa", idTurysta)) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 2).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))))) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - duża", idTurysta))))) {
+                } else if (odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Duża - brązowa", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Duża - srebrna", idTurysta))))  {
                                 odznaki.add(odznakaServiceImpl.getOneByNazwa("Duża - srebrna"));
                                 if(odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - duża", idTurysta)))){
                                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Za wytrwałość - duża"));
                                 }else if (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))){
                                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Za wytrwałość - mała"));
                                 }
-                } else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - srebrna", idTurysta)) ||
-                          ((odznakiTurysty.get(odznakiTurysty.size() - 2).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - srebrna", idTurysta)) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))))) ||
-                          (((odznakiTurysty.get(odznakiTurysty.size() - 3).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - srebrna", idTurysta)) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 2).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))))) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - duża", idTurysta))))) {
+                } else if (odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Duża - srebrna", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Duża - złota", idTurysta))))  {
                                 odznaki.add(odznakaServiceImpl.getOneByNazwa("Duża - złota"));
                                 if(odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - duża", idTurysta)))){
                                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Za wytrwałość - duża"));
                                 }else if (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))){
                                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Za wytrwałość - mała"));
                                 }
-                } else if (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - złota", idTurysta)) ||
-                          ((odznakiTurysty.get(odznakiTurysty.size() - 2).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - złota", idTurysta)) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))))) ||
-                          (((odznakiTurysty.get(odznakiTurysty.size() - 3).equals(turystaOdznakaServiceImpl.findOdznaka("Duża - złota", idTurysta)) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 2).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))))) &&
-                          (odznakiTurysty.get(odznakiTurysty.size() - 1).equals(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - duża", idTurysta))))) {
+                } else if (odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Duża - złota", idTurysta))) {
                                 if(odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta)) && (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - duża", idTurysta)))){
                                     odznaki.add(odznakaServiceImpl.getOneByNazwa("Za wytrwałość - duża"));
                                 }else if (!odznakiTurysty.contains(turystaOdznakaServiceImpl.findOdznaka("Za wytrwałość - mała", idTurysta))){
