@@ -54,7 +54,7 @@
                 <th scope="col">Na odznakę</th>
                 <th scope="col">Pkt / do GOT</th>
                 <th scope="col">Zatwierdzona</th>
-
+ 				<th scope="col">Zaakceptowana przez</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -76,6 +76,15 @@
                         <td>Nie</td>
                     {% else %}
                         <td>Tak✔️</td>
+                    {% endif %}
+                    {% if  wycieczka.getPrzodownikWycieczkaAccept == 0 %}
+                    <td> </td>
+                    {% else %}
+                    {% for przodownik in przodownicy %}
+                    	 {% if przodownik.getIdPrzodownik == wycieczka.getPrzodownikWycieczkaAccept %}
+                        <td>{{ przodownik.getImie}} {{ przodownik.getNazwisko}}</td>
+                          {% endif %}
+                    {% endfor %}
                     {% endif %}
                     <td class="text-right">
                         {% if wycieczka.getZgloszona == 1 or wycieczka.getZatwierdzona == 1 %}

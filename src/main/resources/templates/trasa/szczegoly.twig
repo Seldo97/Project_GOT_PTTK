@@ -25,5 +25,12 @@
                 {% endif %}
     	{%  endfor %}
           </div>
+      <div class="col-6">
+   {% if 'ROLE_przodownik' in LoggedUser.getAuthorities %}
+    <a href="/trasa/akceptuj/{{ trasy.getIdTrasa }}" class="btn btn-primary"  role="button">Akceptuj trasę</a>
+    <a href="/trasa/odrzuc/{{ trasy.getIdTrasa }}" class="btn btn-primary"  role="button">Odrzuć trasę</a>
+    <a class="btn btn-dark" href="/zdjecia/{{ trasy.getWycieczka.idWycieczka }}" role="button">Powrót</a>
+    {% endif %}
+   	 </div>
           
 {% endblock %}

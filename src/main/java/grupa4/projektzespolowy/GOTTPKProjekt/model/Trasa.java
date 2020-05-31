@@ -33,6 +33,9 @@ public class Trasa {
 
     @Column(name = "zrealizowana")
     private int zrealizowana;
+    
+    @Column(name = "sprawdzona")
+    private Integer sprawdzona;
 
     @Column(name = "dubel")
     private int dubel;
@@ -94,11 +97,20 @@ public class Trasa {
         return zrealizowana;
     }
 
-    public void setZrealizowana(int zrealizowana) {
+    public void setZrealizowana(Integer zrealizowana) {
         this.zrealizowana = zrealizowana;
     }
+    
 
-    public int getDubel() {
+    public int getSprawdzona() {
+		return sprawdzona;
+	}
+
+	public void setSprawdzona(int sprawdzona) {
+		this.sprawdzona = sprawdzona;
+	}
+
+	public int getDubel() {
         return dubel;
     }
 

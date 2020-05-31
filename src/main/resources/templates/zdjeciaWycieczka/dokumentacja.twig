@@ -29,16 +29,16 @@
             <th scope="col">Pasmo</th>
             <th scope="col">Data</th>
             <th scope="col">Suma pkt / do GOT</th>
+            <th scope="col">Sprawdzona</th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-
         {% for trasa in trasy %}
             <tr>
                 <td>{{ trasa.getIdTrasa }}</td>
                 <td>{{ trasa.getOpis }}</td>
-                <td>{{ trasa.getPasmo.getNazwa }}</td>
+                <td>{{ trasa.getPasmo.getGrupa.getNazwa }}</td>
                 <td>{{ trasa.getData }}</td>
                 {% if trasa.getDubel == 0 %}
                     <td>{{ trasa.getSuma_punktow }} / {{ trasa.getSumaPunktowDoGot }}</td>
@@ -47,13 +47,36 @@
                                 title="Twoja trasa zawiera zdublowane odcinki, które nie będą brane pod uwagę do punktacji GOT">
                             ❗</abbr>
                     </td>
-                {% endif %}
-                <td class="text-right">
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <abbr title="Szczegóły trasy"><a class="btn btn-sm bg-transparent"
+                  {% endif %}
+           {% for grupaPrzodownika in grupyPrzodownika %}
+                     {% if 'ROLE_przodownik' in LoggedUser.getAuthorities and trasa.getSprawdzona == 0 %}
+                   		<td class="btn disabled"">🔲</td>
+                   {% endif %}
+                    {% if 'ROLE_przodownik' in LoggedUser.getAuthorities and trasa.getSprawdzona == 1 %}
+                   		<td class="btn disabled"">✅</td>
+                    {% endif %}
+                        <td class="text-right">
+                        {% if 'ROLE_przodownik' in LoggedUser.getAuthorities and trasa.getPasmo.getGrupa.getNazwa in grupaPrzodownika.getGrupa.getNazwa   %}
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <abbr title="Szczegóły trasy"><a class="btn btn-sm bg-transparent"
+                                                                     href="/trasa/szczegoly/{{ trasa.getIdTrasa }}">👣</a></abbr>
+                                </div>
+                       {% elseif 'ROLE_przodownik' in LoggedUser.getAuthorities and trasa.getPasmo.getGrupa.getNazwa != grupaPrzodownika.getGrupa.getNazwa   %}
+                              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <abbr title="Szczegóły trasy"><a class="btn disabled btn-sm bg-transparent"
+                                                                     href="/trasa/szczegoly/{{ trasa.getIdTrasa }}">👣</a></abbr>
+                              </div>
+                        {% endif %}
+              		  </td>
+              	{% endfor %}
+              		  {% if 'ROLE_turysta' in LoggedUser.getAuthorities  %}
+                  	<td class="text-right">
+                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <abbr title="Szczegóły trasy"><a class="btn btn-sm bg-transparent"
                                                          href="/trasa/szczegoly/{{ trasa.getIdTrasa }}">👣</a></abbr>
-                    </div>
-                </td>
+                         </div>
+                	</td>
+                	{% endif %}
             </tr>
         {% endfor %}
 
@@ -64,14 +87,18 @@
     <h1>Zdjęcia Tras</h1>
     <form id="zdjeciaDoUsuniecia" action="/zdjecie/usunZaznaczone" method="GET">
         {% for zdjecie in zdjecia %}
-            <a class="demo" href="{{ zdjecie.getSciezka }}" data-lightbox="gallery" data-title="{{ zdjecie.getOpis }}">
-			<img class="example-image" src="{{ zdjecie.getSciezka }}" alt="zdjecie" witdh="150px" height="150px"/>
-            </a>
-            {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
-            <input type = "checkbox" name = "imageIds" value = "{{ zdjecie.getIdZdjecieWycieczka}}" />
+            {% if zdjecie is null %}
+            <h1>Brak zdjęc</h1>
+            {% else %}
+             <a class="demo" href="{{ zdjecie.getSciezka }}" data-lightbox="gallery" data-title="{{ zdjecie.getOpis }}">
+    			<img class="example-image" src="{{ zdjecie.getSciezka }}" alt="zdjecie" witdh="150px" height="150px"/>
+              </a>
+                {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
+                <input type = "checkbox" name = "imageIds" value = "{{ zdjecie.getIdZdjecieWycieczka}}" />
+                {% endif %}
+                <input type="submit" id="submit-form" class="hidden" />
             {% endif %}
-            <input type="submit" id="submit-form" class="hidden" />
-        {% endfor %}
+       {% endfor %}
          
    </form>
     </div>
@@ -92,15 +119,14 @@
             <div class="form-group">
                 <label for="opis">Opis</label>
                 <br>
-
                 <textarea id="opis" name="opis" rows="4" cols="50"></textarea>
             </div>
         </fieldset>
         <button type="submit" class="btn btn-info">Dodaj</button>
     </form>
-    {% elseif 'ROLE_przodownik' in LoggedUser.getAuthorities %}
-    <a href="/wycieczka/akceptuj/{{ idWycieczka }}" class="btn btn-primary"  role="button">Akceptuj wycieczke</a>
-    <a href="/wycieczka/odrzuc/{{ idWycieczka }}" class="btn btn-primary"  role="button">Odrzuć wycieczke</a>
     {% endif %}
-
+    {% if 'ROLE_przodownik' in LoggedUser.getAuthorities  %}
+      <a href="/wycieczka/akceptuj/{{ idWycieczka }}" class="btn  btn-primary"  role="button">Akceptuj wycieczke</a>
+    <a href="/wycieczka/odrzuc/{{ idWycieczka }}" class="btn  btn-primary"  role="button">Odrzuć wycieczke</a>
+    {% endif %}
 {% endblock %}

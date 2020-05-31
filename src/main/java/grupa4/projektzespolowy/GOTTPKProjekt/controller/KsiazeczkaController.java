@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.service.KsiazeczkaServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,11 @@ public class KsiazeczkaController {
     private WycieczkaServiceImpl wycieczkaService;
     @Autowired
     private UzytkownikServiceImpl uzytkownikService;
+    
+    @Autowired
+    private PrzodownikService przodownikService;
+ 
+    List<Przodownik> przodownicy = new ArrayList<>();
 
     @GetMapping("/ksiazeczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllKsiazeczki(Model model, Authentication authentication) {
@@ -75,11 +82,16 @@ public class KsiazeczkaController {
             if (ksiazeczka != null) {
                 List<Wycieczka> wycieczki = ksiazeczka.getWycieczki();
                 model.addAttribute("wycieczki", wycieczki);
+                przodownicy = przodownikService.getAllPrzodownik();
+    			
+                
+                
             }
 
         }
 
         model.addAttribute("LoggedUser", authentication);
+        model.addAttribute("przodownicy", przodownicy);
         model.addAttribute("turysta", turysta);
         model.addAttribute("ksiazeczka", ksiazeczka);
 

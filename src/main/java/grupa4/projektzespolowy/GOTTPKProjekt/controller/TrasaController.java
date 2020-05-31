@@ -158,5 +158,43 @@ public class TrasaController {
         //return "redirect:" + request.getHeader("Referer");
         return "trasa/szczegoly";
     }
+    
+    @GetMapping("/trasa/akceptuj/{idTrasa}")
+    public String akceptujTrase(@PathVariable int idTrasa,
+                                 HttpServletRequest request,
+                                 RedirectAttributes redirectAttributes) {
+
+        Trasa trasa = trasaService.getOneById(idTrasa);
+        if (trasa.getSprawdzona() == 0) {
+            trasa.setSprawdzona(1);
+        } else {
+            trasa.setSprawdzona(0);
+        }
+        trasaService.createTrasa(trasa);
+        
+        redirectAttributes.addFlashAttribute("success_msg", "Status trasy uległ zmianie ✅");
+
+        return "redirect:" + request.getHeader("Referer");
+    }
+    
+    @GetMapping("/trasa/odrzuc/{idTrasa}")
+    public String odrzucTrase(@PathVariable int idTrasa,
+                                 HttpServletRequest request,
+                                 RedirectAttributes redirectAttributes) {
+
+        Trasa trasa = trasaService.getOneById(idTrasa);
+        if (trasa.getSprawdzona() == 0) {
+            trasa.setSprawdzona(0);
+        } 
+        trasaService.createTrasa(trasa);
+        
+        Wycieczka wycieczka = trasa.getWycieczka();
+        wycieczka.setZgloszona(0);
+        wycieczkaService.createWycieczka(wycieczka);
+        
+        redirectAttributes.addFlashAttribute("success_msg", "Status trasy i wycieczki uległ zmianie ✅");
+
+        return "redirect:" + request.getHeader("Referer");
+    }
 
 }
