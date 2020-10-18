@@ -15,9 +15,9 @@
         <form id="signupForm" action="/przodownicy/dodaj" method="POST">
     {% endif %}
         <fieldset>
-            <legend> Dane Personalne </legend>
+            <legend> Dane personalne </legend>
             <div class="form-group">
-                <label for="imie">Imie</label>
+                <label for="imie">Imię</label>
                 <input type="text" class="form-control" id="imie" name="imie" value="{{przodownik.getImie}}">
             </div>
             <div class="form-group">
@@ -30,7 +30,7 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend> Dane Konta </legend>
+            <legend> Dane konta </legend>
             <div class="form-group">
                 <label for="login">Login</label>
                 <input type="text" class="form-control" id="login" name="login" value="{{przodownik.uzytkownik.getLogin}}">

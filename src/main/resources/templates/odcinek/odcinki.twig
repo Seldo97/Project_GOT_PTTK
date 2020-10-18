@@ -25,13 +25,13 @@
         {% for odcinek in odcinki %}
             <tr>
                 <td>{{ odcinek.getIdOdcinek }}</td>
-                <td>[{{ odcinek.getPunktPoczatkowy.getIdpunkt }}] <strong>{{ odcinek.getPunktPoczatkowy.getNazwa }}</strong></td>
+                <td><!-- [{{ odcinek.getPunktPoczatkowy.getIdpunkt }}] --> <strong>{{ odcinek.getPunktPoczatkowy.getNazwa }}</strong></td>
                 {% if odcinek.getPunktyDo != 0 %}
                     <td>↔️</td>
                 {% else %}
                     <td>➡️️</td>
                 {% endif %}
-                <td>[{{ odcinek.getPunktKoncowy.getIdpunkt }}] <strong>{{ odcinek.getPunktKoncowy.getNazwa }}</strong></td>
+                <td><!--[{{ odcinek.getPunktKoncowy.getIdpunkt }}] --><strong>{{ odcinek.getPunktKoncowy.getNazwa }}</strong></td>
                 {% if odcinek.getPunktyDo != 0 %}
                     <td>{{ odcinek.getPunktyOd}}/{{ odcinek.getPunktyDo }}</td>
                 {% else %}

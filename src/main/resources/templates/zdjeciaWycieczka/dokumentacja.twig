@@ -29,7 +29,9 @@
             <th scope="col">Pasmo</th>
             <th scope="col">Data</th>
             <th scope="col">Suma pkt / do GOT</th>
+             {% if 'ROLE_przodownik' in LoggedUser.getAuthorities and trasa.getSprawdzona == 0 %}
             <th scope="col">Sprawdzona</th>
+            {% endif %}
             <th scope="col"></th>
         </tr>
         </thead>
