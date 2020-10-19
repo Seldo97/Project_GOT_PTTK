@@ -1,11 +1,19 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Przodownik")
+@Data
+@NoArgsConstructor @AllArgsConstructor
+@Builder
 public class Przodownik {
 
     @Id
@@ -33,7 +41,6 @@ public class Przodownik {
     @JoinColumn(name = "id_przodownik", referencedColumnName = "id_przodownik")
     private List<GrupaPrzodownik> grupy = new ArrayList<GrupaPrzodownik>();
 
-    public Przodownik() {}
 
     public Przodownik(String imie, String nazwisko, String telefon) {
         this.imie = imie;

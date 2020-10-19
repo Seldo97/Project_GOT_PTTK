@@ -1,5 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.WycieczkaServiceImpl;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
 
 @Controller
 public class KsiazeczkaController {
@@ -34,7 +34,7 @@ public class KsiazeczkaController {
     @Autowired
     private PrzodownikService przodownikService;
  
-    List<Przodownik> przodownicy = new ArrayList<>();
+    List<PrzodownikDTO> przodownicy = new ArrayList<>();
 
     @GetMapping("/ksiazeczki") // ścieżka na której zostanie obsłużona metoda
     public String getAllKsiazeczki(Model model, Authentication authentication) {

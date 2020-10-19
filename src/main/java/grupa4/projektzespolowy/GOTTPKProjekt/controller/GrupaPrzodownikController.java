@@ -1,5 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.GrupaPrzodownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.GrupaServiceImpl;
@@ -45,7 +46,7 @@ public class GrupaPrzodownikController {
                                        Authentication authentication){
 
         List<GrupaPrzodownik> grupyPrzodownika = grupaPrzodownikService.getGrupyPrzodownika(idPrzodownik);
-        Przodownik przodownik = przodownikService.getOneById(idPrzodownik);
+        PrzodownikDTO przodownik = przodownikService.getOneById(idPrzodownik);
 
         // Filtruje żeby nie pokazywało grup do których przodownik już jest przypisany
         List<Grupa> grupyPrzodownikaFilter = grupyPrzodownika
@@ -110,7 +111,7 @@ public class GrupaPrzodownikController {
         Uzytkownik uzytkownik = uzytkownikService.getLoggedUserDetails(authentication);
 
         List<GrupaPrzodownik> grupyPrzodownika = grupaPrzodownikService.getGrupyPrzodownika(uzytkownik.getPrzodownik().getIdPrzodownik());
-        Przodownik przodownik = przodownikService.getOneById(uzytkownik.getPrzodownik().getIdPrzodownik());
+        PrzodownikDTO przodownik = przodownikService.getOneById(uzytkownik.getPrzodownik().getIdPrzodownik());
 
         model.addAttribute("grupyPrzodownika", grupyPrzodownika);
         model.addAttribute("przodownik", przodownik);

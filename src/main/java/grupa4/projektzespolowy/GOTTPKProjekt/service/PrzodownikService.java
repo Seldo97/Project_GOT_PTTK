@@ -1,16 +1,16 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 
 import java.util.List;
 
 public interface PrzodownikService {
 
-    Przodownik createPrzodownik(Przodownik przodownik);
+    PrzodownikDTO createPrzodownik(PrzodownikDTO dto);
 
-    List<Przodownik> getAllPrzodownik();
+    List<PrzodownikDTO> getAllPrzodownik();
 
-    Przodownik getOneById(Integer id);
+    PrzodownikDTO getOneById(Integer id);
 
     void removePrzodownik(Integer id);
 

@@ -1,6 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;
@@ -44,10 +44,10 @@ public class PrzodownikController {
                                    RedirectAttributes redirectAttributes,
                                    Authentication authentication) {
 
-        Rola rola = rolaServiceImpl.getOneByName("ROLE_przodownik"); // pobranie roli (pod id 5 mam przodownik)3
+    	Rola rola = rolaServiceImpl.getOneByName("ROLE_przodownik"); // pobranie roli (pod id 5 mam przodownik)3
         Uzytkownik uzytkownik = new Uzytkownik(login, passwordEncoder.encode(haslo), email, rola); // tworze użytkownika z referencją do pobranej roli
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
-        Przodownik przodownik = new Przodownik(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem
+        PrzodownikDTO przodownik = new PrzodownikDTO(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem
 
         przodownikServiceImpl.createPrzodownik(przodownik); // puść inserta do bazy
         // UWAGA! kolejność operacji jest ważna.
@@ -64,7 +64,7 @@ public class PrzodownikController {
     @GetMapping("/przodownicy/usun/{idPrzodownik}") // usuń przodownika wraz z jego kontem użytkownika
     public String removePrzodownik(@PathVariable Integer idPrzodownik) {
 
-        Przodownik przodownik = przodownikServiceImpl.getOneById(idPrzodownik); // pobieram przodownika po odebranym id
+        PrzodownikDTO przodownik = przodownikServiceImpl.getOneById(idPrzodownik); // pobieram przodownika po odebranym id
         Uzytkownik uzytkownik = przodownik.getUzytkownik(); // pobieram uzytkownika przypisanego do przodownika
         przodownik.setUzytkownik(null); // usuwam referencje do rodzica
 
@@ -81,7 +81,7 @@ public class PrzodownikController {
         model.addAttribute("LoggedUser", authentication);
 
         if(idPrzodownik != null){
-            Przodownik przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
+            PrzodownikDTO przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
             model.addAttribute("przodownik", przodownik);
             model.addAttribute("update", "1");
         }
@@ -98,7 +98,7 @@ public class PrzodownikController {
                                  @RequestParam(value="email") String email,
                                  @PathVariable Integer idPrzodownik) {
 
-        Przodownik przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
+        PrzodownikDTO przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
 
         przodownik.setImie(imie);
         przodownik.setNazwisko(nazwisko);

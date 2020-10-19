@@ -1,6 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 
+import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.*;
 
@@ -232,7 +233,7 @@ public class WycieczkaController {
 		List<Wycieczka> WycieczkiTmp = new ArrayList<Wycieczka>();
 		List<Grupa> grup =  new ArrayList<Grupa>();
 		Turysta turysta = null;
-		Przodownik przodownikAkceptWycieczka = null;
+		PrzodownikDTO przodownikAkceptWycieczka = null;
 		
 		for(Wycieczka wycieczki: wycieczkiZgloszone)
 		{

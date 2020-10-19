@@ -1,28 +1,39 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
+import grupa4.projektzespolowy.GOTTPKProjekt.mapper.PrzodownikMapper;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.repository.PrzodownikRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class PrzodownikServiceImpl implements PrzodownikService{ // service obsługuje nasze metody z repozytorium
 
-    @Autowired
-    private PrzodownikRepository przodownikRepository;
+  
+    private final PrzodownikRepository przodownikRepository;
+    
+    private final PrzodownikMapper przodownikMapper;
 
     @Override
-    public Przodownik createPrzodownik(Przodownik przodownik) { return przodownikRepository.save(przodownik);}
+    public PrzodownikDTO createPrzodownik(PrzodownikDTO dto) 
+    { 
+    	Przodownik przodownik = przodownikMapper.mapOfDTO(dto);
+    	Przodownik saveEntity = przodownikRepository.save(przodownik);
+    	return przodownikMapper.mapOfEntity(saveEntity);
+    }
 
     @Override
-    public List<Przodownik> getAllPrzodownik() {return this.przodownikRepository.findAll(); }
+    public List<PrzodownikDTO> getAllPrzodownik() {return przodownikMapper.mapOfCollection(this.przodownikRepository.findAll()); }
 
     @Override
-    public Przodownik getOneById(Integer id) { return this.przodownikRepository.getOne(id); }
+    public PrzodownikDTO getOneById(Integer id) { return przodownikMapper.mapOfEntity(this.przodownikRepository.getOne(id)); }
 
     @Override
     public void removePrzodownik(Integer id) { this.przodownikRepository.deleteById(id); }

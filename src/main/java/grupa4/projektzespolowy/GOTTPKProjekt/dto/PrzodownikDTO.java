@@ -29,4 +29,14 @@ public class PrzodownikDTO {
     private Uzytkownik Uzytkownik;
 
     private List<GrupaPrzodownik> grupy;
+
+	public PrzodownikDTO( String imie, String nazwisko, String telefon,Uzytkownik uzytkownik) {
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.telefon = telefon;
+		Uzytkownik = uzytkownik;
+	}
+    
+    
+   
 }
