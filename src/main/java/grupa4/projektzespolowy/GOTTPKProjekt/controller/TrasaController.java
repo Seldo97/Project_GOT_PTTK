@@ -163,13 +163,9 @@ public class TrasaController {
     public String akceptujTrase(@PathVariable int idTrasa,
                                  HttpServletRequest request,
                                  RedirectAttributes redirectAttributes) {
-
+    	
         Trasa trasa = trasaService.getOneById(idTrasa);
-        if (trasa.getSprawdzona() == 0) {
-            trasa.setSprawdzona(1);
-        } else {
-            trasa.setSprawdzona(0);
-        }
+        trasa.setSprawdzona(1);
         trasaService.createTrasa(trasa);
         
         redirectAttributes.addFlashAttribute("success_msg", "Status trasy uległ zmianie ✅");
@@ -183,9 +179,7 @@ public class TrasaController {
                                  RedirectAttributes redirectAttributes) {
 
         Trasa trasa = trasaService.getOneById(idTrasa);
-        if (trasa.getSprawdzona() == 0) {
-            trasa.setSprawdzona(0);
-        } 
+         trasa.setSprawdzona(0);
         trasaService.createTrasa(trasa);
         
         Wycieczka wycieczka = trasa.getWycieczka();

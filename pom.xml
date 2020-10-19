@@ -89,6 +89,14 @@
 			<artifactId>jtwig-spring-boot-starter</artifactId>
 			<version>5.87.0.RELEASE</version>
 		</dependency>
+		
+		<!--> Lombok -->
+		<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<version>1.18.16</version>
+		<scope>provided</scope>
+	</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 		<dependency>
