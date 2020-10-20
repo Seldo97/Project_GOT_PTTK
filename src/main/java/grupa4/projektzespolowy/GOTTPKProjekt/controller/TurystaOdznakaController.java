@@ -33,6 +33,9 @@ public class TurystaOdznakaController {
     @Autowired
     private KsiazeczkaServiceImpl ksiazeczkaService;
 
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping("/turystaodznaki") // ścieżka na której zostanie obsłużona metoda
     public String getAllTurystaOdznaka(Model model) {
 
@@ -245,6 +248,7 @@ public class TurystaOdznakaController {
         ksiazeczkaService.createKsiazeczka(ksiazeczka);
 
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka);
+        emailService.sendEmailAboutNewBadge(turystaOdznaka);
         redirectAttributes.addFlashAttribute("wiadomosc", "Przydzielono odznake turyście!");
 
         return "redirect:" + referer;

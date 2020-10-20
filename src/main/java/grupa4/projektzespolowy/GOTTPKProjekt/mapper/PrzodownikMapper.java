@@ -10,7 +10,7 @@ public class PrzodownikMapper implements Mapper<PrzodownikDTO,Przodownik> {
 
 	@Override
 	public PrzodownikDTO mapOfEntity(Przodownik entity) {
-			
+
 		PrzodownikDTO przodownikDTO = PrzodownikDTO.builder()
 										.idPrzodownik(entity.getIdPrzodownik())
 										.imie(entity.getImie())

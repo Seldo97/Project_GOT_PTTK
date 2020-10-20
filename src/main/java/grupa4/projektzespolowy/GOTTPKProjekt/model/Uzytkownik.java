@@ -29,6 +29,11 @@ public class Uzytkownik
 	@Column(name = "email", nullable=false, length=50, unique = true)
 	private String email;
 
+	@Column(name = "enabled")
+	private boolean enabled = false;
+
+	@Column(name = "UUID", unique = true)
+	private String UUID;
 
 
 	@ManyToOne
@@ -119,8 +124,6 @@ public class Uzytkownik
 		return turysta;
 	}
 
-
-
 	public void setTurysta(Turysta turysta) {
 		this.turysta = turysta;
 	}
@@ -141,6 +144,21 @@ public class Uzytkownik
 		this.przodownik = przodownik;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getUUID() {
+		return UUID;
+	}
+
+	public void setUUID(String UUID) {
+		this.UUID = UUID;
+	}
 
 	@Override
 	public String toString() {

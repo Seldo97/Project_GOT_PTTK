@@ -36,7 +36,5 @@ public class PrzodownikDTO {
 		this.telefon = telefon;
 		Uzytkownik = uzytkownik;
 	}
-    
-    
-   
+
 }
