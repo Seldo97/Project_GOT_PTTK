@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/aktywacja/{uuid}").anonymous()
                 .antMatchers("/regulamin").permitAll()
                 .antMatchers("/odcinki").permitAll()
                 .antMatchers("/odcinkiWybor","/odcinki/allPasmo/*", "/odcinki/allGrupa/*" ).permitAll()

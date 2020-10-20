@@ -3,6 +3,7 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.EmailService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.RolaServiceImpl;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
@@ -14,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.UUID;
+
 @Controller
 public class PrzodownikController {
     @Autowired // podłączamy Servicy z których bedzimy koszystać
@@ -24,6 +27,8 @@ public class PrzodownikController {
     private RolaServiceImpl rolaServiceImpl;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/przodownicy") // ścieżka na której zostanie obsłużona metoda
     public String getAllPrzodownik(Model model, Authentication authentication) {
@@ -49,8 +54,11 @@ public class PrzodownikController {
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         PrzodownikDTO przodownik = new PrzodownikDTO(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem
 
+        UUID uuid = UUID.randomUUID();
+        przodownik.getUzytkownik().setUUID(uuid.toString());
         przodownikServiceImpl.createPrzodownik(przodownik); // puść inserta do bazy
         // UWAGA! kolejność operacji jest ważna.
+        emailService.sendActivationLinkToNewUser(przodownik.getUzytkownik());
 
         redirectAttributes.addFlashAttribute("success_msg", "Dodano wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 

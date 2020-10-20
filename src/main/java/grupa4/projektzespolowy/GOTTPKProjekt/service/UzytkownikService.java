@@ -1,5 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.exception.UserDoesNotExistException;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import org.springframework.security.core.Authentication;
 
@@ -17,5 +18,7 @@ public interface UzytkownikService {
     void removeUzytkownik(Integer id);
 
     Uzytkownik getLoggedUserDetails(Authentication authentication);
+
+    void enableUser(String uuid) throws UserDoesNotExistException;
 
 }

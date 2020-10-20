@@ -3,7 +3,9 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
@@ -40,6 +42,9 @@ public class TurystaController {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("/turysci")
     public ModelAndView getAllProduct(Authentication authentication) {
@@ -114,15 +119,20 @@ public class TurystaController {
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         Turysta turysta = new Turysta(imie, nazwisko, telefon, uzytkownik, opis, punkty, niepelnosprawnosc, dataUrodzenia); // stwórz turyste z utworzonym użytkownikiem
 
+        UUID uuid = UUID.randomUUID();
+        turysta.getUzytkownik().setUUID(uuid.toString());
         turystaServiceImpl.createTurysta(turysta); // puść inserta do bazy
         // UWAGA! kolejność operacji jest ważna.
+        emailService.sendActivationLinkToNewUser(turysta.getUzytkownik());
 
-
-        redirectAttributes.addFlashAttribute("success_msg", "Dodane turyste pomyślnie");
-        if (authentication != null)
+        if (authentication != null) {
+            redirectAttributes.addFlashAttribute("success_msg", "Dodane turyste pomyślnie");
             return "redirect:/turysci";
-        else
-            return "redirect:/login";
+        }
+        else {
+            redirectAttributes.addFlashAttribute("success_msg", "Aby móc się zalogować kliknij w link wysłany na podany adres e-mail");
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/turysci/update/{idTurysta}")

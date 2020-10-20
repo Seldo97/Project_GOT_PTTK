@@ -1,7 +1,9 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import grupa4.projektzespolowy.GOTTPKProjekt.exception.UserDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -33,5 +35,15 @@ public class UzytkownikServiceImpl implements UzytkownikService
     @Override
     public Uzytkownik getLoggedUserDetails(Authentication authentication) {
         return uzytkownikRepository.findByLogin(authentication.getName());
+    }
+
+    @Override
+    public void enableUser(String uuid) throws UserDoesNotExistException {
+        Optional<Uzytkownik> userOptional = uzytkownikRepository.findByUUID(uuid);
+        if(userOptional.isPresent()) {
+            userOptional.get().setEnabled(true);
+        } else {
+            throw new UserDoesNotExistException("User with UUID " + uuid + "does not exist in database");
+        }
     }
 }

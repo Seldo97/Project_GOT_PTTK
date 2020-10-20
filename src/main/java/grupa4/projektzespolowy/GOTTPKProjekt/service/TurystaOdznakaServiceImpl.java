@@ -17,9 +17,13 @@ public class TurystaOdznakaServiceImpl implements TurystaOdznakaService{
 
     @Autowired
     private TurystaOdznakaRepository turystaOdznakaRepository;
+    @Autowired
+    private EmailService emailService;
 
     @Override
-    public TurystaOdznaka createTurystaOdznaka(TurystaOdznaka turystaOdznaka) { return turystaOdznakaRepository.save(turystaOdznaka);}
+    public TurystaOdznaka createTurystaOdznaka(TurystaOdznaka turystaOdznaka) {
+        return turystaOdznakaRepository.save(turystaOdznaka);
+    }
 
     @Override
     public List<TurystaOdznaka> getAllTurystaOdznaka() {return this.turystaOdznakaRepository.findAll(); }

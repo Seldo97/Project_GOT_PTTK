@@ -12,12 +12,12 @@ import java.util.List;
 @Primary
 public class MyUserDetails implements UserDetails {
 
-    
 	private static final long serialVersionUID = 7102554437379859119L;
 	private int id;
     private String userName;
     private String password;
     private String email;
+    private boolean enabled;
     private List<GrantedAuthority> authorities = new ArrayList<>();
 
     public MyUserDetails(Uzytkownik user) {
@@ -25,6 +25,7 @@ public class MyUserDetails implements UserDetails {
         this.userName = user.getLogin();
         this.password = user.getHaslo();
         this.email = user.getEmail();
+        this.enabled = user.isEnabled();
 
         String roleName = user.getRola().getNazwa();
         this.authorities.add(new SimpleGrantedAuthority(roleName));
@@ -67,6 +68,8 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
+
+
 }
