@@ -1,0 +1,551 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+        <changeSet author="Kamil (generated)" id="1603454729378-1">
+                <createTable tableName="MSreplication_options">
+                        <column name="optname" type="sysname">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="value" type="bit">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="major_version" type="int">-Dspring.profiles.active=dev
+
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="minor_version" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="revision" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="install_failures" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-2">
+                <createTable tableName="zamowienie_produkt">
+                        <column autoIncrement="true" name="id_zamowienie_produkt" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__zamowien__E484AFB3E0D02CC4"/>
+                        </column>
+                        <column name="ilosc" type="int"/>
+                        <column name="id_produkt" type="int"/>
+                        <column name="id_zamowienie" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-3">
+                <createTable tableName="produkt">
+                        <column autoIncrement="true" name="id_produkt" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__produkt__BA39295959ED4743"/>
+                        </column>
+                        <column name="cena_jednostkowa" type="float(53)"/>
+                        <column name="dlugosc" type="int"/>
+                        <column name="nazwa" type="varchar(100)"/>
+                        <column name="stan_magazynowy" type="int"/>
+                        <column name="szerokosc" type="int"/>
+                        <column name="wysokosc" type="int"/>
+                        <column name="id_kategoria" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-4">
+                <createTable tableName="grupa_przodownik">
+                        <column autoIncrement="true" name="id_grupa_przodownik" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__grupa_pr__DC4D121138CF4A74"/>
+                        </column>
+                        <column name="id_grupa" type="int"/>
+                        <column name="id_przodownik" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-5">
+                <createTable tableName="wycieczka">
+                        <column autoIncrement="true" name="id_wycieczka" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__wycieczk__D9EA1A6A22A0CC76"/>
+                        </column>
+                        <column name="data_do" type="date"/>
+                        <column name="data_od" type="date"/>
+                        <column name="opis" type="varchar(255)"/>
+                        <column name="przodownik_accept_wycieczki" type="int"/>
+                        <column name="suma_punktow" type="int"/>
+                        <column name="suma_punktow_do_got" type="int"/>
+                        <column name="zatwierdzona" type="int"/>
+                        <column name="zgloszona" type="int"/>
+                        <column name="id_ksiazeczka" type="int"/>
+                        <column name="id_odznaka" type="int"/>
+                        <column name="id_turysta_odznaka" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-6">
+                <createTable tableName="punkt">
+                        <column autoIncrement="true" name="id_punkt" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__punkt__15EAB19F6107B0EA"/>
+                        </column>
+                        <column name="nazwa" type="varchar(100)"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-7">
+                <createTable tableName="zdjecie_wycieczka">
+                        <column autoIncrement="true" name="id_zdjecie_wycieczka" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__zdjecie___E4343C37E16E1323"/>
+                        </column>
+                        <column name="opis" type="varchar(255)"/>
+                        <column name="sciezka" type="varchar(255)"/>
+                        <column name="id_wycieczka" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-8">
+                <createTable tableName="odznaka">
+                        <column autoIncrement="true" name="id_odznaka" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__odznaka__FA816F63E2038099"/>
+                        </column>
+                        <column name="nazwa" type="varchar(100)"/>
+                        <column name="punkty" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-9">
+                <createTable tableName="produkt_regal">
+                        <column autoIncrement="true" name="id_produkt_regal" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__produkt___0E7BDF64CEBB14E3"/>
+                        </column>
+                        <column name="id_regal" type="int"/>
+                        <column name="id_produkt" type="int"/>
+                        <column name="nr_kolejnosc" type="int"/>
+                        <column name="polka" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-10">
+                <createTable tableName="rola">
+                        <column autoIncrement="true" name="id_rola" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__rola__3D4844198825A323"/>
+                        </column>
+                        <column name="nazwa" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-11">
+                <createTable tableName="przodownik">
+                        <column autoIncrement="true" name="id_przodownik" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__przodown__384D6B976FD5DA61"/>
+                        </column>
+                        <column name="imie" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="nazwisko" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="opis" type="varchar(100)"/>
+                        <column name="telefon" type="varchar(9)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="id_uzytkownik" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-12">
+                <createTable tableName="uzytkownik">
+                        <column autoIncrement="true" name="id_uzytkownik" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__uzytkown__31E62BAA0CF83941"/>
+                        </column>
+                        <column name="email" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="haslo" type="varchar(255)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="login" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="id_rola" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="uuid" type="varchar(255)"/>
+                        <column name="enabled" type="bit"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-13">
+                <createTable tableName="kategoria">
+                        <column autoIncrement="true" name="id_kategoria" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__kategori__EB93B73BD1F3E361"/>
+                        </column>
+                        <column name="nazwa" type="varchar(50)"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-14">
+                <createTable tableName="pracownik">
+                        <column autoIncrement="true" name="id_pracownik" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__pracowni__417BA443C7C52F9F"/>
+                        </column>
+                        <column name="imie" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="nazwisko" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="opis" type="varchar(100)"/>
+                        <column name="telefon" type="varchar(9)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="id_uzytkownik" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-15">
+                <createTable tableName="spt_fallback_usg">
+                        <column name="xserver_name" type="varchar(30)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xdttm_ins" type="datetime">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xdttm_last_ins_upd" type="datetime">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xfallback_vstart" type="int"/>
+                        <column name="dbid" type="smallint">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="segmap" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="lstart" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="sizepg" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="vstart" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-16">
+                <createTable tableName="trasa_odcinek">
+                        <column autoIncrement="true" name="id_trasa_odcinek" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__trasa_od__5DD4976D707FE221"/>
+                        </column>
+                        <column name="dubel" type="int"/>
+                        <column name="powrot" type="int"/>
+                        <column name="punkty" type="int"/>
+                        <column name="id_odcinek" type="int"/>
+                        <column name="id_trasa" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-17">
+                <createTable tableName="ksiazeczka">
+                        <column autoIncrement="true" name="id_ksiazeczka" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__ksiazecz__14E671DE074C8350"/>
+                        </column>
+                        <column name="powiadomienie" type="int"/>
+                        <column name="suma_punktow" type="int"/>
+                        <column name="suma_punktow_wszystkich" type="int"/>
+                        <column name="zgloszona" type="int"/>
+                        <column name="id_turysta" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-18">
+                <createTable tableName="spt_fallback_dev">
+                        <column name="xserver_name" type="varchar(30)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xdttm_ins" type="datetime">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xdttm_last_ins_upd" type="datetime">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xfallback_low" type="int"/>
+                        <column name="xfallback_drive" type="char(2)"/>
+                        <column name="low" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="high" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="status" type="smallint">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="name" type="varchar(30)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="phyname" type="varchar(127)">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-19">
+                <createTable tableName="odcinek">
+                        <column autoIncrement="true" name="id_odcinek" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__odcinek__857BE8D6854AC5BB"/>
+                        </column>
+                        <column name="otwarty" type="int"/>
+                        <column name="punkty_do" type="int"/>
+                        <column name="punkty_od" type="int"/>
+                        <column name="id_pasmo" type="int"/>
+                        <column name="id_punkt_koncowy" type="int"/>
+                        <column name="id_punkt_poczatkowy" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-20">
+                <createTable tableName="turysta">
+                        <column autoIncrement="true" name="id_turysta" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__turysta__30BE1CD471EAD51D"/>
+                        </column>
+                        <column name="data_urodzenia" type="date"/>
+                        <column name="imie" type="varchar(255)"/>
+                        <column name="nazwisko" type="varchar(255)"/>
+                        <column name="niepelnosprawnosc" type="bit"/>
+                        <column name="opis" type="varchar(255)"/>
+                        <column name="punkty" type="int"/>
+                        <column name="telefon" type="varchar(255)"/>
+                        <column name="id_uzytkownik" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-21">
+                <createTable tableName="magazyn">
+                        <column autoIncrement="true" name="id_magazyn" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__magazyn__44D51AD19FD78660"/>
+                        </column>
+                        <column name="dlugosc" type="int"/>
+                        <column name="lokalizacja" type="varchar(100)"/>
+                        <column name="nazwa" type="varchar(50)"/>
+                        <column name="szerokosc" type="int"/>
+                        <column name="wysokosc" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-22">
+                <createTable tableName="pasmo">
+                        <column autoIncrement="true" name="id_pasmo" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__pasmo__3A48D34D5103ED9C"/>
+                        </column>
+                        <column name="nazwa" type="varchar(50)"/>
+                        <column name="id_grupa" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-23">
+                <createTable tableName="turysta_odznaka">
+                        <column autoIncrement="true" name="id_turysta_odznaka" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__turysta___F8E90E3A762999ED"/>
+                        </column>
+                        <column name="data" type="date"/>
+                        <column name="id_odznaka" type="int"/>
+                        <column name="id_turysta" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-24">
+                <createTable tableName="spt_monitor">
+                        <column name="lastrun" type="datetime">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="cpu_busy" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="io_busy" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="idle" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="pack_received" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="pack_sent" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="connections" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="pack_errors" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="total_read" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="total_write" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="total_errors" type="int">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-25">
+                <createTable tableName="trasa">
+                        <column autoIncrement="true" name="id_trasa" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__trasa__7F2D1D3F4F977CB4"/>
+                        </column>
+                        <column name="data" type="date"/>
+                        <column name="dubel" type="int"/>
+                        <column name="opis" type="varchar(255)"/>
+                        <column name="sprawdzona" type="int"/>
+                        <column name="suma_punktow_do_got" type="int"/>
+                        <column name="suma_punktow" type="int"/>
+                        <column name="zrealizowana" type="int"/>
+                        <column name="id_pasmo" type="int"/>
+                        <column name="id_wycieczka" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-26">
+                <createTable tableName="zamowienie">
+                        <column autoIncrement="true" name="id_zamowienie" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__zamowien__D19B897C78F67446"/>
+                        </column>
+                        <column name="adres" type="varchar(150)"/>
+                        <column name="nr_kolejnosc" type="int"/>
+                        <column name="polka" type="int"/>
+                        <column name="id_pracownik" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-27">
+                <createTable tableName="test">
+                        <column autoIncrement="true" name="id_test" type="bigint">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__test__C6D3284BDA361A87"/>
+                        </column>
+                        <column name="nazwa" type="date"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-28">
+                <createTable tableName="spt_fallback_db">
+                        <column name="xserver_name" type="varchar(30)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xdttm_ins" type="datetime">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xdttm_last_ins_upd" type="datetime">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="xfallback_dbid" type="smallint"/>
+                        <column name="name" type="varchar(30)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="dbid" type="smallint">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="status" type="smallint">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="version" type="smallint">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-29">
+                <createTable tableName="regal">
+                        <column autoIncrement="true" name="id_regal" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__regal__46D10EF693ADE47B"/>
+                        </column>
+                        <column name="ilosc_polek" type="int"/>
+                        <column name="wysokosc" type="int"/>
+                        <column name="x_koniec" type="int"/>
+                        <column name="x_poczatek" type="int"/>
+                        <column name="y_koniec" type="int"/>
+                        <column name="y_poczatek" type="int"/>
+                        <column name="id_magazyn" type="int"/>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-30">
+                <createTable tableName="grupa">
+                        <column autoIncrement="true" name="id_grupa" type="int">
+                                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__grupa__8B68D69A85B72919"/>
+                        </column>
+                        <column name="nazwa" type="varchar(50)">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-31">
+                <addForeignKeyConstraint baseColumnNames="id_wycieczka" baseTableName="zdjecie_wycieczka" constraintName="FKebt2a3tsxw7brk6ru4psosjcv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_wycieczka" referencedTableName="wycieczka" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-32">
+                <addForeignKeyConstraint baseColumnNames="id_produkt" baseTableName="produkt_regal" constraintName="FKbem8hd9i8li1rnvackbwqr709" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_produkt" referencedTableName="produkt" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-33">
+                <addForeignKeyConstraint baseColumnNames="id_rola" baseTableName="uzytkownik" constraintName="FKg6m48h0fq0tmr195mobefpcxn" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_rola" referencedTableName="rola" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-34">
+                <addUniqueConstraint columnNames="uuid" constraintName="UK_3au8we9o5mg9ft8yjatq6dwpd" tableName="uzytkownik"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-35">
+                <addUniqueConstraint columnNames="email" constraintName="UK_7tt9rs0qneii2pkjjdxubfe2d" tableName="uzytkownik"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-36">
+                <addUniqueConstraint columnNames="login" constraintName="UK_jnbal73tjtpy7nt6y3ad6a52q" tableName="uzytkownik"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-37">
+                <addForeignKeyConstraint baseColumnNames="id_uzytkownik" baseTableName="pracownik" constraintName="FKd3yxwmsqt9970noyu83cpja8a" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_uzytkownik" referencedTableName="uzytkownik" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-38">
+                <addForeignKeyConstraint baseColumnNames="id_punkt_poczatkowy" baseTableName="odcinek" constraintName="FKhj3px5um0cge65862lx82l1bo" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_punkt" referencedTableName="punkt" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-39">
+                <addForeignKeyConstraint baseColumnNames="id_punkt_koncowy" baseTableName="odcinek" constraintName="FKnde400t5bv3afuumwx61ouuol" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_punkt" referencedTableName="punkt" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-40">
+                <addForeignKeyConstraint baseColumnNames="id_uzytkownik" baseTableName="turysta" constraintName="FKe9sbeo85ebx50bxfh3nvwsjrb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_uzytkownik" referencedTableName="uzytkownik" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-41">
+                <addForeignKeyConstraint baseColumnNames="id_odznaka" baseTableName="turysta_odznaka" constraintName="FKm5x700gj7409t6yttsb2sdxbi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_odznaka" referencedTableName="odznaka" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-42">
+                <addForeignKeyConstraint baseColumnNames="id_turysta" baseTableName="turysta_odznaka" constraintName="FKpjokc5957k1uf3wlqnb4qgij6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_turysta" referencedTableName="turysta" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-43">
+                <addForeignKeyConstraint baseColumnNames="id_wycieczka" baseTableName="trasa" constraintName="FKkg9y7005fofuwulgicq65i3aj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_wycieczka" referencedTableName="wycieczka" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-44">
+                <addForeignKeyConstraint baseColumnNames="id_pasmo" baseTableName="trasa" constraintName="FKl9r6gqal5dynh9yo86lqde1nm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_pasmo" referencedTableName="pasmo" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-45">
+                <addForeignKeyConstraint baseColumnNames="id_pracownik" baseTableName="zamowienie" constraintName="FK4arj5kuy0hpfln3c052vidaw5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_pracownik" referencedTableName="pracownik" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-46">
+                <addForeignKeyConstraint baseColumnNames="id_magazyn" baseTableName="regal" constraintName="FKph2vrjjxdvffct75yf074pits" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_magazyn" referencedTableName="magazyn" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-47">
+                <addForeignKeyConstraint baseColumnNames="id_zamowienie" baseTableName="zamowienie_produkt" constraintName="FK3w0prl0tktfiqy6ewb983dson" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_zamowienie" referencedTableName="zamowienie" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-48">
+                <addForeignKeyConstraint baseColumnNames="id_produkt" baseTableName="zamowienie_produkt" constraintName="FKk9tnufp6fx0tvfb5c7phlwfy1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_produkt" referencedTableName="produkt" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-49">
+                <addForeignKeyConstraint baseColumnNames="id_kategoria" baseTableName="produkt" constraintName="FKt9m8e6sh95q9ukwwnjlxcjlwm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_kategoria" referencedTableName="kategoria" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-50">
+                <addForeignKeyConstraint baseColumnNames="id_grupa" baseTableName="grupa_przodownik" constraintName="FK1xtt91mvpj28gkq11v242i0ds" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_grupa" referencedTableName="grupa" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-51">
+                <addForeignKeyConstraint baseColumnNames="id_przodownik" baseTableName="grupa_przodownik" constraintName="FKnh86mkrw5yqnkvmjtvppxdt2g" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_przodownik" referencedTableName="przodownik" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-52">
+                <addForeignKeyConstraint baseColumnNames="id_odznaka" baseTableName="wycieczka" constraintName="FKm2mv9rugyxblcq2p0rp8h827j" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_odznaka" referencedTableName="odznaka" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-53">
+                <addForeignKeyConstraint baseColumnNames="id_turysta_odznaka" baseTableName="wycieczka" constraintName="FKrjomo4o4rm58eicxwfoak17hx" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_turysta_odznaka" referencedTableName="turysta_odznaka" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-54">
+                <addForeignKeyConstraint baseColumnNames="id_ksiazeczka" baseTableName="wycieczka" constraintName="FKs56t9s8l9rywyuihas65hpbwh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_ksiazeczka" referencedTableName="ksiazeczka" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-55">
+                <addForeignKeyConstraint baseColumnNames="id_regal" baseTableName="produkt_regal" constraintName="FKq2fo02ucrax8fycq4g34gqecp" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_regal" referencedTableName="regal" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-56">
+                <addForeignKeyConstraint baseColumnNames="id_uzytkownik" baseTableName="przodownik" constraintName="FK2tni4uu7gohr9cs9t8atvkb0n" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_uzytkownik" referencedTableName="uzytkownik" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-57">
+                <addForeignKeyConstraint baseColumnNames="id_odcinek" baseTableName="trasa_odcinek" constraintName="FKkf9o3719vg0karggefxdyevkn" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_odcinek" referencedTableName="odcinek" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-58">
+                <addForeignKeyConstraint baseColumnNames="id_trasa" baseTableName="trasa_odcinek" constraintName="FKkxcuilxcnbpavy8tay9aepycg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_trasa" referencedTableName="trasa" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-59">
+                <addForeignKeyConstraint baseColumnNames="id_turysta" baseTableName="ksiazeczka" constraintName="FKpgkmesklbwftgqhre9j1j81eh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_turysta" referencedTableName="turysta" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-60">
+                <addForeignKeyConstraint baseColumnNames="id_pasmo" baseTableName="odcinek" constraintName="FKdxcde4m35ikqlcwjr5romxcpc" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_pasmo" referencedTableName="pasmo" validate="true"/>
+        </changeSet>
+        <changeSet author="Kamil (generated)" id="1603454729378-61">
+                <addForeignKeyConstraint baseColumnNames="id_grupa" baseTableName="pasmo" constraintName="FK1ngu6xyhox9ppmn6g688oppqu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_grupa" referencedTableName="grupa" validate="true"/>
+        </changeSet>
+</databaseChangeLog>

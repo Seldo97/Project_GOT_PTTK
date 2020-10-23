@@ -109,6 +109,29 @@
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
 		</dependency>
+
+		<!-- liquibase -->
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>3.8.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>3.8.7</version>
+		</dependency>
+
+
+		<!-- fontawesome -->
+		<dependency>
+		<groupId>org.webjars</groupId>
+		<artifactId>font-awesome</artifactId>
+		<version>4.7.0</version>
+	</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -119,6 +142,24 @@
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>
+
+
+
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.8.7</version>
+				<configuration>
+					<changeLogFile>/src/main/resources/db/changelog/dbchangelog.xml </changeLogFile>
+					<driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+					<url>jdbc:sqlserver://localhost;databaseName=test</url>
+					<username>sa</username>
+					<password>gazgazgaz</password>
+					<dropFirst>false</dropFirst>
+					<outputChangeLogFile>myGenChangeLog.xml</outputChangeLogFile>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 

@@ -24,13 +24,13 @@
           <td>{{ uzytkownik.getHaslo }}</td>
           <td>{{ uzytkownik.getEmail }}</td>
           <td><a class="nav-link" href="/uzytkownik/updateForm/{{ uzytkownik.getIdUzytkownik }}">Edytuj</a></td>
-          <td><a class="nav-link" href="/uzytkownik/usun/{{ uzytkownik.getIdUzytkownik }}">Usuñ</a></td>
+          <td><a class="nav-link" href="/uzytkownik/usun/{{ uzytkownik.getIdUzytkownik }}">Usuï¿½</a></td>
         </tr>
         {%  endfor %}
 
         </tbody>
     </table>
     
-    <a class="btn btn-info" href="/uzytkownik/addForm" role="button">Dodaj</a>
+    <a class="btn btn-info" href="/uzytkownik/addForm" role="button"><i class="fas fa-plus">Dodaj</i></a>
 
 {% endblock %}
