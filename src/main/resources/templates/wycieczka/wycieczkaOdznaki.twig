@@ -1,0 +1,34 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Wycieczki Tabela{% endblock %}
+{% block header %}
+    Wycieczki
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nazwa wycieczki</th>
+                <th scope="col">Data rozpoczęcia </th>
+                <th scope="col">Data Zakończenia </th>
+                <th scope="col">Trasy</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% for  wycieczka in wycieczkiOdznaka %}
+        <tr>
+        	 <td>{{ wycieczka.opis }}</td>
+             <td>{{ wycieczka.getDataOd}}</td>
+             <td>{{ wycieczka.getDataDo}}</td>
+               <td class="text-right">
+                       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                             <abbr title="Trasy"><a class="btn btn-sm bg-transparent" href="/wycieczka/odznaka/{{ wycieczka.getOdznaka.getNazwa}}/trasy/{{ wycieczka.getIdWycieczka }}">👣</a></abbr>
+                      </div>
+                </td>
+        </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+{% endblock %}

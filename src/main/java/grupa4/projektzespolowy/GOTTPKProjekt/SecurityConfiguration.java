@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/przodownicy/dodaj", "/turysci/dodaj").permitAll()
                 .antMatchers("/turysta/mojeKonto","/turysci/updateForm","/turysci/updateForm","/turysci/update/{idTurysta}","/podpunkty").hasAnyRole("administrator", "turysta")
                 .antMatchers("/przodownicy/{idPrzodownik}/grupy", "/grupy/{idGrupa}/przodownicy").permitAll()
-                .antMatchers("/turysta/mojeKonto","/turysci/updateForm","/turysci/updateForm","/turysci/update/{idTurysta}","/zdjecia/{idWycieczka}","/zdjecia/form/{idWycieczka}","/zdjecie/dodaj/{idWycieczka}","/zdjecie/usunWszystkie/{idWycieczka}","/zdjecie/usunZaznaczone").hasAnyRole("administrator", "turysta")
+                .antMatchers("/turysta/mojeKonto","/turysci/updateForm","/turysci/updateForm","/turysci/update/{idTurysta}","/zdjecia/{idWycieczka}","/zdjecia/form/{idWycieczka}","/zdjecie/dodaj/{idWycieczka}","/zdjecie/usunWszystkie/{idWycieczka}","/zdjecie/usunZaznaczone","/wycieczka/odznaka/{badgeName}/trasy/{idWycieczki}").hasAnyRole("administrator", "turysta")
                 .antMatchers("/turystaodznaki/znajdzOdznakiTurysty").hasAnyRole("administrator", "przodownik")
                 .antMatchers("/zdjecia/{idWycieczka}").hasAnyRole("przodownik")
                 .antMatchers("/turystaodznaki/MojeOdznaki").hasAnyRole("administrator", "turysta")

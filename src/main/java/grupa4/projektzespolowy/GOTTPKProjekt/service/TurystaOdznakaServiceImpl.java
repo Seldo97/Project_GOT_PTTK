@@ -60,4 +60,6 @@ public class TurystaOdznakaServiceImpl implements TurystaOdznakaService{
     public List<TurystaOdznaka> findAllByOdznakaIdOdznaka(int odznaka) {
         return (List<TurystaOdznaka>) this.turystaOdznakaRepository.findAllByOdznakaIdOdznaka(odznaka);
     }
+    
+	
 }
