@@ -253,6 +253,5 @@ public class TurystaOdznakaController {
 
         return "redirect:" + referer;
     }
-
-
+    
 }

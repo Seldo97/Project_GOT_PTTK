@@ -353,4 +353,33 @@ public class WycieczkaController {
 		
 		return "redirect:/wycieczka/zgloszone";
 	}
+	
+	 @GetMapping("/wycieczka/odznaka/{badgeName}") // ścieżka na której zostanie obsłużona metoda
+	    public String getAllByBadgeName(Model model,@PathVariable String badgeName) {
+		 	
+		 	List<Wycieczka> list = wycieczkaServiceImpl.getAllWycieczkiOnBadge(badgeName);
+	        model.addAttribute("wycieczkiOdznaka", list);
+	        return "/wycieczka/wycieczkaOdznaki";
+	    }
+	 
+	 @GetMapping("/wycieczka/odznaka/{badgeName}/trasy/{idWycieczki}") // ścieżka na której zostanie obsłużona metoda
+	    public String getAllRoutesByBadge(Model model,@PathVariable String badgeName,@PathVariable Integer idWycieczki) {
+		 	
+		 	List<Wycieczka> list = wycieczkaServiceImpl.getAllTrasyOnBadge(badgeName,idWycieczki);
+		 	List<Trasa> trasy = new ArrayList<Trasa>();
+		 	for(Wycieczka wycieczka : list)
+		 	{
+		 		for(Trasa trasa : wycieczka.getTrasy())
+		 		{
+		 			if(!trasy.contains(trasa))
+		 			{
+		 				trasy.add(trasa);
+		 			}
+		 		}
+		 	}
+	        model.addAttribute("trasyOdznaka", trasy);
+	        
+	        return "/trasa/trasyOdznaki";
+	    }
+	
 }
