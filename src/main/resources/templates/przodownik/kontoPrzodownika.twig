@@ -1,5 +1,5 @@
 {% extends '../baseTemplate.twig' %}
-{% block title %}Konto Turysty{% endblock %}
+{% block title %}Konto Przodownika{% endblock %}
 {% block header %}
     Moje Konto
 {% endblock %}
@@ -16,14 +16,14 @@
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						<span>{{ turysta.getImie }} {{ turysta.getNazwisko }}</span>
+						<span>{{ przodownik.getImie }} {{ przodownik.getNazwisko }}</span>
 					</div>
 					<div class="profile-usertitle-job">
 						{{ uzytkownik.rola.getNazwa }}
 					</div>
 				</div>
 				<div class="profile-userbuttons">
-					<a href="/turysci/updateForm?id={{ turysta.getIdTurysta }}"><button type="button" class="btn btn-success btn-sm">Dane Konta</button></a>
+					<a href="/przodownicy/form?id={{ przodownik.getIdPrzodownik }}"><button type="button" class="btn btn-success btn-sm">Dane Konta</button></a>
 				</div>
 			</div>
 		</div>

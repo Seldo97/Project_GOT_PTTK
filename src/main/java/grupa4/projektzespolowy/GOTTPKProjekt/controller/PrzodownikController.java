@@ -1,7 +1,9 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
+import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.EmailService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;
@@ -121,5 +123,22 @@ public class PrzodownikController {
         przodownikServiceImpl.createPrzodownik(przodownik);
 
         return "redirect:/przodownicy";
+    }
+
+    @GetMapping("/przodownik/mojeKonto")
+    public String accountSettings(Model model, Authentication authentication) {
+
+        if (authentication != null) {
+            Uzytkownik uzytkownik = uzytkownikServiceImpl.getLoggedUserDetails(authentication);
+            Przodownik przodownik = uzytkownik.getPrzodownik();
+            model.addAttribute("przodownik", przodownik);
+            model.addAttribute("uzytkownik", uzytkownik);
+            model.addAttribute("LoggedUser", authentication);
+            //System.out.print(numer);
+        } else {
+            System.out.print("Nie znaleziono takiego uzytkownika");
+        }
+
+        return "przodownik/kontoPrzodownika";
     }
 }
