@@ -1,5 +1,6 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
+import com.google.common.base.Strings;
 import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
@@ -42,18 +43,17 @@ public class PrzodownikController {
     }
 
     @PostMapping("/przodownicy/dodaj")
-    public String createPrzodownik(@RequestParam(value="imie") String imie,
-                                  @RequestParam(value="nazwisko") String nazwisko,
-                                  @RequestParam(value="telefon") String telefon,
-                                  @RequestParam(value="login") String login,
-                                  @RequestParam(value="haslo") String haslo,
-                                  @RequestParam(value="email") String email,
+    public String createPrzodownik(@RequestParam(value = "imie") String imie,
+                                   @RequestParam(value = "nazwisko") String nazwisko,
+                                   @RequestParam(value = "telefon") String telefon,
+                                   @RequestParam(value = "login") String login,
+                                   @RequestParam(value = "haslo") String haslo,
+                                   @RequestParam(value = "email") String email,
                                    RedirectAttributes redirectAttributes,
                                    Authentication authentication) {
-    	
-    	
-    	
-    	Rola rola = rolaServiceImpl.getOneByName("ROLE_przodownik"); // pobranie roli (pod id 5 mam przodownik)3
+
+
+        Rola rola = rolaServiceImpl.getOneByName("ROLE_przodownik"); // pobranie roli (pod id 5 mam przodownik)3
         Uzytkownik uzytkownik = new Uzytkownik(login, passwordEncoder.encode(haslo), email, rola); // tworze użytkownika z referencją do pobranej roli
         rola.getUzytkownicy().add(uzytkownik); // dodaj użytkownika do roli (relacja jeden do wielu)
         PrzodownikDTO przodownik = new PrzodownikDTO(imie, nazwisko, telefon, uzytkownik); // stwórz przodownika z utworzonym użytkownikiem
@@ -66,7 +66,7 @@ public class PrzodownikController {
 
         redirectAttributes.addFlashAttribute("success_msg", "Dodano wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 
-        if(authentication != null)
+        if (authentication != null)
             return "redirect:/przodownicy";
         else
             return "redirect:/login";
@@ -92,7 +92,7 @@ public class PrzodownikController {
 
         model.addAttribute("LoggedUser", authentication);
 
-        if(idPrzodownik != null){
+        if (idPrzodownik != null) {
             PrzodownikDTO przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
             model.addAttribute("przodownik", przodownik);
             model.addAttribute("update", "1");
@@ -102,13 +102,13 @@ public class PrzodownikController {
     }
 
     @PostMapping("/przodownicy/update/{idPrzodownik}")
-    public String updatePrzodownik(@RequestParam(value="imie") String imie,
-                                 @RequestParam(value="nazwisko") String nazwisko,
-                                 @RequestParam(value="telefon") String telefon,
-                                 @RequestParam(value="login") String login,
-                                 @RequestParam(value="haslo", required = false) String haslo,
-                                 @RequestParam(value="email") String email,
-                                 @PathVariable Integer idPrzodownik) {
+    public String updatePrzodownik(@RequestParam(value = "imie") String imie,
+                                   @RequestParam(value = "nazwisko") String nazwisko,
+                                   @RequestParam(value = "telefon") String telefon,
+                                   @RequestParam(value = "login") String login,
+                                   @RequestParam(value = "haslo", required = false) String haslo,
+                                   @RequestParam(value = "email") String email,
+                                   @PathVariable Integer idPrzodownik) {
 
         PrzodownikDTO przodownik = przodownikServiceImpl.getOneById(idPrzodownik);
 
@@ -116,7 +116,7 @@ public class PrzodownikController {
         przodownik.setNazwisko(nazwisko);
         przodownik.setTelefon(telefon);
         przodownik.getUzytkownik().setLogin(login);
-        if(haslo != "")
+        if (!Strings.isNullOrEmpty(haslo))
             przodownik.getUzytkownik().setHaslo(passwordEncoder.encode(haslo));
         przodownik.getUzytkownik().setEmail(email);
 
