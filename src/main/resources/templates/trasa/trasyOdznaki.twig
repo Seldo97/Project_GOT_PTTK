@@ -1,0 +1,28 @@
+{% extends '../baseTemplate.twig' %}
+
+{% block title %}Trasy{% endblock %}
+{% block header %}
+	Trasy
+{% endblock %}
+{% block main %}
+    {{siema}}
+    <table id="myTable" class="table table-striped align-middle table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nazwa trasy</th>
+                <th scope="col">Data Ukończenia </th>
+                <th scope="col">Punkty</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% for  trasa in trasyOdznaka %}
+        <tr>
+        	 <td>{{ trasa.getOpis }}</td>
+             <td>{{ trasa.getData}}</td>
+             <td>{{ trasa.getSuma_punktow}}</td>
+        </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+{% endblock %}

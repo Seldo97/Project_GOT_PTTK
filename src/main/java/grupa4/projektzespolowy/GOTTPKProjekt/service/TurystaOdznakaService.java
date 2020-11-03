@@ -6,6 +6,8 @@ import grupa4.projektzespolowy.GOTTPKProjekt.model.TurystaOdznaka;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 public interface TurystaOdznakaService {
     TurystaOdznaka createTurystaOdznaka(TurystaOdznaka turystaOdznaka);
 
@@ -23,6 +25,6 @@ public interface TurystaOdznakaService {
 
     int ileOdznak(int turysta);
 
-
     List<TurystaOdznaka> findAllByOdznakaIdOdznaka(int odznaka);
+    
 }
