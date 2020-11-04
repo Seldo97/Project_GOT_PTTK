@@ -2,8 +2,7 @@ package grupa4.projektzespolowy.GOTTPKProjekt.controller;
 
 import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.*;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.UzytkownikServiceImpl;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.WycieczkaServiceImpl;
+import grupa4.projektzespolowy.GOTTPKProjekt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import grupa4.projektzespolowy.GOTTPKProjekt.service.KsiazeczkaServiceImpl;
-import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +26,8 @@ public class KsiazeczkaController {
     private WycieczkaServiceImpl wycieczkaService;
     @Autowired
     private UzytkownikServiceImpl uzytkownikService;
-    
+    @Autowired
+    private EmailService emailService;
     @Autowired
     private PrzodownikService przodownikService;
  
@@ -120,6 +117,7 @@ public class KsiazeczkaController {
         Ksiazeczka ksiazeczka = ksiazeczkaServiceImpl.getOneById(idKsiazeczka);
         ksiazeczka.setZgloszona(1);
         ksiazeczkaServiceImpl.createKsiazeczka(ksiazeczka);
+        emailService.sendEmailAboutReportedBook(ksiazeczka);
 
         redirectAttributes.addFlashAttribute("info_msg", "Książeczka została zgłoszona do referatu ✅");
 
