@@ -68,6 +68,14 @@
             </div>
         {% endif %}
 
+
+        {% if app.request.parameter.get("success") == 'true' %}
+            <div class="flash-msg alert alert-success" role="alert" style='display:none;'>
+                Wylogowano pomyślnie
+            </div>
+
+        {% endif %}
+
         {{ wiadomosc }}
 
             <header class="mb-1">
