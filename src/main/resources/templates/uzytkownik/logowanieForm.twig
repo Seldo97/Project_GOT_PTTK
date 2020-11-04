@@ -1,4 +1,4 @@
-{% extends '*/formTemplate.twig' %}
+{% extends '../formTemplate.twig' %}
 
 {% block css %}
 
@@ -17,17 +17,27 @@
         <div class="col-12 col-md-6 mt-3" id="form">
             {% block form %}
         
-       <form action="/" method="get" class="form-example">
-          
-            <label for="name">Username </label>
-            <input type="text" name="name" id="username" required>
-        
-      
-            <label for="pass">password</label>
-            <input type="password" name="pass" id="pass" required>
-        
-         
-            <input type="submit" value="Zaloguj">
+       <form action="/login" method="post" class="form-example">
+
+           {% if app.request.parameter.get("error") == 'true' %}
+               <div class="flash-msg alert alert-danger" role="alert" style='display:none;'>
+                   Błędny login lub hasło
+               </div>
+
+           {% endif %}
+
+           <div class="form-group">
+               <label for="username">Login</label>
+               <input type="text" class="form-control" id="username" name="username" required>
+           </div>
+           <div class="form-group">
+               <label for="haslo">Hasło</label>
+               <input type="password" class="form-control" id="password" name="password" required>
+           </div>
+
+
+
+            <input type="submit" class="btn btn-info" value="Zaloguj">
 
         </form>
             

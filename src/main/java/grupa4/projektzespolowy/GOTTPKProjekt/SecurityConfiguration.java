@@ -63,10 +63,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/zdjecia/**").hasAnyRole("administrator", "przodownik", "turysta")
                 .antMatchers("/ksiazeczka/**", "/wycieczka/**", "/trasy/**", "/trasa/**", "/trasa_odcinki/**").hasAnyRole("USER")
                 .antMatchers("/przodownicy/**", "/turysci/**", "/odznaki/**","/grupy/**", "/pasma/**", "/punkty/**", "/podpunkty/**").hasRole("administrator")
-                //.anyRequest().authenticated()
+
                 //.antMatchers("/przodownicy/**", "/turysci/**").hasRole("administrator")
-                .anyRequest().hasRole("administrator")
-                .and().formLogin().permitAll()
+                .anyRequest().authenticated()
+                .and().
+                formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error=true").
+                permitAll()
+
+
+               // .anyRequest().hasRole("administrator")
+
+
                 ;
 
 
