@@ -64,7 +64,7 @@ function testEmail(field) {
 };
 
 //pobieram elementy
-const form = document.querySelector("form");
+const form = document.querySelector("#signupFormRegister");
 const inputName = form.querySelector("input[name=imie]");
 const inputSurname = form.querySelector("input[name=nazwisko]");
 const inputPhone = form.querySelector("input[name=telefon]");

@@ -12,7 +12,7 @@
     {% if update == 1 %}
         <form id="signupForm" action="/przodownicy/update/{{ przodownik.getIdPrzodownik }}" method="POST">
     {% else %}
-        <form id="signupForm" action="/przodownicy/dodaj" method="POST">
+        <form id="signupFormRegister" action="/przodownicy/dodaj" method="POST">
     {% endif %}
         <fieldset>
             <legend> Dane personalne </legend>
