@@ -1,7 +1,5 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

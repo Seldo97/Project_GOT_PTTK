@@ -10,6 +10,7 @@
         <tr>
             <th scope="col">Nazwa odznaki</th>
             <th scope="col">Data przyznania</th>
+            <th scope="col">Wycieczki</th>
             {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
                 <th scope="col"></th>
             {% endif %}
@@ -20,6 +21,12 @@
             <tr>
                 <td>{{ odznakaTurysty.getOdznaka.getNazwa }}</td>
                 <td>{{ odznakaTurysty.getData }}</td>
+                 <td class="text-right">
+                       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                             <abbr title="Wycieczki"><a class="btn btn-sm bg-transparent" href="/wycieczka/odznaka/{{ odznakaTurysty.getOdznaka.getNazwa}}">🌄</a></abbr>
+                      </div>
+                </td>
+             
 
                 {% if 'ROLE_administrator' in LoggedUser.getAuthorities or 'ROLE_przodownik' in LoggedUser.getAuthorities %}
                     <td class="text-right">

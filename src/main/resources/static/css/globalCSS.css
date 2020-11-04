@@ -110,4 +110,13 @@ a:hover{
 	margin:0;
 }
 
+.field-error
+{
+	color:red
+}
+.form-error-text
+{
+	color:red
+}
+
 
