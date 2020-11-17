@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface UzytkownikService {
 
-  
-	Uzytkownik createUzytkownik(Uzytkownik uzytkownik) ;
+
+    Uzytkownik createUzytkownik(Uzytkownik uzytkownik);
 
     List<Uzytkownik> getAllUzytkownik();
-    
+
     Uzytkownik getOneById(Integer id);
 
     void removeUzytkownik(Integer id);
@@ -20,5 +20,7 @@ public interface UzytkownikService {
     Uzytkownik getLoggedUserDetails(Authentication authentication);
 
     void enableUser(String uuid) throws UserDoesNotExistException;
+
+    void enableUser(Long id) throws UserDoesNotExistException;
 
 }
