@@ -63,6 +63,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/zdjecia/{idWycieczka}").hasAnyRole("przodownik")
                 .antMatchers("/turystaodznaki/MojeOdznaki", "/turystaodznaki/ranking").hasAnyRole("administrator", "turysta")
                 .antMatchers("/turystaodznaki/**").hasAnyRole("administrator", "przodownik")
+
+               // .antMatchers("/regulamin/edycja").hasAnyRole("administrator")
+                .antMatchers("/regulamin/updateForm").permitAll()
+                .antMatchers("/regulamin/update").permitAll()
+
+
                 .antMatchers("/zdjecia/{idWycieczka}").hasAnyRole("turysta", "przodownik","administrator")
                 .antMatchers("/zdjecia/**").hasAnyRole("administrator", "przodownik", "turysta")
                 .antMatchers("/ksiazeczka/**", "/wycieczka/**", "/trasy/**", "/trasa/**", "/trasa_odcinki/**").hasAnyRole("USER")
