@@ -1,0 +1,47 @@
+{% extends '../baseTemplate.twig' %}
+{% block title %}Turysta tabela{% endblock %}
+{% block header %}
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+
+    <h2>Regulamin GOT - od 1 stycznia 2016 roku</h2>
+{% endblock %}
+{% block main %}
+
+
+
+
+    <div id="center" style="font-family: Verdana, Arial, Helvetica, Tahoma, sans-serif">
+
+        <form id="updateForm" action="/regulamin/update" method="POST">
+            <fieldset>
+                <legend> Edycja regulaminu </legend>
+                <div class="form-group">
+                    <label for="tekstNaglowek">Nagłówek</label>
+                    <input type="text" class="form-control" id="tekstNaglowek" name="tekstNaglowek" value = "{{ regulamin[0].getTekstNaglowek }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Tekst</label>
+
+                    <textarea id="tekstRegulamin" name="tekstRegulamin" value="{{ regulamin[0].getTekstRegulamin }}">  </textarea>
+                </div>
+            </fieldset>
+            <br/>
+            <button type="submit" class="btn btn-info">Zmień</button>
+
+        </form>
+
+
+
+
+
+
+
+
+
+    </div><!-- koniec center -->
+
+
+
+{% endblock %}
