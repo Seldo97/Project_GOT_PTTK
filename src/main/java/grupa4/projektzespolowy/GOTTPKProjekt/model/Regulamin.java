@@ -1,6 +1,7 @@
 package grupa4.projektzespolowy.GOTTPKProjekt.model;
 
 
+import org.hibernate.annotations.Type;
 import org.hibernate.type.TextType;
 import org.w3c.dom.Text;
 
@@ -16,7 +17,8 @@ public class Regulamin {
     @Column(name = "id_regulamin")
     private int idRegulamin;
 
-    @Column(name = "tekst")
+    @Column(name = "tekst", columnDefinition="TEXT")
+    @Type(type="text")
     private String tekstRegulamin;
 
     @Column(name = "naglowek")

@@ -9,12 +9,10 @@
 
    <div id="center" style="font-family: Verdana, Arial, Helvetica, Tahoma, sans-serif">
 
-       <div class="nav-item">
-           <a class="btn btn-success" href="/regulamin/updateForm">Edycja Regulaminu</a>
-       </div>
-
       {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-
+          <div class="nav-item">
+              <a class="btn btn-success" href="/regulamin/updateForm">Edycja Regulaminu</a>
+          </div>
       {% endif %}
 
        {{ regulamin[0].getTekstRegulamin }}

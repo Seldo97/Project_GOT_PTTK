@@ -22,7 +22,6 @@ public class MainController {
     private RegulaminServiceImpl regulaminServiceImpl;
 
 
-
     @GetMapping({"/"})
     public String indexPage(ModelMap model, Authentication authentication) {
 
@@ -42,7 +41,7 @@ public class MainController {
     public String regiulamin(ModelMap model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
-        model.addAttribute("regulamin", regulaminServiceImpl.getAllRegulamin() );
+        model.addAttribute("regulamin", regulaminServiceImpl.getAllRegulamin());
 
         //System.out.println(exampleInt);
 
@@ -54,7 +53,7 @@ public class MainController {
     public String regiulaminEdycja(ModelMap model, Authentication authentication) {
 
         model.addAttribute("LoggedUser", authentication);
-        model.addAttribute("regulamin", regulaminServiceImpl.getAllRegulamin() );
+        model.addAttribute("regulamin", regulaminServiceImpl.getAllRegulamin());
 
         //System.out.println(exampleInt);
 
@@ -62,16 +61,10 @@ public class MainController {
     }
 
 
-
-
     @PostMapping("/regulamin/update")
     public String updateZamowienie(@RequestParam(value = "tekstNaglowek") String tekstNaglowek,
                                    @RequestParam(value = "tekstRegulamin") String tekstRegulamin,
-
-
-
-
-                                   RedirectAttributes redirectAttributes) throws IOException {
+                                   RedirectAttributes redirectAttributes) {
 
 
         Regulamin regulamin = regulaminServiceImpl.getOneById(1);
@@ -80,14 +73,10 @@ public class MainController {
         regulamin.setTekstRegulamin(tekstRegulamin);
 
 
-
-
         regulaminServiceImpl.createRegulamin(regulamin);
-        // redirectAttributes.addFlashAttribute("success_msg", "Zmiany zostały przyjęte pomyślnie");
+        redirectAttributes.addFlashAttribute("success_msg", "Zmiany zostały przyjęte pomyślnie");
         return "redirect:/regulamin";
     }
-
-
 
 
 //    @GetMapping("/prevPage")
