@@ -68,9 +68,11 @@ public class EmailServiceImpl implements EmailService {
                 " zgłosił książeczkę do weryfikacji. <a href='"+ path + "/ksiazeczka/" + ksiazeczka.getIdKsiazeczka() +"'>PRZEJDŹ DO KSIĄŻECZKI</a>");
     }
 
+    @Async
     @Override
     @Transactional
-    public void sendEmailAboutReportedTour(Wycieczka wycieczka) throws InterruptedException {
+    public void sendEmailAboutReportedTour(Wycieczka w) throws InterruptedException {
+        Wycieczka wycieczka = wycieczkaService.getOneById(w.getIdWycieczka());
         List<PrzodownikDTO> przodownikList = przodownikService.getAllPrzodownik();
         List<Trasa> trasyWycieczki = wycieczka.getTrasy();
 
