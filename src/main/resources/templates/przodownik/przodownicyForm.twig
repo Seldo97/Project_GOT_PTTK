@@ -10,7 +10,7 @@
 
 {% block form %}
     {% if update == 1 %}
-        <form id="signupForm" action="/przodownicy/update/{{ przodownik.getIdPrzodownik }}" method="POST">
+        <form id="signupFormUpdate" action="/przodownicy/update/{{ przodownik.getIdPrzodownik }}" method="POST">
     {% else %}
         <form id="signupFormRegister" action="/przodownicy/dodaj" method="POST">
     {% endif %}

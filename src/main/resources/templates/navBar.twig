@@ -34,6 +34,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/odcinkiWybor">Odcinki</a>
             </li>
+             
             {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
             <li class="nav-item">
                 <a class="nav-link" href="/turystaodznaki/ranking">Ranking</a>
@@ -41,6 +42,11 @@
             {% endif %}
         </ul>
     	<ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+            {% if LoggedUser is not null %}
+               <span class="nav-link"> Witaj na stronie: {{ LoggedUser.getName() }} [Role] {% for i in LoggedUser.getAuthorities() %} {{ i.getAuthority() }} {% endfor %}</span>
+            </li>
+              {% endif %}
             <li class="nav-item dropdown dropleft">
                 <a class="nav-link dropdown-toggle dropleft" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <abbr title="Opcje"><img src="/images/settings3.png" alt = "opcje" width="25" height="25" /></abbr>

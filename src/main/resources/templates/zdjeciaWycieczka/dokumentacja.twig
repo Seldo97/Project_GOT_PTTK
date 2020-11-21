@@ -127,8 +127,8 @@
         <button type="submit" class="btn btn-info"><i class="fas fa-plus">Dodaj</i></button>
     </form>
     {% endif %}
-    {% if 'ROLE_przodownik' in LoggedUser.getAuthorities  %}
+    {% if 'ROLE_przodownik' in LoggedUser.getAuthorities and trasa.getSprawdzona == 1 %}
       <a href="/wycieczka/akceptuj/{{ idWycieczka }}" class="btn  btn-primary"  role="button">Akceptuj wycieczke</a>
-    <a href="/wycieczka/odrzuc/{{ idWycieczka }}" class="btn  btn-primary"  role="button">Odrzuć wycieczke</a>
+      <a href="/wycieczka/odrzuc/{{ idWycieczka }}" class="btn  btn-primary"  role="button">Odrzuć wycieczke</a>
     {% endif %}
 {% endblock %}

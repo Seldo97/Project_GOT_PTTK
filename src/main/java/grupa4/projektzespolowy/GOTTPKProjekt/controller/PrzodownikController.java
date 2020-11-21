@@ -4,7 +4,6 @@ import com.google.common.base.Strings;
 import grupa4.projektzespolowy.GOTTPKProjekt.dto.PrzodownikDTO;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Przodownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Rola;
-import grupa4.projektzespolowy.GOTTPKProjekt.model.Turysta;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.EmailService;
 import grupa4.projektzespolowy.GOTTPKProjekt.service.PrzodownikServiceImpl;

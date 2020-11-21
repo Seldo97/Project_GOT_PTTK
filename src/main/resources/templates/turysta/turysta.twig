@@ -43,8 +43,10 @@
                 <td>{{ turysta.getPunkty }}</td>
                 <td class="text-right">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        {% if 'ROLE_administrator' in LoggedUser.getAuthorities or  'ROLE_przodownik' in LoggedUser.getAuthorities %}
                         <abbr title="Odznaki"><a class="btn btn-sm bg-transparent"
                                                  href="/turystaodznaki/znajdzOdznakiTurysty?idTurysta={{ turysta.getIdTurysta }}">🏅</a></abbr>
+                        {% endif %}
                         {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                             <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
                                                     href="/turysci/updateForm?id={{ turysta.getIdTurysta }}">✏️</a></abbr>
