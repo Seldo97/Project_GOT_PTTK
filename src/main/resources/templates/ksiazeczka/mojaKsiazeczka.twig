@@ -6,12 +6,14 @@
     {% if ksiazeczka.getPowiadomienie == 1 %}
         <div class="alert alert-info" role="alert">
             <span>Otrzymałeś nową odznakę! Możesz przejść do zakładki <strong>Moje odznaki</strong>.
-            <a class="btn btn-info" href="/ksiazeczka/zamknij/{{ ksiazeczka.getIdKsiazeczka }}" role="button">Zamknij</a></span>
+            <a class="btn btn-info" href="/ksiazeczka/zamknij/{{ ksiazeczka.getIdKsiazeczka }}"
+               role="button">Zamknij</a></span>
         </div>
     {% elseif ksiazeczka.getPowiadomienie == 2 %}
         <div class="alert alert-info" role="alert">
             <span>Twoja prośba została rozpatrzona negatywnie.
-            <a class="btn btn-info" href="/ksiazeczka/zamknij/{{ ksiazeczka.getIdKsiazeczka }}" role="button">Zamknij</a></span>
+            <a class="btn btn-info" href="/ksiazeczka/zamknij/{{ ksiazeczka.getIdKsiazeczka }}"
+               role="button">Zamknij</a></span>
         </div>
     {% endif %}
 
@@ -54,7 +56,7 @@
                 <th scope="col">Na odznakę</th>
                 <th scope="col">Pkt / do GOT</th>
                 <th scope="col">Zatwierdzona</th>
- 				<th scope="col">Zaakceptowana przez</th>
+                <th scope="col">Zaakceptowana przez</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -78,13 +80,13 @@
                         <td>Tak✔️</td>
                     {% endif %}
                     {% if  wycieczka.getPrzodownikWycieczkaAccept == 0 %}
-                    <td> </td>
+                        <td></td>
                     {% else %}
-                    {% for przodownik in przodownicy %}
-                    	 {% if przodownik.getIdPrzodownik == wycieczka.getPrzodownikWycieczkaAccept %}
-                        <td>{{ przodownik.getImie}} {{ przodownik.getNazwisko}}</td>
-                          {% endif %}
-                    {% endfor %}
+                        {% for przodownik in przodownicy %}
+                            {% if przodownik.getIdPrzodownik == wycieczka.getPrzodownikWycieczkaAccept %}
+                                <td>{{ przodownik.getImie }} {{ przodownik.getNazwisko }}</td>
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                     <td class="text-right">
                         {% if wycieczka.getZgloszona == 1 or wycieczka.getZatwierdzona == 1 %}
@@ -138,12 +140,14 @@
             {% endif %}
 
         {% else %}
-            <a class="btn btn-info"
-               href="/turystaodznaki/znajdzOdznakiTurysty?idTurysta={{ ksiazeczka.getTurysta.getIdTurysta }}"
-               role="button">Przyznaj
-                odznakę</a>
-            <a class="btn btn-danger" href="/ksiazeczka/odrzuc/{{ ksiazeczka.getIdKsiazeczka }}" role="button">Odrzuć
-                zgłoszenie</a>
+            <button class="btn btn-info" role="button" data-toggle="modal" data-target="#acceptBookModal">
+                Przyznaj odznakę
+            </button>
+            <button class="btn btn-danger" role="button" data-toggle="modal" data-target="#rejectBookModal">
+                Odrzuć zgłoszenie
+            </button>
+            {% include 'acceptBookModal.twig' %}
+            {% include 'rejectBookModal.twig' %}
         {% endif %}
 
     {% endif %}

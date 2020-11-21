@@ -19,6 +19,7 @@
             <th scope="col">Opis</th>
             <th scope="col">Niepełnosprawność</th>
             <th scope="col">Punkty</th>
+            <th scope="col" class="text-center">Aktywny</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -41,6 +42,11 @@
                     <td>Nie</td>
                 {% endif %}
                 <td>{{ turysta.getPunkty }}</td>
+                {% if turysta.uzytkownik.isEnabled %}
+                    <td class="text-center"><a href="/aktywacja/zmien-status/{{ turysta.uzytkownik.getIdUzytkownik }}"><i class="far fa-check-square fa-lg text-success"></i></a></td>
+                {% else %}
+                    <td class="text-center"><a href="/aktywacja/zmien-status/{{ turysta.uzytkownik.getIdUzytkownik }}"><i class="far fa-square fa-lg text-danger"></i></a></td>
+                {% endif %}
                 <td class="text-right">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         {% if 'ROLE_administrator' in LoggedUser.getAuthorities or  'ROLE_przodownik' in LoggedUser.getAuthorities %}
@@ -61,7 +67,7 @@
         </tbody>
     </table>
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-        <a class="btn btn-info" href="/turysci/addForm" role="button"><i class="fas fa-plus">Dodaj</i></a>
+        <a class="btn btn-info" href="/turysci/addForm" role="button"><i class="fas fa-user-plus"></i> Dodaj</a>
     {% endif %}
 
 {% endblock %}

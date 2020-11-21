@@ -14,6 +14,7 @@
                 <th scope="col">Telefon</th>
                 <th scope="col">Login</th>
                 <th scope="col">E-mail</th>
+                <th scope="col" class="text-center">Aktywny</th>
                 <th scope="col"></th>
 
             </tr>
@@ -28,7 +29,11 @@
             <td>{{ przodownik.getTelefon }}</td>
             <td>{{ przodownik.uzytkownik.getLogin }}</td>
             <td>{{ przodownik.uzytkownik.getEmail }}</td>
-
+            {% if przodownik.uzytkownik.isEnabled %}
+                <td class="text-center"><a href="/aktywacja/zmien-status/{{ przodownik.uzytkownik.getIdUzytkownik }}"><i class="far fa-check-square fa-lg text-success"></i></a></td>
+            {% else %}
+                <td class="text-center"><a href="/aktywacja/zmien-status/{{ przodownik.uzytkownik.getIdUzytkownik }}"><i class="far fa-square fa-lg text-danger"></i></a></td>
+            {% endif %}
             <td class="text-right">
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                     <abbr title="Edytuj grupy górskie"><a class="btn btn-sm bg-transparent" href="/przodownicy/{{ przodownik.getIdPrzodownik }}/grupy">🏔️</a></abbr>
@@ -48,7 +53,7 @@
     </table>
 
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
-        <a class="btn btn-info" href="/przodownicy/form" role="button"><i class="fas fa-plus">Dodaj</i></a>
+        <a class="btn btn-info" href="/przodownicy/form" role="button"><i class="fas fa-user-plus"></i> Dodaj</a>
     {% endif %}
 
 {% endblock %}

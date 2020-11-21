@@ -11,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import grupa4.projektzespolowy.GOTTPKProjekt.model.Uzytkownik;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Controller
 public class UzytkownikController {
@@ -44,6 +47,15 @@ public class UzytkownikController {
         uzytkownikService.enableUser(uuid);
         redirectAttributes.addFlashAttribute("success_msg", "Konto zostało aktywowane, możesz się zalogować na swoje konto.");
         return "redirect:/";
+    }
+
+    @GetMapping("/aktywacja/zmien-status/{id}")
+    public String enableUserByClick(@PathVariable Long id, RedirectAttributes redirectAttributes,
+                                    HttpServletRequest request) throws UserDoesNotExistException {
+        String referer = request.getHeader("Referer");
+        uzytkownikService.enableUser(id);
+        redirectAttributes.addFlashAttribute("success_msg", "Zmieniono status konta użytkownika pomyślnie");
+        return "redirect:" + referer;
     }
 
     @ExceptionHandler(UserDoesNotExistException.class)
