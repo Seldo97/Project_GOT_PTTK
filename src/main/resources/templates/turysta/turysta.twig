@@ -1,7 +1,7 @@
 {% extends '../baseTemplate.twig' %}
 {% block title %}Turysta tabela{% endblock %}
 {% block header %}
-    Turysta
+    Turyści
     {{ turysta.getNiepelnosprawnosc }}
 {% endblock %}
 {% block main %}
@@ -57,7 +57,8 @@
                             <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
                                                     href="/turysci/updateForm?id={{ turysta.getIdTurysta }}">✏️</a></abbr>
                             <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
-                                                  href="/turysci/usun/{{ turysta.getIdTurysta }}">🗑️</a></abbr>
+                                                   data-toggle="modal" data-target="#usunTurysteModal">🗑️</a></abbr>
+                            {% include 'usunTurysteModal.twig' %}
                         {% endif %}
                     </div>
                 </td>

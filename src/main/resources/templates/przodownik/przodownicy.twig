@@ -39,7 +39,8 @@
                     <abbr title="Edytuj grupy górskie"><a class="btn btn-sm bg-transparent" href="/przodownicy/{{ przodownik.getIdPrzodownik }}/grupy">🏔️</a></abbr>
                     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                         <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/przodownicy/form?id={{ przodownik.getIdPrzodownik }}">✏️</a></abbr>
-                        <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/przodownicy/usun/{{ przodownik.getIdPrzodownik }}">🗑️</a></abbr>
+                        <abbr title="Usuń"><a class="btn btn-sm bg-transparent" data-toggle="modal" data-target="#usunPrzodownikaModal">🗑️</a></abbr>
+                        {% include 'usunPrzodownikaModal.twig' %}
                     {% endif %}
                 </div>
             </td>
