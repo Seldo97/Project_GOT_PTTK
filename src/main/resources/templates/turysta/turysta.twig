@@ -56,9 +56,9 @@
                         {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                             <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
                                                     href="/turysci/updateForm?id={{ turysta.getIdTurysta }}">✏️</a></abbr>
-                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
-                                                   data-toggle="modal" data-target="#usunTurysteModal">🗑️</a></abbr>
-                            {% include 'usunTurysteModal.twig' %}
+                            <abbr title="Usuń"><button class="btn btn-sm bg-transparent usuwanieTurystyTab" value="{{ turysta.getIdTurysta }}"
+                                                   data-toggle="modal" data-target="#usunTurysteModal">🗑️</button></abbr>
+
                         {% endif %}
                     </div>
                 </td>
@@ -67,8 +67,25 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include 'usunTurysteModal.twig' %}
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
         <a class="btn btn-info" href="/turysci/addForm" role="button"><i class="fas fa-user-plus"></i> Dodaj</a>
     {% endif %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            const usuwanieBTN = document.querySelector("#usuwanieTurysty");
+            const usuwanieTurystyTabBTN = document.querySelectorAll(".usuwanieTurystyTab");
+            const usuwanieURL = "/turysci/usun/";
+
+            usuwanieTurystyTabBTN.forEach(btn=>{
+                btn.addEventListener("click", function () {
+                    let value = btn.value;
+                    usuwanieBTN.href = usuwanieURL + value;
+                })
+            })
+
+
+        });
+    </script>
 {% endblock %}

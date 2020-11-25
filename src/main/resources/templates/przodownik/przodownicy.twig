@@ -39,8 +39,7 @@
                     <abbr title="Edytuj grupy górskie"><a class="btn btn-sm bg-transparent" href="/przodownicy/{{ przodownik.getIdPrzodownik }}/grupy">🏔️</a></abbr>
                     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
                         <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/przodownicy/form?id={{ przodownik.getIdPrzodownik }}">✏️</a></abbr>
-                        <abbr title="Usuń"><a class="btn btn-sm bg-transparent" data-toggle="modal" data-target="#usunPrzodownikaModal">🗑️</a></abbr>
-                        {% include 'usunPrzodownikaModal.twig' %}
+                        <abbr title="Usuń"><button class="btn btn-sm bg-transparent usuwaniePrzodownikaTab" value="{{ przodownik.getIdPrzodownik }}" data-toggle="modal" data-target="#usunPrzodownikaModal">🗑️</button></abbr>
                     {% endif %}
                 </div>
             </td>
@@ -52,9 +51,26 @@
 
         </tbody>
     </table>
-
+    {% include 'usunPrzodownikaModal.twig' %}
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
         <a class="btn btn-info" href="/przodownicy/form" role="button"><i class="fas fa-user-plus"></i> Dodaj</a>
     {% endif %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            const usuwanieBTN = document.querySelector("#usuwaniePrzodownika");
+            const usuwaniePrzodownikaTabBTN = document.querySelectorAll(".usuwaniePrzodownikaTab");
+            const usuwanieURL = "/przodownicy/usun/";
+
+            usuwaniePrzodownikaTabBTN.forEach(btn=>{
+                btn.addEventListener("click", function () {
+                    let value = btn.value;
+                    usuwanieBTN.href = usuwanieURL + value;
+                })
+            })
+
+
+        });
+
+    </script>
 {% endblock %}

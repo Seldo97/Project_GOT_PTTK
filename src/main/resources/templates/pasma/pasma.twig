@@ -27,7 +27,7 @@
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                             <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/pasma/updateForm?id={{ pasmo.getIdPasmo}}">✏️</a></abbr>
-                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" href="/pasma/usun/{{ pasmo.getIdPasmo}}">🗑️</a></abbr>
+                            <abbr title="Usuń"><button class="btn btn-sm bg-transparent usuwaniePasmaTab" value="{{ pasmo.getIdPasmo}}" data-toggle="modal" data-target="#usunPasmoModal">🗑️</button></abbr>
                         </div>
                     </td>
                 {% endif %}
@@ -36,8 +36,26 @@
 
         </tbody>
     </table>
+    {% include 'usunPasmoModal.twig' %}
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
         <a class="btn btn-info" href="/pasma/addForm" role="button"><i class="fas fa-plus">Dodaj</i></a>
     {% endif %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            const usuwanieBTN = document.querySelector("#usuwaniePasma");
+            const usuwaniePasmaTabBTN = document.querySelectorAll(".usuwaniePasmaTab");
+            const usuwanieURL = "/pasma/usun/";
+
+            usuwaniePasmaTabBTN.forEach(btn=>{
+                btn.addEventListener("click", function () {
+                    let value = btn.value;
+                    usuwanieBTN.href = usuwanieURL + value;
+                })
+            })
+
+
+        });
+
+    </script>
 {% endblock %}

@@ -28,9 +28,9 @@
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                             <abbr title="Edytuj"><a class="btn btn-sm bg-transparent" href="/odznaki/form?id={{ odznaka.getIdOdznaka }}">✏️</a></abbr>
-                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent" data-toggle="modal" data-target="#usunOdznakeModal">🗑️</a></abbr>
+                            <abbr title="Usuń"><button class="btn btn-sm bg-transparent usuwanieOdznakiTab" value="{{ odznaka.getIdOdznaka }}" data-toggle="modal" data-target="#usunOdznakeModal">🗑️</button></abbr>
                         </div>
-                        {% include 'usunOdznakeModal.twig' %}
+
                     </td>
                 {% endif %}
         </tr>
@@ -38,8 +38,26 @@
 
         </tbody>
     </table>
+    {% include 'usunOdznakeModal.twig' %}
     {% if 'ROLE_administrator' in LoggedUser.getAuthorities %}
     <a class="btn btn-info" href="/odznaki/form" role="button"><i class="fas fa-plus">Dodaj</i></a>
      {% endif %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
 
+        const usuwanieBTN = document.querySelector("#usuwanieOdznaki");
+        const usuwanieOdznakiTabBTN = document.querySelectorAll(".usuwanieOdznakiTab");
+        const usuwanieURL = "/odznaki/usun/";
+
+        usuwanieOdznakiTabBTN.forEach(btn=>{
+            btn.addEventListener("click", function () {
+                let value = btn.value;
+                usuwanieBTN.href = usuwanieURL + value;
+            })
+        })
+
+
+    });
+
+</script>
 {% endblock %}
