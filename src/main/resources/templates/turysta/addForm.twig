@@ -10,37 +10,44 @@
 
 {% block form %}
 
-    <form id="signupFormRegister" action="/turysci/dodaj" method="POST">
+    <form id="signupFormRegister" name="signupFormRegister" action="/turysci/dodaj" method="POST">
         <fieldset>
             <legend> Dane Personalne </legend>
             <div class="form-group">
                 <label for="imie">Imię</label>
                 <input type="text" class="form-control" id="imie" name="imie">
+                <div class="error" id="nameErr"></div>
             </div>
             <div class="form-group">
                 <label for="nazwisko">Nazwisko</label>
                 <input type="text" class="form-control" id="nazwisko" name="nazwisko">
+                <div class="error" id="surnameErr"></div>
             </div>
             <div class="form-group">
                 <label for="telefon">Telefon</label>
                 <input type="text" class="form-control" id="telefon" name="telefon">
+                <div class="error" id="phoneErr"></div>
             </div>
             <div class="form-group">
                 <label for="dataUrodzenia">Data urodzenia:</label>
                 <input type="date" class="form-control" id="dataUrodzenia" name="dataUrodzenia" />
+                <div class="error" id="dateBirthErr"></div>
             </div>
             <div class="form-group">
                 <label for="niepelnosprawnosc">Niepełnosprawność:</label>
                 <input type="hidden" name="niepelnosprawnosc" value="0">
                 <input type="checkbox"  class="form-control" id="niepelnosprawnosc" name="niepelnosprawnosc" value="1">
+                <div class="error" id="deficentErr"></div>
             </div>
              <div class="form-group">
                 <label for="opis">Opis</label>
                  <textarea  class="form-control" id="opis" name="opis" ></textarea>
+                 <div class="error" id="descErr"></div>
             </div>
               <div class="form-group">
                 <label for="punkty">Punkty</label>
                 <input type="number" class="form-control" id="punkty" name="punkty" value="0" readonly>
+                <div class="error" id="pointsErr"></div>
             </div>
         </fieldset>
         
@@ -49,6 +56,7 @@
             <div class="form-group">
                 <label for="login">Login</label>
                 <input type="text" class="form-control" id="login" name="login">
+                <div class="error" id="loginErr"></div>
             </div>
             <div class="form-group">
                 <label for="haslo">Hasło</label>
@@ -56,10 +64,12 @@
                    <input type="password" class="form-control input-field" id="haslo" name="haslo" value="">
                    <i class="fas fa-eye icon" id="eye"></i>
                </div>
+               <div class="error" id="passwordErr"></div>
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="text" class="form-control" id="email" name="email">
+                <div class="error" id="emailErr"></div>
             </div>
         </fieldset>
         <br/>
