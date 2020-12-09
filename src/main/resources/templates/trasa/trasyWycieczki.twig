@@ -77,13 +77,13 @@
                         {% if wycieczka.getZgloszona == 1 or wycieczka.getZatwierdzona == 1 or trasa.getZrealizowana == 1 %}
                             <abbr title="Edytuj"><a class="btn disabled btn-sm bg-transparent"
                                                     href="/trasa/form/{{ trasa.getIdTrasa }}">✏️</a></abbr>
-                            <abbr title="Usuń"><a class="btn disabled btn-sm bg-transparent"
-                                                  href="/trasa/usun/{{ trasa.getIdTrasa }}">🗑️</a></abbr>
+                            <abbr title="Usuń"><button class="btn disabled btn-sm bg-transparent usunTraseTab" data-toggle="modal"
+                                                       value="{{trasa.getIdTrasa}}" data-target="#usunTraseModal">🗑️</button></abbr>
                         {% else %}
                             <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
                                                     href="/trasa/form/{{ trasa.getIdTrasa }}">✏️</a></abbr>
-                            <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
-                                                  href="/trasa/usun/{{ trasa.getIdTrasa }}">🗑️</a></abbr>
+                            <abbr title="Usuń"><button class="btn btn-sm bg-transparent usunTraseTab" data-toggle="modal"
+                                                       value="{{trasa.getIdTrasa}}" data-target="#usunTraseModal">🗑️</button></abbr>
                         {% endif %}
                     </div>
                 </td>
@@ -93,6 +93,7 @@
         {% set i = 1 %}
         </tbody>
     </table>
+    {% include 'usunTraseModal.twig' %}
     {% if wycieczka.getZgloszona == 1 or wycieczka.getZatwierdzona == 1 %}
     {% else %}
         <button class="btn btn-info" id="toggleButton" role="button">Nowa trasa 👣</button>
@@ -151,5 +152,22 @@
         </div>
 
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            const usuwanieBTN = document.querySelector("#usuwanieTrasy");
+            const usuwanieTrasyTabBTN = document.querySelectorAll(".usunTraseTab");
+            const usuwanieURL = "/trasa/usun/";
+
+            usuwanieTrasyTabBTN.forEach(btn=>{
+                btn.addEventListener("click", function () {
+                    let value = btn.value;
+                    usuwanieBTN.href = usuwanieURL + value;
+                })
+            })
+
+
+        });
+
+    </script>
 {% endblock %}
