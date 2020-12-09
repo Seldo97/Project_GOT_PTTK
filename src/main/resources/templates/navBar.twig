@@ -44,7 +44,12 @@
     	<ul class="navbar-nav ml-auto">
             <li class="nav-item">
             {% if LoggedUser is not null %}
-               <span class="nav-link"> Witaj na stronie: {{ LoggedUser.getName() }} [Role] {% for i in LoggedUser.getAuthorities() %} {{ i.getAuthority() }} {% endfor %}</span>
+            <div class="dropup">
+      			<button class="dropbtn"> Witaj {{ LoggedUser.getName() }}</button>
+                  <div class="dropup-content">
+                    <span>[Role] {% for i in LoggedUser.getAuthorities() %} {{ i.getAuthority() }} {% endfor %}</span>
+                  </div>
+           </div>
             </li>
               {% endif %}
             <li class="nav-item dropdown dropleft">

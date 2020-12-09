@@ -89,7 +89,7 @@
                 <input type="hidden" id="dubel" name="dubel" value="0"/>
 
                 <div class="form-group input-group">
-                    <select name="odcinek" class="form-control" required>
+                    <select name="odcinek" class="form-control js-example-basic-single mdb-select md-form" required>
                         <option value="">--Wybierz odcinek--</option>
                         {% for odcinek in odcinki %}
                         {% if odcinek. getOtwarty == 0 %}
@@ -114,10 +114,11 @@
                         {% endif %}
                         {% endfor %}
                     </select>
-                    <span class="input-group-btn ml-2">
+                    <br />
+                </div>
+                <span class="input-group-btn">
                         <button type="submit" class="btn btn-info"><i class="fas fa-plus">Dodaj</i></button>
                     </span>
-                </div>
 
             </form>
 
