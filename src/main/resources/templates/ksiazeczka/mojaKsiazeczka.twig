@@ -110,8 +110,8 @@
                                                               href="/zdjecia/{{ wycieczka.getIdWycieczka }}">📷</a></abbr>
                                 <abbr title="Edytuj"><a class="btn btn-sm bg-transparent"
                                                         href="/wycieczka/form/{{ ksiazeczka.getIdKsiazeczka }}/{{ wycieczka.getIdWycieczka }}/1">✏️</a></abbr>
-                                <abbr title="Usuń"><a class="btn btn-sm bg-transparent"
-                                                      href="/wycieczka/usun/{{ wycieczka.getIdWycieczka }}">🗑️</a></abbr>
+                                <abbr title="Usuń"><button class="btn btn-sm bg-transparent usunWycieczkeTab" data-toggle="modal"
+                                                           value="{{wycieczka.getIdWycieczka}}" data-target="#usunWycieczkeModal">🗑️</button></abbr>
                                 <abbr title="Zgłoś do oceny"><a class="btn btn-sm bg-transparent"
                                                                 href="/wycieczka/zglos/{{ wycieczka.getIdWycieczka }}">📤</a></abbr>
                             </div>
@@ -122,6 +122,7 @@
 
             </tbody>
         </table>
+        {% include 'usunWycieczkeModal.twig' %}
         {% if 'ROLE_turysta' in LoggedUser.getAuthorities %}
             <div><a class="btn btn-info" href="/wycieczka/form/{{ ksiazeczka.getIdKsiazeczka }}" role="button">Utwórz
                     nową wycieczkę 🏕️</a></div>
@@ -151,5 +152,22 @@
         {% endif %}
 
     {% endif %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            const usuwanieBTN = document.querySelector("#usuwanieWycieczki");
+            const usuwanieWycieczkiTabBTN = document.querySelectorAll(".usunWycieczkeTab");
+            const usuwanieURL = "/wycieczka/usun/";
+
+            usuwanieWycieczkiTabBTN.forEach(btn=>{
+                btn.addEventListener("click", function () {
+                    let value = btn.value;
+                    usuwanieBTN.href = usuwanieURL + value;
+                })
+            })
+
+
+        });
+
+    </script>
 {% endblock %}
