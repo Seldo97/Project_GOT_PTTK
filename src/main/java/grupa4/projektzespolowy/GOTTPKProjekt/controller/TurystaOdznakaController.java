@@ -53,7 +53,7 @@ public class TurystaOdznakaController {
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka); // puść inserta do bazy
 
 
-        redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
+        redirectAttributes.addFlashAttribute("success_msg", "Dodano Wiersz pomyślnie!"); // flash messages w przyszłości będzie rozbudowane
 
         return "redirect:/turystaodznaki";
     }
@@ -237,7 +237,7 @@ public class TurystaOdznakaController {
         String referer = request.getHeader("Referer");
 
         if (turystaOdznakaServiceImpl.checkOfUnique(turystaOdznaka.getOdznaka(), turystaOdznaka.getTurysta()) != null) {
-            redirectAttributes.addFlashAttribute("wiadomosc", "Ten turysta posiada już tę odznakę!");
+            redirectAttributes.addFlashAttribute("success_msg", "Ten turysta posiada już tę odznakę!");
             return "redirect:" + referer;
         }
 
@@ -249,7 +249,7 @@ public class TurystaOdznakaController {
 
         turystaOdznakaServiceImpl.createTurystaOdznaka(turystaOdznaka);
         emailService.sendEmailAboutNewBadge(turystaOdznaka);
-        redirectAttributes.addFlashAttribute("wiadomosc", "Przydzielono odznake turyście!");
+        redirectAttributes.addFlashAttribute("success_msg", "Przydzielono odznake turyście!");
 
         return "redirect:" + referer;
     }

@@ -66,7 +66,7 @@ public class GrupaController {
     {
 
     	grupaServiceImpl.createGrupa(grupa);
-        redirectAttributes.addFlashAttribute("wiadomosc", "Przydzielono odznake turyście!");
+        redirectAttributes.addFlashAttribute("success_msg", "Przydzielono odznake turyście!");
 
         return "redirect:/grupy";
     }
@@ -94,7 +94,7 @@ public class GrupaController {
 
         grupaServiceImpl.deleteGrupa(grupa.getIdGrupa());
         
-        redirectAttributes.addFlashAttribute("wiadomosc", "usunieto grupę pomyślnie!");
+        redirectAttributes.addFlashAttribute("success_msg", "usunieto grupę pomyślnie!");
 
         return "redirect:/grupy";
     }

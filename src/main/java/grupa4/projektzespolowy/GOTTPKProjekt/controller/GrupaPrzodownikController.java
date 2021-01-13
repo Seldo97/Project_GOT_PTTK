@@ -74,7 +74,7 @@ public class GrupaPrzodownikController {
         String referer = request.getHeader("Referer");
 
         grupaPrzodownikService.saveGrupaPrzodownik(grupaPrzodownik);
-        redirectAttributes.addFlashAttribute("wiadomosc", "Przydzielono grupę przodownikowi!");
+        redirectAttributes.addFlashAttribute("success_msg", "Przydzielono grupę przodownikowi!");
 
         return "redirect:" + referer;
     }

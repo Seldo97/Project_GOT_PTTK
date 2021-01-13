@@ -92,7 +92,7 @@ public class PasmoController {
     	   Grupa grupa = grupaServiceImpl.getOneById(idGrupa);
     	   Pasmo pasmo = new Pasmo(nazwaPasmo,grupa);
     	   pasmoServiceImpl.createPasmo(pasmo);
-           redirectAttributes.addFlashAttribute("wiadomosc", "Dodano Pasmo!");
+           redirectAttributes.addFlashAttribute("success_msg", "Dodano Pasmo!");
 
            return "redirect:/pasma";
        }
@@ -104,7 +104,7 @@ public class PasmoController {
    		pasmoServiceImpl.getOneById(idPasmo);  
    		pasmoServiceImpl.removePasmo(idPasmo);
    		
-   		redirectAttributes.addFlashAttribute("wiadomosc", "Usunięto pasmo pomyślnie");
+   		redirectAttributes.addFlashAttribute("success_msg", "Usunięto pasmo pomyślnie");
    		return "redirect:/pasma";
    	}
 
